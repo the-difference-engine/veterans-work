@@ -13,3 +13,5 @@ server: install
 
 console: install
 	$(BE) rails c
+
+.PHONY: install test server console
