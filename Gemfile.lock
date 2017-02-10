@@ -192,9 +192,9 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  cancancan
+  cancancan (~> 1.15.0)
   coffee-rails (~> 4.2)
-  devise
+  devise (~> 4.2.0)
   factory_girl_rails (~> 4.8.0)
   jbuilder (~> 2.5)
   jquery-rails
@@ -202,7 +202,7 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.1)
-  rolify
+  rolify (~> 5.1.0)
   rspec-rails (~> 3.5.2)
   sass-rails (~> 5.0)
   spring
