@@ -26,6 +26,6 @@ class CompanyController < ApplicationController
   private
 
   def company_params
-    require(@company).permit()
+    require(:company).permit()
   end
 end
