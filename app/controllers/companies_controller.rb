@@ -1,6 +1,9 @@
+
 class CompaniesController < ApplicationController
   def index
-    companies = Company.all
+    @companies = Company.all
+    @attributes = Company.column_names
+    render 'index.html.erb'
   end
 
   def new
@@ -10,6 +13,8 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    @company = Company.find_by(params[:id])
+    render 'show.html.erb'
   end
 
   def edit
