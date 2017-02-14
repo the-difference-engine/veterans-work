@@ -6,15 +6,6 @@ class CompaniesController < ApplicationController
     render 'index.html.erb'
   end
 
-  def new
-    render 'new.html.erb'
-  end
-
-  def create
-    company = Company.create(company_params)
-    redirect_to "/companies/#{company.id}"
-  end
-
   def show
     @company = Company.find_by(params[:id])
     render 'show.html.erb'
