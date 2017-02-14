@@ -26,7 +26,11 @@
           <td><%= company.last_sign_in_ip %></td>
           <td><%= company.created_at %></td>
           <td><%= company.updated_at %></td>
-          <td><%= company.name %></td>
+          <td>
+            <a href='/companies/<%= company.id %>'>
+              <%= company.name %>
+            </a>
+          </td>
           <td><%= company.shorten_zip_code %></td>
           <td><%= company.phone %></td>
           <td><%= company.description %></td>
