@@ -7,9 +7,12 @@ class CompaniesController < ApplicationController
   end
 
   def new
+    render 'new.html.erb'
   end
 
   def create
+    company = Company.create(company_params)
+    redirect_to "/companies/#{company.id}"
   end
 
   def show
@@ -18,19 +21,32 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    render 'edit.html.erb'
   end
 
   def update
     company = Company.find(params[:id])
     company.update(company_params)
+    redirect_to "/companies/#{company.id}"
   end
 
   def destroy
+    company = Company.find_by(params[:id])
+    company.destroy
+    redirect_to 'index.html.erb'
   end
 
   private
 
   def company_params
-    require(:company).permit()
+    require(:company).permit(
+      email: params[:email],
+      password: params[:password],
+      name: params[:name],
+      zip_code: params[:zip_code],
+      phone: params[:phone],
+      description: params[:description],
+      url: params[:url]
+    )
   end
 end

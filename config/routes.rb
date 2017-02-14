@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get '/' => 'pages#hello_world'
 
   get '/companies' => 'companies#index'
-  get 'companies/:id' => 'companies#show'
+  get '/companies/:id' => 'companies#show'
 end
