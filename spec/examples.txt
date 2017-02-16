@@ -1,0 +1,7 @@
+example_id                                             | status  | run_time        |
+------------------------------------------------------ | ------- | --------------- |
+./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.0361 seconds  |
+./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.0205 seconds  |
+./spec/controllers/pages_controller_spec.rb[1:1:1]     | passed  | 0.00603 seconds |
+./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.03191 seconds |
+./spec/models/role_spec.rb[1:1]                        | pending | 0.00002 seconds |
