@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
     it 'assigns all the companies to @companies' do
-      this_company = create(:company)
-      that_company = create(:company)
-      another_company = create(:company)
+      all_companies = [
+        create(:company),
+        create(:company),
+        create(:company),
+      ]
       get :index
-      expect(assigns(:companies)).to eq([this_company, that_company, another_company])
+      expect(assigns(:companies)).to eq(all_companies)
     end
 
     it "renders the index template" do
