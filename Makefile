@@ -6,7 +6,7 @@ install:
 	bundle install
 
 test: install
-	$(BE) rspec
+	$(BE) rspec --format documentation
 
 server: install
 	$(BE) rails s

@@ -36,7 +36,6 @@ gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'faker', '~> 1.7.3'
-gem 'simplecov', :require => false, :group => :test
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -45,7 +44,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
- gem 'rails-controller-testing' 
+  gem 'rails-controller-testing' 
+  gem 'simplecov', :require => false
+
 end
 
 group :development do
