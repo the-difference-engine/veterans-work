@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217013309) do
-
+ActiveRecord::Schema.define(version: 20170217024207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +43,13 @@ ActiveRecord::Schema.define(version: 20170217013309) do
     t.index ["company_id", "role_id"], name: "index_companies_roles_on_company_id_and_role_id", using: :btree
   end
 
+  create_table "company_services", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "service_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "customer_requests", force: :cascade do |t|
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -56,13 +62,6 @@ ActiveRecord::Schema.define(version: 20170217013309) do
     t.string   "explanation"
     t.string   "location"
     t.string   "customer_availability"
-  end 
-  
-  create_table "company_services", force: :cascade do |t|
-    t.integer  "company_id"
-    t.integer  "service_category_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
   end
 
   create_table "roles", force: :cascade do |t|
