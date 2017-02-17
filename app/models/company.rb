@@ -11,4 +11,6 @@ class Company < ApplicationRecord
   def shorten_zip_code
     zip_code[0..4]
   end
+  def eligible_customer_requests
+  end
 end

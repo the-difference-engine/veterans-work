@@ -1,0 +1,40 @@
+<h1>Enter Work Request</h1>
+<%= form_tag "/requests", method: :post do %>
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+  </div>
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+  <div>
+    <%= label_tag :phone %>
+    <%= text_field_tag :phone %>
+  </div>
+  <div>
+    <%= label_tag :industry %>
+    <%= text_field_tag :industry %>
+  </div>
+  <div>
+    <%= label_tag :job_type %>
+    <%= text_field_tag :job_type %>
+  </div>
+  <div>
+    <%= label_tag :project_type %>
+    <%= text_field_tag :project_type %>
+  </div>
+  <div>
+    <%= label_tag :explanation %>
+    <%= text_field_tag :explanation %>
+  </div>
+  <div>
+    <%= label_tag :location %>
+    <%= text_field_tag :location %>
+  </div>
+  <div>
+    <%= label_tag :customer_availability %>
+    <%= date_field_tag :customer_availability %>
+  </div>
+  <%= submit_tag "Submit" %>
+<% end %>
