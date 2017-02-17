@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :service_category do
-    name "MyString"
+    sequence(:name) { |n| "category_#{n}" }
   end
 end
