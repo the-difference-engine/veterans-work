@@ -1,0 +1,44 @@
+<h1>Company Information</h1>
+<div class="row">
+  <div class="col-md-12">
+
+    <table class="table table-hover">
+      <thead>     
+        <tr>
+          <% @attributes.each do |attr| %>
+            <th><%= attr %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <th scope="row"><%= company.id %></th>
+          <td><%= company.email %></td>
+          <td><%= company.encrypted_password %></td>
+          <td><%= company.reset_password_token %></td>
+          <td><%= company.reset_password_sent_at %></td>
+          <td><%= company.remember_created_at %></td>
+          <td><%= company.sign_in_count %></td>
+          <td><%= company.current_sign_in_at %></td>
+          <td><%= company.last_sign_in_at %></td>
+          <td><%= company.current_sign_in_ip %></td>
+          <td><%= company.last_sign_in_ip %></td>
+          <td><%= company.created_at %></td>
+          <td><%= company.updated_at %></td>
+          <td>
+            <a href='/companies/<%= company.id %>'>
+              <%= company.name %>
+            </a>
+          </td>
+          <td><%= company.shorten_zip_code %></td>
+          <td><%= company.phone %></td>
+          <td><%= company.description %></td>
+          <td><%= company.url %></td>
+        </tr>
+      <% end %>  
+      </tbody>
+    </table>
+
+  </div>
+</div>
