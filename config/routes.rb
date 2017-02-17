@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :companies
+  devise_for :companies, :controllers => { registrations: 'companies/registrations'}
   get '/companies' => 'companies#index'
   get '/companies/:id' => 'companies#show'
 end
