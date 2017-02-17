@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170217013309) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +56,13 @@ ActiveRecord::Schema.define(version: 20170217013309) do
     t.string   "explanation"
     t.string   "location"
     t.string   "customer_availability"
+  end 
+  
+  create_table "company_services", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "service_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -65,6 +73,12 @@ ActiveRecord::Schema.define(version: 20170217013309) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "service_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
