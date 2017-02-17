@@ -62,3 +62,5 @@ bower.json
 # ignore rbenv local version
 .ruby-version
 
+spec/examples.txt
+
