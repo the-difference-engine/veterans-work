@@ -20,6 +20,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def show
+    @request = CustomerRequest.find(params[:id])
     render "show.html.erb"
   end
 
