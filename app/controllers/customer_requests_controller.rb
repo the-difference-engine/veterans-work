@@ -42,7 +42,7 @@ class CustomerRequestsController < ApplicationController
       :state,
       :zipcode,
       :description,
-      :customer_id
+      :expires_date
     )
   end
 end

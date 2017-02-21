@@ -22,5 +22,9 @@
     <%= label_tag :description %>
     <%= f.text_area :description %>
   </div>
+  <div>
+    <%= label_tag :expires_date %>
+    <%= f.date_select :expires_date %>
+  </div>
   <%= submit_tag "Submit" %>
 <% end %>
