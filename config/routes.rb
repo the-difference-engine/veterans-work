@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/companies/:id' => 'companies#show'
 
   get '/requests' => 'customer_requests#index'
-  get '/requests/new' => 'customer_requests#new'
-  post '/requests' => 'customer_requests#create'
+  get '/customer_requests/new' => 'customer_requests#new'
+  post '/customer_requests' => 'customer_requests#create'
 end
