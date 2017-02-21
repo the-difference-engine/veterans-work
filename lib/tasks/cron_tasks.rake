@@ -6,6 +6,6 @@ namespace :cron_tasks do
       if ExpiredCustomerRequest.create(request)
         request.destroy_all
       end
-    endf
+    end
   end
 end
