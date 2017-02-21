@@ -17,7 +17,7 @@ class CustomerRequestsController < ApplicationController
     @request = CustomerRequest.new(customer_request_params)
     @request.save
     flash[:success] = "You did it!"
-    redirect_to '/requests'
+    redirect_to '/customer_requests'
   end
 
   def show
