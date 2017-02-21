@@ -9,3 +9,8 @@
     password: Faker::Cat.name
     )
 end
+@service_categories = ["Paint", "Plumbing", "Carpentry", "Mechanical", "Electrical"]
+
+@service_categories.each do |service_category|
+  ServiceCategory.create(name: service_category)
+end
