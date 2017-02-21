@@ -1,10 +1,10 @@
 example_id                                             | status  | run_time        |
 ------------------------------------------------------ | ------- | --------------- |
-./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.04714 seconds |
-./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.00539 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.08928 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.00448 seconds |
 ./spec/helpers/customer_requests_helper_spec.rb[1:1]   | pending | 0.00001 seconds |
-./spec/models/company_service_spec.rb[1:1]             | passed  | 0.07017 seconds |
-./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.03891 seconds |
+./spec/models/company_service_spec.rb[1:1]             | passed  | 0.03155 seconds |
+./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.00339 seconds |
 ./spec/models/customer_request_spec.rb[1:1]            | pending | 0.00001 seconds |
-./spec/models/role_spec.rb[1:1]                        | pending | 0.00002 seconds |
-./spec/models/service_category_spec.rb[1:1]            | passed  | 0.00451 seconds |
+./spec/models/role_spec.rb[1:1]                        | pending | 0.00001 seconds |
+./spec/models/service_category_spec.rb[1:1]            | passed  | 0.01987 seconds |

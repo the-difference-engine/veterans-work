@@ -7,21 +7,14 @@ class CustomerRequestsController < ApplicationController
   end
 
   def new
+    @customer_request = CustomerRequest.new
+    @categories = ServiceCategory.all
+    p @categories
     render "new.html.erb"
   end
 
   def create
-    @request = CustomerRequest.new(
-      name: params["name"],
-      email: params["email"],
-      phone: params["phone"],
-      industry: params["industry"],
-      job_type: params["job_type"],
-      project_type: params["project_type"],
-      explanation: params["explanation"],
-      location: params["location"],
-      customer_availability: params["customer_availability"]
-      )
+    @request = CustomerRequest.new(customer_request_params)
     @request.save
     flash[:success] = "You did it!"
     redirect_to '/requests'
@@ -38,5 +31,18 @@ class CustomerRequestsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def customer_request_params
+    params.require(:customer_request).permit(
+      :address,
+      :city,
+      :state,
+      :zipcode,
+      :description,
+      :customer_id
+    )
   end
 end

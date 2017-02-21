@@ -9,15 +9,11 @@
   <tbody>
       <% @requests.each do |request| %>
         <tr>
-          <td><%= request.name %></td>
-          <td><%= request.email %></td>
-          <td><%= request.phone %></td>
-          <td><%= request.industry %></td>
-          <td><%= request.job_type %></td>
-          <td><%= request.project_type %></td>
-          <td><%= request.explanation %></td>
-          <td><%= request.location %></td>
-          <td><%= request.customer_availability %></td>
+          <td><%= request.address %></td>
+          <td><%= request.city %></td>
+          <td><%= request.state %></td>
+          <td><%= request.zipcode %></td>
+          <td><%= request.description %></td>
         </tr>
       <% end %>
   </tbody>

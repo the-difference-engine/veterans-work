@@ -11,6 +11,9 @@ class Company < ApplicationRecord
   def shorten_zip_code
     zip_code[0..4]
   end
+
   def eligible_customer_requests
+    CustomerRequest.where(service_category_id: service_categories)
   end
+
 end
