@@ -1,0 +1,10 @@
+example_id                                             | status  | run_time        |
+------------------------------------------------------ | ------- | --------------- |
+./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.13663 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.00364 seconds |
+./spec/helpers/customer_requests_helper_spec.rb[1:1]   | pending | 0.00001 seconds |
+./spec/models/company_service_spec.rb[1:1]             | passed  | 0.03145 seconds |
+./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.00307 seconds |
+./spec/models/customer_request_spec.rb[1:1]            | pending | 0.00001 seconds |
+./spec/models/role_spec.rb[1:1]                        | pending | 0.00001 seconds |
+./spec/models/service_category_spec.rb[1:1]            | passed  | 0.01191 seconds |
