@@ -36,6 +36,7 @@ gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'faker', '~> 1.7.3'
+gem 'whenever', :require => false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
