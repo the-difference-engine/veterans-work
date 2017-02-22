@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 example_id                                                     | status  | run_time        |
 -------------------------------------------------------------- | ------- | --------------- |
 ./spec/controllers/companies_controller_spec.rb[1:1:1]         | passed  | 0.02472 seconds |
@@ -22,3 +23,15 @@ example_id                                                     | status  | run_t
 ./spec/models/customer_request_spec.rb[1:1]                    | pending | 0.00002 seconds |
 ./spec/models/role_spec.rb[1:1]                                | pending | 0.00001 seconds |
 ./spec/models/service_category_spec.rb[1:1]                    | passed  | 0.00364 seconds |
+=======
+example_id                                             | status  | run_time        |
+------------------------------------------------------ | ------- | --------------- |
+./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.12794 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.0541 seconds  |
+./spec/helpers/customer_requests_helper_spec.rb[1:1]   | pending | 0.00001 seconds |
+./spec/models/company_service_spec.rb[1:1]             | passed  | 0.03871 seconds |
+./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.00301 seconds |
+./spec/models/customer_request_spec.rb[1:1]            | pending | 0.00002 seconds |
+./spec/models/role_spec.rb[1:1]                        | pending | 0.00001 seconds |
+./spec/models/service_category_spec.rb[1:1]            | passed  | 0.01444 seconds |
+>>>>>>> 562667744446db98e6c93fdf995914ec04b434e7
