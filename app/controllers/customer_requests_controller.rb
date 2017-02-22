@@ -2,7 +2,6 @@ class CustomerRequestsController < ApplicationController
 
   def index
     @requests = CustomerRequest.all
-    @attributes = Company.column_names
     render "index.html.erb"
   end
 
@@ -21,6 +20,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def show
+    @request = CustomerRequest.find(params[:id])
     render "show.html.erb"
   end
 

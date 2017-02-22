@@ -1,4 +1,4 @@
 class CustomerRequest < ApplicationRecord
-  has_one :service_category
+  belongs_to :service_category
   belongs_to :customer
 end
