@@ -17,10 +17,24 @@ RSpec.describe CustomerRequestsController, type: :controller do
   end
 
   describe 'GET #new' do
-    it '' do
+    it 'should create a new customer request' do
+      get :new
+      # expect(assigns(:customer_request)).to be_a(CustomerRequest)
+      expect(assigns(:customer_request)).to be_a_new(CustomerRequest)
     end
-    it '' do
+    it 'assigns all service categories to @rcategories' do
+      all_categories = [
+        create(:service_category),
+        create(:service_category)
+      ]
+      get :new
+      expect(assigns(:categories)).to eq(all_categories)
     end
+    it 'renders the new html' do
+      get :new
+      expect(response).to render_template("new.html.erb")
+    end
+
   end
 
   describe 'POST #create' do
