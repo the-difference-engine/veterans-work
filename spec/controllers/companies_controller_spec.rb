@@ -19,15 +19,28 @@ RSpec.describe CompaniesController, type: :controller do
   end
 
   describe 'GET #show' do
+    it 'assigns the requested company to @sompany' do
+      company = create(:company)
+      get(:show, id: company.id)
+      expect(assigns(:company)).to eq(company)
+    end
     it 'renders show page' do
-      get(:show, id: 1)
+      company = create(:company)
+      get(:show, id: company.id)
       expect(response).to render_template("show.html.erb")
     end
   end
 
   describe 'GET #edit' do
+    before :each do
+      @company = create(:company)
+    end
+    it 'asigns the requested company to @company' do
+      get(:edit, id: @company.id)
+      expect(assigns(:company)).to eq(@company)
+    end
     it 'renders edit page' do
-      get(:edit, id: 5)
+      get(:edit, id: @company.id)
       expect(response).to render_template("edit.html.erb")
     end
   end
@@ -51,6 +64,21 @@ RSpec.describe CompaniesController, type: :controller do
       company = create(:company)
       patch(:update, id: company.id)
       expect(response).to redirect_to("/companies/#{company.id}")
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    before :each do
+      @company = create(:company)
+    end
+    it 'removes the desired company from the database' do
+      expect{
+        delete :destroy, id: @company.id
+      }.to change(Company, :count).by(-1)
+    end
+    it 'redirects to index page' do
+      delete(:destroy, id: @company.id)
+      expect(response).to redirect_to("index.html.erb")
     end
   end
 end

@@ -12,6 +12,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @company = Company.find_by(id: params[:id])
     render 'edit.html.erb'
   end
 
@@ -22,7 +23,7 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-    company = Company.find_by(params[:id])
+    company = Company.find(params[:id])
     company.destroy
     redirect_to 'index.html.erb'
   end
