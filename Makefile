@@ -5,6 +5,9 @@ BE=bundle exec
 install:
 	bundle install
 
+migrate:
+	$(BE) rake db:migrate
+
 test: install
 	$(BE) rspec --format documentation
 

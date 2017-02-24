@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   devise_for :companies, :controllers => { registrations: 'companies/registrations'}
-  get '/companies' => 'companies#index'
+
   get '/companies/services' => 'companies#show_services'
   patch '/companies/services/:id' => 'companies#update_services'
-  get '/companies/:id' => 'companies#show'
 
-  get '/requests' => 'customer_requests#index'
-  get '/requests/new' => 'customer_requests#new'
-  post '/requests' => 'customer_requests#create'
+  resources :customer_requests
+  resources :companies
 end
+
