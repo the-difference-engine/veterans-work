@@ -45,9 +45,12 @@ RSpec.describe CustomerRequestsController, type: :controller do
   end
 
   describe 'GET #show' do
-    it '' do
+    it 'assigns the requested customer_request to @request' do
+      customer_request = create(:customer_request)
+      get :show, params: { id: customer_request.id }
+      expect(assigns(:request)).to eq(customer_request)
     end
-    it '' do
+    it 'renders the show page' do
     end
   end
 
