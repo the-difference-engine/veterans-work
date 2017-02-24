@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
-    xit 'assigns all the companies to @companies' do
+    it 'assigns all the companies to @companies' do
       all_companies = [
         create(:company),
         create(:company),
@@ -21,12 +21,12 @@ RSpec.describe CompaniesController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested company to @sompany' do
       company = create(:company)
-      get(:show, id: company.id)
+      get :show, params: { id: company.id }
       expect(assigns(:company)).to eq(company)
     end
     it 'renders show page' do
       company = create(:company)
-      get(:show, id: company.id)
+      get :show, params: { id: company.id }
       expect(response).to render_template("show.html.erb")
     end
   end
@@ -36,22 +36,22 @@ RSpec.describe CompaniesController, type: :controller do
       @company = create(:company)
     end
     it 'asigns the requested company to @company' do
-      get(:edit, id: @company.id)
+      get :edit, params: { id: @company.id }
       expect(assigns(:company)).to eq(@company)
     end
     it 'renders edit page' do
-      get(:edit, id: @company.id)
+      get :edit, params: { id: @company.id }
       expect(response).to render_template("edit.html.erb")
     end
   end
 
-  describe 'PATCH #update' do    
+  describe 'PATCH #update' do
     it 'update the values of the company' do
-      company = create(:company, 
-        name: "old value", 
+      company = create(:company,
+        name: "old value",
         phone: "1234"
       )
-      patch :update, params: { 
+      patch :update, params: {
         id: company.id,
         name: "New Value",
         phone: "5678"
@@ -62,7 +62,7 @@ RSpec.describe CompaniesController, type: :controller do
     end
     it 'redirect to the company page' do
       company = create(:company)
-      patch(:update, id: company.id)
+      patch :update, params: { id: company.id }
       expect(response).to redirect_to("/companies/#{company.id}")
     end
   end
@@ -73,11 +73,11 @@ RSpec.describe CompaniesController, type: :controller do
     end
     it 'removes the desired company from the database' do
       expect{
-        delete :destroy, id: @company.id
+        delete :destroy, params: { id: @company.id }
       }.to change(Company, :count).by(-1)
     end
     it 'redirects to index page' do
-      delete(:destroy, id: @company.id)
+      delete :destroy, params: { id: @company.id }
       expect(response).to redirect_to("index.html.erb")
     end
   end

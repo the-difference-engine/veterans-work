@@ -19,7 +19,6 @@ RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #new' do
     it 'should create a new customer request' do
       get :new
-      # expect(assigns(:customer_request)).to be_a(CustomerRequest)
       expect(assigns(:customer_request)).to be_a_new(CustomerRequest)
     end
     it 'assigns all service categories to @rcategories' do
@@ -40,11 +39,11 @@ RSpec.describe CustomerRequestsController, type: :controller do
   describe 'POST #create' do
     it 'creates and saves a new customer request to the database' do
       expect{
-        post :create, customer_request: attributes_for(:customer_request)
+        post :create, params: { customer_request: attributes_for(:customer_request) }
       }.to change(CustomerRequest, :count).by(1)
     end
     it 'redirects to the customer_requests index' do
-      post :create, customer_request: attributes_for(:customer_request)
+      post :create, params: { customer_request: attributes_for(:customer_request) }
       expect(response).to redirect_to("/customer_requests")
     end
   end
