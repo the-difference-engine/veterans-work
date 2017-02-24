@@ -1,37 +1,24 @@
-<<<<<<< HEAD
 example_id                                                     | status  | run_time        |
 -------------------------------------------------------------- | ------- | --------------- |
-./spec/controllers/companies_controller_spec.rb[1:1:1]         | passed  | 0.02472 seconds |
-./spec/controllers/companies_controller_spec.rb[1:1:2]         | passed  | 0.01694 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:1:1] | passed  | 0.01971 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:1:2] | passed  | 0.00861 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:2:1] | passed  | 0.0025 seconds  |
-./spec/controllers/customer_requests_controller_spec.rb[1:2:2] | passed  | 0.00134 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:3:1] | passed  | 0.00135 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:3:2] | passed  | 0.0013 seconds  |
-./spec/controllers/customer_requests_controller_spec.rb[1:4:1] | passed  | 0.06109 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:4:2] | passed  | 0.0017 seconds  |
-./spec/controllers/customer_requests_controller_spec.rb[1:5:1] | passed  | 0.00151 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:5:2] | passed  | 0.0014 seconds  |
-./spec/controllers/customer_requests_controller_spec.rb[1:6:1] | passed  | 0.00137 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:6:2] | passed  | 0.00524 seconds |
-./spec/controllers/customer_requests_controller_spec.rb[1:7:1] | passed  | 0.00138 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:1]         | passed  | 0.04268 seconds |
+./spec/controllers/companies_controller_spec.rb[1:1:2]         | passed  | 0.02502 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:1:1] | passed  | 0.04213 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:1:2] | passed  | 0.00344 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:2:1] | passed  | 0.00122 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:2:2] | passed  | 0.00137 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:3:1] | passed  | 0.02307 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:3:2] | passed  | 0.00927 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:4:1] | passed  | 0.01818 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:4:2] | passed  | 0.00246 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:5:1] | passed  | 0.00161 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:5:2] | passed  | 0.00174 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:6:1] | passed  | 0.00197 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:6:2] | passed  | 0.00163 seconds |
+./spec/controllers/customer_requests_controller_spec.rb[1:7:1] | passed  | 0.00127 seconds |
 ./spec/controllers/customer_requests_controller_spec.rb[1:7:2] | passed  | 0.00141 seconds |
 ./spec/helpers/customer_requests_helper_spec.rb[1:1]           | pending | 0.00001 seconds |
-./spec/models/company_service_spec.rb[1:1]                     | passed  | 0.09566 seconds |
-./spec/models/company_spec.rb[1:1:1]                           | passed  | 0.00382 seconds |
-./spec/models/customer_request_spec.rb[1:1]                    | pending | 0.00002 seconds |
-./spec/models/role_spec.rb[1:1]                                | pending | 0.00001 seconds |
-./spec/models/service_category_spec.rb[1:1]                    | passed  | 0.00364 seconds |
-=======
-example_id                                             | status  | run_time        |
------------------------------------------------------- | ------- | --------------- |
-./spec/controllers/companies_controller_spec.rb[1:1:1] | passed  | 0.12794 seconds |
-./spec/controllers/companies_controller_spec.rb[1:1:2] | passed  | 0.0541 seconds  |
-./spec/helpers/customer_requests_helper_spec.rb[1:1]   | pending | 0.00001 seconds |
-./spec/models/company_service_spec.rb[1:1]             | passed  | 0.03871 seconds |
-./spec/models/company_spec.rb[1:1:1]                   | passed  | 0.00301 seconds |
-./spec/models/customer_request_spec.rb[1:1]            | pending | 0.00002 seconds |
-./spec/models/role_spec.rb[1:1]                        | pending | 0.00001 seconds |
-./spec/models/service_category_spec.rb[1:1]            | passed  | 0.01444 seconds |
->>>>>>> 562667744446db98e6c93fdf995914ec04b434e7
+./spec/models/company_service_spec.rb[1:1]                     | passed  | 0.02537 seconds |
+./spec/models/company_spec.rb[1:1:1]                           | passed  | 0.03194 seconds |
+./spec/models/customer_request_spec.rb[1:1]                    | pending | 0.00001 seconds |
+./spec/models/role_spec.rb[1:1]                                | pending | 0.00002 seconds |
+./spec/models/service_category_spec.rb[1:1]                    | passed  | 0.02417 seconds |

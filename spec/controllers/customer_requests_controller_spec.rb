@@ -25,13 +25,13 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
   describe 'POST #create' do
     it 'creates and saves a new customer request to the database' do
-      # CustomerRequest.new = [
-      post :create, customer_request: attributes_for(:customer_request)
-      expect(CustomerRequest.count).to eq(1)
+      expect{
+        post :create, customer_request: attributes_for(:customer_request)
+      }.to change(CustomerRequest, :count).by(1)
     end
     it 'redirects to the customer_requests index' do
-      get :index
-      expect(response).to redirect_to("index.html.erb")
+      post :create, customer_request: attributes_for(:customer_request)
+      expect(response).to redirect_to("/customer_requests")
     end
   end
 
