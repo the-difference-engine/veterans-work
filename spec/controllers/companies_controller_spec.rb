@@ -12,21 +12,21 @@ RSpec.describe CompaniesController, type: :controller do
       expect(assigns(:companies)).to eq(all_companies)
     end
 
-    xit "renders the index template" do
+    it "renders the index template" do
       get :index
       expect(response).to render_template("index.html.erb")
     end
   end
 
   describe 'GET #show' do
-    xit 'renders show page' do
+    it 'renders show page' do
       get(:show, id: 1)
       expect(response).to render_template("show.html.erb")
     end
   end
 
   describe 'GET #edit' do
-    xit 'renders edit page' do
+    it 'renders edit page' do
       get(:edit, id: 5)
       expect(response).to render_template("edit.html.erb")
     end
@@ -47,10 +47,10 @@ RSpec.describe CompaniesController, type: :controller do
       expect(company.name).to eq("New Value")
       expect(company.phone).to eq("5678")
     end
-    xit 'redirect to the company page' do
+    it 'redirect to the company page' do
       company = create(:company)
       patch(:update, id: company.id)
-      expect(response).to redirect_to("/companies/#{assigns(:company).id}")
+      expect(response).to redirect_to("/companies/#{company.id}")
     end
   end
 end
