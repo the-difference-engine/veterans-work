@@ -30,14 +30,14 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    require(:company).permit(
-      email: params[:email],
-      password: params[:password],
-      name: params[:name],
-      zip_code: params[:zip_code],
-      phone: params[:phone],
-      description: params[:description],
-      url: params[:url]
+    params.require(:company).permit(
+      :email,
+      :password,
+      :name,
+      :zip_code,
+      :phone,
+      :description,
+      :url
     )
   end
 end
