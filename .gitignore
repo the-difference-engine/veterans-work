@@ -62,3 +62,4 @@ bower.json
 # ignore rbenv local version
 .ruby-version
 
+.DS_Store
