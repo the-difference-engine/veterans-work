@@ -1,0 +1,23 @@
+<h1>Customer Requests:</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Address:</th>
+      <th>City:</th>
+      <th>State:</th>
+      <th>Zip Code:</th>
+      <th>Description of work:</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+          <td><%= request.address %></td>
+          <td><%= request.city %></td>
+          <td><%= request.state %></td>
+          <td><%= request.zipcode %></td>
+          <td><%= request.description %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>

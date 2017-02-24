@@ -9,6 +9,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if  current_company %>
+      <%= link_to 'Logout', destroy_company_session_path, method: :delete %>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
