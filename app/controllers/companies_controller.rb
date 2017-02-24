@@ -22,6 +22,21 @@ class CompaniesController < ApplicationController
     redirect_to "/companies/#{company.id}"
   end
 
+  def show_services
+    @service_categories = ServiceCategory.all
+  end
+
+  def update_services
+    @service_categories = ServiceCategory.all
+    params['service_category'].each do |service_category|
+      CompanyService.create(
+        company_id: current_company.id,
+        service_category_id: service_category.to_i
+      )
+    end
+    redirect_to "/companies/#{current_company.id}"
+  end
+
   def destroy
     company = Company.find(params[:id])
     company.destroy
