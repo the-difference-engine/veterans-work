@@ -8,7 +8,6 @@ class CustomerRequestsController < ApplicationController
   def new
     @customer_request = CustomerRequest.new
     @categories = ServiceCategory.all
-    p @categories
     render "new.html.erb"
   end
 
