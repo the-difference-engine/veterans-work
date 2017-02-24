@@ -72,9 +72,9 @@ RSpec.describe CompaniesController, type: :controller do
       @company = create(:company)
     end
     it 'removes the desired company from the database' do
-      company_count = Company.count
-      delete(:destroy, id: @company.id)
-      expect(Company.count).to eq(company_count - 1)
+      expect{
+        delete :destroy, id: @company.id
+      }.to change(Company, :count).by(-1)
     end
     it 'redirects to index page' do
       delete(:destroy, id: @company.id)
