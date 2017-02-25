@@ -1,7 +1,7 @@
 class CustomerRequestsController < ApplicationController
 
   def index
-    @requests = CustomerRequest.all
+    @requests = current_company.eligible_customer_requests
     render "index.html.erb"
   end
 

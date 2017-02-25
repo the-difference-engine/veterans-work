@@ -35,6 +35,7 @@ gem 'area'
 gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
+gem 'geocoder', '~> 1.4.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
