@@ -21,6 +21,8 @@ class Company < ApplicationRecord
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end
 
+  private
+
   def full_street_address
     "#{address}, #{city}, #{state}, #{zip_code}"
   end
