@@ -16,7 +16,7 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where(
+    CustomerRequest.where("expires_date >= ?", Date.today()).where(
       service_category_id: service_categories
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end
