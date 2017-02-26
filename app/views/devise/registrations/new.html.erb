@@ -27,8 +27,23 @@
   </div>
 
   <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :zip_code %><br />
     <%= f.text_field :zip_code, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state, autofocus: true %>
   </div>
 
   <div class="field">
@@ -44,6 +59,11 @@
   <div class="field">
     <%= f.label :website %><br />
     <%= f.text_field :url, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Service Radius (miles)" %><br />
+    <%= f.number_field :service_radius, autofocus: true %>
   </div>
 
   <div class="actions">

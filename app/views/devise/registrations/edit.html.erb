@@ -1,5 +1,7 @@
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
+<%= @some_variable %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -55,11 +57,15 @@
     <%= f.label :website %><br />
     <%= f.text_field :url, autofocus: true %>
   </div>
-
+  <hr>
+  
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+
 <% end %>
+
+<a href="/companies/services">Edit Company Services</a>
 
 <h3>Cancel my account</h3>
 
