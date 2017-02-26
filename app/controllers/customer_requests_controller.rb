@@ -41,7 +41,8 @@ class CustomerRequestsController < ApplicationController
       :state,
       :zipcode,
       :description,
-      :expires_date
+      :expires_date,
+      :service_category_id
     )
   end
 end

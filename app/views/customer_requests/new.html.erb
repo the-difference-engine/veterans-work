@@ -16,8 +16,6 @@
     <%= label_tag :zipcode %>
     <%= f.text_field :zipcode %>
   </div>
-
-
   <div>
     <%= label_tag :description %>
     <%= f.text_area :description %>
@@ -25,6 +23,11 @@
   <div>
     <%= label_tag :expires_date %>
     <%= f.date_select :expires_date %>
+  </div>
+  <div>
+    <%= f.select :service_category_id,
+      options_from_collection_for_select(@categories, "id", "name"),
+      prompt: "select type of work" %>
   </div>
   <%= submit_tag "Submit" %>
 <% end %>

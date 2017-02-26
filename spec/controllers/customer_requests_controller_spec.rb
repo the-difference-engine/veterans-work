@@ -2,15 +2,20 @@ require 'rails_helper'
 
 RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #index' do
-    it 'assigns all customer request to @requests' do
+    it 'assigns all eligible customer request to @requests' do
+      company = create(:company)
+      sign_in company
       all_requests = [
         create(:customer_request),
         create(:customer_request)
       ]
+      allow_any_instance_of(Company).to receive(:eligible_customer_requests).and_return(all_requests)
       get :index
       expect(assigns(:requests)).to eq(all_requests)
     end
     it 'renders the index html' do
+      company = create(:company)
+      sign_in company
       get :index
       expect(response).to render_template("index.html.erb")
     end
@@ -21,7 +26,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
       get :new
       expect(assigns(:customer_request)).to be_a_new(CustomerRequest)
     end
-    it 'assigns all service categories to @rcategories' do
+    it 'assigns all service categories to @categories' do
       all_categories = [
         create(:service_category),
         create(:service_category)
