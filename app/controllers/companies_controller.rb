@@ -28,12 +28,6 @@ class CompaniesController < ApplicationController
 
   def update_services
     @service_categories = ServiceCategory.all
-    params['service_category'].each do |service_category|
-      CompanyService.create(
-        company_id: current_company.id,
-        service_category_id: service_category.to_i
-      )
-    end
     redirect_to "/companies/#{current_company.id}"
   end
 

@@ -57,6 +57,14 @@
     <%= f.label :website %><br />
     <%= f.text_field :url, autofocus: true %>
   </div>
+
+  <% @service_categories.each do |service_category| %>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary"> 
+        <%= check_box_tag 'service_category[]', service_category.id, checked = false %> <%= service_category.name %>
+      </label>
+    </div>
+  <% end %>
   <hr>
   
   <div class="actions">
