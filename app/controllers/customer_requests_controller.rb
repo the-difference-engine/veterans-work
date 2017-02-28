@@ -1,14 +1,13 @@
 class CustomerRequestsController < ApplicationController
 
   def index
-    @requests = CustomerRequest.all
+    @requests = current_company.eligible_customer_requests
     render "index.html.erb"
   end
 
   def new
     @customer_request = CustomerRequest.new
     @categories = ServiceCategory.all
-    p @categories
     render "new.html.erb"
   end
 
@@ -42,7 +41,8 @@ class CustomerRequestsController < ApplicationController
       :state,
       :zipcode,
       :description,
-      :expires_date
+      :expires_date,
+      :service_category_id
     )
   end
 end

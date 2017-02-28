@@ -9,7 +9,7 @@ migrate:
 	$(BE) rake db:migrate
 
 test: install
-	$(BE) rspec --format documentation
+	$(BE) rspec
 
 server: install
 	$(BE) rails s
