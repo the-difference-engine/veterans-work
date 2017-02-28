@@ -4,9 +4,6 @@ Rails.application.routes.draw do
 
   get '/' => 'pages#index'
 
-  get '/companies/services' => 'companies#show_services'
-  patch '/companies/services/:id' => 'companies#update_services'
-
   resources :customer_requests
   resources :companies
   resources :customers
