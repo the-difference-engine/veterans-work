@@ -2,7 +2,6 @@
 class CompaniesController < ApplicationController
   def index
     @companies = Company.all
-    @attributes = Company.column_names
     render 'index.html.erb'
   end
 
