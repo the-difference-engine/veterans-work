@@ -22,15 +22,6 @@ class CompaniesController < ApplicationController
     redirect_to "/companies/#{company.id}"
   end
 
-  def show_services
-    @service_categories = ServiceCategory.all
-  end
-
-  def update_services
-    @service_categories = ServiceCategory.all
-    redirect_to "/companies/#{current_company.id}"
-  end
-
   def destroy
     company = Company.find(params[:id])
     company.destroy
