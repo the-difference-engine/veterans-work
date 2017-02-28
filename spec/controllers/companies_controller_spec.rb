@@ -19,7 +19,7 @@ RSpec.describe CompaniesController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested company to @sompany' do
+    it 'assigns the requested company to @company' do
       company = create(:company)
       get :show, params: { id: company.id }
       expect(assigns(:company)).to eq(company)
