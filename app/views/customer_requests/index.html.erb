@@ -2,22 +2,26 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Address:</th>
-      <th>City:</th>
-      <th>State:</th>
-      <th>Zip Code:</th>
-      <th>Description of work:</th>
+      <th></th>
+      <th>Distance</th>
+      <th>Address</th>
+      <th>Category</th>
       <th>Expires</th>
     </tr>
   </thead>
   <tbody>
       <% @requests.each do |request| %>
         <tr>
-          <td><%= request.address %></td>
-          <td><%= request.city %></td>
-          <td><%= request.state %></td>
-          <td><%= request.zipcode %></td>
-          <td><%= request.description %></td>
+          <td>
+            <%= link_to "/customer_requests/#{request.id}" do %>
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= request.distance_from([@company.latitude, @company.longitude]) %>
+          </td>
+          <td><%= request.full_street_address %></td>
+          <td><%= request.service_category.name %></td>
           <td><%= request.expires_date %></td>
         </tr>
       <% end %>
