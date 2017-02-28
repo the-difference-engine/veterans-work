@@ -3,15 +3,18 @@ before_action :configure_sign_up_params, only: [:create]
 before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   puts "NEW"
-  #   super
-  # end
+  def new
+    @service_categories = ServiceCategory.all
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    params[:category_ids].each do |id|
+      CompanyService.create(service_category_id: id, company_id: )
+    end
+    super
+  end
 
   # GET /resource/edit
   def edit
