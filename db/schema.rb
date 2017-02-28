@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225202508) do
+ActiveRecord::Schema.define(version: 20170227010134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170225202508) do
     t.date     "expires_date"
     t.float    "latitude"
     t.float    "longitude"
+    t.index ["expires_date"], name: "index_customer_requests_on_expires_date", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|

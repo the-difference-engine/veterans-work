@@ -10,8 +10,14 @@ before_action :configure_account_update_params, only: [:update]
 
   # POST /resource
   def create
-    @service_categories = ServiceCategory.all
     super
+    @service_categories = ServiceCategory.all
+    params['service_category'].each do |service_category|
+      CompanyService.create(
+        company_id: current_company.id,
+        service_category_id: service_category.to_i
+      )
+    end
   end
 
   # GET /resource/edit

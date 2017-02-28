@@ -66,6 +66,16 @@
     <%= f.number_field :service_radius, autofocus: true %>
   </div>
 
+  <div>Service Categories Offered
+    <% @service_categories.each do |service_category| %>
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+          <%= check_box_tag 'service_category[]', service_category.id, checked = false %> <%= service_category.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
