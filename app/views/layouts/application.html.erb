@@ -12,9 +12,8 @@
     <div class="container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <% if  current_company %>
-      <%= link_to 'Logout', destroy_company_session_path, method: :delete %>
-      <% end %>
+      <%= link_to 'Logout', destroy_company_session_path, method: :delete if current_company %>
+      <%= link_to 'Logout', destroy_customer_session_path, method: :delete if current_customer %>
       <%= yield %>
     </div>
   </body>
