@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   get '/' => 'pages#index'
 
-  get '/companies/customer_reviews' => 'customer_reviews#new'
-  post '/companies/customer_reviews' => 'customer_reviews#create'
+  get '/reviews/new' => 'reviews#new'
+  post '/reviews' => 'reviews#create'
 
   resources :customer_requests
   resources :companies
