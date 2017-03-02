@@ -1,11 +1,11 @@
-class CustomerReviewsController < ApplicationController
+class ReviewsController < ApplicationController
 
   def new
     render 'new.html.erb'
   end
 
   def create
-    CustomerReview.create(
+    Review.create(
       customer_id: current_customer.id,
       company_id: params[:company_id],
       body: params[:body],
