@@ -2,7 +2,8 @@ class CustomersController < ApplicationController
 
 
   def show
-    render "show.html.erb"
+
+    redirect_to "/companies"
   end
 
 end
