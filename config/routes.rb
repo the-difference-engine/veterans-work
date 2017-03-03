@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   get '/' => 'pages#index'
 
+
+
   resources :customer_requests
   resources :companies
   resources :customers
+  resources :reviews
 end
 
