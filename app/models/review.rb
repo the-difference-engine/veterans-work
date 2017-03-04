@@ -7,6 +7,7 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 5
   }
   validates :body, length: { maximum: 2500 }
+  validates :stars, presence: true
 
   belongs_to :customer
   belongs_to :company
