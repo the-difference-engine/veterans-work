@@ -1,9 +1,19 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
+  minimum_coverage_by_file 80
   add_filter '/vendor/'
   add_filter '/channels/'
   add_filter '/controllers/Companies/'
   add_filter '/spec/'
+  add_filter '/mailers/'
+  add_filter '/helpers/'
+  add_filter '/jobs/'
+  add_filter '/models/ability.rb'
+  add_filter '/models/company.rb'
+  add_filter '/models/customer.rb'
+  add_filter '/models/application_record.rb'
+  add_filter '/controllers/companies/'
+  add_filter '/controllers/customers/'
 end
 
 require 'rspec/rails'
