@@ -1,8 +1,5 @@
 language: ruby
 
-env:
-  - DB=pgsql
-
 services:
   - postgresql
 
