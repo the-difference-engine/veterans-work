@@ -37,13 +37,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :zip_code %><br />
-    <%= f.text_field :zip_code, autofocus: true %>
+    <%= f.label :state %><br />
+    <%= f.text_field :state, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state, autofocus: true %>
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :zip_code, autofocus: true %>
   </div>
 
   <div class="field">
@@ -64,6 +64,16 @@
   <div class="field">
     <%= f.label "Service Radius (miles)" %><br />
     <%= f.number_field :service_radius, autofocus: true %>
+  </div>
+
+  <div>Service Categories Offered
+    <% @service_categories.each do |service_category| %>
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+          <%= check_box_tag 'service_category[]', service_category.id, checked = false %> <%= service_category.name %>
+        </label>
+      </div>
+    <% end %>
   </div>
 
   <div class="actions">

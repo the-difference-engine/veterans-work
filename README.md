@@ -1,18 +1,18 @@
 # Veterans Work
 ### Example workflow:
 1. I start at my local repo's master branch and cut a new feature
-    
+
     `git checkout -b <branch_name>`
 2. I write some hot code.
-    
-    `x += 1 #whoa` 
+
+    `x += 1 #whoa`
 3. I add all and commit.
-    
+
     `git add --all`
-    
+
     `git commit -m "descriptive and short af message"`
 4. I push my commits to my forked github repo.
-    
+
     `git push <user_name> <branch_name>`
 5. I go to the organization repo **or** my forked copy on github.com and trigger a pull request with the message waiting for me on the page.
 
@@ -47,4 +47,4 @@ Login details should be obtained in person for access to the build log and never
 
 **The reason for doing it this way is to always deploy from our one source of truth, the organization's repo, not our own.**
 
-.
+.....

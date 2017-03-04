@@ -3,15 +3,22 @@ before_action :configure_sign_up_params, only: [:create]
 before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   puts "NEW"
-  #   super
-  # end
+  def new
+    @service_categories = ServiceCategory.all
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @service_categories = ServiceCategory.all
+    params['service_category'].each do |service_category|
+      CompanyService.create(
+        company_id: current_company.id,
+        service_category_id: service_category.to_i
+      )
+    end
+  end
 
   # GET /resource/edit
   def edit
@@ -20,9 +27,16 @@ before_action :configure_account_update_params, only: [:update]
   end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @service_categories = ServiceCategory.all
+    super
+    params['service_category'].each do |service_category|
+      CompanyService.create(
+        company_id: current_company.id,
+        service_category_id: service_category.to_i
+      )
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -43,13 +57,13 @@ before_action :configure_account_update_params, only: [:update]
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :zip_code, :phone,
-      :description, :url])
+      :description, :url, :address, :city, :state, :service_radius])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :zip_code, :phone,
-      :description, :url])
+      :description, :url, :address, :city, :state, :service_radius])
   end
 
   # The path used after sign up.

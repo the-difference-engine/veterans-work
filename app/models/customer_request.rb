@@ -8,4 +8,8 @@ class CustomerRequest < ApplicationRecord
   def full_street_address
     "#{address}, #{city}, #{state}, #{zipcode}"
   end
+
+  def distance_from_current_company
+    current_company
+  end
 end

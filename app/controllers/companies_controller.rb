@@ -2,7 +2,6 @@
 class CompaniesController < ApplicationController
   def index
     @companies = Company.all
-    @attributes = Company.column_names
     render 'index.html.erb'
   end
 
@@ -20,21 +19,6 @@ class CompaniesController < ApplicationController
     company = Company.find(params[:id])
     company.update(company_params)
     redirect_to "/companies/#{company.id}"
-  end
-
-  def show_services
-    @service_categories = ServiceCategory.all
-  end
-
-  def update_services
-    @service_categories = ServiceCategory.all
-    params['service_category'].each do |service_category|
-      CompanyService.create(
-        company_id: current_company.id,
-        service_category_id: service_category.to_i
-      )
-    end
-    redirect_to "/companies/#{current_company.id}"
   end
 
   def destroy

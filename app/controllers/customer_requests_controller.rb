@@ -2,6 +2,7 @@ class CustomerRequestsController < ApplicationController
 
   def index
     @requests = current_company.eligible_customer_requests
+    @company = current_company
     render "index.html.erb"
   end
 
@@ -15,7 +16,7 @@ class CustomerRequestsController < ApplicationController
     @request = CustomerRequest.new(customer_request_params)
     @request.save
     flash[:success] = "You did it!"
-    redirect_to '/customer_requests'
+    redirect_to "/customers/#{current_customer.id}"
   end
 
   def show
@@ -43,6 +44,6 @@ class CustomerRequestsController < ApplicationController
       :description,
       :expires_date,
       :service_category_id
-    )
+    ).merge(customer_id: current_customer.id)
   end
 end
