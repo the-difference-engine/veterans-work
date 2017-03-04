@@ -19,7 +19,7 @@ RSpec.describe Review, type: :model do
       expect(review.errors[:company_id]).to include("can't be blank")
     end
 
-    it "is invalid if the body is greater than 2500 characters long." do
+    it "is invalid if the body is greater than 2500" do
       review = build(:review, body: Faker::Lorem.characters(2505))
       review.valid?
       expect(review.errors[:body]).to include("is too long (maximum is 2500 characters)")
