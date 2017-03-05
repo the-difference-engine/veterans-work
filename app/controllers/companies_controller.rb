@@ -1,8 +1,15 @@
-
 class CompaniesController < ApplicationController
+
   def index
     @companies = Company.all
     render 'index.html.erb'
+  end
+
+  def new
+    @service_categories = ServiceCategory.all
+  end
+
+  def create
   end
 
   def show
