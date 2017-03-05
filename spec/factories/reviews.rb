@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :review do
     customer
     company
-    stars [1..5].sample
+    stars { rand(1..5) }
     body Faker::Lorem.paragraph
   end
 end

@@ -60,6 +60,7 @@ end
 
 group :test do
   gem 'rake'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
