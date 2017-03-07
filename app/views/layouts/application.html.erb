@@ -9,13 +9,12 @@
   </head>
 
   <body ng-app="veteransWork">
-    <div class="container">
+    <div class="container" ng-controller="TestController">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= link_to 'Logout', destroy_company_session_path, method: :delete if current_company %>
       <%= link_to 'Logout', destroy_customer_session_path, method: :delete if current_customer %>
       <%= yield %>
-      {{ 2 + 2 }}
     </div>
   </body>
 </html>
