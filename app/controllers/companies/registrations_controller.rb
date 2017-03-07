@@ -1,6 +1,8 @@
 class Companies::RegistrationsController < Devise::RegistrationsController
-before_action :configure_sign_up_params, only: [:create]
-before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+
+  after_action :create_company_services, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -10,33 +12,19 @@ before_action :configure_account_update_params, only: [:update]
 
   # POST /resource
   def create
-    super
     @service_categories = ServiceCategory.all
-    params['service_category'].each do |service_category|
-      CompanyService.create(
-        company_id: current_company.id,
-        service_category_id: service_category.to_i
-      )
-    end
+    super
   end
 
   # GET /resource/edit
-  def edit
-    @service_categories = ServiceCategory.all
-    super
-  end
+  # def edit
+  #   super
+  # end
 
   # PUT /resource
-  def update
-    @service_categories = ServiceCategory.all
-    super
-    params['service_category'].each do |service_category|
-      CompanyService.create(
-        company_id: current_company.id,
-        service_category_id: service_category.to_i
-      )
-    end
-  end
+  # def update
+  #   super
+  # end
 
   # DELETE /resource
   # def destroy
@@ -57,13 +45,13 @@ before_action :configure_account_update_params, only: [:update]
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :zip_code, :phone,
-      :description, :url, :address, :city, :state, :service_radius])
+      :description, :url, :address, :city, :state, :service_radius, :service_category])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :zip_code, :phone,
-      :description, :url, :address, :city, :state, :service_radius])
+      :description, :url, :address, :city, :state, :service_radius, :service_category])
   end
 
   # The path used after sign up.
@@ -75,4 +63,13 @@ before_action :configure_account_update_params, only: [:update]
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def create_company_services
+    params[:service_category].each do |service_category|
+      CompanyService.create(
+        company_id: current_company.id,
+        service_category_id: service_category.to_i
+      )
+    end
+  end
 end

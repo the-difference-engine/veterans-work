@@ -1,6 +1,12 @@
 class ReviewsController < ApplicationController
 
+  def index
+    @reviews = Review.all
+    render 'index.html.erb'
+  end
+
   def new
+    @review = Review.new
     render 'new.html.erb'
   end
 
@@ -16,6 +22,6 @@ class ReviewsController < ApplicationController
       :company_id,
       :stars,
       :body
-      ).merge(customer_id: current_customer.id)
+    ).merge(customer_id: current_customer.id)
   end
 end

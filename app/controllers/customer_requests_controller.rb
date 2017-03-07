@@ -14,7 +14,6 @@ class CustomerRequestsController < ApplicationController
 
   def create
     @request = CustomerRequest.new(customer_request_params)
-    @request.customer_id = current_customer.id
     @request.save
     flash[:success] = "You did it!"
     redirect_to "/customers/#{current_customer.id}"
@@ -45,6 +44,6 @@ class CustomerRequestsController < ApplicationController
       :description,
       :expires_date,
       :service_category_id
-    )
+    ).merge(customer_id: current_customer.id)
   end
 end

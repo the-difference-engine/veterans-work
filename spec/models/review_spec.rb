@@ -24,5 +24,11 @@ RSpec.describe Review, type: :model do
       review.valid?
       expect(review.errors[:body]).to include("is too long (maximum is 2500 characters)")
     end
+
+      it "is invalid without stars" do
+      review = build(:review, stars: nil)
+      review.valid?
+      expect(review.errors[:stars]).to include("can't be blank")
+    end
   end
 end

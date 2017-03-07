@@ -1,5 +1,5 @@
-
 class CompaniesController < ApplicationController
+
   def index
     @companies = Company.all
     render 'index.html.erb'
@@ -40,4 +40,5 @@ class CompaniesController < ApplicationController
       :url
     )
   end
+
 end
