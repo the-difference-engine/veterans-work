@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :reviews
   has_many :companies, through: :reviews
+  has_many :quotes
 end
