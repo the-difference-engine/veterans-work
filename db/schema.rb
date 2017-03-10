@@ -90,13 +90,12 @@ ActiveRecord::Schema.define(version: 20170307005806) do
   end
 
   create_table "quotes", force: :cascade do |t|
-    t.integer  "customer_id"
+    t.integer  "customer_request_id"
     t.integer  "company_id"
     t.decimal  "materials_cost_estimate"
     t.decimal  "labor_cost_estimate"
-    t.string   "start_date"
-    t.string   "completion_date_estimate"
-    t.text     "materials"
+    t.date     "start_date"
+    t.date     "completion_date_estimate"
     t.text     "notes"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

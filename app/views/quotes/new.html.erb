@@ -1,0 +1,27 @@
+<h1>New Quote</h1>
+<%= form_for @quote do |f| %>
+  <div>
+    <%= label_tag :materials_cost_estimate %>
+    <%= f.number_field :materials_cost_estimate %>
+  </div>
+  <div>
+    <%= label_tag :labor_cost_estimate %>
+    <%= f.number_field :labor_cost_estimate %>
+  </div>
+  <div>
+    <%= label_tag :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+  <div>
+    <%= label_tag :completion_date_estimate %>
+    <%= f.date_field :completion_date_estimate %>
+  </div>
+  <div>
+    <%= label_tag :notes %>
+    <%= f.text_field :notes %>
+  </div>
+
+    <%= f.hidden_field :customer_request_id, value: @customer_request_id %>
+ 
+<%= submit_tag "Submit" %>
+<% end %>
