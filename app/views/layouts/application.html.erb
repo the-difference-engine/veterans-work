@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VeteransWork</title>
+    <title>Veterans Work</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <div class="container">
+  <body ng-app="veteransWork">
+    <div class="container" ng-controller="TestController">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= link_to 'Logout', destroy_company_session_path, method: :delete if current_company %>
