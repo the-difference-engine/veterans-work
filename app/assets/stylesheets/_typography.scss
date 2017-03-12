@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Allerta+Stencil');
+@import url('https://fonts.googleapis.com/css?family=Allerta');
 
-$font-family: Allerta Stencil, sans-serif;
+@import "colors";
+
+$title-font: Allerta Stencil, sans-serif;
+$body-font: Allerta, sans-serif;
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: $font-family
+  font-family: $title-font;
+  color: $wet-concrete;
+}
+
+p, a {
+  font-family: $body-font;
 }
