@@ -3,7 +3,6 @@
   <head>
     <title>Veterans Work</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
@@ -32,9 +31,8 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">Edit Profile</a></li>
+                  <li><a href="#">Change Password</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Separated link</a></li>
                   <li role="separator" class="divider"></li>
@@ -53,9 +51,8 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">edit profile</a></li>
+                  <li><a href="#">change password</a></li>
                   <li role="separator" class="divider"></li>
                   <li><%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %></li>
                   <li><%= link_to "Logout #{current_customer.email}", destroy_customer_session_path, method: :delete if current_customer %></li>
@@ -65,7 +62,7 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-      <div class="container panel">
+      <div class="container well">
         <% if notice || alert %>
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
@@ -74,7 +71,11 @@
       </div>
       <div class="footer navbar-fixed-bottom">
         <div class="container">
-          footer type
+          <div class="row">
+            <div class="col-md-12">
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
