@@ -10,4 +10,8 @@ class PagesController < ApplicationController
     end
   end
 
+  def about
+    render "about.html"
+  end
+
 end

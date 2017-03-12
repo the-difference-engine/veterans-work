@@ -9,6 +9,7 @@ class Company < ApplicationRecord
   has_many :service_categories, through: :company_services
   has_many :reviews
   has_many :customers, through: :reviews
+  has_many :quotes
 
   geocoded_by :full_street_address
   after_validation :geocode

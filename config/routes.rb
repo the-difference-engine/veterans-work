@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   devise_for :companies, :controllers => { registrations: 'companies/registrations'}
 
   get '/' => 'pages#index'
-
-
+  get '/about' => 'pages#about'
 
   resources :customer_requests
   resources :companies
   resources :customers
   resources :reviews
+  resources :quotes
 end
 
