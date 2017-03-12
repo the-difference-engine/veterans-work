@@ -22,6 +22,11 @@ FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS = {
 }
 
 RSpec.describe Company, type: :model do
+
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:company)).to be_valid
+  end
+
   describe "#shorten_zip_code" do
     it "returns the first 5 characters of a zip_code" do
       company = build(:company, zip_code: "12345-6789")
