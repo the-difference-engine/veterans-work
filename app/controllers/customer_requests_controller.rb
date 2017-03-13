@@ -1,5 +1,9 @@
 class CustomerRequestsController < ApplicationController
 
+  before_action :authenticate_company!, only: [:index]
+  before_action :authenticate_customer!, only: [:create, :new]
+  before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
+
   def index
     @requests = current_company.eligible_customer_requests
     @company = current_company
@@ -45,5 +49,17 @@ class CustomerRequestsController < ApplicationController
       :expires_date,
       :service_category_id
     ).merge(customer_id: current_customer.id)
+  end
+
+  def validate_customer_request!
+    customer_request = CustomerRequest.find(params[:id])
+    unless customer_request.customer == current_customer ||
+           (
+              current_company.eligible_customer_requests.include?(
+                customer_request
+              ) if current_company
+            )
+      redirect_to '/', notice: 'insufficient privilages'
+    end
   end
 end
