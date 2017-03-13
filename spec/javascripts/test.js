@@ -1,5 +1,5 @@
-describe('example test', function() {
-  it('should be true', function() {
+describe('example test', () => {
+  it('should be true', () => {
     expect('foo').toBe('foo');
   });
 });
