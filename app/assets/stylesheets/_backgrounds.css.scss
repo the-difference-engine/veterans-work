@@ -1,3 +1,17 @@
 body {
-  background-image: image-url("camo_background")
+  background-image: image-url("polaroid")
+}
+
+.jumbotron {
+  background: image-url("veterans_work_logo_no_words.png");
+  background-height: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 78vh;
+}
+
+.mask {
+  background-color: rgba(230,230,230,0.7);
+  padding: 10px;
+  border-radius: 5px;
 }
