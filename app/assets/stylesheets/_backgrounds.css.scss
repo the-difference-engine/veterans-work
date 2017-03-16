@@ -1,3 +1,18 @@
-body {
-  background-image: image-url("camo_background")
+.homepage {
+  background: image-url("handyman") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.non-homepage {
+  background-image: image-url("polaroid");
+}
+
+.jumbotron {
+  background-color: rgba(230,230,230,0.7);
+  background-height: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
 }

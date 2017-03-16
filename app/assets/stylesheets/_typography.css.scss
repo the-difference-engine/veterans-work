@@ -14,3 +14,20 @@ h1,h2,h3,h4,h5,h6 {
 p, a {
   font-family: $body-font;
 }
+
+.jumbotron {
+  text-align: center;
+  h1 {
+    font-size: 90px;
+    font-weight: bold;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  #jumbotron-message {
+    margin-top: 5px;
+    font-size: 16px;
+    padding: 10px;
+  }
+}
