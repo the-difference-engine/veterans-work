@@ -1,7 +1,11 @@
 class CompaniesController < ApplicationController
 
   def index
-    @companies = Company.all
+    if params[:query]
+      @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    else
+      @companies = Company.all
+    end
     render 'index.html.erb'
   end
 
