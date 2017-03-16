@@ -1,9 +1,13 @@
-body {
+.homepage {
   background: image-url("handyman") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.non-homepage {
+  background-image: image-url("polaroid");
 }
 
 .jumbotron {
