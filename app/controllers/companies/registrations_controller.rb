@@ -17,14 +17,16 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @service_categories = ServiceCategory.all
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @service_categories = ServiceCategory.all
+    super
+  end
 
   # DELETE /resource
   # def destroy
