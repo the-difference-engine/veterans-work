@@ -1,17 +1,14 @@
 body {
-  background-image: image-url("polaroid")
+  background: image-url("handyman") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .jumbotron {
-  background: image-url("veterans_work_logo_no_words.png");
+  background-color: rgba(230,230,230,0.7);
   background-height: 90%;
   background-repeat: no-repeat;
   background-position: center;
-  height: 78vh;
-}
-
-.mask {
-  background-color: rgba(230,230,230,0.7);
-  padding: 10px;
-  border-radius: 5px;
 }

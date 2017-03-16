@@ -18,6 +18,16 @@ p, a {
 .jumbotron {
   text-align: center;
   h1 {
-    font-size: 80px;
+    font-size: 90px;
+    font-weight: bold;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  #jumbotron-message {
+    margin-top: 5px;
+    font-size: 16px;
+    padding: 10px;
   }
 }
