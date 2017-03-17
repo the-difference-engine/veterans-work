@@ -63,11 +63,9 @@
     <%= f.number_field :service_radius, autofocus: true %>
   </div>
 
-  <% @service_categories.each do |service_category| %>
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary">
-        <%= check_box_tag 'service_category[]', service_category.id, checked = false %> <%= service_category.name %>
-      </label>
+  <% @service_categories.each do |service_category| %>   
+    <div data-toggle="checkbox">
+        <%= check_box_tag 'service_category[]', service_category.id, current_company.service_categories.include?(service_category) %> <%= service_category.name %>
     </div>
   <% end %>
   <hr>
