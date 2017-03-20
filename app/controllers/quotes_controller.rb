@@ -11,6 +11,11 @@ class QuotesController < ApplicationController
     redirect_to '/customer_requests'
   end
 
+  def show
+    @quote = Quote.find(params[:id])
+    @company = @quote.company
+  end
+
   private
 
   def quote_params
