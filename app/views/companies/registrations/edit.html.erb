@@ -4,77 +4,87 @@
 <%= @some_variable %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if not changing)</i><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :zip_code %><br />
-    <%= f.text_field :zip_code, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :website %><br />
-    <%= f.text_field :url, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Service Radius (miles)" %><br />
-    <%= f.number_field :service_radius, autofocus: true %>
-  </div>
-
-  <% @service_categories.each do |service_category| %>   
-    <div data-toggle="checkbox">
-        <%= check_box_tag 'service_category[]', service_category.id, current_company.service_categories.include?(service_category) %> <%= service_category.name %>
+      <div class="field">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off" %>
+      </div>
     </div>
+
+    <div class="col-sm-4">
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :zip_code %><br />
+        <%= f.text_field :zip_code, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone %><br />
+        <%= f.text_field :phone, autofocus: true %>
+      </div>
+    </div>
+    
+    <div class="col-sm-4">
+      <div class="field">
+        <%= f.label :description %><br />
+        <%= f.text_field :description, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :website %><br />
+        <%= f.text_field :url, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Service Radius (miles)" %><br />
+        <%= f.number_field :service_radius, autofocus: true %>
+      </div>
+
+    <div><b>Services Categories Offered</b>
+      <% @service_categories.each do |service_category| %>   
+        <div data-toggle="checkbox">
+            <%= check_box_tag 'service_category[]', service_category.id, current_company.service_categories.include?(service_category) %> <%= service_category.name %>
+        </div>        
+      <% end %>
+    </div>
+    <hr>
+
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+    </div>
+
   <% end %>
-  <hr>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-
-<% end %>
+</div>
 
 <a href="/companies/services">Edit Company Services</a>
 
