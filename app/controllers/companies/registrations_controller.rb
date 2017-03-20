@@ -2,7 +2,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  after_action :create_company_services, only: [:create]
+  after_action :create_company_services, only: [:create, :update]
 
   # GET /resource/sign_up
   def new
@@ -67,6 +67,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create_company_services
+    current_company.company_services.destroy_all
     params[:service_category].each do |service_category|
       CompanyService.create(
         company_id: current_company.id,
