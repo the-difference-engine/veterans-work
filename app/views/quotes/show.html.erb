@@ -7,9 +7,9 @@
 <h3>Notes: <%= @quote.notes %></h3>
 
 <% if current_company %>
-  <button type="submit" class="btn btn-primary">Back to Quotes</button>
-  <button type="submit" class="btn btn-primary">Home</button>
+  <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
+  <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
 <% else %>
-  <button type="submit" class="btn btn-success">Accept Quote</button> 
-  f<button type="submit" class="btn btn-danger">Decline Quote</button>
+  <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a> 
+  <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
 <% end %>
