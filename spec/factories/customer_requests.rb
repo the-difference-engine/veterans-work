@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: customer_requests
+#
+#  id                  :integer          not null, primary key
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  address             :string
+#  city                :string
+#  state               :string
+#  zipcode             :string
+#  service_category_id :integer
+#  description         :text
+#  customer_id         :integer
+#  expires_date        :date
+#  latitude            :float
+#  longitude           :float
+#
+
 FactoryGirl.define do
   factory :customer_request do
     sequence(:customer_id) { |n| n }
