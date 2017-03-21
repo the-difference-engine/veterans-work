@@ -39,6 +39,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     angularjs-rails (1.6.2)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     area (0.10.0)
       fastercsv (~> 1.5)
     arel (7.1.4)
@@ -229,6 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   angularjs-rails (~> 1.6.2)
+  annotate
   area
   bootstrap-sass (~> 3.3.6)
   byebug
@@ -263,4 +267,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.14.5
+   1.14.6
