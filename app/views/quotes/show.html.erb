@@ -1,15 +1,18 @@
-<h1>New Quote for <%= @customer_request.customer.email %></h1>
-<h1>New Quote from <%= @company.name %></h1>
-<h3>Materials Cost Estimate: <%= number_to_currency(@quote.materials_cost_estimate) %></h3>
-<h3>Labor Cost Estimate: <%= number_to_currency(@quote.labor_cost_estimate) %></h3>
-<h3>Start Date: <%= @quote.start_date %></h3>
-<h3>Completion Date Estimate: <%= @quote.completion_date_estimate %></h3>
-<h3>Notes: <%= @quote.notes %></h3>
+<div class="well">
+  <h3>New Quote for <%= @customer_request.customer.email %></h3>
+  <h3>New Quote from <%= @company.name %></h3>
+  <p>Materials Cost Estimate: <%= number_to_currency(@quote.materials_cost_estimate) %></p>
+  <p>Labor Cost Estimate: <%= number_to_currency(@quote.labor_cost_estimate) %></p>
+  <p>Start Date: <%= @quote.start_date %></p>
+  <p>Completion Date Estimate: <%= @quote.completion_date_estimate %></p>
+  <p>Notes: <%= @quote.notes %></p>
 
-<% if current_company %>
-  <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
-  <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
-<% else %>
-  <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a> 
-  <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
-<% end %>
+  <% if current_company %>
+    <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
+    <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
+  <% else %>
+    <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a> 
+    <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
+  <% end %>
+  
+</div>
