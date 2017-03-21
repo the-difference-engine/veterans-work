@@ -9,7 +9,7 @@
     <div class="col-sm-4">
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -18,7 +18,7 @@
 
       <div class="field">
         <%= f.label :password %> <i>(leave blank if not changing)</i><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
         <% if @minimum_password_length %>
           <br />
           <em><%= @minimum_password_length %> characters minimum</em>
@@ -27,46 +27,46 @@
 
       <div class="field">
         <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-        <%= f.password_field :current_password, autocomplete: "off" %>
+        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="field">
         <%= f.label :name %><br />
-        <%= f.text_field :name, autofocus: true %>
+        <%= f.text_field :name, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label :zip_code %><br />
-        <%= f.text_field :zip_code, autofocus: true %>
+        <%= f.text_field :zip_code, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label :phone %><br />
-        <%= f.text_field :phone, autofocus: true %>
+        <%= f.text_field :phone, autofocus: true, class: "form-control" %>
       </div>
     </div>
     
     <div class="col-sm-4">
       <div class="field">
         <%= f.label :description %><br />
-        <%= f.text_field :description, autofocus: true %>
+        <%= f.text_field :description, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label :website %><br />
-        <%= f.text_field :url, autofocus: true %>
+        <%= f.text_field :url, autofocus: true, class: "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label "Service Radius (miles)" %><br />
-        <%= f.number_field :service_radius, autofocus: true %>
+        <%= f.number_field :service_radius, autofocus: true, class: "form-control" %>
       </div>
 
     <div><b>Services Categories Offered</b>
@@ -79,7 +79,7 @@
     <hr>
 
     <div class="actions">
-      <%= f.submit "Update" %>
+      <%= f.submit "Update", class: "btn-xs btn-info btn" %>
     </div>
     </div>
 
@@ -90,6 +90,6 @@
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: "btn-xs btn-danger btn", data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
