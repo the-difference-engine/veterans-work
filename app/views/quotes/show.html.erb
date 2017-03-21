@@ -6,5 +6,10 @@
 <h3>Completion Date Estimate: <%= @quote.completion_date_estimate %></h3>
 <h3>Notes: <%= @quote.notes %></h3>
 
-<button type="submit" class="btn btn-success">Accept Quote</button>
-<button type="submit" class="btn btn-danger">Decline Quote</button>
+<% if current_company %>
+  <button type="submit" class="btn btn-primary">Back to Quotes</button>
+  <button type="submit" class="btn btn-primary">Home</button>
+<% else %>
+  <button type="submit" class="btn btn-success">Accept Quote</button> 
+  f<button type="submit" class="btn btn-danger">Decline Quote</button>
+<% end %>
