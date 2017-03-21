@@ -1,5 +1,14 @@
 class QuotesController < ApplicationController
 
+  def index
+    if current_customer
+      @customer_requests = current_customer.customer_requests
+    elsif current_company
+    else 
+      redirect_to "/"
+    end
+  end
+
   def new
     @customer_request_id = params[:customer_request_id]
     @quote = Quote.new
