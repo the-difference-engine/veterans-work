@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe QuotesController, type: :controller do
+  describe 'GET #index' do 
+    it 'assigns the proper quotes to @quotes' do 
+      customer = create(:customer)
+      create(:customer_request, customer_id: customer_id)
+      sign_in customer
+      q1 = create(:quote, customer_id: customer.id)
+      q2 = create(:quote, customer_id: customer.id)
+      q3 = create(:quote, customer_id: customer.id)
+      get :index
+      expect(assigns(:quotes)).to eq([q1, q2, q3])
+    end
+  end
   describe 'GET #new' do
     it 'renders a new form' do
       get :new
