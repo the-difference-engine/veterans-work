@@ -69,7 +69,7 @@
         <%= f.number_field :service_radius, autofocus: true, class: "form-control" %>
       </div>
 
-    <div><b>Services Categories Offered</b>
+    <div><strong>Services Categories Offered</strong>
       <% @service_categories.each do |service_category| %>   
         <div data-toggle="checkbox">
             <%= check_box_tag 'service_category[]', service_category.id, current_company.service_categories.include?(service_category) %> <%= service_category.name %>
