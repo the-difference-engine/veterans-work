@@ -52,13 +52,12 @@ class CustomerRequestsController < ApplicationController
   end
 
   def validate_customer_request!
-    customer_request = CustomerRequest.find(params[:id])
-    unless customer_request.customer == current_customer ||
-           (
-              current_company.eligible_customer_requests.include?(
-                customer_request
-              ) if current_company
-            )
+    @customer_request = CustomerRequest.find(params[:id])
+    unless @customer_request.customer == current_customer || (
+        current_company.eligible_customer_requests.include?(
+          @customer_request
+        ) if current_company
+      )
       redirect_to '/', notice: 'insufficient privilages'
     end
   end
