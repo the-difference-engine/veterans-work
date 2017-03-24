@@ -18,6 +18,12 @@ class Quote < ApplicationRecord
   belongs_to :company
   belongs_to :customer_request
 
+  attr_accessor :customer_request_id
+
+  def initialize(request_id)
+    @customer_request_id = request_id
+  end
+
   def total_cost_estimate 
     materials_cost_estimate + labor_cost_estimate
   end
