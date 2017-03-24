@@ -11,9 +11,8 @@ class QuotesController < ApplicationController
   end
 
   def new
-    p params[:customer_request_id]
-    @quote = Quote.new(params[:customer_request_id])
-    # @quote.customer_request_id = params[:customer_request_id]
+    @quote = Quote.new
+    @quote.customer_request_id = params[:customer_request_id]
     render "new.html.erb"
   end
 
