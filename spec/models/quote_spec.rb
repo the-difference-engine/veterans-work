@@ -17,5 +17,10 @@
 require 'rails_helper'
 
 RSpec.describe Quote, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#total_cost_estimate" do
+    it "returns the sum of the materials_cost_estimate and the labor_cost_estimate" do
+      quote = build(:quote, materials_cost_estimate: 10.0, labor_cost_estimate: 10.0)
+      expect(quote.total_cost_estimate).to eq(20.0)
+    end
+  end
 end
