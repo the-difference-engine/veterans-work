@@ -1,31 +1,32 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
       <div class="login-form">
-        <h3>Customer Sign In</h3>
+        <h2>Customer Sign In</h2>
         <div class="form-group">
           <label for="email">Email address</label>
-          <%= f.email_field :email, class:"form-control"%>
+          <%= f.email_field :email, class: "form-control"%>
         </div>
+
         <div class="form-group">
           <label for="password">Password</label>
           <%= f.password_field :password, class:"form-control"%>
         </div>
       </div>
-    </div>
-  </div>
+
   <% if devise_mapping.rememberable? -%>
-    <div class="col-sm-4 col-sm-offset-4">
+    <div class="actions">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
-  <div class="actions col-sm-4 col-sm-offset-4">
-    <%= render "customers/shared/links" %>
+  <div class="actions">
+    <%= f.submit "Log in", class: "btn btn-info btn-theme-dark" %>
   </div>
-  <div class="actions col-sm-7 col-sm-offset-7">
-    <%= f.submit "Sign In", class: "btn btn-theme-dark btn-lg" %>
-  </div>
+
+  <%= render "customers/shared/links" %>
+
 <% end %>
