@@ -16,10 +16,15 @@
 #  latitude            :float
 #  longitude           :float
 #
+# Indexes
+#
+#  index_customer_requests_on_expires_date  (expires_date)
+#
 
 class CustomerRequest < ApplicationRecord
   belongs_to :service_category
   belongs_to :customer
+  belongs_to :contract
 
   has_many :quotes
 
