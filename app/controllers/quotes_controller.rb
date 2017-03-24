@@ -17,7 +17,6 @@ class QuotesController < ApplicationController
   end
 
   def create
-    p params[:quote]
     Quote.create(quote_params)
     redirect_to '/customer_requests'
   end
