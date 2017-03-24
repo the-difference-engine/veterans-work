@@ -16,6 +16,10 @@
 #  latitude            :float
 #  longitude           :float
 #
+# Indexes
+#
+#  index_customer_requests_on_expires_date  (expires_date)
+#
 
 FactoryGirl.define do
   factory :customer_request do

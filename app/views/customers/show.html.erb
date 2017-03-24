@@ -1,6 +1,9 @@
 <h3><%= "User: #{@customer.email}" %></h3>
 <ul>
   <li><%= link_to "Post a Customer Request", '/customer_requests/new' %>
+  <li><%= link_to "See Company Quotes", '/quotes' %></li>
 </ul>
 
 <a href="/reviews/new"><button class="btn btn-theme-bg btn-lg pull-right">Leave Company Review</button>
+
+<a href="/quotes"><button class="btn btn-theme-bg btn-lg pull-left">View Quotes</button>
