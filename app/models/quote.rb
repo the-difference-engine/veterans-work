@@ -17,8 +17,10 @@
 class Quote < ApplicationRecord
   belongs_to :company
   belongs_to :customer_request
+  belongs_to :contract
 
-  def total_cost_estimate 
+  def total_cost_estimate
     materials_cost_estimate + labor_cost_estimate
   end
+
 end
