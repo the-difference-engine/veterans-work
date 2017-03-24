@@ -4,6 +4,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Company name</th>
           <th>Materials Cost Estimate</th>
           <th>Labor Cost Estimate</th>
           <th>Total Cost Estimate</th>
@@ -14,6 +15,7 @@
       </thead>
       <tbody>
         <tr>
+          <td><%= @quote.company %></td>
           <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
           <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
           <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
@@ -25,13 +27,12 @@
     </table>
   </div>
   <p></p>
-  
 
   <% if current_company %>
     <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
     <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
   <% else %>
-    <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a> 
+    <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
     <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
   <% end %>
 
