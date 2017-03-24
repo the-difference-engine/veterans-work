@@ -18,12 +18,12 @@ RSpec.describe CompaniesController, type: :controller do
     end
 
     context 'search params present' do
-      it 'assigns all the companies to @companies' do
-        c1 = create(:company, name: "zxvbnbvd")
-        c2 = create(:company)
+      it 'assigns all the companies that match the query to @companies' do
+        c1 = create(:company, name: "fgsefe")
+        c2 = create(:company, name: "asdffgsefefdsa")
         c3 = create(:company)
-        get :index, parameters: { query: "zxvbnbvd" }
-        expect(assigns(:companies)).to eq([c1])
+        get :index, params: { query: "fgsefe" }
+        expect(assigns(:companies)).to eq([c1, c2])
       end
 
       it "renders the index template" do

@@ -1,15 +1,16 @@
 # == Schema Information
 #
-# Table name: company_services
+# Table name: contracts
 #
 #  id                  :integer          not null, primary key
-#  company_id          :integer
-#  service_category_id :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  quote_id            :string
+#  customer_request_id :string
 #
 
-class CompanyService < ApplicationRecord
-  belongs_to :company
-  belongs_to :service_category
+FactoryGirl.define do
+  factory :contract do
+    
+  end
 end

@@ -1,0 +1,37 @@
+<h1>My Quotes</h1>
+<% if @customer_requests %>
+  <% @customer_requests.each do |cr| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Start Date</th>
+              <th>Completion Date Estimate</th>
+              <th>Notes</th>
+              <th>Materials Cost Estimate</th>
+              <th>Labor Cost Estimate</th>
+              <th>Total Cost Estimate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% cr.quotes.each do |quote| %>
+              <tr>
+                <td><%= quote.start_date %></td>
+                <td><%= quote.completion_date_estimate %></td>
+                <td><%= quote.notes %></td>
+                <td><%= number_to_currency(quote.materials_cost_estimate) %></td>
+                <td><%= number_to_currency(quote.labor_cost_estimate) %></td> 
+                <td><%= number_to_currency(quote.total_cost_estimate) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+<% elsif @quotes %>
+<% end %>
+
+
+

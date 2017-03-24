@@ -7,7 +7,7 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body ng-app="veteransWork">
+  <body ng-app="veteransWork" class="<%= @homepage ? 'homepage' : 'non-homepage' %>">
     <div ng-controller="TestController">
 
       <nav class="navbar navbar-default navbar-static-top">
@@ -54,10 +54,16 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-      <div class="container">
+      <div class="container main-content">
         <% if notice || alert %>
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"><span aria-hidden="true">&times;</span>
+            </button>
+            <p class="notice"><%= notice || alert %></p>
+          </div>
         <% end %>
         <%= yield %>
       </div>

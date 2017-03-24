@@ -6,7 +6,7 @@ SimpleCov.start 'rails' do
   minimum_coverage_by_file 80
   add_filter '/vendor/'
   add_filter '/channels/'
-  add_filter '/controllers/Companies/'
+  add_filter '/controllers/companies/'
   add_filter '/spec/'
   add_filter '/mailers/'
   add_filter '/helpers/'
@@ -17,6 +17,7 @@ SimpleCov.start 'rails' do
   add_filter '/models/application_record.rb'
   add_filter '/controllers/companies/'
   add_filter '/controllers/customers/'
+  add_filter '/models/contract.rb'
 end
 
 DatabaseCleaner.strategy = :truncation
