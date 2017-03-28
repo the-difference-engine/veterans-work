@@ -5,6 +5,8 @@
       <thead>
         <tr>
           <th>Company name</th>
+          <th>Category</th>
+          <th>Zip Code</th>
           <th>Materials Cost Estimate</th>
           <th>Labor Cost Estimate</th>
           <th>Total Cost Estimate</th>
@@ -15,7 +17,9 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= @quote.company %></td>
+          <td><%= @quote.company.name %></td>
+          <td><%= @quote.customer_request.service_category.name%></td>
+          <td><%= @quote.customer_request.zipcode%></td>
           <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
           <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
           <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
