@@ -1,0 +1,22 @@
+class ContractsController < ApplicationController
+
+  def create
+    if Contract.create(
+      @customer_request.quotes.each do |quote|
+        if quote.accepted == true
+          CompanyMailer.accept_email(quote).deliver_now
+        else
+          CompanyMailer.decline_email(quote).deliver_now
+        end
+      )
+    else
+      redirect_to "/quotes"
+    end
+  end
+
+  def show
+    @contract = Contract.find_by(params[:id])
+    render "show.html.erb"
+  end
+
+end
