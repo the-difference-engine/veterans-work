@@ -4,11 +4,10 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <table class="table table-hover">
+        <h4><%= cr.description %></h4>
           <thead>
             <tr>
               <th>Company</th>
-              <th>Category</th>
-              <th>Zip Code</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
               <th>Total Cost Estimate</th>
@@ -18,10 +17,8 @@
             <% cr.quotes.each do |quote| %>
               <tr>
                 <td><%= quote.company.name%></td>
-                <td><%= quote.customer_request.service_category.name%></td>
-                <td><%= quote.customer_request.zipcode%></td>
-                <td><%= quote.start_date.strftime("%B %e %Y") %></td>
-                <td><%= quote.completion_date_estimate.strftime("%B %e %Y") %></td>
+                <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
+                <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
                 <td><%= number_to_currency(quote.total_cost_estimate) %></td>
                 <td><a href="/quotes/<%=quote.id%>"><button>Details</button></a></td>
               </tr>
