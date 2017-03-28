@@ -18,6 +18,7 @@ SimpleCov.start 'rails' do
   add_filter '/controllers/companies/'
   add_filter '/controllers/customers/'
   add_filter '/models/contract.rb'
+  add_filter '/models/admin.rb'
 end
 
 DatabaseCleaner.strategy = :truncation
