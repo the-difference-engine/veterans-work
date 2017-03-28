@@ -1,37 +1,44 @@
-<div class="well">
-  <h3><%= @company.name %> Quotes</h3>
-  <div>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Company name</th>
-          <th>Category</th>
-          <th>Zip Code</th>
-          <th>Materials Cost Estimate</th>
-          <th>Labor Cost Estimate</th>
-          <th>Total Cost Estimate</th>
-          <th>Start Date</th>
-          <th>Completion Date Estimate</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @quote.company.name %></td>
-          <td><%= @quote.customer_request.service_category.name%></td>
-          <td><%= @quote.customer_request.zipcode%></td>
-          <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
-          <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
-          <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
-          <td><%= @quote.start_date %></td>
-          <td><%= @quote.completion_date_estimate %></td>
-          <td><%= @quote.notes %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p></p>
-
+  <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><%=@quote.company.name%></h3>
+                        </div>
+                        <div class="panel-body">
+                             <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                 <th>Category</th>
+                                 <td><%= @quote.customer_request.service_category.name%></td>
+                            </tr>
+                              <tr>
+                                 <th>Zip Code</th>
+                                 <td><%= @quote.customer_request.zipcode%></td>
+                            </tr>
+                            <tr>
+                                 <th>Start Date</th>
+                                 <td><%= @quote.start_date.strftime("%B %e, %Y") %></td>
+                            </tr>
+                            <tr>
+                                 <th>Completion Date Estimate</th>
+                                 <td><%= @quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+                            </tr>
+                            <tr>
+                                 <th>Notes</th>
+                                 <td><%= @quote.notes %></td>
+                            </tr>
+                            <tr>
+                                 <th>Materials Cost Estimate</th>
+                                 <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
+                            </tr>
+                            <tr>
+                                 <th>Labor Cost Estimate</th>
+                                 <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
+                            </tr>
+                            <tr>
+                                 <th>Total Cost Estimate</th>
+                                 <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
   <% if current_company %>
     <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
     <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
@@ -39,5 +46,8 @@
     <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
     <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
   <% end %>
+                        </div>
+                    </div>
+
 
 </div>
