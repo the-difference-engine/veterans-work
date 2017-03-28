@@ -39,13 +39,14 @@
                             </tr>
                         </tbody>
                     </table>
-  <% if current_company %>
-    <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
-    <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
-  <% else %>
-    <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
-    <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
-  <% end %>
+                    <div align="right">
+                      <% if current_company %>
+                        <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
+                        <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
+                      <% else %>
+                        <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
+                        <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
+                      <% end %>
                         </div>
                     </div>
 
