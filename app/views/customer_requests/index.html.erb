@@ -23,7 +23,8 @@
                 <%= request.distance_from([@company.latitude, @company.longitude]).round(1) %> mi.
               </td>
               <td><%= request.full_street_address.titleize %></td>
-              <td><%= request.service_category.name.capitalize %></td>
+              <td><%= request.se
+              rvice_category.name.capitalize %></td>
               <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
             </tr>
           <% end %>
