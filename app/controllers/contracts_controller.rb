@@ -1,6 +1,8 @@
 class ContractsController < ApplicationController
 
   def create
+    @accepted_quote = Quote.find_by(params[:id])
+    @customer_request = accepted_quote.customer_request
     if Contract.create(
       @customer_request.quotes.each do |quote|
         if quote.accepted == true
@@ -12,7 +14,7 @@ class ContractsController < ApplicationController
     else
       redirect_to "/quotes"
     end
-  end
+end
 
   def show
     @contract = Contract.find_by(params[:id])
