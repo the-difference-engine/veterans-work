@@ -1,3 +1,8 @@
 // Place all the styles related to the Quotes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "colors";
+
+.qoute_cr_header {
+  color: $wet-concrete
+}
