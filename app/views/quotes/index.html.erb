@@ -4,17 +4,14 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <table class="table table-hover">
-        <h4><%= cr.description %></h4>
+        <h4><%= cr.description %></h4><h5>Request Expires: <%= cr.expires_date %></h5>
           <thead>
-            <tr>
-              <th class="qoute-cr-header"><%= cr.customer.email %></th>
-              <th class="qoute-cr-header"><%= cr.description %></th>
-            </tr>
             <tr>
               <th>Company</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
               <th>Total Cost Estimate</th>
+              <th>Quote Details</th>
             </tr>
           </thead>
           <tbody>
