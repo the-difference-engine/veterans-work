@@ -1,5 +1,5 @@
 <%= form_for @customer_request do |f| %>
-  
+
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
       <div class="field">
@@ -30,15 +30,15 @@
 
       <div class="field">
         <%= label_tag :expires_date %>
-        <%= f.date_select :expires_date, class: "form-control" %>
+          <%= f.date_field :expires_date, class: "form-control" %>
       </div>
 
       <div class="actions">
-        <%= f.select :service_category_id,
-          options_from_collection_for_select(@categories, "id", "name"),
-          prompt: "select type of work" %>
+        <%= label_tag :service_category_id %>
+        <%= f.select :service_category_id, options_from_collection_for_select(@categories, "id", "name"),
+          {}, prompt: "select type of work", class: "form-control" %>
       </div>
+      <br>
       <%= submit_tag "Submit", class: "btn btn-info btn-theme-dark" %>
-    </div>
     </div>
   <% end %>
