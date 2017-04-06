@@ -41,7 +41,9 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <% if current_customer %>
-                      <li><a href="/customers/edit">edit my profile</a></li>
+                      <li><a href="/customers/edit">Edit My Profile</a></li>
+                      <li><a href="/reviews/new">Leave Review</a></li>
+                      <li><a href="/quotes">View Quotes</a></li>
                     <% elsif current_company %>
                       <li><a href="/companies/edit">edit my profile</a></li>
                     <% end %>
