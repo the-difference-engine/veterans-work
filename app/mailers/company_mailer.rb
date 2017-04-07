@@ -1,5 +1,5 @@
 class CompanyMailer < ApplicationMailer
-  default from: "no-reply@veteranswork.com"
+  default from: 'no-reply@veteranswork.com'
 
   def decline_email(quote)
     @quote = quote
