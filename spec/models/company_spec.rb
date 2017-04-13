@@ -26,6 +26,7 @@
 #  city                   :string
 #  state                  :string
 #  service_radius         :float
+#  status                 :string           default("Pending")
 #
 # Indexes
 #
