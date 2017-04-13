@@ -4,7 +4,7 @@ class CompanyMailer < ApplicationMailer
   def decline_email(quote)
     @quote = quote
     @company = quote.company
-    mailto: @company.email, subject: "Your quote was rejected by the customer"
+    mail to: @company.email, subject: "Your quote was rejected by the customer"
   end
 
   def accept_email(quote)
