@@ -11,7 +11,7 @@ RSpec.describe CustomersController, type: :controller do
     end
     it 'redirects a user trying to access another users pages' do
       customer1 = create(:customer,
-        email: "test@gmail.com", id: 20)
+      email: "test@gmail.com", id: 20)
       customer = create(:customer,
       email: "example@gmail.com", id: 100)
       sign_in customer
