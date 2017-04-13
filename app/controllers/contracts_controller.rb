@@ -4,7 +4,10 @@ class ContractsController < ApplicationController
     @accepted_quote = Quote.find(params[:id])
     @customer_request = @accepted_quote.customer_request
     @accepted_quote.update(accepted: true)
-    if Contract.create(quote_id: @accepted_quote.id, customer_request_id: @customer_request.id)
+    if Contract.create(
+      quote_id: @accepted_quote.id,
+      customer_request_id: @customer_request.id
+    )
       @customer_request.quotes.each do |quote|
         if quote.accepted
           CompanyMailer.accept_email(quote).deliver_now
