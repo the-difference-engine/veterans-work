@@ -52,7 +52,7 @@ RSpec.describe CompaniesController, type: :controller do
       email: "example@gmail.com", id: 100)
       sign_in company
       get :show, params: { id: 20 }
-      expect(:company).to redirect_to("/")
+      expect(response).to redirect_to("/")
     end
   end
 

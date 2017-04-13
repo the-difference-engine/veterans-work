@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe CustomersController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested customer to @customer' do
-      customer = create(:customer,
-      email: "example@gmail.com")
+      customer = create(:customer)
       sign_in customer
       get :show, params: { id: customer.id }
       expect(assigns(:customer)).to eq(customer)
@@ -16,7 +15,7 @@ RSpec.describe CustomersController, type: :controller do
       email: "example@gmail.com", id: 100)
       sign_in customer
       get :show, params: { id: 20 }
-      expect(:customer).to redirect_to("/")
+      expect(response).to redirect_to("/")
     end
   end
 end
