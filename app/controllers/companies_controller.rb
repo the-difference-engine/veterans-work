@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
-
   before_action :assign_company, only: [:show, :edit, :update, :destroy]
+
+  before_action :authenticate_company!, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:query]
@@ -12,7 +13,12 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    render 'show.html.erb'
+    company = Company.find_by(id: params[:id])
+    if current_company.id == company.id
+      render 'show.html.erb'
+    else
+      redirect_to '/'
+    end
   end
 
   def edit
