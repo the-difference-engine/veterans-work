@@ -1,6 +1,6 @@
 body {
     opacity: 1;
-    transition: 1s opacity;
+    transition: 400ms opacity;
 }
 body.fade-out {
     opacity: 0;
