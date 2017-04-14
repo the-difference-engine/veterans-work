@@ -60,6 +60,14 @@ class Company < ApplicationRecord
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end
 
+  def open_quotes
+    quotes.where(accepted: nil)
+  end
+
+  def accepted_quotes
+    quotes.where(accepted: true)
+  end
+  
   private
 
   def full_street_address
