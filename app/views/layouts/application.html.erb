@@ -45,7 +45,8 @@
                       <li><a href="/reviews/new">Leave Review</a></li>
                       <li><a href="/quotes">View Quotes</a></li>
                     <% elsif current_company %>
-                      <li><a href="/companies/edit">edit my profile</a></li>
+                      <li><a href="/companies/<%=current_company.id%>">Profile</a></li>
+                      <li><a href="/companies/edit">Edit My Profile</a></li>
                     <% end %>
                     <li role="separator" class="divider"></li>
                     <li><%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %></li>
