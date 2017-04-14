@@ -11,7 +11,6 @@
           <p>Service Categories: <%@company.company_services.each do |c|%> 
           <%=c.service_category.name%> 
           <%end%></p>
-          <p>Reviews: </p>
           <p><%= form_tag "/companies/#{@company.id}", method: :put do  %>
              <label><p>Status: </p></label>
              <%= select_tag :status, options_for_select(["Pending", "Active", "Inactive"], @company.status) %>
