@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   get '/' => 'pages#index'
   get '/about' => 'pages#about'
+  get '/admin_panel' => 'pages#admin_panel'
 
+  resources :admins
   resources :customer_requests
   resources :companies
   resources :customers

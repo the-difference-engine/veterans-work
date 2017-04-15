@@ -57,6 +57,12 @@ class CompaniesController < ApplicationController
   end
 
   def assign_company
-    @company = Company.find(params[:id])
+    if current_admin
+      @company = Company.find(params[:id])
+    elsif current_company
+      @company = current_company
+    else
+      redirect_to "/companies/#{current_company.id}"
+    end
   end
 end

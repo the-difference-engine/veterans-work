@@ -3,13 +3,6 @@ require 'rails_helper'
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
     context 'no search params' do
-      it 'assigns all the companies to @companies' do
-        c1 = create(:company)
-        c2 = create(:company)
-        c3 = create(:company)
-        get :index
-        expect(assigns(:companies)).to eq([c1, c2, c3])
-      end
 
       it "renders the index template" do
         get :index
@@ -36,6 +29,7 @@ RSpec.describe CompaniesController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested company to @company' do
       company = create(:company)
+      sign_in company
       get :show, params: { id: company.id }
       expect(assigns(:company)).to eq(company)
     end
