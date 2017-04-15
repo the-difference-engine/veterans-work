@@ -23,7 +23,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
     </div>
   </div>
-  
+
   <div class="col-sm-4">
     <div class="field">
       <%= f.label :name %><br />
@@ -55,7 +55,7 @@
       <%= f.text_field :phone, autofocus: true, class: "form-control"  %>
     </div>
   </div>
-    
+
   <div class="col-sm-4">
     <div class="field">
       <%= f.label :description %><br />
@@ -79,7 +79,7 @@
         <%= check_box_tag 'service_category[]', service_category.id, checked = false %> <%= service_category.name %>
     <% end %>
   </div>
-    
+
   </div>
 
 </div>
