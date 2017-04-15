@@ -22,12 +22,19 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @company = Company.find_by(id: params[:id])
     render 'edit.html.erb'
   end
 
   def update
-    @company.update(company_params)
-    redirect_to "/companies/#{@company.id}"
+    company = Company.find(params[:id])
+    if params[:status] && current_admin
+      company.update(status: params[:status])
+      redirect_to "/companies/#{company.id}/edit"
+    elsif current_company
+      current_company.update(company_params)
+      redirect_to "/companies/#{company.id}"
+    end
   end
 
   def destroy
@@ -58,5 +65,4 @@ class CompaniesController < ApplicationController
       redirect_to "/companies/#{current_company.id}"
     end
   end
-
 end
