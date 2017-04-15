@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170407004950) do
     t.text     "notes"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.boolean  "accepted"
   end
 
   create_table "reviews", force: :cascade do |t|
