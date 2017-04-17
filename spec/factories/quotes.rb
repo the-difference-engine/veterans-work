@@ -19,10 +19,15 @@ FactoryGirl.define do
   factory :quote do
     customer_request
     company
-    materials_cost_estimate "9.99"
-    labor_cost_estimate "9.99"
-    start_date "MyString"
-    completion_date_estimate "MyString"
+    materials_cost_estimate 100.00
+    labor_cost_estimate 100.00
+    start_date Date.today()
+    completion_date_estimate Date.today() + 3
     notes "MyText"
+  end
+
+  trait :blank_costs do
+    materials_cost_estimate ''
+    labor_cost_estimate nil
   end
 end
