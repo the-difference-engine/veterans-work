@@ -1,5 +1,4 @@
 class QuotesController < ApplicationController
-
   def index
     if current_customer
       @customer_requests = current_customer.customer_requests

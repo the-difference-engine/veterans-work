@@ -38,4 +38,12 @@ class CustomerRequest < ApplicationRecord
   def distance_from_current_company
     current_company
   end
+
+  def open_qoutes
+    quotes.where(accepted: nil)
+  end
+
+  def accepted_quotes
+    quotes.where(accepted: true)
+  end
 end
