@@ -12,6 +12,7 @@
 #  notes                    :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  accepted                 :boolean
 #
 
 require 'rails_helper'

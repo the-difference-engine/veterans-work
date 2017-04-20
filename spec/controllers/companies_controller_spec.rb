@@ -3,13 +3,6 @@ require 'rails_helper'
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
     context 'no search params' do
-      it 'assigns all the companies to @companies' do
-        c1 = create(:company)
-        c2 = create(:company)
-        c3 = create(:company)
-        get :index
-        expect(assigns(:companies)).to eq([c1, c2, c3])
-      end
 
       it "renders the index template" do
         get :index
@@ -36,19 +29,31 @@ RSpec.describe CompaniesController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested company to @company' do
       company = create(:company)
+      sign_in company
       get :show, params: { id: company.id }
       expect(assigns(:company)).to eq(company)
     end
     it 'renders show page' do
       company = create(:company)
+      sign_in company
       get :show, params: { id: company.id }
       expect(response).to render_template("show.html.erb")
+    end
+    it 'redirects a user trying to access another users show page' do
+      company1 = create(:company,
+      email: "test@gmail.com", id: 20)
+      company = create(:company,
+      email: "example@gmail.com", id: 100)
+      sign_in company
+      get :show, params: { id: 20 }
+      expect(response).to redirect_to("/")
     end
   end
 
   describe 'GET #edit' do
     before :each do
       @company = create(:company)
+      sign_in @company
     end
     it 'asigns the requested company to @company' do
       get :edit, params: { id: @company.id }
@@ -66,6 +71,7 @@ RSpec.describe CompaniesController, type: :controller do
         name: "old value",
         phone: "1234"
       )
+      sign_in company
       patch :update, params: {
         id: company.id,
         name: "New Value",
@@ -77,6 +83,7 @@ RSpec.describe CompaniesController, type: :controller do
     end
     it 'redirect to the company page' do
       company = create(:company)
+      sign_in company
       patch :update, params: { id: company.id }
       expect(response).to redirect_to("/companies/#{company.id}")
     end
@@ -85,6 +92,7 @@ RSpec.describe CompaniesController, type: :controller do
   describe 'DELETE #destroy' do
     before :each do
       @company = create(:company)
+      sign_in @company
     end
     it 'removes the desired company from the database' do
       expect{
@@ -97,6 +105,3 @@ RSpec.describe CompaniesController, type: :controller do
     end
   end
 end
-
-
-
