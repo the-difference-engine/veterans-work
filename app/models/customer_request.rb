@@ -39,7 +39,7 @@ class CustomerRequest < ApplicationRecord
     current_company
   end
 
-  def open_qoutes
+  def open_quotes
     quotes.where(accepted: nil)
   end
 

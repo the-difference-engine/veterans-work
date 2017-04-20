@@ -2,8 +2,8 @@
   <div class="panel panel-default">
     <div class="panel-body">
     <h2>Open Quotes</h2>
-      <% @open_quotes.each do |open_quote| %>
-        <span><h3><%= open_quote.customer_request.description %></h3><h5>Request Expires: <%= open_quote.customer_request.expires_date %></h5></span> 
+      <% @customer_requests.each do |cr| %>
+        <span><h3><%= cr.description %></h3><h5>Request Expires: <%= cr.expires_date %></h5></span> 
         <table class="table table-hover">
           <thead>
             <tr>
@@ -15,6 +15,7 @@
             </tr>
           </thead>
           <tbody>
+            <% cr.open_quotes.each do |open_quote| %>
             <tr>
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
@@ -22,6 +23,7 @@
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
               <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
       <% end %>
