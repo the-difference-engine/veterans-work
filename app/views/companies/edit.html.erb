@@ -1,1 +1,25 @@
-edit.html.erb
+<section>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div>
+        <h1><%= @company.name %></h1>
+        <h2>Doing business in the <%= @company.shorten_zip_code.to_region %> area</h2>
+          <h4>Phone: <%= @company.phone %></h4>
+          <h4>Email: <%= @company.email %></h4>
+          <h4>Website: <%= @company.url %></h4>
+          <p>About: <%= @company.description %></p>
+          <p>Service Categories: <%@company.company_services.each do |c|%> 
+          <%=c.service_category.name%> 
+          <%end%></p>
+          <p><%= form_tag "/companies/#{@company.id}", method: :put do  %>
+             <label><p>Status: </p></label>
+             <%= select_tag :status, options_for_select(["Pending", "Active", "Inactive"], @company.status) %>
+             <div class="actions">
+               <%= submit_tag "Update", class: "btn-xs btn-info btn-theme-dark" %>
+             </div>
+             <%end%></p>
+      </div>
+    </div>
+  </div>
+</section>
+ 

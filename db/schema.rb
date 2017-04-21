@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327234409) do
+ActiveRecord::Schema.define(version: 20170407004950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,18 +33,18 @@ ActiveRecord::Schema.define(version: 20170327234409) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",        null: false
+    t.string   "encrypted_password",     default: "",        null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "name"
     t.string   "zip_code"
     t.string   "phone"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170327234409) do
     t.string   "city"
     t.string   "state"
     t.float    "service_radius"
+    t.string   "status",                 default: "Pending"
     t.index ["email"], name: "index_companies_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true, using: :btree
   end
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170327234409) do
     t.text     "notes"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.boolean  "accepted"
   end
 
   create_table "reviews", force: :cascade do |t|
