@@ -17,7 +17,9 @@ class QuotesController < ApplicationController
   end
 
   def create
-    Quote.create(quote_params)
+    quote = Quote.new(quote_params)
+    sanitize_blank_costs(quote)
+    quote.save
     redirect_to '/customer_requests'
   end
 
@@ -41,5 +43,15 @@ class QuotesController < ApplicationController
       company_id: current_company.id,
       customer_request_id: params[:customer_request_id]
     )
+  end
+
+  def sanitize_blank_costs(quote)
+    Quote.columns_hash.each do |key, value|
+      if value.type == :decimal
+        if quote[key] == nil || quote[key] == ''
+          quote[key] = 0
+        end
+      end
+    end
   end
 end
