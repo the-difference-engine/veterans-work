@@ -23,7 +23,7 @@ class ContractsController < ApplicationController
   end
 
   def show
-    @contract = Contract.find_by(params[:id])
+    @contract = Contract.find(params[:id])
     render "show.html.erb"
   end
 
