@@ -5,8 +5,8 @@
 #  id                       :integer          not null, primary key
 #  customer_request_id      :integer
 #  company_id               :integer
-#  materials_cost_estimate  :decimal(, )
-#  labor_cost_estimate      :decimal(, )
+#  materials_cost_estimate  :decimal(, )      default("0")
+#  labor_cost_estimate      :decimal(, )      default("0")
 #  start_date               :date
 #  completion_date_estimate :date
 #  notes                    :text

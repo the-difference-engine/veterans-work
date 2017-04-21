@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407004950) do
+ActiveRecord::Schema.define(version: 20170415191734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,13 +117,13 @@ ActiveRecord::Schema.define(version: 20170407004950) do
   create_table "quotes", force: :cascade do |t|
     t.integer  "customer_request_id"
     t.integer  "company_id"
-    t.decimal  "materials_cost_estimate"
-    t.decimal  "labor_cost_estimate"
+    t.decimal  "materials_cost_estimate",  default: "0.0"
+    t.decimal  "labor_cost_estimate",      default: "0.0"
     t.date     "start_date"
     t.date     "completion_date_estimate"
     t.text     "notes"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.boolean  "accepted"
   end
 

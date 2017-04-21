@@ -25,5 +25,9 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '' do
+    it 'makes sure tests are working' do
+      expect(true).to eq(true)
+    end
+  end
 end

@@ -8,7 +8,6 @@ end
 ruby "2.3.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
-gem 'pry'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -34,8 +33,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'area'
 gem 'devise', '~> 4.2.0'
-gem 'cancancan', '~> 1.15.0'
-gem 'rolify', '~> 5.1.0'
 gem 'geocoder', '~> 1.4.3'
 gem 'angularjs-rails', '~> 1.6.2'
 gem 'rubocop', '~> 0.47.1', require: false
@@ -49,7 +46,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'rails-controller-testing'
-  gem 'simplecov', :require => false
+  gem 'simplecov', '~> 0.14.1', :require => false
   gem 'faker', '~> 1.7.3'
 end
 
