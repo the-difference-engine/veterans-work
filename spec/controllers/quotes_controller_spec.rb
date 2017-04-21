@@ -30,18 +30,38 @@ RSpec.describe QuotesController, type: :controller do
         expect(assigns(:customer_requests)).to eq([cr1, cr2, cr3])
       end
       it 'assigns all the customers open quotes to @open_quotes' do
-        customer = create(:customer)
         company1 = create(:company)
         company2 = create(:company)
+        customer = create(:customer)
         sign_in customer
         cr1 = create(:customer_request, customer_id: customer.id)
         cr2 = create(:customer_request, customer_id: customer.id)
         cr3 = create(:customer_request, customer_id: customer.id)
-        q1 = create(:quote, company_id: company1.id, accepted: nil)
-        q2 = create(:quote, company_id: company1.id, accepted: true)
-        q3 = create(:quote, company_id: company1.id, accepted: nil)
-        q4 = create(:quote, company_id: company2.id, accepted: true)
-        q5 = create(:quote, company_id: company2.id, accepted: nil)
+        q1 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr1.id,
+          accepted: nil
+          )
+        q2 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr2.id,
+          accepted: true
+          )
+        q3 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr3.id,
+          accepted: nil
+          )
+        q4 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr1.id,
+          accepted: true
+          )
+        q5 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr2.id,
+          accepted: nil
+          )
         get :index
         expect(assigns(:open_quotes)).to eq([q1, q3, q5])
       end
