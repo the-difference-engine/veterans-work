@@ -63,7 +63,7 @@ RSpec.describe QuotesController, type: :controller do
           accepted: nil
           )
         get :index
-        expect(assigns(:open_quotes)).to eq([q1, q3, q5])
+        expect(assigns(:open_quotes)).to include(q1, q3, q5)
       end
     end
 
