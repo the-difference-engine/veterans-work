@@ -8,12 +8,13 @@ class ContractsController < ApplicationController
         quote_id: accepted_quote.id,
         customer_request_id: customer_request.id
       )
+        accepted_quote.update(accepted: true)
         customer_request.quotes.each do |quote|
           if quote.accepted
             CompanyMailer.accept_email(quote).deliver_now
           else
             CompanyMailer.decline_email(quote).deliver_now
-            accepted_quote.update(accepted: false)
+            quote.update(accepted: false)
           end
         end
       else
