@@ -55,11 +55,11 @@ RSpec.describe ContractsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before :each do
+    it 'assigns the requested contract to @contract' do
       @company_one = create(:company)
       @company_two = create(:company)
       @company_three = create(:company)
-      @customer = create(:customer, id: 25)
+      @customer = create(:customer)
       sign_in @customer
       @customer_request = create(:customer_request, customer_id: @customer.id)
       @quote_one = create(
@@ -85,10 +85,17 @@ RSpec.describe ContractsController, type: :controller do
         customer_request_id: @customer_request.id,
         quote_id: @quote_one.id
       )
-    end
-    it 'assigns the requested contract to @contract' do
       get :show, params: { id: @contract.id }
       expect(assigns(:contract)).to eq(@contract)
+    end
+    it 'redirects to show page if not logged in as current Company or Customer' do
+      @contract = create(
+        :contract,
+        customer_request_id: 5,
+        quote_id: 1
+      )
+      get :show, params: { id: @contract.id }
+      expect(response).to redirect_to('/')
     end
   end
 end
