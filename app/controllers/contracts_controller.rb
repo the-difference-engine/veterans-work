@@ -24,7 +24,11 @@ class ContractsController < ApplicationController
 
   def show
     @contract = Contract.find(params[:id])
-    render "show.html.erb"
+    if current_customer || current_company
+      render "show.html.erb"
+    else
+      redirect_to '/'
+    end
   end
 
 end

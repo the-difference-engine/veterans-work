@@ -59,7 +59,7 @@ RSpec.describe ContractsController, type: :controller do
       @company_one = create(:company)
       @company_two = create(:company)
       @company_three = create(:company)
-      @customer = create(:customer)
+      @customer = create(:customer, id: 25)
       sign_in @customer
       @customer_request = create(:customer_request, customer_id: @customer.id)
       @quote_one = create(
@@ -89,9 +89,6 @@ RSpec.describe ContractsController, type: :controller do
     it 'assigns the requested contract to @contract' do
       get :show, params: { id: @contract.id }
       expect(assigns(:contract)).to eq(@contract)
-    end
-    it 'redirects a user back to Quotes page trying to access another users Show page' do
-      @customer_2 = create(:customer, id: 666)
     end
   end
 end
