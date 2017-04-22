@@ -90,5 +90,8 @@ RSpec.describe ContractsController, type: :controller do
       get :show, params: { id: @contract.id }
       expect(assigns(:contract)).to eq(@contract)
     end
+    it 'redirects a user back to Quotes page trying to access another users Show page' do
+      @customer_2 = create(:customer, id: 666)
+    end
   end
 end
