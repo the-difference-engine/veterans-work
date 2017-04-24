@@ -64,11 +64,12 @@ RSpec.describe QuotesController, type: :controller do
           )
         get :index
         expect(assigns(:open_quotes)).to include(q1, q3, q5)
+        expect(assigns(:open_quotes)).to_not include(q2, q4)
       end
     end
 
     context 'with company signed in' do
-      it 'assigns all the company"s open quotes to @open_quotes' do
+      it "assigns all the company's open quotes to @open_quotes" do
         company1 = create(:company)
         sign_in company1
         q1 = create(:quote, company_id: company1.id, accepted: nil)
