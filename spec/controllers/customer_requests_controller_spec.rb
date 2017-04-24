@@ -5,7 +5,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
     context 'company signed in' do
 
       before :each do
-        sign_in create :company
+        sign_in create :company, status: "Approved"
       end
 
       it 'assigns all eligible customer request to @requests' do
