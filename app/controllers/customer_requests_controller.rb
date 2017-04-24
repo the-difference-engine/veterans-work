@@ -1,12 +1,18 @@
 class CustomerRequestsController < ApplicationController
-
-  before_action :authenticate_company!, only: [:index]
+  
   before_action :authenticate_customer!, only: [:create, :new]
   before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
 
   def index
-    @requests = current_company.eligible_customer_requests
-    @company = current_company
+    if current_customer
+      @requests = current_customer.customer_requests
+      @customer = current_customer
+    elsif current_company
+      @requests = current_company.eligible_customer_requests
+      @company = current_company
+    else
+      redirect_to "/"
+    end
     render "index.html.erb"
   end
 
