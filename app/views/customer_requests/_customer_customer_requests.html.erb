@@ -1,23 +1,45 @@
-<h1>Customer Requests</h1>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Address</th>
-          <th>Category</th>
-          <th>Expires</th>
-        </tr>
-      </thead>
-      <tbody>
-          <% @requests.each do |request| %>
+<h1>My Work Requests</h1>
+<% if @customer.customer_requests %>
+  <% @customer.customer_requests.each do |cr| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-hover">
+        <h4><%= cr.description %></h4>
+          <thead>
             <tr>
-              <td><%= request.full_street_address.titleize %></td>
-              <td><%= request.service_category.name.capitalize %></td>
-              <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
+              <th>Service Category</th>
+              <th>Expiration Date</th>
+              <th>Quotes Received</th>
+              <th></th>
             </tr>
-          <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= cr.service_category.name%></td>
+              <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
+                <% if cr.quotes.count == 0 %>
+              <td>
+                0 of 3
+              </td>
+                <% elsif cr.quotes.count == 1 %>
+              <td>
+                1 of 3
+              </td>
+               <% elsif cr.quotes.count == 2 %>
+              <td>
+                2 of 3
+              </td>
+               <% elsif cr.quotes.count == 3 %>
+              <td>
+                3 of 3
+              </td>
+              <% end %>
+              <td><a href="/quotes?request_id=<%=cr.id%>"><button class="btn btn-theme-bg btn-md">View Quotes</button></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<a href="/customer_requests/new"><button class="btn btn-theme-bg btn-lg pull-right">New Work Request</button>
