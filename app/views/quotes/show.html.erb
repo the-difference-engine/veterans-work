@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title"><%=@quote.company.name%></h3>
+    <h3 class="panel-title">Quote from <%=@quote.company.name%></h3>
   </div>
   <div>
     <table class="table table-condensed">
@@ -44,9 +44,13 @@
         <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
         <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
       <% else %>
-        <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
-        <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
-        <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
+        <% if @quote.accepted %>
+          <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
+        <% else %>
+          <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
+          <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
+          <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
+        <% end %>
       <% end %>
     </div>
   </div>
