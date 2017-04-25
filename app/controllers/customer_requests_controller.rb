@@ -1,17 +1,24 @@
 class CustomerRequestsController < ApplicationController
-
-  before_action :authenticate_company!, only: [:index]
+  
   before_action :authenticate_customer!, only: [:create, :new]
   before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_company.status == "Approved"
-      @requests = current_company.eligible_customer_requests
-      @company = current_company
+    if current_customer
+      @requests = current_customer.customer_requests
+      @customer = current_customer
       render "index.html.erb"
+    elsif current_company
+      if current_company.status == "Approved"
+        @requests = current_company.eligible_customer_requests
+        @company = current_company
+        render "index.html.erb"
+      else
+        flash[:notice] = "Thank you for registering! Your company is currently under review."
+        redirect_to "/"
+      end
     else
-      flash[:notice] = "Thank you for registering! Your company is currently under review."
-      redirect_to "/companies/#{current_company.id}"
+      redirect_to "/"
     end
   end
 
