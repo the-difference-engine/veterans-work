@@ -55,6 +55,21 @@ RSpec.describe CustomerRequestsController, type: :controller do
     end
   end
 
+  describe 'GET #index' do
+    context 'company has a pending status' do
+
+      before :each do
+        @company = create :company, status: "Pending"
+        sign_in @company
+      end
+
+      it 'redirects company to their show page' do
+        get :index
+        expect(response).to redirect_to("/companies/#{@company.id}")
+      end
+    end
+  end
+
   describe 'GET #new' do
     context 'customer signed in' do
 
