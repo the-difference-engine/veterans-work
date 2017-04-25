@@ -67,7 +67,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create_company_services
-    current_company.company_services.destroy_all
+    current_company.company_services.destroy_all if current_company.company_services
     params[:service_category].each do |service_category|
       CompanyService.create(
         company_id: current_company.id,
