@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil');
+@import url('https://fonts.googleapis.com/css?family=Allerta');
+
+@import "colors";
+
+$title-font: Allerta Stencil, sans-serif;
+$body-font: Allerta, sans-serif;
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: $title-font;
+  color: $wet-concrete;
+}
+
+p, a {
+  font-family: $body-font;
+}
+
+.jumbotron {
+  text-align: center;
+  h1 {
+    font-size: 90px;
+    font-weight: bold;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  #jumbotron-message {
+    margin-top: 5px;
+    font-size: 16px;
+    padding: 10px;
+  }
+}

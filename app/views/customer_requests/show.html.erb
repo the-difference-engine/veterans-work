@@ -1,0 +1,5 @@
+<h2><%= @request.customer.email %> needs...</h2>
+<p><%= @request.description %></p>
+<%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
+
+

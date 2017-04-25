@@ -4,9 +4,14 @@ BE=bundle exec
 
 install:
 	bundle install
+	npm install
+
+migrate:
+	$(BE) rake db:migrate
 
 test: install
 	$(BE) rspec
+	npm test
 
 server: install
 	$(BE) rails s
@@ -14,4 +19,7 @@ server: install
 console: install
 	$(BE) rails c
 
-.PHONY: install test server console
+print_to_terminal: install
+	echo 'what the flip'
+
+.PHONY: install test server console migrate

@@ -1,14 +1,92 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VeteransWork</title>
+    <title>Veterans Work</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'veterans_work_logo_no_words.png' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body ng-app="veteransWork" class="<%= @homepage ? 'homepage' : 'non-homepage' %>">
+    <div ng-controller="TestController">
+
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><%= image_tag "veterans_work_logo_no_words.png", height: "40", alt: "Company Logo" %></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="/about">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search for a company">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <% if current_company || current_customer %>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <% if current_customer %>
+                      <li><a href="/customers/edit">Edit My Profile</a></li>
+                      <li><a href="/reviews/new">Leave Review</a></li>
+                      <li><a href="/quotes">View Quotes</a></li>
+                    <% elsif current_company %>
+                      <li><a href="/companies/<%=current_company.id%>">Profile</a></li>
+                      <li><a href="/companies/edit">Edit My Profile</a></li>
+                    <% end %>
+                    <li role="separator" class="divider"></li>
+                    <li><%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %></li>
+                    <li><%= link_to "Logout #{current_customer.email}", destroy_customer_session_path, method: :delete if current_customer %></li>
+                  </ul>
+                </li>
+              </ul>
+            <% end %>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <div class="container main-content">
+        <% if notice || alert %>
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-label="Close"><span aria-hidden="true">&times;</span>
+            </button>
+            <p class="notice"><%= notice || alert %></p>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+      <div class="footer navbar-fixed-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-xs-2"><%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %></div>
+                <div class="col-xs-2"><%= image_tag 'national_gaurd.png', alt: "national gaurd logo", class: "small-military-logo" %></div>
+                <div class="col-xs-2"><%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %></div>
+                <div class="col-xs-2"><%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %></div>
+                <div class="col-xs-2"><%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %></div>
+                <div class="col-xs-2"><%= image_tag 'coast_gaurd.png', alt: "coast gaurd logo", class: "small-military-logo" %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

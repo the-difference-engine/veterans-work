@@ -1,0 +1,20 @@
+@import "colors";
+
+.navbar-brand {
+  padding: 5px 15px 15px 15px;
+}
+
+.navbar {
+  background-color: $gold;
+  border-bottom: 3px solid $mustard;
+}
+
+.footer {
+  background-color: $navy-blue;
+  height: 75px;
+  border-top: 2px solid $mustard;
+  text-align: center;
+  img {
+    margin-top: 8px;
+  }
+}
