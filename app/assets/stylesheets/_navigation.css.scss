@@ -5,16 +5,16 @@
 }
 
 .navbar {
-  background-color: $gold;
-  border-bottom: 3px solid $mustard;
+  background-color: $pine-green;
+  border-bottom: 3px solid $muddy-brown;
 }
 
 .footer {
-  background-color: $navy-blue;
+  background-image: image-url("camo_banner");
   height: 75px;
-  border-top: 2px solid $mustard;
+  border-top: 2px solid $muddy-brown;
   text-align: center;
   img {
-    margin-top: 8px;
+    margin-top: 10px;
   }
 }
