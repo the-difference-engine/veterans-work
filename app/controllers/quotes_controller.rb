@@ -2,7 +2,11 @@ class QuotesController < ApplicationController
 
   def index
     if current_customer
-      @customer_requests = current_customer.customer_requests
+      if params[:request_id]
+        @customer_requests = [CustomerRequest.find(params[:request_id])]
+      else
+        @customer_requests = current_customer.customer_requests
+      end
     elsif current_company
       @quotes = current_company.quotes
     else
