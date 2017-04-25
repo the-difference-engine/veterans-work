@@ -14,6 +14,14 @@ class CustomerRequestsController < ApplicationController
       redirect_to "/"
     end
     render "index.html.erb"
+    if current_company.status == "Approved"
+      @requests = current_company.eligible_customer_requests
+      @company = current_company
+      render "index.html.erb"
+    else
+      flash[:notice] = "Thank you for registering! Your company is currently under review."
+      redirect_to "/companies/#{current_company.id}"
+    end
   end
 
   def new

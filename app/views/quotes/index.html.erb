@@ -1,36 +1,10 @@
 <h1>My Quotes</h1>
-<% if @customer_requests %>
-  <% @customer_requests.each do |cr| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table table-hover">
-        <span><h3><%= cr.description %></h3><h5>Request Expires: <%= cr.expires_date %></h5></span> 
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Start Date</th>
-              <th>Completion Date Estimate</th>
-              <th>Total Cost Estimate</th>
-              <th>Quote Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% cr.quotes.each do |quote| %>
-              <tr>
-                <td><%= quote.company.name%></td>
-                <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
-                <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
-                <td><%= number_to_currency(quote.total_cost_estimate) %></td>
-                <td><a href="/quotes/<%= quote.id %>"><button>Details</button></a></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  <% end %>
-<% elsif @quotes %>
+
+
+<% if current_customer %>
+  <%= render 'customer_quotes' %>
+<% elsif current_company %>
+  <%= render 'company_quotes' %>
+
+<% else @quotes %>
 <% end %>
-
-
-
