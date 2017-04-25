@@ -1,11 +1,11 @@
 class CompanyMailerPreview < ActionMailer::Preview
-  def decline_email
-    quote = Quote.last
-    CompanyMailer.decline_email(quote)
+  def decline_email_preview
+    # quote = Quote.last
+    CompanyMailer.decline_email(Quote.last)
   end
 
-  def accept_email
-    quote = Quote.last
-    CompanyMailer.accept_email(quote)
+  def accept_email_preview
+    # quote = Quote.last
+    CompanyMailer.accept_email(Quote.last)
   end
 end
