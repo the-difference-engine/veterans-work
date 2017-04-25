@@ -8,7 +8,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
@@ -60,6 +60,14 @@ class Company < ApplicationRecord
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end
 
+  def open_quotes
+    quotes.where(accepted: nil)
+  end
+
+  def accepted_quotes
+    quotes.where(accepted: true)
+  end
+  
   private
 
   def full_street_address
