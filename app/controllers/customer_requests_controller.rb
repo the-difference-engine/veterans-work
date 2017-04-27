@@ -5,7 +5,7 @@ class CustomerRequestsController < ApplicationController
   before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_company.status == "Approved"
+    if current_company.status == "Active"
       @requests = current_company.eligible_customer_requests
       @company = current_company
       render "index.html.erb"
