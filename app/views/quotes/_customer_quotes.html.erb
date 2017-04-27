@@ -17,7 +17,7 @@
           <tbody>
             <% cr.open_quotes.each do |open_quote| %>
             <tr>
-              <td><%= open_quote.company.name%></td>
+              <td><%= open_quote.company.name %></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
