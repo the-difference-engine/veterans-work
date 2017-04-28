@@ -40,10 +40,11 @@
       </tbody>
     </table>
     <div align="center">
-      <% if current_company %>
+      <% if current_company || current_customer && @quote.accepted %>
         <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
         <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
       <% else %>
+        <%= link_to "Create Contract", contracts_path(quote_id: @quote.id, customer_request_id: @quote.customer_request.id), :method => :post %>
         <a class="btn btn-success" href="/quotes/<% @quote.id %>" role="button">Accept Quote</a>
         <a class="btn btn-danger" href="/quotes" role="button">Decline Quote</a>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>

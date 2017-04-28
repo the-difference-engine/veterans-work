@@ -1,7 +1,7 @@
 class ContractsController < ApplicationController
 
   def create
-    accepted_quote = Quote.find(params[:id])
+    accepted_quote = Quote.find(params[:quote_id])
     customer_request = accepted_quote.customer_request
     if current_customer.customer_requests.include?(customer_request)
       if Contract.create(
