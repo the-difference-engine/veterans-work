@@ -4,12 +4,16 @@ class CompaniesController < ApplicationController
   before_action :authenticate_company!, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query]
-      @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    if current_admin
+      if params[:query]
+        @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+      else
+        @companies = Company.all
+      end
+      render 'index.html.erb'
     else
-      @companies = Company.all
+      redirect_to '/pages'
     end
-    render 'index.html.erb'
   end
 
   def show

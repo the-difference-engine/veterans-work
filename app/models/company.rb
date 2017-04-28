@@ -47,6 +47,8 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
 
+  validates :name, uniqueness: true
+
   geocoded_by :full_street_address
   after_validation :geocode
 
@@ -67,7 +69,7 @@ class Company < ApplicationRecord
   def accepted_quotes
     quotes.where(accepted: true)
   end
-  
+
   private
 
   def full_street_address
