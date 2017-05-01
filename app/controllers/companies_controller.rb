@@ -6,7 +6,10 @@ class CompaniesController < ApplicationController
   def index
     if current_admin
       if params[:query]
-        @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+        @companies = Company.where(
+          "lower(name) LIKE ?",
+          "%#{params[:query].downcase}%"
+        )
       else
         @companies = Company.all
       end
