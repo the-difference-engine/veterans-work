@@ -58,8 +58,11 @@ FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS = {
 }
 
 RSpec.describe Company, type: :model do
-  it "has a valid factory" do
-    expect(FactoryGirl.build(:company)).to be_valid
+
+  describe "validations" do
+    it "has a valid factory" do
+      expect(FactoryGirl.build(:company)).to be_valid
+    end
   end
 
   describe "#shorten_zip_code" do
