@@ -35,6 +35,18 @@
 #
 
 class Company < ApplicationRecord
+  include PgSearch
+  pg_search_scope :search_by_query, :against => [
+    :email,
+    :name,
+    :zip_code,
+    :phone,
+    :url,
+    :address,
+    :city,
+    :state,
+    :status
+  ]
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
