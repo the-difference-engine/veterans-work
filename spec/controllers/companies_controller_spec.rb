@@ -42,10 +42,17 @@ RSpec.describe CompaniesController, type: :controller do
       sign_in create(:admin)
     end
     context 'no search params' do
-
       it "renders the index template" do
         get :index
         expect(response).to render_template("index.html.erb")
+      end
+
+      it 'assigns all the companies to @companies' do
+        c1 = create(:company, name: "superhandyman")
+        c2 = create(:company, name: "toiletsrus")
+        c3 = create(:company, name: "ceilingrepairers")
+        get :index
+        expect(assigns(:companies)).to eq([c1, c2, c3])
       end
     end
 
