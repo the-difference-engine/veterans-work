@@ -43,6 +43,7 @@ class Company < ApplicationRecord
     :phone,
     :url,
     :address,
+    :description,
     :city,
     :state,
     :status
