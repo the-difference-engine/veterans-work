@@ -91,27 +91,31 @@ RSpec.describe QuotesController, type: :controller do
 
   describe 'POST #create' do
     before :each do
+      @customer_request = create(:customer_request)
       sign_in create(:company)
     end
 
     it 'creates and saves a new customer quote to the database' do
       expect{
         post :create, params: {
-          quote: attributes_for(:quote)
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
         }
       }.to change(Quote, :count).by(1)
     end
 
     it 'replaces blank values in any cost field with 0' do
       post :create, params: {
-        quote: attributes_for(:quote, :blank_costs)
+        quote: attributes_for(:quote, :blank_costs),
+        customer_request_id: @customer_request.id
       }
       expect(Quote.last.total_cost_estimate).to eq(0)
     end
 
     it 'does not replace non-blank values in any cost field with 0' do
       post :create, params: {
-        quote: attributes_for(:quote)
+        quote: attributes_for(:quote),
+        customer_request_id: @customer_request.id
       }
       expect(Quote.last.total_cost_estimate).to eq(200)
     end
