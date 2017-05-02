@@ -6,9 +6,9 @@ class CompaniesController < ApplicationController
   def index
     if current_admin
       if params[:query]
-        @companies = Company.search_by_query(params[:query])
+        @companies = Company.search_by_query(params[:query]).order(params[:sortby])
       else
-        @companies = Company.all
+        @companies = Company.order(params[:sortby])
       end
       render 'index.html.erb'
     else
