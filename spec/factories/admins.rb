@@ -24,6 +24,7 @@
 
 FactoryGirl.define do
   factory :admin do
-    
+    sequence(:email) {|n| "horatio_admin#{n}@mailmail.com" }
+    password "12345678"
   end
 end

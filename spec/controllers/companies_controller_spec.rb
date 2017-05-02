@@ -38,6 +38,9 @@ require 'rails_helper'
 
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
+    before :each do
+      sign_in create(:admin)
+    end
     context 'no search params' do
 
       it "renders the index template" do
@@ -48,11 +51,11 @@ RSpec.describe CompaniesController, type: :controller do
 
     context 'search params present' do
       it 'assigns all the companies that match the query to @companies' do
-        c1 = create(:company, name: "fgsefe")
-        c2 = create(:company, name: "asdffgsefefdsa")
-        c3 = create(:company)
-        get :index, params: { query: "fgsefe" }
-        expect(assigns(:companies)).to eq([c1, c2])
+        c1 = create(:company, name: "superhandyman")
+        c2 = create(:company, name: "toiletsrus")
+        c3 = create(:company, name: "ceilingrepairers")
+        get :index, params: { query: "toiletsrus" }
+        expect(assigns(:companies)).to eq([c2])
       end
 
       it "renders the index template" do
