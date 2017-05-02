@@ -29,15 +29,17 @@
             <ul class="nav navbar-nav">
               <li><a href="/about">About</a></li>
             </ul>
-            <form class="navbar-form navbar-left">
+            <div class="navbar-form navbar-left">
               <% if current_admin %>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search for a company">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <%= form_tag "/companies", method: :get do %>
+                  <div class="form-group">
+                    <%= text_field_tag :query, nil, placeholder: "Enter Company Info", class: 'form-control' %>
+                  </div>
+                  <%= submit_tag "Search", class: "btn btn-default" %>
+                <% end %>
               <% end %>
-            </form>
-            <% if current_company || current_customer %>
+            </div>
+            <% if current_company || current_customer || current_admin %>
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
@@ -53,6 +55,7 @@
                     <li role="separator" class="divider"></li>
                     <li><%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %></li>
                     <li><%= link_to "Logout #{current_customer.email}", destroy_customer_session_path, method: :delete if current_customer %></li>
+                    <li><%= link_to "Logout #{current_admin.email}", destroy_admin_session_path, method: :delete if current_admin %></li>
                   </ul>
                 </li>
               </ul>

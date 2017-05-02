@@ -1,15 +1,19 @@
 class CompaniesController < ApplicationController
-  before_action :assign_company, only: [:show, :edit, :update, :destroy]
 
+  before_action :assign_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_company!, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query]
-      @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    if current_admin
+      if params[:query]
+        @companies = Company.search_by_query(params[:query]).order(params[:sortby])
+      else
+        @companies = Company.order(params[:sortby])
+      end
+      render 'index.html.erb'
     else
-      @companies = Company.all
+      redirect_to '/'
     end
-    render 'index.html.erb'
   end
 
   def show
