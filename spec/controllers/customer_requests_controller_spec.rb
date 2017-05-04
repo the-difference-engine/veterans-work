@@ -50,7 +50,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
     context 'company not signed in' do
       it 'redirects to the company sign in page' do
         get :index
-        expect(response).to redirect_to('/companies/sign_in')
+        expect(response).to redirect_to('/')
       end
     end
   end
