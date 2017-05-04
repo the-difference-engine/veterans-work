@@ -4,21 +4,20 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Zipcode</td>
-          <td>Phone Number</td>
-          <td>Description</td>
-          <td>Website</td>
+          <th><%= link_to "Name", "/companies?sortby=name" %></th>
+          <th><%= link_to "Email", "/companies?sortby=email" %></th>
+          <th><%= link_to "Zipcode", "/companies?sortby=zip_code" %></th>
+          <th><%= link_to "Phone Number", "/companies?sortby=phone" %></th>
+          <th><%= link_to "Description", "/companies?sortby=description" %></th>
+          <th><%= link_to "Website", "/companies?sortby=url" %></th>
+          <th><%= link_to "Status", "/companies?sortby=status" %></th>
         </tr>
       </thead>
       <tbody>
       <% @companies.each do |company| %>
         <tr>
-          <th><%= company.id %></th>
           <td>
-            <a href='/companies/<%= company.id %>'>
+            <a href='/companies/<%= company.id %>/edit'>
               <%= company.name %>
             </a>
           </td>
@@ -27,6 +26,7 @@
           <td><%= company.phone %></td>
           <td><%= company.description %></td>
           <td><%= company.url %></td>
+          <td><%= company.status %></td>
         </tr>
       <% end %>
       </tbody>

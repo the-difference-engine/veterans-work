@@ -40,6 +40,8 @@ gem 'geocoder', '~> 1.4.3'
 gem 'angularjs-rails', '~> 1.6.2'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'
+# pg_search allows fast seaching by any field on model
+gem 'pg_search'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
