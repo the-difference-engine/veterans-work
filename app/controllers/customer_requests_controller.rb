@@ -74,7 +74,7 @@ class CustomerRequestsController < ApplicationController
           @customer_request
         ) if current_company
       )
-      redirect_to '/', notice: 'insufficient privilages'
+      redirect_to '/', notice: 'insufficient privileges'
     end
   end
 end
