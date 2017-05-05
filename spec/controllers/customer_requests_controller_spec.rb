@@ -21,8 +21,6 @@
 #  index_customer_requests_on_expires_date  (expires_date)
 #
 
-require 'rails_helper'
-
 RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #index' do
     context 'company signed in' do
@@ -48,15 +46,15 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'doesn\'t assign expired customer request to @requests' do
         service_category = create(:service_category)
-        company = create(:company, 
+        company = create(:company,
           status: "Active",
           latitude: 0.0,
           longitude: 0.0,
           service_radius: 1.0
         )
         sign_in company
-        company_service = create(:company_service, 
-          service_category_id: service_category.id, 
+        company_service = create(:company_service,
+          service_category_id: service_category.id,
           company_id: company.id
         )
         customer_request_1 = create(:customer_request,
@@ -204,24 +202,15 @@ RSpec.describe CustomerRequestsController, type: :controller do
     end
   end
 
-  describe 'GET #edit' do
-    it '' do
-    end
-    it '' do
-    end
-  end
+  # describe 'GET #edit' do
 
-  describe 'PATCH #update' do
-    it '' do
-    end
-    it '' do
-    end
-  end
+  # end
 
-  describe 'DELETE #destroy' do
-    it '' do
-    end
-    it '' do
-    end
-  end
+  # describe 'PATCH #update' do
+
+  # end
+
+  # describe 'DELETE #destroy' do
+
+  # end
 end

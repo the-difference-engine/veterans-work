@@ -34,8 +34,6 @@
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-require "rails_helper"
-
 COMPANY_ADDRESS_DETAILS = {
   address: "2515 W FLETCHER",
   city: "CHIACGO",

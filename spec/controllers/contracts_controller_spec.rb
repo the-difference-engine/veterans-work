@@ -9,8 +9,6 @@
 #  customer_request_id :string
 #
 
-require 'rails_helper'
-
 RSpec.describe ContractsController, type: :controller do
   describe 'POST #create' do
     before :each do
