@@ -6,7 +6,7 @@ class CustomerRequestsController < ApplicationController
     if current_customer
       @requests = current_customer.customer_requests.where(
         "expires_date >= ?", 
-        Date.today - 10
+        10.days.ago
       )
       @customer = current_customer
       render "index.html.erb"
