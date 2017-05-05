@@ -4,7 +4,10 @@ class CustomerRequestsController < ApplicationController
 
   def index
     if current_customer
-      @requests = current_customer.customer_requests
+      @requests = current_customer.customer_requests.where(
+        "expires_date >= ?", 
+        Date.today - 10
+      )
       @customer = current_customer
       render "index.html.erb"
     elsif current_company
