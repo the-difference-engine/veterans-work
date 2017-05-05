@@ -96,6 +96,10 @@ RSpec.describe CompaniesController, type: :controller do
     end
   end
 
+  describe 'POST #create' do
+
+  end
+
   describe 'GET #edit' do
     before :each do
       @company = create(:company)

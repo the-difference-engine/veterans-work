@@ -23,10 +23,13 @@ class QuotesController < ApplicationController
   end
 
   def create
-    quote = Quote.new(quote_params)
-    sanitize_blank_costs(quote)
-    quote.save
-    redirect_to '/customer_requests'
+    @quote = Quote.new(quote_params)
+    sanitize_blank_costs(@quote)
+    if @quote.save
+      redirect_to '/customer_requests'
+    else
+      render "new.html.erb"
+    end
   end
 
   def show
