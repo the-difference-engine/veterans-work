@@ -35,6 +35,18 @@ class QuotesController < ApplicationController
     @company = @quote.company
   end
 
+  def update
+    quote = Quote.find(params[:id])
+    if current_customer
+      quote.update(accepted: false)
+      CompanyMailer.decline_email(quote).deliver_now
+      redirect_to '/quotes'
+    elsif current_company
+      quote.update(quote_params)
+      redirect_to '/quotes/#{quote.id}'
+    end
+  end
+
   private
 
   def quote_params
