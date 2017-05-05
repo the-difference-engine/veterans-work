@@ -9,8 +9,10 @@
 #  customer_request_id :string
 #
 
-require 'rails_helper'
-
 RSpec.describe Contract, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#validations' do
+    it 'has a valid factory' do
+      expect(build(:contract)).to be_valid
+    end
+  end
 end

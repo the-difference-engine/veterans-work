@@ -15,10 +15,12 @@
 #  accepted                 :boolean
 #
 
-require 'rails_helper'
-
 RSpec.describe Quote, type: :model do
   describe "validations" do
+    it 'has a valid factory' do
+      expect(build(:quote)).to be_valid
+    end
+
     it "is invalid if company already has quote for customer request" do
       customer_request = create(:customer_request)
       company = create(:company)
