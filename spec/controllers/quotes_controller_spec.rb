@@ -118,4 +118,12 @@ RSpec.describe QuotesController, type: :controller do
       expect(Quote.last.total_cost_estimate).to eq(200)
     end
   end
+
+  describe 'GET #show' do
+    it 'assigns the requested quote to @quote' do
+      quote = create(:quote)
+      get :show, params: {id: quote.id}
+      expect(assigns(:quote)).to eq(quote)
+    end
+  end
 end
