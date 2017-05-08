@@ -26,7 +26,6 @@ class QuotesController < ApplicationController
     @quote = Quote.new(quote_params)
     sanitize_blank_costs(@quote)
     @quote.save
-    redirect_to '/customer_requests'
     sanitize_blank_costs(@quote)
     if @quote.save
       redirect_to '/customer_requests'
