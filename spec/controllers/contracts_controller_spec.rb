@@ -38,7 +38,7 @@ RSpec.describe ContractsController, type: :controller do
     it 'creates and saves a new contract to the database' do
       expect{
         post :create, params: {
-          id: @quote_one.id
+          quote_id: @quote_one.id
           }
         }.to change(Contract, :count).by(1)
     end
@@ -46,7 +46,7 @@ RSpec.describe ContractsController, type: :controller do
     it 'sends an email to each company that has created a quote' do
       expect {
         post :create, params: {
-          id: @quote_one.id
+          quote_id: @quote_one.id
         }
       }.to change { ActionMailer::Base.deliveries.count }.by(3)
     end
