@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
 
   before_action :assign_company, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_company!, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_admin
@@ -56,7 +55,7 @@ class CompaniesController < ApplicationController
       :zip_code,
       :phone,
       :description,
-      :url
+      :url,
     )
   end
 

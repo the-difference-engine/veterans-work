@@ -18,6 +18,18 @@
 RSpec.describe QuotesController, type: :controller do
   describe 'GET #index' do
     context 'with customer signed in' do
+      context 'with request_id param' do
+        it 'assigns the proper customer_requests to @customer_requests' do
+          customer = create(:customer)
+          sign_in customer
+          cr1 = create(:customer_request, customer_id: customer.id)
+          create(:customer_request, customer_id: customer.id)
+          create(:customer_request, customer_id: customer.id)
+          get :index, params: { request_id: cr1.id }
+          expect(assigns(:customer_requests)).to match_array [cr1]
+        end
+      end
+
       it 'assigns the proper customer_requests to @customer_requests' do
         customer = create(:customer)
         sign_in customer
@@ -27,6 +39,7 @@ RSpec.describe QuotesController, type: :controller do
         get :index
         expect(assigns(:customer_requests)).to match_array [cr1, cr2, cr3]
       end
+
       it 'assigns all the customers open quotes to @open_quotes' do
         company1 = create(:company)
         company2 = create(:company)
@@ -77,6 +90,13 @@ RSpec.describe QuotesController, type: :controller do
         expect(assigns(:open_quotes)).to eq([q1, q3])
       end
     end
+
+    context 'without customer or company signed in' do
+      it 'redirects to the root' do
+        get :index
+        expect(response).to redirect_to('/')
+      end
+    end
   end
 
   describe 'GET #new' do
@@ -116,6 +136,22 @@ RSpec.describe QuotesController, type: :controller do
         customer_request_id: @customer_request.id
       }
       expect(Quote.last.total_cost_estimate).to eq(200)
+    end
+
+    it 'renders new.html.erb if quote doesn\'t save' do
+      allow_any_instance_of(Quote).to receive(:save).and_return(false)
+      post :create, params: {
+        quote: attributes_for(:quote)
+      }
+      expect(response).to render_template('new.html.erb')
+    end
+  end
+
+  describe 'GET #show' do
+    it 'assigns the requested quote to @quote' do
+      quote = create(:quote)
+      get :show, params: {id: quote.id}
+      expect(assigns(:quote)).to eq(quote)
     end
   end
 end

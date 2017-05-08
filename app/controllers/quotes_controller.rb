@@ -18,14 +18,14 @@ class QuotesController < ApplicationController
 
   def new
     @quote = Quote.new
-    quote.customer_request_id = params[:customer_request_id]
+    @quote.customer_request_id = params[:customer_request_id]
     render "new.html.erb"
   end
 
   def create
     @quote = Quote.new(quote_params)
-    sanitize_blank_costs(quote)
-    quote.save
+    sanitize_blank_costs(@quote)
+    @quote.save
     redirect_to '/customer_requests'
     sanitize_blank_costs(@quote)
     if @quote.save
@@ -48,7 +48,7 @@ class QuotesController < ApplicationController
       CompanyMailer.decline_email(@quote).deliver_now
       redirect_to '/quotes'
     elsif current_company
-      quote.update(quote)
+      @quote.update(@quote)
       redirect_to '/quotes/#{quote.id}'
     end
   end
