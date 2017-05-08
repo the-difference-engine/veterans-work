@@ -19,6 +19,7 @@ SimpleCov.start 'rails' do
   add_filter '/controllers/customers/'
   add_filter '/models/contract.rb'
   add_filter '/models/admin.rb'
+  add_filter '/models/role.rb'
 end
 
 

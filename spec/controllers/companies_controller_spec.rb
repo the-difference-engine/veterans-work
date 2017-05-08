@@ -34,8 +34,6 @@
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-require 'rails_helper'
-
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
     before :each do
@@ -52,7 +50,7 @@ RSpec.describe CompaniesController, type: :controller do
         c2 = create(:company, name: "toiletsrus")
         c3 = create(:company, name: "ceilingrepairers")
         get :index
-        expect(assigns(:companies)).to eq([c1, c2, c3])
+        expect(assigns(:companies)).to match_array [c1, c2, c3]
       end
     end
 
@@ -94,6 +92,10 @@ RSpec.describe CompaniesController, type: :controller do
       get :show, params: { id: 20 }
       expect(response).to redirect_to("/")
     end
+  end
+
+  describe 'POST #create' do
+
   end
 
   describe 'GET #edit' do

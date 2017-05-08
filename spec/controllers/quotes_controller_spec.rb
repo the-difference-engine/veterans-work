@@ -15,8 +15,6 @@
 #  accepted                 :boolean
 #
 
-require 'rails_helper'
-
 RSpec.describe QuotesController, type: :controller do
   describe 'GET #index' do
     context 'with customer signed in' do
@@ -27,7 +25,7 @@ RSpec.describe QuotesController, type: :controller do
         cr2 = create(:customer_request, customer_id: customer.id)
         cr3 = create(:customer_request, customer_id: customer.id)
         get :index
-        expect(assigns(:customer_requests)).to eq([cr1, cr2, cr3])
+        expect(assigns(:customer_requests)).to match_array [cr1, cr2, cr3]
       end
       it 'assigns all the customers open quotes to @open_quotes' do
         company1 = create(:company)
@@ -91,27 +89,31 @@ RSpec.describe QuotesController, type: :controller do
 
   describe 'POST #create' do
     before :each do
+      @customer_request = create(:customer_request)
       sign_in create(:company)
     end
 
     it 'creates and saves a new customer quote to the database' do
       expect{
         post :create, params: {
-          quote: attributes_for(:quote)
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
         }
       }.to change(Quote, :count).by(1)
     end
 
     it 'replaces blank values in any cost field with 0' do
       post :create, params: {
-        quote: attributes_for(:quote, :blank_costs)
+        quote: attributes_for(:quote, :blank_costs),
+        customer_request_id: @customer_request.id
       }
       expect(Quote.last.total_cost_estimate).to eq(0)
     end
 
     it 'does not replace non-blank values in any cost field with 0' do
       post :create, params: {
-        quote: attributes_for(:quote)
+        quote: attributes_for(:quote),
+        customer_request_id: @customer_request.id
       }
       expect(Quote.last.total_cost_estimate).to eq(200)
     end

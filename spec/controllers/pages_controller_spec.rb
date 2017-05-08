@@ -1,5 +1,3 @@
-require "rails_helper"
-
 RSpec.describe PagesController, type: :controller do
   describe "GET #index" do
     context "with an active company session" do

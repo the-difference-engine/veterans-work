@@ -27,6 +27,12 @@ class QuotesController < ApplicationController
     sanitize_blank_costs(quote)
     quote.save
     redirect_to '/customer_requests'
+    sanitize_blank_costs(@quote)
+    if @quote.save
+      redirect_to '/customer_requests'
+    else
+      render "new.html.erb"
+    end
   end
 
   def show
