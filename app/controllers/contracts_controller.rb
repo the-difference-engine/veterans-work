@@ -8,13 +8,16 @@ class ContractsController < ApplicationController
         quote_id: accepted_quote.id,
         customer_request_id: customer_request.id
       )
-        accepted_quote.update(accepted: true)
-        customer_request.quotes.each do |quote|
-          if quote.accepted
-            CompanyMailer.accept_email(quote).deliver_now
-          else
-            CompanyMailer.decline_email(quote).deliver_now
-            quote.update(accepted: false)
+        if has_fewer_than_3_siblings?(customer_request)
+          if accepted_quote.update(accepted: true)
+            customer_request.quotes.each do |quote|
+              if quote.accepted
+                CompanyMailer.accept_email(quote).deliver_now
+              else
+                CompanyMailer.decline_email(quote).deliver_now
+                quote.update(accepted: false)
+              end
+            end
           end
         end
       else
@@ -29,6 +32,14 @@ class ContractsController < ApplicationController
       render "show.html.erb"
     else
       redirect_to '/'
+    end
+  end
+
+  private
+
+  def has_fewer_than_3_siblings?(customer_request)
+    if customer_request.quotes.count <= 3
+      return true
     end
   end
 
