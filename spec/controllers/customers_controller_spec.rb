@@ -41,4 +41,15 @@ RSpec.describe CustomersController, type: :controller do
       expect(response).to redirect_to("/")
     end
   end
+  describe 'Canelled account' do
+    it 'should destroy all items associated to cancelled customer' do
+      customer = create(:customer)
+      sign_in customer
+      review = create(:review, customer_id: customer.id)
+      customer_request = create(:customer_request, customer_id: customer.id)
+      customer.destroy
+      expect { review.reload }.to raise_error ActiveRecord::RecordNotFound
+      expect { customer_request.reload }.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
 end
