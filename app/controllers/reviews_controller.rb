@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 
   def index
     reviews = Review.all
-    render component: 'ReviewList', props: { reviews: reviews }, tag: 'span', class: 'review'
+    render 'index.html.erb'
   end
 
   def new
