@@ -8,7 +8,9 @@ class ContractsController < ApplicationController
         quote_id: accepted_quote.id,
         customer_request_id: customer_request.id
       )
-        accepted_quote.update(accepted: true)
+        accepted_quote.update_attributes(accepted: true)
+        accepted_quote.reload
+        customer_request = accepted_quote.customer_request
         customer_request.quotes.each do |quote|
           if quote.accepted
             CompanyMailer.accept_email(quote).deliver_now
@@ -17,6 +19,7 @@ class ContractsController < ApplicationController
             quote.update(accepted: false)
           end
         end
+        pp customer_request.quotes
       else
         redirect_to "/quotes"
       end

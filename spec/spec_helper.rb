@@ -2,6 +2,13 @@ require 'simplecov'
 require 'rspec/rails'
 require 'devise'
 
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+
+# then, whenever you need to clean the DB
+DatabaseCleaner.clean
+
 SimpleCov.start 'rails' do
   minimum_coverage_by_file 80
   add_filter '/vendor/'
