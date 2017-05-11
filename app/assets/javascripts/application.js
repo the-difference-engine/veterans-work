@@ -15,4 +15,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-animate
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
