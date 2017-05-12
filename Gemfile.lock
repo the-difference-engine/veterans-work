@@ -286,7 +286,6 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails-controller-testing
   rake (~> 11.3.0)
-  rake
   react-rails
   roadie
   rolify (~> 5.1.0)
