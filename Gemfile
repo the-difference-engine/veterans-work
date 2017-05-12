@@ -42,6 +42,8 @@ gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'
 # pg_search allows fast seaching by any field on model
 gem 'pg_search'
+# react
+gem "react-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
