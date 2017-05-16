@@ -34,11 +34,39 @@
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-require 'rails_helper'
-
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
     context 'no search params' do
+      before :each do
+        sign_in create(:admin)
+      end
+
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template("index.html.erb")
+      end
+
+      it 'assigns all the companies to @companies' do
+        c1 = create(:company, name: "superhandyman")
+        c2 = create(:company, name: "toiletsrus")
+        c3 = create(:company, name: "ceilingrepairers")
+        get :index
+        expect(assigns(:companies)).to match_array [c1, c2, c3]
+      end
+    end
+
+    context 'search params present' do
+      before :each do
+        sign_in create(:admin)
+      end
+
+      it 'assigns all the companies that match the query to @companies' do
+        c1 = create(:company, name: "superhandyman")
+        c2 = create(:company, name: "toiletsrus")
+        c3 = create(:company, name: "ceilingrepairers")
+        get :index, params: { query: "toiletsrus" }
+        expect(assigns(:companies)).to eq([c2])
+      end
 
       it "renders the index template" do
         get :index
@@ -46,19 +74,9 @@ RSpec.describe CompaniesController, type: :controller do
       end
     end
 
-    context 'search params present' do
-      it 'assigns all the companies that match the query to @companies' do
-        c1 = create(:company, name: "fgsefe")
-        c2 = create(:company, name: "asdffgsefefdsa")
-        c3 = create(:company)
-        get :index, params: { query: "fgsefe" }
-        expect(assigns(:companies)).to eq([c1, c2])
-      end
-
-      it "renders the index template" do
-        get :index
-        expect(response).to render_template("index.html.erb")
-      end
+    it 'redirects to root if no admin signed in' do
+      get :index
+      expect(response).to redirect_to('/')
     end
   end
 
@@ -84,6 +102,10 @@ RSpec.describe CompaniesController, type: :controller do
       get :show, params: { id: 20 }
       expect(response).to redirect_to("/")
     end
+  end
+
+  describe 'POST #create' do
+
   end
 
   describe 'GET #edit' do
@@ -117,6 +139,20 @@ RSpec.describe CompaniesController, type: :controller do
       expect(company.name).to eq("New Value")
       expect(company.phone).to eq("5678")
     end
+
+    context 'with params[:status] && current_admin' do
+      it 'updates the company status per the admin' do
+        sign_in create(:admin)
+        company = create(:company)
+        patch :update, params: {
+          id: company.id,
+          status: "Active"
+         }
+        company.reload
+        expect(company.status).to eq("Active")
+      end
+    end
+
     it 'redirect to the company page' do
       company = create(:company)
       sign_in company

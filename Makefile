@@ -11,7 +11,6 @@ migrate:
 
 test: install
 	$(BE) rspec
-	npm test
 
 server: install
 	$(BE) rails s
