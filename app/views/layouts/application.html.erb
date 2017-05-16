@@ -28,6 +28,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="/about">About</a></li>
+              <li><a href="/how">How It Works</a></li>
             </ul>
             <div class="navbar-form navbar-left">
               <% if current_admin %>
@@ -58,6 +59,11 @@
                     <li><%= link_to "Logout #{current_admin.email}", destroy_admin_session_path, method: :delete if current_admin %></li>
                   </ul>
                 </li>
+              </ul>
+            <% else %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Customer Sign Up", "/customers/sign_up" %></li>
+                <li><%= link_to "Company Sign Up", "/companies/sign_up" %></li>
               </ul>
             <% end %>
           </div><!-- /.navbar-collapse -->
