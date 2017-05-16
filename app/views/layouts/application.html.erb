@@ -60,6 +60,11 @@
                   </ul>
                 </li>
               </ul>
+            <% else %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Customer Sign Up", "/customers/sign_up" %></li>
+                <li><%= link_to "Company Sign Up", "/companies/sign_up" %></li>
+              </ul>
             <% end %>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
