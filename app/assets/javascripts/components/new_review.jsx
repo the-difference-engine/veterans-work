@@ -1,6 +1,8 @@
 class NewReview extends React.Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       body: '',
       company_id: props.company_id,
@@ -26,7 +28,10 @@ class NewReview extends React.Component {
             <span key={index} onClick={() => this.handleClick(index)} className={star} aria-hidden='true'></span>
           ))}
         </div>
-        <input type="text" className="form-control" placeholder="leave review here..."></input>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} value={this.state.body} />
+          <button>submit</button>
+        </form>
       </div>
     )
   }
@@ -41,6 +46,34 @@ class NewReview extends React.Component {
     }
     this.setState({
       starArray: newStarArray,
+    })
+  }
+
+  handleChange(e) {
+    this.setState({body: e.target.value});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let newReview = {
+      body: this.state.body,
+    };
+
+    let request = new Request('/api/v1/reviews', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.state),
+    });
+
+    fetch(request).then((response) => {
+      console.log(response)
+      this.setState(() => ({
+        body: newReview,
+      }));
+      console.log(this.state.body)
     })
   }
 }
