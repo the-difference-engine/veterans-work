@@ -1,23 +1,24 @@
 <div class="jumbotron">
   <h1>Veterans Work</h1>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8 ">
-      <p id="jumbotron-message">For our beloved veterans in the skilled trades, work opportunities can sometimes be hard to come by. Veterans Work's mission is to connect customers in need with hard working, dedicated veterans who are qualified and ready.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div>
-        <%= link_to "Customer sign in", "/customers/sign_in", class: "btn btn-success btn-lg" %>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8 ">
+        <p id="jumbotron-message">For our beloved veterans in the skilled trades, work opportunities can sometimes be hard to come by. Veterans Work's mission is to connect customers in need with hard working, dedicated veterans who are qualified and ready.</p>
       </div>
-      <p>Customers can post work requests and receive competitive bids from veterans and veteran-owned companies.</p>
     </div>
-    <div class="col-md-6">
-      <div>
-        <%= link_to "Company sign in", "/companies/sign_in", class: "btn btn-success btn-lg" %>
+    <div class="row">
+      <div class="col-md-6">
+        <div>
+          <%= link_to "Customer sign in", "/customers/sign_in", class: "btn btn-success btn-lg" %>
+        </div>
+        <p>Customers can post work requests and receive competitive bids from veterans and veteran-owned companies.</p>
       </div>
-      <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
+      <div class="col-md-6">
+        <div>
+          <%= link_to "Company sign in", "/companies/sign_in", class: "btn btn-success btn-lg" %>
+        </div>
+        <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
+      </div>
     </div>
-  </div>
-  <%= link_to "administrator login", "/admins/sign_in" %>
+    <%= link_to "administrator login", "/admins/sign_in" %>
 </div>
+
