@@ -1,3 +1,4 @@
+<% if @customer_request.include?(contract:) %>
 <h2>A customer needs...</h2>
 <p><%= @request.description %></p>
 <%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
