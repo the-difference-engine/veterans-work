@@ -8,8 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
-
 RSpec.describe ServiceCategory, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+    it 'has a valid factory' do
+      expect(build(:service_category)).to be_valid
+    end
 end

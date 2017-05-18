@@ -8,7 +8,11 @@
           <h4>Email: <%= @company.email %></h4>
           <h4>Website: <%= @company.url %></h4>
           <p>About: <%= @company.description %></p>
-          <p>Reviews: </p>
+          <hr>
+          <h4>Reviews: </h4>
+          <% @company.reviews.each do |review| %>
+            <%= react_component("Review", { review: review, customer: review.customer }) %>
+          <% end %>
         <a href="/companies">Back to all companies</a>
       </div>
     </div>

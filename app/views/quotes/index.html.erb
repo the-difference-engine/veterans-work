@@ -1,10 +1,7 @@
 <h1>My Quotes</h1>
-
-
 <% if current_customer %>
   <%= render 'customer_quotes' %>
 <% elsif current_company %>
   <%= render 'company_quotes' %>
-
 <% else @quotes %>
 <% end %>

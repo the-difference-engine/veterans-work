@@ -9,8 +9,10 @@
 #  updated_at          :datetime         not null
 #
 
-require 'rails_helper'
-
 RSpec.describe CompanyService, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#validations' do
+    it 'has a valid factory' do
+      expect(build(:company_service)).to be_valid
+    end
+  end
 end

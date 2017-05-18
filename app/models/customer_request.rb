@@ -35,10 +35,6 @@ class CustomerRequest < ApplicationRecord
     "#{address}, #{city}, #{state}, #{zipcode}"
   end
 
-  def distance_from_current_company
-    current_company
-  end
-
   def open_quotes
     quotes.where(accepted: nil)
   end

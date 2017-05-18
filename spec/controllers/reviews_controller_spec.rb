@@ -11,8 +11,6 @@
 #  updated_at  :datetime         not null
 #
 
-require 'rails_helper'
-
 RSpec.describe ReviewsController, type: :controller do
   describe 'GET #index' do
     it 'assigns all the reviews to @reviews' do

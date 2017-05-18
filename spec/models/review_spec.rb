@@ -11,10 +11,12 @@
 #  updated_at  :datetime         not null
 #
 
-require 'rails_helper'
-
 RSpec.describe Review, type: :model do
   describe "validations" do
+    it 'has a valid factory' do
+      expect(build(:review)).to be_valid
+    end
+
     it "is invalid with a customer rating less than one and greater than 5" do
       expect(build(:review, stars: 6)).to_not be_valid
       expect(build(:review, stars: 0)).to_not be_valid
