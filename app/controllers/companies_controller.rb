@@ -1,20 +1,23 @@
 class CompaniesController < ApplicationController
+
   before_action :assign_company, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_company!, only: [:show, :edit, :update, :destroy]
-
   def index
-    if params[:query]
-      @companies = Company.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    if current_admin
+      if params[:query]
+        @companies = Company.search_by_query(params[:query]).order(params[:sortby])
+      else
+        @companies = Company.order(params[:sortby])
+      end
+      render 'index.html.erb'
     else
-      @companies = Company.all
+      redirect_to '/'
     end
-    render 'index.html.erb'
   end
 
   def show
     company = Company.find_by(id: params[:id])
-    if current_company.id == company.id
+    if current_admin || current_company.id == company.id
       render 'show.html.erb'
     else
       redirect_to '/'
@@ -52,7 +55,7 @@ class CompaniesController < ApplicationController
       :zip_code,
       :phone,
       :description,
-      :url
+      :url,
     )
   end
 

@@ -1,7 +1,11 @@
 class QuotesController < ApplicationController
   def index
     if current_customer
-      @customer_requests = current_customer.customer_requests
+      if params[:request_id]
+        @customer_requests = [CustomerRequest.find(params[:request_id])]
+      else
+        @customer_requests = current_customer.customer_requests
+      end
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
     elsif current_company
@@ -19,10 +23,13 @@ class QuotesController < ApplicationController
   end
 
   def create
-    quote = Quote.new(quote_params)
-    sanitize_blank_costs(quote)
-    quote.save
-    redirect_to '/customer_requests'
+    @quote = Quote.new(quote_params)
+    sanitize_blank_costs(@quote)
+    if @quote.save
+      redirect_to '/customer_requests'
+    else
+      render "new.html.erb"
+    end
   end
 
   def show

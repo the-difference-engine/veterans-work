@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: companies
 #
@@ -35,6 +35,19 @@
 #
 
 class Company < ApplicationRecord
+  include PgSearch
+  pg_search_scope :search_by_query, :against => [
+    :email,
+    :name,
+    :zip_code,
+    :phone,
+    :url,
+    :address,
+    :description,
+    :city,
+    :state,
+    :status
+  ]
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -46,6 +59,8 @@ class Company < ApplicationRecord
   has_many :reviews
   has_many :customers, through: :reviews
   has_many :quotes
+
+  validates :name, uniqueness: true
 
   geocoded_by :full_street_address
   after_validation :geocode
@@ -67,7 +82,7 @@ class Company < ApplicationRecord
   def accepted_quotes
     quotes.where(accepted: true)
   end
-  
+
   private
 
   def full_street_address

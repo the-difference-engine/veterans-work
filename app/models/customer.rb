@@ -27,9 +27,9 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :reviews
+  has_many :reviews, dependent: :delete_all
   has_many :companies, through: :reviews
-  has_many :customer_requests
+  has_many :customer_requests, dependent: :delete_all
   has_many :quotes, through: :customer_requests
 
 

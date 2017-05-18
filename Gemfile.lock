@@ -50,6 +50,10 @@ GEM
     ast (2.3.0)
     autoprefixer-rails (6.7.7.1)
       execjs
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
@@ -67,6 +71,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
     css_parser (1.4.10)
       addressable
     database_cleaner (1.5.3)
@@ -124,6 +129,10 @@ GEM
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.20.0)
+    pg_search (2.0.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -166,6 +175,12 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    react-rails (2.1.0)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     roadie (3.2.1)
@@ -264,11 +279,13 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   pg (~> 0.18)
+  pg_search
   pry
   puma (~> 3.0)
   rails (~> 5.0.1)
   rails-controller-testing
   rake
+  react-rails
   roadie
   rolify (~> 5.1.0)
   rspec-rails (~> 3.5.2)

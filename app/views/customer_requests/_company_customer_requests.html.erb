@@ -1,0 +1,33 @@
+<h1>Customer Requests</h1>
+ <div class="panel panel-default">
+   <div class="panel-body">
+     <table class="table table-hover">
+       <thead>
+         <tr>
+           <th></th>
+           <th>Distance</th>
+           <th>Address</th>
+           <th>Category</th>
+           <th>Expires</th>
+         </tr>
+       </thead>
+       <tbody>
+           <% @requests.each do |request| %>
+             <tr>
+               <td>
+                 <%= link_to "/customer_requests/#{request.id}" do %>
+                   <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                 <% end %>
+               </td>
+               <td>
+                 <%= request.distance_from([@company.latitude, @company.longitude]).round(1) %> mi.
+               </td>
+               <td><%= request.full_street_address.titleize %></td>
+               <td><%= request.service_category.name.capitalize %></td>
+               <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
+             </tr>
+           <% end %>
+       </tbody>
+     </table>
+   </div>
+ </div>

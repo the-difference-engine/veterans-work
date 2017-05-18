@@ -22,8 +22,6 @@
 #  index_customers_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-require 'rails_helper'
-
 RSpec.describe CustomersController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested customer to @customer' do
@@ -32,6 +30,7 @@ RSpec.describe CustomersController, type: :controller do
       get :show, params: { id: customer.id }
       expect(assigns(:customer)).to eq(customer)
     end
+
     it 'redirects a user trying to access another users show page' do
       customer1 = create(:customer,
       email: "test@gmail.com", id: 20)
@@ -40,6 +39,17 @@ RSpec.describe CustomersController, type: :controller do
       sign_in customer
       get :show, params: { id: 20 }
       expect(response).to redirect_to("/")
+    end
+  end
+  describe 'Canelled account' do
+    it 'should destroy all items associated to cancelled customer' do
+      customer = create(:customer)
+      sign_in customer
+      review = create(:review, customer_id: customer.id)
+      customer_request = create(:customer_request, customer_id: customer.id)
+      customer.destroy
+      expect { review.reload }.to raise_error ActiveRecord::RecordNotFound
+      expect { customer_request.reload }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end
