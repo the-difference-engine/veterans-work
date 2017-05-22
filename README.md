@@ -47,4 +47,4 @@ Login details should be obtained in person for access to the build log and never
 
 **The reason for doing it this way is to always deploy from our one source of truth, the organization's repo, not our own.**
 
-.....
+

@@ -68,7 +68,7 @@ group :development do
 end
 
 group :test do
-  gem 'rake'
+  gem 'rake', '~> 11.3.0'
   gem 'database_cleaner'
 end
 
