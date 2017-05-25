@@ -291,6 +291,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  mail
   pg (~> 0.18)
   pg_search
   pry
@@ -317,4 +318,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.14.6
+   1.15.0

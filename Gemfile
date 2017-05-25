@@ -45,6 +45,7 @@ gem 'pg_search'
 # react
 gem "react-rails"
 gem 'sendgrid-ruby'
+gem 'mail'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
