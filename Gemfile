@@ -44,6 +44,7 @@ gem 'figaro'
 gem 'pg_search'
 # react
 gem "react-rails"
+gem 'sendgrid-ruby'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
