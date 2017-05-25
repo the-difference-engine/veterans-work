@@ -3,6 +3,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   after_action :create_company_services, only: [:create, :update]
+  after_action :send_welcome_email, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -74,5 +75,9 @@ class Companies::RegistrationsController < Devise::RegistrationsController
         service_category_id: service_category.to_i
       )
     end
+  end
+
+  def send_welcome_email
+    CompanyMailer.welcome_email.deliver_now
   end
 end
