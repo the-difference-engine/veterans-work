@@ -6,7 +6,7 @@
     <%= stylesheet_link_tag "company_mailer", media: "all" %>
   </head>
   <body>
-    <h1>Welcome to Veterans Work!</h1>
-    <p>You have created a company account.</p>
+    <h1>Welcome <%= @company.name %> to Veterans Work!</h1>
+    <p><%= mail.content %></p>
   </body>
 </html>
