@@ -61,6 +61,6 @@ after_action :send_welcome_email, only: [:create]
   # end
 
   def send_welcome_email
-    CompanyMailer.welcome_email.deliver_now
+    CustomerMailer.welcome_email.deliver_now
   end
 end
