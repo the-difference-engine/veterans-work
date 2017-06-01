@@ -25,6 +25,7 @@ FactoryGirl.define do
     start_date Date.today()
     completion_date_estimate Date.today() + 3
     notes "MyText"
+    accepted nil
   end
 
   trait :blank_costs do

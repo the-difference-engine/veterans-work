@@ -111,10 +111,37 @@ RSpec.describe QuotesController, type: :controller do
   describe 'POST #create' do
     before :each do
       @customer_request = create(:customer_request)
-      sign_in create(:company)
+      @company_one = create(:company)
+      @company_two = create(:company)
+      @company_three = create(:company)
+      sign_in @company_one
     end
 
-    it 'creates and saves a new customer quote to the database' do
+    it 'does not create a new quote if 3 quotes already exist' do
+      quote_one = create(
+        :quote,
+        company_id: @company_one.id,
+        customer_request_id: @customer_request.id
+      )
+      quote_two = create(
+        :quote,
+        company_id: @company_two.id,
+        customer_request_id: @customer_request.id
+      )
+      quote_three = create(
+        :quote,
+        company_id: @company_three.id,
+        customer_request_id: @customer_request.id
+      )
+      expect{
+        post :create, params: {
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
+        }
+      }.to change(Quote, :count).by(0)
+    end
+
+    it 'creates and saves a new company quote to the database' do
       expect{
         post :create, params: {
           quote: attributes_for(:quote),
@@ -142,7 +169,8 @@ RSpec.describe QuotesController, type: :controller do
     it 'renders new.html.erb if quote doesn\'t save' do
       allow_any_instance_of(Quote).to receive(:save).and_return(false)
       post :create, params: {
-        quote: attributes_for(:quote)
+        quote: attributes_for(:quote),
+        customer_request_id: @customer_request.id
       }
       expect(response).to render_template('new.html.erb')
     end
