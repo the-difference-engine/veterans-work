@@ -92,8 +92,8 @@ Rails.application.configure do
    :domain               => 'gmail.com',
    :user_name            => ENV['GMAIL_USERNAME'],
    :password             => ENV['GMAIL_PASSWORD'],
-   :authentication       => "plain",
+   :authentication       => "login",
    :enable_starttls_auto => true
   }
-  config.action_mailer.default_url_options = {:host => 'veterans-work.herokuapp.com'}
+  config.action_mailer.default_url_options = {:host => ENV['HOST_APP']}
 end
