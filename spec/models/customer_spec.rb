@@ -15,9 +15,13 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 # Indexes
 #
+#  index_customers_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_customers_on_email                 (email) UNIQUE
 #  index_customers_on_reset_password_token  (reset_password_token) UNIQUE
 #
