@@ -104,9 +104,4 @@ Rails.application.configure do
    :enable_starttls_auto => true
   }
   config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
-config.action_mailer.smtp_settings = {
-  :address => "127.0.0.1",
-  :port    => 25,
-  :domain  => 'yourdomain.com'
-}
 end
