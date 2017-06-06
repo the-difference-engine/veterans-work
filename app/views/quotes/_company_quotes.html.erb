@@ -15,13 +15,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+          <% if open_quote.customer_viewed == false %>
+            <tr style="font-weight: bold;">
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
-              <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+              <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
               <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
             </tr>
+          <% else %>
+            <tr>
+              <td><%= open_quote.company.name%></td>
+              <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
+              <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
+              <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
+              <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
+            </tr>
+          <% end %>
           </tbody>
         </table>
       <% end %>

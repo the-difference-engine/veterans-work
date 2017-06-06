@@ -15,9 +15,13 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 # Indexes
 #
+#  index_customers_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_customers_on_email                 (email) UNIQUE
 #  index_customers_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -39,6 +43,17 @@ RSpec.describe CustomersController, type: :controller do
       sign_in customer
       get :show, params: { id: 20 }
       expect(response).to redirect_to("/")
+    end
+  end
+  describe 'Canelled account' do
+    it 'should destroy all items associated to cancelled customer' do
+      customer = create(:customer)
+      sign_in customer
+      review = create(:review, customer_id: customer.id)
+      customer_request = create(:customer_request, customer_id: customer.id)
+      customer.destroy
+      expect { review.reload }.to raise_error ActiveRecord::RecordNotFound
+      expect { customer_request.reload }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end
