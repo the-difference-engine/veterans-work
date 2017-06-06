@@ -4,7 +4,7 @@ class CompanyMailer < ApplicationMailer
     @company = quote.company
     mail(
       to: @company.email,
-      subject: 'Your quote was rejected by the customer.'
+      subject: 'Your quote was declined by the customer.'
     )
   end
 

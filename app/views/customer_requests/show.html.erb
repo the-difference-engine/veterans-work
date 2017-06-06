@@ -1,5 +1,20 @@
-<h2><%= @request.customer.email %> needs...</h2>
-<p><%= @request.description %></p>
+<% if @request.contract %>
+  <h2><%= @request.customer.email %> needs ...</h2>
+  <div>
+    <p><%= @request.description %></p>
+    <p>Address: <%= @request.address %></p>
+    <p>City: <%= @request.city %></p>
+    <p>State: <%= @request.state %></p>
+    <p>Zipcode: <%= @request.zipcode %></p>
+  </div>
+<% else %>
+  <h2>A customer needs...</h2>
+  <div>
+    <p><%= @request.description %></p>
+    <p>Address: <%= @request.address %></p>
+    <p>City: <%= @request.city %></p>
+    <p>State: <%= @request.state %></p>
+    <p>Zipcode: <%= @request.zipcode %></p>
+  </div>
 <%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
-
-
+<% end %>
