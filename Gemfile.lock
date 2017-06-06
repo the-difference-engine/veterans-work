@@ -231,7 +231,6 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
-    ruby_http_client (3.1.0)
     sass (3.4.24)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -239,9 +238,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sendgrid-ruby (5.0.0)
-      ruby_http_client (~> 3.0)
-      sinatra (>= 1.4.7, < 3)
     simplecov (0.14.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -318,7 +314,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  mail
   mailcatcher
   pg (~> 0.18)
   pg_search
@@ -333,7 +328,6 @@ DEPENDENCIES
   rspec-rails (~> 3.5.2)
   rubocop (~> 0.47.1)
   sass-rails (~> 5.0)
-  sendgrid-ruby
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
