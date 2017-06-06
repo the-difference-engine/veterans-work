@@ -130,9 +130,10 @@ ActiveRecord::Schema.define(version: 20170606001331) do
     t.date     "start_date"
     t.date     "completion_date_estimate"
     t.text     "notes"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.boolean  "accepted"
+    t.boolean  "customer_viewed",          default: false
   end
 
   create_table "reviews", force: :cascade do |t|
