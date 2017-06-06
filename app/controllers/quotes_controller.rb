@@ -9,7 +9,7 @@ class QuotesController < ApplicationController
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
     elsif current_company
-      @open_quotes = current_company.open_quotes
+      @open_quotes = current_company.open_quotes.order("start_date")
       @accepted_quotes = current_company.accepted_quotes
     else
       redirect_to "/"
@@ -40,6 +40,9 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @customer_request = @quote.customer_request
     @company = @quote.company
+    if current_customer
+      @quote.update(customer_viewed: true)
+    end
   end
 
   def update
