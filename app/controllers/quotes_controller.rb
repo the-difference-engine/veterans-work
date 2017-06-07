@@ -9,7 +9,7 @@ class QuotesController < ApplicationController
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
     elsif current_company
-      @open_quotes = current_company.open_quotes
+      @open_quotes = current_company.open_quotes.order("start_date")
       @accepted_quotes = current_company.accepted_quotes
     else
       redirect_to "/"
@@ -25,10 +25,17 @@ class QuotesController < ApplicationController
   def create
     @quote = Quote.new(quote_params)
     sanitize_blank_costs(@quote)
-    if @quote.save
-      redirect_to '/customer_requests'
+    if has_fewer_than_3_siblings?(@quote)
+      if @quote.save
+        flash[:notice] = "New Quote created successfully!"
+        redirect_to '/customer_requests'
+      else
+        flash[:notice] = "Sorry, the quote did not save. Please try again."
+        render "new.html.erb"
+      end
     else
-      render "new.html.erb"
+      flash[:notice] = "Sorry, this Customer Request has already recieved its max number of quotes."
+      render 'new.html.erb'
     end
   end
 
@@ -36,6 +43,21 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @customer_request = @quote.customer_request
     @company = @quote.company
+    if current_customer
+      @quote.update(customer_viewed: true)
+    end
+  end
+
+  def update
+    @quote = Quote.find(params[:id])
+    if current_customer
+      @quote.update(accepted: false)
+      CompanyMailer.decline_email(@quote).deliver_now
+      redirect_to '/quotes'
+    elsif current_company
+      @quote.update(@quote)
+      redirect_to '/quotes/#{quote.id}'
+    end
   end
 
   private
@@ -61,6 +83,12 @@ class QuotesController < ApplicationController
           quote[key] = 0
         end
       end
+    end
+  end
+
+  def has_fewer_than_3_siblings?(quote)
+    if quote.customer_request.quotes.count < 3
+      return true
     end
   end
 end

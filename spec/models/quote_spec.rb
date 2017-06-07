@@ -13,6 +13,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
+#  customer_viewed          :boolean          default(FALSE)
 #
 
 RSpec.describe Quote, type: :model do
@@ -43,16 +44,6 @@ RSpec.describe Quote, type: :model do
         company_id: company.id
       )
       expect(quote).to be_valid
-    end
-
-    it "is invalid if customer_request already has 3 or more quotes" do
-      customer_request = create(:customer_request)
-      create(:quote, customer_request_id: customer_request.id)
-      create(:quote, customer_request_id: customer_request.id)
-      create(:quote, customer_request_id: customer_request.id)
-      expect(
-        build(:quote, customer_request_id: customer_request.id)
-      ).to_not be_valid
     end
   end
 
