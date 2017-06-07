@@ -3,8 +3,7 @@ language: ruby
 services:
   - postgresql
 
-script:
-  - bundle exec rspec
+script: "bundle exec rspec $TESTFOLDER"
 
 before_script:
   - cp config/database.yml.travis config/database.yml
@@ -16,3 +15,12 @@ addons:
 dist: trusty
 sudo: required
 bundler_args: --without production development
+
+env:
+  - TESTFOLDER=spec/controllers
+  - TESTFOLDER=spec/factories
+  - TESTFOLDER=spec/helpers
+  - TESTFOLDER=spec/javascripts
+  - TESTFOLDER=spec/mailers
+  - TESTFOLDER=spec/models
+  - TESTFOLDER=spec/views
