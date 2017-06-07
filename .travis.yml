@@ -15,4 +15,4 @@ addons:
 
 dist: trusty
 sudo: required
-bundler_args: --without production
+bundler_args: --without production development
