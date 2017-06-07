@@ -26,13 +26,18 @@
 
 10. I discuss qa deployment with my leads and team.
 
+### Working with Mailers in Development Mode
+To interact with the app's mailers, you need to run **Mailcatcher** in tandem with Veterans Work. To do this, open a separate terminal window and activate Mailcatcher with: `make mailcatcher`.
+
+This will spin up an inbound mailbox app that you can interact with by opening `localhost:1080` in your browser.
+
 ### Deployment Guide
 
 As discussed in our first meeting, we will follow a strict protocol for pull requests and deployments. Overall, Veterans Work will be **deployed** in three environments:
 
 As you develop, you will push from your fork and create pull requests on github.com as such:
 
-**my_fork** --> **organization master** --> **qa** --> **demo** --> **production**
+**my_fork** --> organization master auto deploys to **qa** --> **demo** --> **production**
 
 From qa and on, Veterans Work will automatically build and deploy to heroku as app instances on three different URL's when merged into these respective branches:
 
