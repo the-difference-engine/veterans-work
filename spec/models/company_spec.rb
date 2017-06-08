@@ -75,40 +75,35 @@ RSpec.describe Company, type: :model do
   end
 
   describe "#eligible_customer_requests" do
-    it "doesn't return expired customer requests" do
-      service_category = create(:service_category)
-      company = create(:company,
+    before :each do
+      @service_category = create(:service_category)
+      @company = create(:company,
         COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
       )
       company_service = create(:company_service,
-        company_id: company.id,
-        service_category_id: service_category.id
+        company_id: @company.id,
+        service_category_id: @service_category.id
       )
-      expired_customer_request = create(:customer_request,
+      @expired_customer_request = create(:customer_request,
         CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({
-          service_category_id: service_category.id,
+          service_category_id: @service_category.id,
           expires_date: Date.today() - 1
         })
       )
-      expect(company.eligible_customer_requests).to_not include(expired_customer_request)
+      @close_customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      create(:customer_request,
+        FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+    end
+
+    it "doesn't return expired customer requests" do
+      expect(@company.eligible_customer_requests).to_not include(@expired_customer_request)
     end
 
     it "returns ONLY customer requests that are in the service radius" do
-      service_category = create(:service_category)
-      company = create(:company,
-        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
-      )
-      company_service = create(:company_service,
-        company_id: company.id,
-        service_category_id: service_category.id
-      )
-      close_customer_request = create(:customer_request,
-        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: service_category.id })
-      )
-      far_customer_request = create(:customer_request,
-        FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: service_category.id })
-      )
-      expect(company.eligible_customer_requests).to eq([close_customer_request])
+      expect(@company.eligible_customer_requests).to eq([@close_customer_request])
     end
   end
 end
