@@ -2,7 +2,8 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  after_action :create_company_services, only: [:create, :update]
+  after_action :reset_company_services, only: [:update]
+  after_action :create_company_services_at_sign_up, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -66,7 +67,12 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  def create_company_services
+  def create_company_services_at_sign_up
+    reset_company_services
+    sign_out(current_company)
+  end
+
+  def reset_company_services
     current_company.company_services.destroy_all if current_company.company_services
     params[:service_category].each do |service_category|
       CompanyService.create(

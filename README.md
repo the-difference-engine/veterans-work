@@ -24,7 +24,12 @@
 
 9. I merge my PR into master.
 
-10. I discuss qa deployment with my leads and team.
+10. Once merged I await my changes to be deployed to the [qa environment](http://qa-veterans-work.herokuapp.com/).
+
+### Working with Mailers in Development Mode
+To interact with the app's mailers, you need to run **Mailcatcher** in tandem with Veterans Work. To do this, open a separate terminal window and activate Mailcatcher with: `make mailcatcher`.
+
+This will spin up an inbound mailbox app that you can interact with by opening `localhost:1080` in your browser.
 
 ### Deployment Guide
 
@@ -32,19 +37,20 @@ As discussed in our first meeting, we will follow a strict protocol for pull req
 
 As you develop, you will push from your fork and create pull requests on github.com as such:
 
-**my_fork** --> **organization master** --> **qa** --> **demo** --> **production**
+**my_fork** --> organization master auto deploys to **qa** --> **demo** --> **production**
 
 From qa and on, Veterans Work will automatically build and deploy to heroku as app instances on three different URL's when merged into these respective branches:
 
-qa: http://qa-veterans-work.herokuapp.com/ | [build activity](https://dashboard.heroku.com/apps/qa-veterans-work/activity)
+development: http://qa-veterans-work.herokuapp.com/ | [build activity](https://dashboard.heroku.com/apps/qa-veterans-work/activity)
 
-demo: http://demo-veterans-work.herokuapp.com/ | [build activity](https://dashboard.heroku.com/apps/demo-veterans-work/activity)
+staging: http://demo-veterans-work.herokuapp.com/ | [build activity](https://dashboard.heroku.com/apps/demo-veterans-work/activity)
 
 production: http://veterans-work.herokuapp.com/ | [build activity](https://dashboard.heroku.com/apps/veterans-work/activity)
 
+[project pipeline](https://dashboard.heroku.com/pipelines/59144ee6-73bf-4f9a-91ea-43da97e9108f)
 
-Login details should be obtained in person for access to the build log and never shared on slack or this repo.
+Once code is merged into our organization master branch, we propel it through the heroku pipeline using the heroku UI.
 
-**The reason for doing it this way is to always deploy from our one source of truth, the organization's repo, not our own.**
+>Note: No need to open PR's from one branch to another on github.
 
-
+**Login details should be obtained in person for access to the build log and never shared on slack or this repo.**
