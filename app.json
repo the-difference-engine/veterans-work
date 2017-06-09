@@ -1,6 +1,7 @@
 {
   "name": "veterans-work",
   "scripts": {
+    "postdeploy": "bundle exec rake db:schema:load"
   },
   "env": {
     "LANG": {
