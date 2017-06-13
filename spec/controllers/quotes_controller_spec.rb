@@ -182,5 +182,27 @@ RSpec.describe QuotesController, type: :controller do
       get :show, params: {id: quote.id}
       expect(assigns(:quote)).to eq(quote)
     end
+
+    it 'updates customer_viewed to true if it is the current_customer clicking
+    on the quote' do
+      customer = create(:customer)
+      sign_in customer
+      customer_request = create(:customer_request, customer_id: customer.id)
+      quote = create(:quote, customer_request_id: customer_request.id)
+      get :show, params: {id: quote.id}
+      quote.reload
+      expect(quote.customer_viewed).to eq(true)
+    end
+
+    it "doesn't update customer_viewed to true if a company clicks
+    on the quote" do
+      company = create(:company)
+      sign_in company
+      customer_request = create(:customer_request)
+      quote = create(:quote, customer_request_id: customer_request.id)
+      get :show, params: {id: quote.id}
+      quote.reload
+      expect(quote.customer_viewed).to eq(false)
+    end
   end
 end
