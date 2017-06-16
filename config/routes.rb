@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'reviews/create'
+    end
+  end
+
   devise_for :admins
   devise_for :customers, :controllers => { registrations: 'customers/registrations'}
   devise_for :companies, :controllers => { registrations: 'companies/registrations'}
@@ -15,5 +21,11 @@ Rails.application.routes.draw do
   resources :reviews
   resources :quotes
   resources :contracts
+
+  namespace :api do
+    namespace :v1 do
+      post '/reviews' => 'reviews#create'
+    end
+  end
 end
 

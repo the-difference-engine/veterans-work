@@ -9,7 +9,7 @@ class QuotesController < ApplicationController
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
     elsif current_company
-      @open_quotes = current_company.open_quotes
+      @open_quotes = current_company.open_quotes.order("start_date")
       @accepted_quotes = current_company.accepted_quotes
     else
       redirect_to "/"
@@ -27,12 +27,15 @@ class QuotesController < ApplicationController
     sanitize_blank_costs(@quote)
     if has_fewer_than_3_siblings?(@quote)
       if @quote.save
-        flash[:success] = "New Quote created successfully!"
+        flash[:notice] = "New Quote created successfully!"
         redirect_to '/customer_requests'
       else
-        flash[:danger] = "Sorry, this Customer Request has already recieved its max number of quotes."
+        flash[:notice] = "Sorry, the quote did not save. Please try again."
         render "new.html.erb"
       end
+    else
+      flash[:notice] = "Sorry, this Customer Request has already recieved its max number of quotes."
+      render 'new.html.erb'
     end
   end
 
@@ -40,6 +43,9 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @customer_request = @quote.customer_request
     @company = @quote.company
+    if current_customer
+      @quote.update(customer_viewed: true)
+    end
   end
 
   def update
@@ -81,7 +87,7 @@ class QuotesController < ApplicationController
   end
 
   def has_fewer_than_3_siblings?(quote)
-    if quote.customer_request.quotes.count <= 3
+    if quote.customer_request.quotes.count < 3
       return true
     end
   end

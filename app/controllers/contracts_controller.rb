@@ -1,7 +1,6 @@
 class ContractsController < ApplicationController
-
   def create
-    accepted_quote = Quote.find(params[:quote_id])
+    accepted_quote = Quote.find(params[:contract][:quote_id])
     customer_request = accepted_quote.customer_request
     if current_customer.customer_requests.include?(customer_request)
       if Contract.create(
@@ -18,9 +17,10 @@ class ContractsController < ApplicationController
             end
           end
         end
-      flash[:success] = "Contract created and saved!"
+      flash[:notice] = "Contract created and saved!"
       redirect_to '/quotes'
       else
+        flash[:notice] = 'Quote was not accepted. Try again.'
         redirect_to "/quotes"
       end
     end
@@ -34,5 +34,4 @@ class ContractsController < ApplicationController
       redirect_to '/'
     end
   end
-
 end

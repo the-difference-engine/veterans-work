@@ -111,7 +111,7 @@ Devise.setup do |config|
   # config.pepper = '2af1ba56954678f8d3593a3e65c996ebf4c606df63c8ea474eacc7c3598e9ec291d942f8862f19f847f943aa5c6a43343380cc1e157def4802dc82996d91ecf0'
 
   # Send a notification email when the user's password is changed
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = false
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -119,7 +119,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming their account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming their account.
-  # config.allow_unconfirmed_access_for = 2.days
+  # config.allow_unconfirmed_access_for = 30.seconds
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm

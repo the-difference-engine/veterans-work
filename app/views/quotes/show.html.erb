@@ -44,9 +44,9 @@
         <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
         <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
       <% else %>
-        <%= form_for :contract, url: {action: "create"}, html: {class: "btn btn-success"} do |f| %>
-          <%= f.hidden_field :quote_id %>
-          <%= f.hidden_field :customer_request_id %>
+        <%= form_for :contract, url: '/contracts/', method: :post, html: {class: "btn btn-success"} do |f| %>
+          <%= f.hidden_field :quote_id, value: @quote.id %>
+          <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
           <%= f.submit "Accept" %>
         <% end %>
         <%= button_to "Decline Quote", { action: "update", id: @quote.id }, method: :patch, data: { confirm: "Are you sure?" } %>
