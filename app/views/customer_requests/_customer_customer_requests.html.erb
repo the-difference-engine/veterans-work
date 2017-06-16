@@ -1,6 +1,7 @@
 <h1>My Work Requests</h1>
 <% if @customer.customer_requests %>
   <% @customer.customer_requests.each do |cr| %>
+  <% if cr.expires_date >= Date.today %>
     <div class="panel panel-default">
       <div class="panel-body">
         <table class="table table-hover">
@@ -40,6 +41,8 @@
         </table>
       </div>
     </div>
-  <% end %>
+    <% else %>
+    <% end %>
+    <% end %>
 <% end %>
 <a href="/customer_requests/new"><button class="btn btn-theme-bg btn-lg pull-right">New Work Request</button>

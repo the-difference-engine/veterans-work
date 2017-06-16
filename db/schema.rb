@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606001331) do
+ActiveRecord::Schema.define(version: 20170612233244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,15 +79,16 @@ ActiveRecord::Schema.define(version: 20170606001331) do
   end
 
   create_table "contracts", force: :cascade do |t|
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "quote_id"
     t.string   "customer_request_id"
+    t.boolean  "archive",             default: false
   end
 
   create_table "customer_requests", force: :cascade do |t|
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170606001331) do
     t.date     "expires_date"
     t.float    "latitude"
     t.float    "longitude"
+    t.boolean  "is_archived",         default: false
     t.index ["expires_date"], name: "index_customer_requests_on_expires_date", using: :btree
   end
 
@@ -133,6 +135,7 @@ ActiveRecord::Schema.define(version: 20170606001331) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.boolean  "accepted"
+    t.boolean  "is_archived"
     t.boolean  "customer_viewed",          default: false
   end
 

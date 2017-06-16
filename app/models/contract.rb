@@ -7,6 +7,7 @@
 #  updated_at          :datetime         not null
 #  quote_id            :string
 #  customer_request_id :string
+#  archive             :boolean          default(FALSE)
 #
 
 class Contract < ApplicationRecord

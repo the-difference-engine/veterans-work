@@ -13,6 +13,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
+#  is_archived              :boolean
 #  customer_viewed          :boolean          default(FALSE)
 #
 

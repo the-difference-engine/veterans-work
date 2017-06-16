@@ -15,6 +15,7 @@
 #  expires_date        :date
 #  latitude            :float
 #  longitude           :float
+#  is_archived         :boolean          default(FALSE)
 #
 # Indexes
 #
