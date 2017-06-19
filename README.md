@@ -54,3 +54,4 @@ Once code is merged into our organization master branch, we propel it through th
 >Note: No need to open PR's from one branch to another on github.
 
 **Login details should be obtained in person for access to the build log and never shared on slack or this repo.**
+
