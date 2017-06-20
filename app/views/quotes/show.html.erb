@@ -1,4 +1,4 @@
-<div class="panel panel-default text-center" style="width: 60%;">
+<div class="panel panelQuotes panel-default text-center" style="width: 60%;">
   <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
     <h3 class="panel-title">Quote from <%= @quote.company.name %></h3>
   </div>
@@ -47,8 +47,9 @@
         <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
           <%= f.hidden_field :quote_id, value: @quote.id %>
           <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
-          <%= f.submit "Accept", class: "btn btn-md btn-success" %> <%= button_to "Decline Quote", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch, data: { confirm: "Are you sure?" }%>
+          <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
+        <%= button_to "Decline Quote", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch, data: { confirm: "Are you sure?" }%>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
       <% end %>
     </div>
