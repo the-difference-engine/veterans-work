@@ -15,7 +15,7 @@
           <tbody>
             <tr>
               <td><%= cr.service_category.name%></td>
-              <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
+              <td><%= cr.try(:expires_date).try(:strftime, "%B %e, %Y") %></td>
             </tr>
           </tbody>
         </table>
