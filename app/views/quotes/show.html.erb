@@ -1,5 +1,5 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
+<div class="panel panel-quotes panel-default text-center" style="width: 60%;">
+  <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
     <h3 class="panel-title">Quote from <%= @quote.company.name %></h3>
   </div>
   <div>
@@ -44,12 +44,12 @@
         <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
         <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
       <% else %>
-        <%= form_for :contract, url: '/contracts/', method: :post, html: {class: "btn btn-success"} do |f| %>
+        <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
           <%= f.hidden_field :quote_id, value: @quote.id %>
           <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
-          <%= f.submit "Accept" %>
+          <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
-        <%= button_to "Decline Quote", { action: "update", id: @quote.id }, method: :patch, data: { confirm: "Are you sure?" } %>
+        <%= button_to "Decline Quote", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch, data: { confirm: "Are you sure?" }%>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
       <% end %>
     </div>
