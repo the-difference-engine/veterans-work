@@ -6,8 +6,10 @@
     phone: Faker::PhoneNumber.cell_phone,
     description: Faker::Lorem.paragraph,
     url: Faker::Internet.url,
-    password: Faker::Cat.name
-    )
+    password: 'password',
+    status: 'Active',
+    confirmed_at: Date.today()
+)
 end
 service_categories = ["Paint", "Plumbing", "Carpentry", "Mechanical", "Electrical"]
 
