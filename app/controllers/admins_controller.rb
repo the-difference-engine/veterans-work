@@ -7,8 +7,6 @@ class AdminsController < ApplicationController
       @recent_companies = Company.last(10) || []
       @recent_customer_requests = CustomerRequest.last(10) || []
       @recent_quotes = Quote.last(10) || []
-    else
-      redirect_to '/'
     end
   end
 end
