@@ -1,11 +1,11 @@
 class CustomerRequestsController < ApplicationController
-  before_action :authenticate_customer!, only: [:create, :new]
+  before_action :authenticate_customer!, only: [:create, :new], unless: :current_admin_user
   before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_customer
       @requests = current_customer.customer_requests.where(
-        "expires_date >= ?", 
+        "expires_date >= ?",
         10.days.ago
       )
       @customer = current_customer
@@ -71,8 +71,12 @@ class CustomerRequestsController < ApplicationController
         current_company.eligible_customer_requests.include?(
           @customer_request
         ) if current_company
-      )
+      ) || current_admin
       redirect_to '/', notice: 'insufficient privileges'
     end
+  end
+
+  def current_admin_user
+    current_admin ? true : false
   end
 end
