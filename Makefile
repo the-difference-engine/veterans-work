@@ -18,7 +18,8 @@ console: install
 	$(BE) rails c
 
 mailcatcher:
-	$(BE) mailcatcher
+	@echo THIS COMMAND HAS BEEN DISABLED.
+	@echo please see the readme.
 
 print_to_terminal: install
 	echo 'what the flip'
