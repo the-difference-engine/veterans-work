@@ -16,5 +16,5 @@
     <p>State: <%= @request.state %></p>
     <p>Zipcode: <%= @request.zipcode %></p>
   </div>
-<%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
+<%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" if current_company %>
 <% end %>

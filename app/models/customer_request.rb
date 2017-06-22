@@ -20,7 +20,6 @@
 #
 #  index_customer_requests_on_expires_date  (expires_date)
 #
-
 class CustomerRequest < ApplicationRecord
   belongs_to :service_category
   belongs_to :customer
@@ -28,7 +27,6 @@ class CustomerRequest < ApplicationRecord
 
   has_many :quotes
 
-  
   geocoded_by :full_street_address
   after_validation :geocode
 
@@ -43,6 +41,4 @@ class CustomerRequest < ApplicationRecord
   def accepted_quotes
     quotes.where(accepted: true)
   end
-
-  
 end
