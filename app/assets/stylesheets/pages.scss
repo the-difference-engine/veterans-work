@@ -3,5 +3,19 @@
 }
 h3 {
   text-align: center;
+  }
+
+@media only screen and (max-width: 768px) {
+    .contact-us {
+        font-size: 1.25em;
+    }
 }
+
+@media only screen and (max-width: 768px) {
+    h1.home-title{
+        font-size: 4em;
+    }
+}
+
+
 
