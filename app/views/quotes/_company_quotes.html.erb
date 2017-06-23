@@ -21,7 +21,7 @@
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
           <% else %>
             <tr>
@@ -29,7 +29,7 @@
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
           <% end %>
           </tbody>
@@ -60,7 +60,7 @@
               <td><%= accepted_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= accepted_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(accepted_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= accepted_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= accepted_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
           </tbody>
         </table>
