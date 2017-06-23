@@ -1,4 +1,20 @@
 class ContractsController < ApplicationController
+  def index
+    if current_customer
+      @contracts = []
+      current_customer.customer_requests.each do |cr|
+        @contracts << cr.contract
+      end
+      p @contracts
+    elsif current_company
+    elsif current_admin
+    else 
+      render "/"
+    end
+    render "index.html.erb"
+  end
+
+
   def create
     accepted_quote = Quote.find(params[:contract][:quote_id])
     customer_request = accepted_quote.customer_request
