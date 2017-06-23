@@ -32,7 +32,7 @@
         <%= label_tag :expires_date %>
           <%= f.date_field :expires_date, class: "form-control" %>
       </div>
-
+      
       <div class="actions">
         <%= label_tag :service_category_id %>
         <%= f.select :service_category_id, options_from_collection_for_select(@categories, "id", "name"),

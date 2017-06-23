@@ -13,6 +13,7 @@
        </thead>
        <tbody>
            <% @requests.each do |request| %>
+            <% if request.expires_date > Date.today %>
              <tr>
                <td>
                  <%= link_to "/customer_requests/#{request.id}" do %>
@@ -26,8 +27,9 @@
                <td><%= request.service_category.name.capitalize %></td>
                <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
              </tr>
+            <% end %>
            <% end %>
-       </tbody>
-     </table>
-   </div>
- </div>
+        </tbody>
+      </table>
+    </div>
+  </div>

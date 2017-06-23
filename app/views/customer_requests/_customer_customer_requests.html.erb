@@ -1,45 +1,45 @@
 <h1>My Work Requests</h1>
 <% if @customer.customer_requests %>
   <% @customer.customer_requests.each do |cr| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table table-hover">
-        <h4><%= cr.description %></h4>
-          <thead>
-            <tr>
-              <th>Service Category</th>
-              <th>Expiration Date</th>
-              <th>Quotes Received</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= cr.service_category.name%></td>
-              <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
-                <% if cr.quotes.count == 0 %>
-              <td>
-                0 of 3
-              </td>
-                <% elsif cr.quotes.count == 1 %>
-              <td>
-                1 of 3
-              </td>
-               <% elsif cr.quotes.count == 2 %>
-              <td>
-                2 of 3
-              </td>
-               <% elsif cr.quotes.count == 3 %>
-              <td>
-                3 of 3
-              </td>
-              <% end %>
-              <td><a href="/quotes?request_id=<%=cr.id%>"><button class="btn btn-theme-bg btn-md">View Quotes</button></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  <% end %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table class="table table-hover">
+            <h4><%= cr.description %></h4>
+              <thead>
+                <tr>
+                  <th>Service Category</th>
+                  <th>Expiration Date</th>
+                  <th>Quotes Received</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= cr.service_category.name%></td>
+                  <td><%= cr.expires_date.strftime("%B %e, %Y") %> </td>
+                    <% if cr.quotes.count == 0 %>
+                  <td>
+                    0 of 3
+                  </td>
+                    <% elsif cr.quotes.count == 1 %>
+                  <td>
+                    1 of 3
+                  </td>
+                    <% elsif cr.quotes.count == 2 %>
+                  <td>
+                    2 of 3
+                  </td>
+                    <% elsif cr.quotes.count == 3 %>
+                  <td>
+                    3 of 3
+                  </td>
+                </tr>
+                  <td><a href="/quotes?request_id=<%=cr.id%>"><button class="btn btn-theme-bg btn-md">View Quotes</button></a></td>
+                  <% end %>
+              </tbody>
+          </table>
+        </div>
+      </div>  
+    <% end %>
+  <a href="/customer_requests/new"><button class="btn btn-theme-bg btn-lg pull-right">New Work Request</button>
 <% end %>
-<a href="/customer_requests/new"><button class="btn btn-theme-bg btn-lg pull-right">New Work Request</button>
