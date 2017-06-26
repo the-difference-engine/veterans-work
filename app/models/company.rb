@@ -100,15 +100,15 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
 
-  validates :name, uniqueness: true,uniqueness: {message: "is required"}
-  validates :phone, :presence => {:message => 'Phone number format is not correct'}, 
-                    :numericality => true, 
-                    :length => { :minimum => 10, :maximum => 15 }
+  validates :name, uniqueness: true
+  validates :phone, presence: {message: 'Phone number format is not correct'}, 
+                    numericality: true, 
+                    length: { minimum: 10, maximum:10 }
 
   validates_format_of :zip_code,
                    with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                    message: "should be 12345 or 12345-1234",
-                   allow_blank: true
+                   presence: true
 
   geocoded_by :full_street_address
   after_validation :geocode
