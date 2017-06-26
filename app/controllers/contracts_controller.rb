@@ -26,6 +26,10 @@ class ContractsController < ApplicationController
     end
   end
 
+  def index
+    render "index.html.erb"
+  end
+
   def show
     if current_customer || current_company
       @contract = Contract.find(params[:id])
