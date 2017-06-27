@@ -131,17 +131,17 @@ RSpec.describe CompaniesController, type: :controller do
     it 'update the values of the company' do
       company = create(:company,
         name: "old value",
-        phone: "1234"
+        phone: "1234567899"
       )
       sign_in company
       patch :update, params: {
         id: company.id,
         name: "New Value",
-        phone: "5678"
+        phone: "1234567890"
        }
       company.reload
       expect(company.name).to eq("New Value")
-      expect(company.phone).to eq("5678")
+      expect(company.phone).to eq("1234567890")
     end
 
     context 'with params[:status] && current_admin' do

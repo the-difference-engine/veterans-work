@@ -4,7 +4,7 @@
     <h2>Open Quotes</h2>
       <% @customer_requests.each do |cr| %>
         <span><h3><%= cr.description %></h3><h5>Request Expires: <%= cr.expires_date %></h5></span> 
-        <table class="table table-hover">
+        <table class="table table-hover table-condensed">
           <thead>
             <tr>
               <th>Company</th>
@@ -22,7 +22,7 @@
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
             <% else %>
              <tr>
@@ -30,7 +30,7 @@
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= open_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
             <% end %>
             <% end %>
@@ -45,7 +45,7 @@
     <div class="panel-body">
     <h2>Accepted Quotes</h2>
       <% @accepted_quotes.each do |accepted_quote| %>
-        <table class="table table-hover">
+        <table class="table table-hover table-condensed">
         <span><h3><%= accepted_quote.customer_request.description %></h3><h5>Request Expires: <%= accepted_quote.customer_request.expires_date %></h5></span> 
           <thead>
             <tr>
@@ -62,7 +62,7 @@
               <td><%= accepted_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= accepted_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(accepted_quote.total_cost_estimate) %></td>
-              <td><a href="/quotes/<%= accepted_quote.id %>"><button>Details</button></a></td>
+              <td><a href="/quotes/<%= accepted_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
           </tbody>
         </table>
