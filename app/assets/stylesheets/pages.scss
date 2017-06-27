@@ -12,3 +12,12 @@
   background-color: $white;
 }
 
+@media only screen and (max-width: 768px) {
+  .contact-us {
+    font-size: 1.25em;
+  }
+  h1.home-title {
+    font-size: 4em;
+  }
+}
+

@@ -194,8 +194,8 @@ RSpec.describe QuotesController, type: :controller do
       expect(quote.customer_viewed).to eq(true)
     end
 
-    it "doesn't update customer_viewed to true if a company clicks
-    on the quote" do
+    it 'does not update customer_viewed to true if a company clicks
+    on the quote' do
       company = create(:company)
       sign_in company
       customer_request = create(:customer_request)
@@ -203,6 +203,35 @@ RSpec.describe QuotesController, type: :controller do
       get :show, params: {id: quote.id}
       quote.reload
       expect(quote.customer_viewed).to eq(false)
+    end
+  end
+
+  describe 'PATCH #update' do
+    context 'when current_customer is logged in' do
+      it 'assigns the requested quote to @quote' do 
+        customer = create(:customer)
+        sign_in customer
+        quote = create(:quote)
+        patch :update, params: {id: quote.id}
+        quote.reload
+        expect(quote.accepted).to eq(false)
+      end
+
+      it 'assigns the quote id' do
+        customer = create(:customer)
+        sign_in customer
+        quote = create(:quote)
+        patch :update, params: {id: quote.id}
+        expect(assigns(:quote)).to eq(quote)
+      end
+    end
+
+    context 'when current_customer is not logged in' do
+      it 'redirects to the quotes show page if not current_customer' do
+        quote = create(:quote)
+        patch :update, params: {id: quote.id}
+        expect(response).to redirect_to("/quotes/#{quote.id}")
+      end
     end
   end
 end

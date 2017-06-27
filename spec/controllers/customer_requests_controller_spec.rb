@@ -48,8 +48,8 @@ RSpec.describe CustomerRequestsController, type: :controller do
         service_category = create(:service_category)
         company = create(:company,
           status: "Active",
-          latitude: 0.0,
-          longitude: 0.0,
+          latitude: 41.9013087, 
+          longitude: -87.68276759999999,
           service_radius: 1.0
         )
         sign_in company
@@ -58,17 +58,18 @@ RSpec.describe CustomerRequestsController, type: :controller do
           company_id: company.id
         )
         customer_request_1 = create(:customer_request,
-          latitude: 0.0,
-          longitude: 0.0,
+          latitude: 41.9013087, 
+          longitude: -87.68276759999999,
           service_category_id: service_category.id,
-          expires_date: Date.today
+          expires_date: Date.today + 2
         )
         customer_request_3 = create(:customer_request,
-          latitude: 0.0,
-          longitude: 0.0,
+          latitude: 41.9013087, 
+          longitude: -87.68276759999999,
           service_category_id: service_category.id,
           expires_date: Date.today - 2
         )
+
 
         get :index
         expect(assigns(:requests)).to eq([customer_request_1])

@@ -283,7 +283,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  pg (~> 0.18)
+  pg
   pg_search
   pry
   puma (~> 3.0)
@@ -306,7 +306,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.0
+   1.15.1

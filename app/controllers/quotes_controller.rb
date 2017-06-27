@@ -54,9 +54,8 @@ class QuotesController < ApplicationController
       @quote.update(accepted: false)
       CompanyMailer.decline_email(@quote).deliver_now
       redirect_to '/quotes'
-    elsif current_company
-      @quote.update(@quote)
-      redirect_to '/quotes/#{quote.id}'
+    else
+      redirect_to "/quotes/#{@quote.id}"
     end
   end
 
