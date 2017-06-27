@@ -2,7 +2,7 @@ class QuotesController < ApplicationController
   def index
     if current_customer
       if params[:request_id]
-        @customer_requests = [CustomerRequest.find(params[:request_id])].where("expires_date >= ?", Date.today())
+        @customer_requests = CustomerRequest.where("id = ?", params[:request_id]).where("expires_date >= ?", Date.today())
       else
         @customer_requests = current_customer.customer_requests.where("expires_date >= ?", Date.today())
       end
