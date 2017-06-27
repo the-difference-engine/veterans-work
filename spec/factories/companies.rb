@@ -43,6 +43,8 @@ FactoryGirl.define do
     sequence(:email) {|n| "horatio_gomez#{n}@mailmail.com" }
     password "12345678"
     sequence(:name) {|n| "company #{n}"}
+    zip_code "60622"
+    phone "1234567890"
     confirmed_at Time.now
   end
 end
