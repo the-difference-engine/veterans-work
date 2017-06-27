@@ -207,7 +207,7 @@ RSpec.describe QuotesController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'when current_customer is logged in'
+    context 'when current_customer is logged in' do
       it 'assigns the requested quote to @quote' do 
         customer = create(:customer)
         sign_in customer
@@ -218,19 +218,20 @@ RSpec.describe QuotesController, type: :controller do
       end
 
       it 'assigns the quote id' do
-        quote = create(:quote)
-        patch :update, params: {id: quote.id}
-        expect(assigns(:quote)).to eq(quote)
-      end
-
-
-    context 'when current_customer is not logged in'
-      it 'redirects to the quotes show page if not current_customer' do
         customer = create(:customer)
         sign_in customer
         quote = create(:quote)
         patch :update, params: {id: quote.id}
-        expect(response).to redirect_to('/quotes')
+        expect(assigns(:quote)).to eq(quote)
+      end
+    end
+
+    context 'when current_customer is not logged in' do
+      it 'redirects to the quotes show page if not current_customer' do
+        quote = create(:quote)
+        patch :update, params: {id: quote.id}
+        expect(response).to redirect_to("/quotes/#{quote.id}")
       end
     end
   end
+end
