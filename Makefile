@@ -27,4 +27,7 @@ seed:
 	$(BE) rake db:migrate
 	$(BE) rake db:seed
 
-.PHONY: install test server console migrate
+coverage: test
+	open ./coverage/index.html
+
+.PHONY: install test server console migrate coverage
