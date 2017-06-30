@@ -43,8 +43,14 @@ FactoryGirl.define do
     sequence(:email) {|n| "horatio_gomez#{n}@mailmail.com" }
     password "12345678"
     sequence(:name) {|n| "company #{n}"}
-    zip_code "60622"
     phone "1234567890"
     confirmed_at Time.now
+    address Faker::Address.street_address
+    city Faker::Address.city
+    state Faker::Address.state_abbr
+    zip_code Faker::Address.zip_code
+    url Faker::Internet.url('example.com', '/foobar.html')
+    service_radius 35
+    description Faker::Lorem.paragraph
   end
 end

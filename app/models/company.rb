@@ -101,10 +101,15 @@ class Company < ApplicationRecord
   has_many :quotes
 
   validates :name, uniqueness: true
-  validates :phone, presence: {message: 'Phone number format is not correct'}, 
-                    numericality: true, 
-                    length: { minimum: 10, maximum:10 }
-
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :state, presence: true, length: { is: 2 }
+  validates :description, presence: true
+  validates :service_radius, presence: true, numericality: true
+  validates :phone, presence: true,
+                    numericality: true,
+                    length: { is: 10 }
+  validates :url, url: true
   validates_format_of :zip_code,
                    with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                    message: "should be 12345 or 12345-1234",

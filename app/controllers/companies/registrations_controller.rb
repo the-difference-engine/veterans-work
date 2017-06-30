@@ -69,16 +69,17 @@ class Companies::RegistrationsController < Devise::RegistrationsController
 
   def create_company_services_at_sign_up
     reset_company_services
-    sign_out(resource)
   end
 
   def reset_company_services
     resource.company_services.destroy_all if resource.company_services
-    params[:service_category].each do |service_category|
-      CompanyService.create(
-        company_id: resource.id,
-        service_category_id: service_category.to_i
-      )
+    if params[:service_category]
+      params[:service_category].each do |service_category|
+        CompanyService.create(
+          company_id: resource.id,
+          service_category_id: service_category.to_i
+        )
+      end
     end
   end
 end
