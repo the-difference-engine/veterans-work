@@ -21,7 +21,7 @@ class ContractsController < ApplicationController
       redirect_to '/quotes'
       else
         flash[:notice] = 'Quote was not accepted. Try again.'
-        redirect_to "/quotes"
+        redirect_to "/quotes/#{@quote.id}"
       end
     end
   end
