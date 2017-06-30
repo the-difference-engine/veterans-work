@@ -8,6 +8,7 @@
 #  quote_id            :string
 #  customer_request_id :string
 #
+require 'rails_helper' 
 
 RSpec.describe ContractsController, type: :controller do
   describe 'POST #create' do
@@ -40,6 +41,10 @@ RSpec.describe ContractsController, type: :controller do
           }
         }
       }.to change(Contract, :count).by(1)
+    end
+
+    it 'updates the flash notice if the company does not successfully sign in' do
+    
     end
 
     it 'sends an email to each company that has created a quote' do
