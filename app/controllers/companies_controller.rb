@@ -16,8 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    company = Company.find_by(id: params[:id])
-    if current_admin || current_company.id == company.id
+    if current_admin || (current_company && current_company.id == company.id)
       render 'show.html.erb'
     else
       redirect_to '/'
@@ -65,7 +64,7 @@ class CompaniesController < ApplicationController
     elsif current_company
       @company = current_company
     else
-      redirect_to "/companies/#{current_company.id}"
+      redirect_to "/"
     end
   end
 end
