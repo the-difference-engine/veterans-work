@@ -97,7 +97,25 @@ RSpec.describe CompaniesController, type: :controller do
         company = create :company
         sign_in create :customer
         get :show, params: { id: company.id }
-        expect(assigns(:company)).to eq nil
+        expect(assigns(:company)).to eq(nil)
+      end
+    end
+
+    context 'customer with quotes linking to company' do
+      before :each do
+        customer = create :customer
+        sign_in customer
+        @company = create :company
+        customer_request = create :customer_request, customer_id: customer.id
+        quote = create :quote, customer_request_id: customer_request.id, company_id: @company.id
+      end
+      # it 'assigns the requested company to @company'  do
+      #   get :show, params: {id: company.id}
+      #   expect(assigns(:company)).to eq(company)
+      # end
+      it 'assigns true to @readaction_boolean' do
+        get :show, params: { id: @company.id }
+        expect(assigns(:readaction_boolean)).to eq(true)
       end
     end
 
@@ -113,15 +131,6 @@ RSpec.describe CompaniesController, type: :controller do
         sign_in company
         get :show, params: { id: company.id }
         expect(response).to render_template("show.html.erb")
-      end
-      it 'redirects a user trying to access another users show page' do
-        company1 = create(:company,
-        email: "test@gmail.com", id: 20)
-        company = create(:company,
-        email: "example@gmail.com", id: 100)
-        sign_in company
-        get :show, params: { id: 20 }
-        expect(response).to redirect_to("/")
       end
     end
   end
