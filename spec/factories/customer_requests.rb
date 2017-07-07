@@ -23,7 +23,7 @@
 
 FactoryGirl.define do
   factory :customer_request do
-    sequence(:customer_id) { |n| n }
+    customer
     address Faker::Address.street_address
     city Faker::Address.city
     state Faker::Address.state_abbr

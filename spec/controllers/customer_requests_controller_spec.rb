@@ -48,7 +48,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         service_category = create(:service_category)
         company = create(:company,
           status: "Active",
-          latitude: 41.9013087, 
+          latitude: 41.9013087,
           longitude: -87.68276759999999,
           service_radius: 1.0
         )
@@ -58,13 +58,13 @@ RSpec.describe CustomerRequestsController, type: :controller do
           company_id: company.id
         )
         customer_request_1 = create(:customer_request,
-          latitude: 41.9013087, 
+          latitude: 41.9013087,
           longitude: -87.68276759999999,
           service_category_id: service_category.id,
           expires_date: Date.today + 2
         )
         customer_request_3 = create(:customer_request,
-          latitude: 41.9013087, 
+          latitude: 41.9013087,
           longitude: -87.68276759999999,
           service_category_id: service_category.id,
           expires_date: Date.today - 2
@@ -83,9 +83,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         expect(response).to redirect_to('/')
       end
     end
-  end
 
-  describe 'GET #index' do
     context 'company has a pending status' do
 
       before :each do
@@ -98,9 +96,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         expect(response).to redirect_to("/companies/#{@company.id}")
       end
     end
-  end
 
-  describe 'GET #index' do
     context 'customer signed in' do
 
       before :each do
@@ -180,9 +176,15 @@ RSpec.describe CustomerRequestsController, type: :controller do
     end
 
     context 'company signed in' do
-
       before :each do
-        sign_in create :company
+        allow_any_instance_of(Company).to receive_message_chain(
+          :eligible_customer_requests, :include?
+        ).and_return(true)
+        company = create :company
+        sign_in company
+        create :quote,
+          customer_request_id: @customer_request.id,
+          company_id: company.id
       end
 
       it 'assigns the requested customer_request to @request' do
