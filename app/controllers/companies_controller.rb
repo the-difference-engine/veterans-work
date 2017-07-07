@@ -59,10 +59,18 @@ class CompaniesController < ApplicationController
   end
 
   def assign_company
+    company = Company.find(params[:id])
     if current_admin
-      @company = Company.find(params[:id])
+      @company = company
     elsif current_company
       @company = current_company
+    elsif current_customer
+      if (current_customer.customer_requests.map(&:quotes) & company.quotes).any?
+        @company = Company.find(params[:id])
+        @redaction_boolean = true
+      else
+        redirect_to "/"
+      end
     else
       redirect_to "/"
     end
