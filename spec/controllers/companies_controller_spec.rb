@@ -36,7 +36,8 @@
 #  index_companies_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_companies_on_email                 (email) UNIQUE
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
-#
+
+require 'rails_helper'
 
 RSpec.describe CompaniesController, type: :controller do
   describe 'GET #index' do
@@ -85,26 +86,43 @@ RSpec.describe CompaniesController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested company to @company' do
-      company = create(:company)
-      sign_in company
-      get :show, params: { id: company.id }
-      expect(assigns(:company)).to eq(company)
+    context 'customer with no association to company' do
+      it 'redirects the customer to root' do
+        company = create :company
+        sign_in create :customer
+        get :show, params: { id: company.id }
+        expect(response).to redirect_to '/'
+      end
+      it 'redirects the customer to root' do
+        company = create :company
+        sign_in create :customer
+        get :show, params: { id: company.id }
+        expect(assigns(:company)).to eq nil
+      end
     end
-    it 'renders show page' do
-      company = create(:company)
-      sign_in company
-      get :show, params: { id: company.id }
-      expect(response).to render_template("show.html.erb")
-    end
-    it 'redirects a user trying to access another users show page' do
-      company1 = create(:company,
-      email: "test@gmail.com", id: 20)
-      company = create(:company,
-      email: "example@gmail.com", id: 100)
-      sign_in company
-      get :show, params: { id: 20 }
-      expect(response).to redirect_to("/")
+
+    context 'other' do
+      it 'assigns the requested company to @company' do
+        company = create(:company)
+        sign_in company
+        get :show, params: { id: company.id }
+        expect(assigns(:company)).to eq(company)
+      end
+      it 'renders show page' do
+        company = create(:company)
+        sign_in company
+        get :show, params: { id: company.id }
+        expect(response).to render_template("show.html.erb")
+      end
+      it 'redirects a user trying to access another users show page' do
+        company1 = create(:company,
+        email: "test@gmail.com", id: 20)
+        company = create(:company,
+        email: "example@gmail.com", id: 100)
+        sign_in company
+        get :show, params: { id: 20 }
+        expect(response).to redirect_to("/")
+      end
     end
   end
 
