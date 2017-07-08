@@ -72,6 +72,11 @@
       <%= f.number_field :service_radius, autofocus: true, class: "form-control"  %>
     </div>
 
+    <div class="file">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+    </div>
+
   <div><strong>Service Categories Offered</strong>
     <% @service_categories.each do |service_category| %>
 
