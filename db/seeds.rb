@@ -5,9 +5,9 @@ Customer.create!([
   {email: "customer@gmail.com", password: 'password', confirmed_at: Date.today()}
 ])
 Company.create!([
-  {email: "company@gmail.com", password: 'password', name: 'company1', address: "301 N Michigan Ave", city: "Chicago", state: "IL", zip_code: "60601", service_radius: 30.0, status: 'Active', confirmed_at: Date.today()},
-  {email: "company2@gmail.com", password: 'password', name: 'company2', address: "2000 N Western Ave", city: "Chicago", state: "IL", zip_code: "60625", service_radius: 30.0, status: 'Active', confirmed_at: Date.today()},
-  {email: "company3@gmail.com", password: 'password', name: 'company3', address: "2600 Lawrence ave", city: "Chicago", state: "IL", zip_code: "60625", service_radius: 30.0}
+  {email: "company@gmail.com", password: 'password', name: 'company1', address: "301 N Michigan Ave", city: "Chicago", state: "IL", zip_code: "60601", service_radius: 30.0, description: 'hello there handy service', phone: '3123231234', url: 'http://localhost:3000/customer_requests', status: 'Active', confirmed_at: Date.today()},
+  {email: "company2@gmail.com", password: 'password', name: 'company2', address: "2000 N Western Ave", city: "Chicago", state: "IL", zip_code: "60625", service_radius: 30.0, description: 'hello there handy service', phone: '3123231234', url: 'http://localhost:3000/customer_requests', status: 'Active', confirmed_at: Date.today()},
+  {email: "company3@gmail.com", password: 'password', name: 'company3', address: "2600 Lawrence ave", city: "Chicago", state: "IL", zip_code: "60625", service_radius: 30.0, description: 'hello there handy service', phone: '3123231234', url: 'http://localhost:3000/customer_requests'}
 ])
 ServiceCategory.create!([
   {name: "Paint"},
