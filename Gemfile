@@ -38,7 +38,6 @@ gem 'devise', '~> 4.2.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'geocoder', '~> 1.4.3'
-gem 'angularjs-rails', '~> 1.6.2'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'
 # validate submited company websites
