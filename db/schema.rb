@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 20170706235608) do
   end
 
   create_table "contracts", force: :cascade do |t|
+    t.integer  "quote_id"
+    t.integer  "customer_request_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "quote_id"
-    t.string   "customer_request_id"
   end
 
   create_table "customer_requests", force: :cascade do |t|
