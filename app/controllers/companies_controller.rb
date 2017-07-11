@@ -55,6 +55,7 @@ class CompaniesController < ApplicationController
       :phone,
       :description,
       :url,
+      :avatar,
     )
   end
 

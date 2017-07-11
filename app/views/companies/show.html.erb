@@ -3,8 +3,9 @@
     <div class="col-sm-8 col-sm-offset-2">
       <div>
         <h1><%= @company.name %></h1>
+        <%= image_tag @company.avatar.url(:medium) if @company.avatar %>
         <h2>Doing business in the <%= @company.shorten_zip_code.to_region %> area</h2>
-          <h4>Phone: <%= @company.phone %></h4>
+          <h4>Phone: <%= number_to_phone(@company.phone, area_code: true) %></h4>
           <h4>Email: <%= @company.email %></h4>
           <h4>Website: <%= @company.url %></h4>
           <p>About: <%= @company.description %></p>
