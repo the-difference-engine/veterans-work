@@ -48,6 +48,7 @@ gem 'pg_search'
 gem "react-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "sentry-raven"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,6 +58,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'simplecov', :require => false
   gem 'faker', '~> 1.7.3'
+  gem 'dotenv-rails'
 end
 
 group :development do
