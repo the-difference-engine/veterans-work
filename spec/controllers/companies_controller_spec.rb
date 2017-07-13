@@ -117,13 +117,28 @@ RSpec.describe CompaniesController, type: :controller do
         customer_request = create :customer_request, customer_id: customer.id
         quote = create :quote, customer_request_id: customer_request.id, company_id: @company.id
       end
-      # it 'assigns the requested company to @company'  do
-      #   get :show, params: {id: company.id}
-      #   expect(assigns(:company)).to eq(company)
-      # end
       it 'assigns true to @readaction_boolean' do
         get :show, params: { id: @company.id }
         expect(assigns(:readaction_boolean)).to eq(true)
+      end
+    end
+
+    context 'customer with a contract linking to company' do
+      before :each do 
+        customer = create :customer
+        sign_in customer
+        @company = create :company
+        customer_request = create :customer_request, customer_id: customer.id
+        quote = create :quote, customer_request_id: customer_request.id, company_id: @company.id
+        contract = create :contract, customer_request_id: customer_request.id, quote_id: quote.id
+      end
+      it 'assigns the requested company to @company' do
+        get :show, params: {id: @company.id}
+        expect(assigns(:company)).to eq(@company)
+      end
+      it 'renders show page' do
+        get :show, params: {id: @company.id}
+        expect(response).to render_template("show.html.erb")
       end
     end
 
