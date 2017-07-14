@@ -69,8 +69,6 @@ class CompaniesController < ApplicationController
       if (current_customer.quotes.map(&:id) & company.quotes.map(&:id)).any?
         @company = Company.find(params[:id])
         @readaction_boolean = true
-      # elsif (current_customer.customer_requests.map(&:contracts) & company.quotes.map(&:contracts)).any?
-      #   @full_page_boolean = true
       else
         redirect_to "/"
       end
