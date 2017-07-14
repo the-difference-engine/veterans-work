@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
 
   def index
-    1 / 0 
     @homepage = true
     if current_company
       redirect_to "/customer_requests"
