@@ -64,3 +64,5 @@ spec/examples.txt
 
 # Ignore application configuration
 /config/application.yml
+/public/packs
+/node_modules
