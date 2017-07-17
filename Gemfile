@@ -7,7 +7,7 @@ end
 
 ruby "2.3.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.1.2'
 gem 'pry'
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip', '~> 5.0.0'
 gem 'area'
-gem 'devise', '~> 4.2.0'
+gem 'devise', '~> 4.3.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'geocoder', '~> 1.4.3'
@@ -48,6 +48,8 @@ gem 'pg_search'
 gem "react-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "sentry-raven"
+gem 'webpacker', '~> 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,6 +59,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'simplecov', :require => false
   gem 'faker', '~> 1.7.3'
+  gem 'dotenv-rails'
 end
 
 group :development do

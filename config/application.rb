@@ -23,3 +23,7 @@ module VeteransWork
     end
   end
 end
+
+Raven.configure do |config|
+  config.dsn = ENV["SENTRY_DSN"] 
+end 
