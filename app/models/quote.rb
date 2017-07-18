@@ -19,7 +19,8 @@
 class Quote < ApplicationRecord
   belongs_to :company
   belongs_to :customer_request
-  belongs_to :contract
+
+  has_many :contracts
 
   validates_uniqueness_of :company_id, scope: :customer_request_id
 
