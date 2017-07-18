@@ -35,6 +35,7 @@ class Customer < ApplicationRecord
   has_many :companies, through: :reviews
   has_many :customer_requests, dependent: :delete_all
   has_many :quotes, through: :customer_requests
+  has_many :contracts, through: :customer_requests
 
 
   def open_quotes
