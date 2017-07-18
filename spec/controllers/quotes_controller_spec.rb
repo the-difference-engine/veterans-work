@@ -36,8 +36,8 @@ RSpec.describe QuotesController, type: :controller do
         sign_in customer
         cr1 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()-1)
         cr2 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()+1)
-        q1 = create(:quote, customer_request_id: cr1.id)
-        q2 = create(:quote, customer_request_id: cr2.id)
+        create(:quote, customer_request_id: cr1.id)
+        create(:quote, customer_request_id: cr2.id)
         get :index
         expect(assigns(:customer_requests)).to match_array [cr2]
       end
