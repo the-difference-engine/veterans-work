@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    if current_admin || (current_company && current_company.id == @company.id) || (current_customer.contracts & @company.contracts).any?
+    if current_admin || current_company || current_customer
       render 'show.html.erb'
     else
       redirect_to '/'
@@ -66,8 +66,11 @@ class CompaniesController < ApplicationController
     elsif current_company
       @company = current_company
     elsif current_customer
-      if (current_customer.quotes.map(&:id) & company.quotes.map(&:id)).any?
-        @company = Company.find(params[:id])
+      if (current_customer.contracts & company.contracts).any?
+        @company = company
+        @readaction_boolean = false
+      elsif (current_customer.quotes.map(&:id) & company.quotes.map(&:id)).any?
+        @company = company
         @readaction_boolean = true
       else
         redirect_to "/"
