@@ -16,8 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    company = Company.find_by(id: params[:id])
-    if current_admin || current_company.id == company.id
+    if current_admin || current_company || current_customer
       render 'show.html.erb'
     else
       redirect_to '/'
@@ -61,12 +60,23 @@ class CompaniesController < ApplicationController
   end
 
   def assign_company
+    company = Company.find(params[:id])
     if current_admin
-      @company = Company.find(params[:id])
+      @company = company
     elsif current_company
       @company = current_company
+    elsif current_customer
+      if (current_customer.contracts & company.contracts).any?
+        @company = company
+        @readaction_boolean = false
+      elsif (current_customer.quotes.map(&:id) & company.quotes.map(&:id)).any?
+        @company = company
+        @readaction_boolean = true
+      else
+        redirect_to "/"
+      end
     else
-      redirect_to "/companies/#{current_company.id}"
+      redirect_to "/"
     end
   end
 end
