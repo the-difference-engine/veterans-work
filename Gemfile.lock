@@ -310,7 +310,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   cancancan (~> 1.15.0)
-  capybara
+  capybara (~> 2.14.4)
   coffee-rails (~> 4.2)
   database_cleaner
   devise (~> 4.3.0)
