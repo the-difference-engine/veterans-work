@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'certs/show'
-
   namespace :api do
     namespace :v1 do
       get '/reviews/new' => 'reviews#new'
@@ -34,7 +32,5 @@ Rails.application.routes.draw do
   resources :reviews
   resources :quotes
   resources :contracts
-
-  get "/.well-known/acme-challenge/seM0ysBGk0QZl1RFISAA63ZWVebCzcAKsAHoeaH__So" => 'certs#show'
 end
 
