@@ -35,6 +35,6 @@ Rails.application.routes.draw do
   resources :quotes
   resources :contracts
 
-  get "/.well-known/acme-challenge/qPDoA3ZCIGfTAp5KynGIxqC-QPJSwwd2o8MsK5zof4c" => 'certs#show'
+  get "/.well-known/acme-challenge/seM0ysBGk0QZl1RFISAA63ZWVebCzcAKsAHoeaH__So" => 'certs#show'
 end
 
