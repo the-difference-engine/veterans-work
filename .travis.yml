@@ -3,10 +3,7 @@ language: ruby
 services:
   - postgresql
 
-cache:
-  yarn: true
-  directories:
-    - node_modules
+cache: yarn
 
 script:
   - bundle exec rspec
