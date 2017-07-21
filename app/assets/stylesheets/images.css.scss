@@ -1,3 +1,27 @@
 .small-military-logo {
   height: 50px;
 }
+
+@media only screen and (max-device-width: 321px) {
+  .small-military-logo {
+    height: 42px;
+    margin-right: 30px;
+    padding: 10px 10px 0px 0px;
+  }
+}
+
+@media only screen and (min-device-width: 375px) {
+  .small-military-logo {
+    height: 46px;
+    margin-right: 60px;
+    padding: 5px 46px 0px 2px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) {
+  .small-military-logo {
+    height: 46px;
+    margin-left: 40px;
+    padding: 5px 45px 0px 2px;
+  }
+}

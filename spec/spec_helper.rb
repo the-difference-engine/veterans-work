@@ -1,7 +1,7 @@
 require 'simplecov'
 require 'rspec/rails'
 require 'devise'
-
+require 'capybara/rspec'
 require 'database_cleaner'
 
 DatabaseCleaner.strategy = :truncation
