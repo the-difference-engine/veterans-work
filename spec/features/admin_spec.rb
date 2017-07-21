@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "the signin process", :type => :feature do
   before :each do
-    create :company, email: 'user@example.com', password: 'password', status: 'Active'
+    create :admin, email: 'user@example.com', password: 'password'
   end
 
   it "signs me in" do
-    visit '/companies/sign_in'
+    visit '/admins/sign_in'
     within(".login-form") do
-      fill_in 'company[email]', with: 'user@example.com'
-      fill_in 'company[password]', with: 'password'
+      fill_in 'admin[email]', with: 'user@example.com'
+      fill_in 'admin[password]', with: 'password'
     end
     click_button 'Log in'
     expect(page).to have_content 'Signed in successfully'

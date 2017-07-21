@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
-      <div class="field">
+      <div class="login-form">
         <h2>Admin Login</h2>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field">
+          <div class="form-group">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, class: "form-control" %>
           </div>
 
-          <div class="field">
+          <div class="form-group">
             <%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
           </div>
 
           <% if devise_mapping.rememberable? -%>
-            <div class="field">
+            <div class="actions">
               <%= f.check_box :remember_me %>
               <%= f.label :remember_me %>
             </div>
