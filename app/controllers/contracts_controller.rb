@@ -1,4 +1,12 @@
 class ContractsController < ApplicationController
+
+  def index
+    if current_customer || current_company
+    @contracts = Contract.all
+    render "index.html.erb"
+    end
+  end
+
   def create
     accepted_quote = Quote.find(params[:contract][:quote_id])
     customer_request = accepted_quote.customer_request

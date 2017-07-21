@@ -1,1 +1,10 @@
 <h1>Hi!</h1>
+  <h2> ID: <%= @contract.id %> </h2> 
+  <h2> Customer Request ID: <%= @contract.quote.customer_request_id %> </h2>
+  <h2> Company ID: <%= @contract.quote.company_id %> </h2>
+  <h2> Material Cost Estimate:  <%= @contract.quote.materials_cost_estimate %> </h2>
+  <h2> Labor Cost Estimate <%= @contract.quote.labor_cost_estimate %> </h2>
+  <h2> Completion Date: <%= @contract.quote.completion_date_estimate %> </h2>
+  <h2> Notes: <%= @contract.quote.notes %> </h2>
+  <h2> Accepted: <%= @contract.quote.accepted %> </h2>
+<a href="/contracts"> Back to all Contracts </a>
