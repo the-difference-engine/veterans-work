@@ -66,4 +66,3 @@ spec/examples.txt
 /config/application.yml
 /public/packs
 /node_modules
-/public/packs-test
