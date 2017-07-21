@@ -3,8 +3,12 @@ language: ruby
 services:
   - postgresql
 
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 script:
-  - npm install
   - bundle exec rspec
 
 before_script:
