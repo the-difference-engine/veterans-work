@@ -15,7 +15,7 @@
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
 #
-
+require 'rails_helper'
 RSpec.describe QuotesController, type: :controller do
   describe 'GET #index' do
     context 'with customer signed in' do
@@ -29,6 +29,17 @@ RSpec.describe QuotesController, type: :controller do
           get :index, params: { request_id: cr1.id }
           expect(assigns(:customer_requests)).to match_array [cr1]
         end
+      end
+
+      it 'only shows quotes that arent expired' do
+        customer = create(:customer)
+        sign_in customer
+        cr1 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()-1)
+        cr2 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()+1)
+        create(:quote, customer_request_id: cr1.id)
+        create(:quote, customer_request_id: cr2.id)
+        get :index
+        expect(assigns(:customer_requests)).to match_array [cr2]
       end
 
       it 'assigns the proper customer_requests to @customer_requests' do
