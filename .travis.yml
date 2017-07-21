@@ -4,6 +4,7 @@ services:
   - postgresql
 
 script:
+  - npm install
   - bundle exec rspec
 
 before_script:
