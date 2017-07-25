@@ -1,10 +1,31 @@
 <h1>Hi!</h1>
-  <h2> ID: <%= @contract.id %> </h2> 
-  <h2> Customer Request ID: <%= @contract.quote.customer_request_id %> </h2>
-  <h2> Company ID: <%= @contract.quote.company_id %> </h2>
-  <h2> Material Cost Estimate:  <%= @contract.quote.materials_cost_estimate %> </h2>
-  <h2> Labor Cost Estimate <%= @contract.quote.labor_cost_estimate %> </h2>
-  <h2> Completion Date: <%= @contract.quote.completion_date_estimate %> </h2>
-  <h2> Notes: <%= @contract.quote.notes %> </h2>
-  <h2> Accepted: <%= @contract.quote.accepted %> </h2>
+<table class="table">
+  <thead class="thead-inverse">
+      <tr> 
+        <th> ID:  </th> 
+        <th> Customer Request ID: </th>
+        <th> Company ID:  </th>
+        <th> Material Cost Estimate:   </th>
+        <th> Labor Cost Estimate  </th>
+        <th> Completion Date:  </th>
+        <th> Notes:  </th>
+        <th> Accepted:  </th>
+      </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td> <%= @contract.id %> </td>
+        <td> <%= @contract.quote.customer_request_id %> </td>
+        <td> <%= @contract.quote.company_id %> </td>
+        <td> <%= @contract.quote.materials_cost_estimate %>  </td>
+        <td> <%= @contract.quote.labor_cost_estimate %> </td>
+        <td> <%= @contract.quote.completion_date_estimate %> </td>
+        <td> <%= @contract.quote.notes %> </td>
+        <td> <%= @contract.quote.accepted %> </td>
+      </tr>
+  </tbody>
+</table>
+<input type="Complete?" class="btn btn-primary" value="Complete?">
+<input type="Leave Review" class="btn btn-primary" value="Leave Review">
 <a href="/contracts"> Back to all Contracts </a>
