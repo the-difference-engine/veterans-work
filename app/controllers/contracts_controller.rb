@@ -43,3 +43,4 @@ class ContractsController < ApplicationController
     end
   end
 end
+end
