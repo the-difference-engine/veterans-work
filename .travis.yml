@@ -21,3 +21,5 @@ before_install:
 
 cache:
   yarn: true
+
+bundler_args: --without production development
