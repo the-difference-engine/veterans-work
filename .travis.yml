@@ -17,8 +17,6 @@ dist: trusty
 
 sudo: required
 
-bundler_args: --without production development
-
 before_install: # if "install" is overridden
   # Repo for Yarn
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
