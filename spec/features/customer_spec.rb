@@ -9,8 +9,8 @@ RSpec.describe 'the signout process', :type => :feature do
   end
 end
 
-RSpec.describe "the signin process", :type => :feature do
-  it "signs me in" do
+RSpec.describe 'the signin process', :type => :feature do
+  it 'signs me in' do
     with_customer_signed_in
     expect(page).to have_content 'Signed in successfully.'
   end
