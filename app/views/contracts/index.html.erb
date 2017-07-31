@@ -12,8 +12,8 @@
   </thead>
 
   <tbody>
+  <% @contracts.each do |contract| %>
       <tr>
-       <% @contracts.each do |contract| %>
         <td><%= contract.id %></td>
         <td><%= contract.quote.customer_request_id %></td>
         <td><%= contract.quote.company_id %></td>

@@ -39,7 +39,7 @@ class CustomerRequestsController < ApplicationController
 
   def show
     @request = CustomerRequest.find(params[:id])
-    render "show.html.erb"
+    render 'show.html.erb'
   end
 
   def edit
