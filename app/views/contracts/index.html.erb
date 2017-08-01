@@ -2,25 +2,25 @@
 <table class="table">
   <thead class="thead-inverse">
       <tr>
-        <th> ID:  </th>
-        <th> Customer Request ID: </th>
-        <th> Company ID: </th>
-        <th> Total Cost: </th>
-        <th> Completion Date: </th>
-        <th> Notes : </th>
+        <th>ID:</th>
+        <th>Customer Request ID:</th>
+        <th>Company ID:</th>
+        <th>Total Cost:</th>
+        <th>Completion Date:</th>
+        <th>Notes:</th>
       </tr>
   </thead>
 
   <tbody>
+    <% @contracts.each do |contract| %>
       <tr>
-       <% @contracts.each do |contract| %>
-        <td> <%= contract.id %> </td>
-        <td>  <%= contract.quote.customer_request_id %> </td>
-        <td>  <%= contract.quote.company_id %> </td>
-        <td>  <%= contract.quote.total_cost_estimate %> </td>
-        <td> <%= contract.quote.completion_date_estimate %> </td>
-        <td> <%= contract.quote.notes %> </td>
-<% end %>
+        <td><%= contract.id %></td>
+        <td><%= contract.quote.customer_request_id %></td>
+        <td><%= contract.quote.company_id %></td>
+        <td><%= contract.quote.total_cost_estimate %></td>
+        <td><%= contract.quote.completion_date_estimate %></td>
+        <td><%= contract.quote.notes %></td>
       </tr>
+     <% end %>
   </tbody>
 </table>

@@ -1,9 +1,13 @@
 class ContractsController < ApplicationController
 
   def index
-    if current_customer || current_company
-    @contracts = Contract.all
-    render "index.html.erb"
+    if current_customer
+      @contracts = current_customer.contracts
+    elsif current_company
+      @contracts = current_company.contracts
+      render 'index.html.erb'
+    else
+      redirect_to '/'
     end
   end
 
@@ -37,7 +41,7 @@ class ContractsController < ApplicationController
   def show
     if current_customer || current_company
       @contract = Contract.find(params[:id])
-      render "show.html.erb"
+      render 'show.html.erb'
     else
       redirect_to '/'
     end
