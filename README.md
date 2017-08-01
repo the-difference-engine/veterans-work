@@ -1,4 +1,19 @@
 # Veterans Work
+
+### What We Use
+
+* App Framework - [Rails](http://rubyonrails.org/)
+* Database - [Postgres](https://www.postgresql.org/)
+* Backend Testing - [Rspec-Rails](http://rspec.info/documentation/3.6/rspec-rails/)
+* Feature Testing - [Capybara](https://github.com/teamcapybara/capybara)
+* Test Coverage - [Simplecov](https://github.com/colszowka/simplecov#simplecov----)
+* Continuous Integration (CI) - [Travis](https://travis-ci.org/)
+* Frontend Framework - [React](https://facebook.github.io/react/)
+* Development Mailbox - [Mailcatcher](https://mailcatcher.me/)
+* Node Dependency Managment - [Yarn](https://yarnpkg.com/lang/en/)
+* Project Management - [Trello](https://trello.com/b/xNkJUl4n/veterans-work)
+* [Make](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html)
+
 ### Example workflow:
 1. I start at my local repo's master branch and cut a new feature
 
