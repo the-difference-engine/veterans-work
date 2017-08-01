@@ -72,7 +72,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
 
         get :index
-        expect(assigns(:requests)).to eq([customer_request_1])
+        expect(assigns(:requests)).to match_array([customer_request_1])
       end
 
     end

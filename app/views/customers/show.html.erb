@@ -3,26 +3,26 @@
 <% if @customer.customer_requests %>
   <% @customer.customer_requests.each do |cr| %>
     <% if cr.expires_date > Date.today %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table table-hover">
-        <h4><%= cr.description %></h4>
-          <thead>
-            <tr>
-              <th>Service Category</th>
-              <th>Expiration Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= cr.service_category.name%></td>
-              <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table class="table table-hover">
+            <h4><%= cr.description %></h4>
+            <thead>
+              <tr>
+                <th>Service Category</th>
+                <th>Expiration Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= cr.service_category.name%></td>
+                <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
 <% end %>
 <a href="/customer_requests/new" class="btn btn-success btn-lg pull-right">New Work Request</a>
