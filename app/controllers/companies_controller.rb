@@ -65,6 +65,7 @@ class CompaniesController < ApplicationController
       @company = company
     elsif current_company
       @company = current_company
+      @balance = current_company.balance_in_dollars
     elsif current_customer
       if (current_customer.contracts & company.contracts).any?
         @company = company

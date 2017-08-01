@@ -8,6 +8,11 @@
           <h4>Phone: <%= number_to_phone(@company.phone, area_code: true) %></h4>
           <h4>Email: <%= @company.email %></h4>
           <h4>Website: <%= @company.url %></h4>
+          <% if @balance %>
+            <h4>Current Balance: <%= number_to_currency(@balance) %>
+              <span><%= link_to 'add funds', '/credits/new' %></span>
+            </h4>
+          <% end %>
           <p>About: <%= @company.description %></p>
           <hr>
           <h4>Reviews: </h4>
