@@ -1,4 +1,4 @@
-<% if @request.contract %>
+<% if @request.contracts.length > 0 %>
   <h2><%= @request.customer.email %> needs ...</h2>
   <div>
     <p><%= @request.description %></p>
@@ -16,5 +16,5 @@
     <p>State: <%= @request.state %></p>
     <p>Zipcode: <%= @request.zipcode %></p>
   </div>
-<%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" if current_company %>
+  <%= link_to "New Quote", "/quotes/new?customer_request_id=#{@request.id}" if current_company %>
 <% end %>

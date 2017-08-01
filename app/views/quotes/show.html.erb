@@ -49,9 +49,31 @@
           <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
           <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
-        <%= button_to "Decline Quote", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch, data: { confirm: "Are you sure?" }%>
+        <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#exampleModal">Decline Quote</button>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
       <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Decline Quote</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Do you want to decline this quote?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-md" data-dismiss="modal">No</button>
+        <%= button_to "Yes", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch %>
+      </div>
     </div>
   </div>
 </div>
