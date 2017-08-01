@@ -1,4 +1,11 @@
 class ContractsController < ApplicationController
+  def index
+    if current_customer || current_company
+      @contracts = Contract.all
+    render 'index.html.erb'
+    end
+  end
+
   def create
     accepted_quote = Quote.find(params[:contract][:quote_id])
     customer_request = accepted_quote.customer_request
@@ -17,7 +24,7 @@ class ContractsController < ApplicationController
             end
           end
         end
-      flash[:notice] = "Contract created and saved!"
+      flash[:notice] = 'Contract created and saved!'
       redirect_to '/quotes'
       else
         flash[:notice] = 'Quote was not accepted. Try again.'
@@ -28,8 +35,8 @@ class ContractsController < ApplicationController
 
   def show
     if current_customer || current_company
-      @contract = Contract.find(params[:id])
-      render "show.html.erb"
+      @contracts = Contract.find(params[:id])
+      render 'show.html.erb'
     else
       redirect_to '/'
     end
