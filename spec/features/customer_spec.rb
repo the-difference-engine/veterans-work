@@ -46,7 +46,7 @@ def with_customer_signed_in
   click_button 'Log in'
 end
 
-RSpec.describe "customer accepts quote", :type => :feature do
+RSpec.describe "customer decides on quote", :type => :feature do
   before :each do
     @company = create :company, email: 'user@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
     @service_category = create :service_category, name: 'Paint'
@@ -62,6 +62,14 @@ RSpec.describe "customer accepts quote", :type => :feature do
     click_button 'Log in'
   end
 
+  it 'customer rejects quote' do
+    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    click_link 'Details'
+    click_button "Decline Quote"
+    click_button "Yes"
+    expect(@company.quotes.length).to eq(0)
+  end
+  
   it 'customer accepts quote' do
     find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
     click_link 'Details'
