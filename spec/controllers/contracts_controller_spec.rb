@@ -9,9 +9,19 @@
 #  updated_at          :datetime         not null
 #
 
-require 'rails_helper' 
+require 'rails_helper'
 
 RSpec.describe ContractsController, type: :controller do
+  describe 'GET #index' do
+    context 'when current_customer is logged in' do
+      it 'renders the index view showing proper contracts of the current_customer' do
+        @contracts = current_customer.contracts
+        get :index
+        expect(response).to render_template('index.html.erb')
+      end
+    end
+  end
+
   describe 'POST #create' do
     it 'creates and saves a new contract to the database' do
       company_one = create(:company)
