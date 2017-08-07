@@ -38,6 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  balance                :integer
 #
 # Indexes
 #
@@ -117,6 +118,28 @@ RSpec.describe Company, type: :model do
         FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: service_category.id })
       )
       expect(company.eligible_customer_requests).to eq([close_customer_request])
+    end
+  end
+
+  describe '#balance_in_dollars' do
+    it 'returns a 10 from 1000 balance' do
+      company = create :company, balance: 1000
+      expect(company.balance_in_dollars).to eq(10)
+    end
+
+    it 'returns a 10.5 from 1050 balance' do
+      company = create :company, balance: 1050
+      expect(company.balance_in_dollars).to eq(10.5)
+    end
+
+    it 'returns a 10.25 from 1025 balance' do
+      company = create :company, balance: 1025
+      expect(company.balance_in_dollars).to eq(10.25)
+    end
+
+    it 'returns a 0.25 from 25 balance' do
+      company = create :company, balance: 25
+      expect(company.balance_in_dollars).to eq(0.25)
     end
   end
 end

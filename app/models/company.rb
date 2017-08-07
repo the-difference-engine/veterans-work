@@ -38,6 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  balance                :integer
 #
 # Indexes
 #
@@ -146,6 +147,10 @@ class Company < ApplicationRecord
 
   def accepted_quotes
     quotes.where(accepted: true)
+  end
+
+  def balance_in_dollars
+    balance.to_f / 100
   end
 
   private

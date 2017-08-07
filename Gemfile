@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
-ruby "2.3.1"
+ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 gem 'pry'
@@ -45,11 +45,12 @@ gem 'validate_url'
 # pg_search allows fast seaching by any field on model
 gem 'pg_search'
 # react
-gem "react-rails"
+gem 'react-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "sentry-raven"
+gem 'sentry-raven'
 gem 'webpacker', '~> 2.0'
+gem 'activemerchant'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
