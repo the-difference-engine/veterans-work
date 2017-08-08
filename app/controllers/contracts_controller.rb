@@ -1,9 +1,9 @@
 class ContractsController < ApplicationController
 
   def index
-    if current_customer
+    if current_customer && current_customer.contracts.any?
       @contracts = current_customer.contracts
-    elsif current_company
+    elsif current_company && current_company.contracts.any?
       @contracts = current_company.contracts
       render 'index.html.erb'
     else
