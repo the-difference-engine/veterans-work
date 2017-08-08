@@ -49,10 +49,8 @@
           <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
           <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
-        <div align="center">
         <a type="button" class="btn btn-danger btn-md top_margin_button" data-toggle="modal" data-target="#myModal">Decline Quote</a><br>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
-        </div>
       <% end %>
     </div>
   </div>
