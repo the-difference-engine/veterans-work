@@ -1,1 +1,31 @@
 <h1>Hi!</h1>
+<table class="table">
+  <thead class="thead-inverse">
+      <tr>
+        <th> ID:  </th>
+        <th> Customer Request ID: </th>
+        <th> Company ID:  </th>
+        <th> Material Cost Estimate:   </th>
+        <th> Labor Cost Estimate  </th>
+        <th> Completion Date:  </th>
+        <th> Notes:  </th>
+        <th> Accepted:  </th>
+      </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td> <%= @contract.id %> </td>
+        <td> <%= @contract.quote.customer_request_id %> </td>
+        <td> <%= @contract.quote.company_id %> </td>
+        <td> <%= @contract.quote.materials_cost_estimate %>  </td>
+        <td> <%= @contract.quote.labor_cost_estimate %> </td>
+        <td> <%= @contract.quote.completion_date_estimate %> </td>
+        <td> <%= @contract.quote.notes %> </td>
+        <td> <%= @contract.quote.accepted %> </td>
+      </tr>
+  </tbody>
+</table>
+<button type="button">Complete?</button>
+<button type="button">Leave Review</button>
+<a href="/contracts"> Back to all Contracts </a>
