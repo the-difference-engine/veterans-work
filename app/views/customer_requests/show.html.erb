@@ -1,4 +1,4 @@
-<% if @request.contracts.length > 0 %>
+<% if @request.contracts.any? %>
   <h2><%= @request.customer.email %> needs ...</h2>
   <div>
     <p><%= @request.description %></p>
