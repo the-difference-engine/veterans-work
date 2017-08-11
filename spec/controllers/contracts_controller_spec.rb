@@ -21,20 +21,41 @@ RSpec.describe ContractsController, type: :controller do
         contract = create(:contract, customer_request_id: customer_request.id
         )
         get :index
-        expect(response).to render_template("contracts/index")
+        expect(response).to render_template("index")
+      end
+
+      it 'assigns the expected contract to current_customer' do
+        customer = create(:customer)
+        sign_in customer
+        customer_request = create(:customer_request, customer_id: customer.id)
+        contract = create(:contract, customer_request_id: customer_request.id
+        )
+        get :index
+        expect(assigns(:contracts)).to match_array([contract])
+      end
+
+      it 'assigns the expected contract to current_company' do
+        company = create(:company)
+        sign_in company
+        customer_request = create(:customer_request)
+        quote = create(:quote, customer_request_id: customer_request.id, company_id: company.id)
+        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id
+        )
+        get :index
+        expect(assigns(:contracts)).to match_array([contract])
       end
     end
 
-     context 'when current_company is logged in' do
+    context 'when current_company is logged in' do
       it 'renders the index html showing contracts of the signed in company' do
         customer = create(:customer)
         company = create(:company)
         sign_in company
-        customer_request = create(:customer_request, customer_id: customer.id)
+        customer_request = create(:customer_request)
         quote = create(:quote, customer_request_id: customer_request.id, company_id: company.id)
         contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id)
         get :index
-        expect(response).to render_template("contracts/index.html.erb")
+        expect(response).to render_template(:index)
       end
     end
 

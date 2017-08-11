@@ -8,8 +8,8 @@
           <h4>Email: <%= @company.email %></h4>
           <h4>Website: <%= @company.url %></h4>
           <p>About: <%= @company.description %></p>
-          <p>Service Categories: <%@company.company_services.each do |c|%> 
-          <%=c.service_category.name%> 
+          <p>Service Categories: <%@company.company_services.each do |c|%>
+          <%=c.service_category.name%>
           <%end%></p>
           <p><%= form_tag "/companies/#{@company.id}", method: :put do  %>
              <label><p>Status: </p></label>
@@ -22,4 +22,3 @@
     </div>
   </div>
 </section>
- 
