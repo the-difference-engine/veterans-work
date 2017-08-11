@@ -63,10 +63,8 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer rejects quote' do
-    p 'made it here'
     first(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
     click_link 'Details'
-    expect(page).to have_content 'About'
     click_button "Decline Quote"
     click_button "Yes"
     expect(@company.quotes.length).to eq(0)
