@@ -63,7 +63,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer rejects quote' do
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    first(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
     click_link 'Details'
     click_button "Decline Quote"
     click_button "Yes"
