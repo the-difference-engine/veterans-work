@@ -207,6 +207,15 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
   # describe 'GET #edit' do
 
+  #   before :each do
+  #     @customer_request = create(:customer_request)
+  #   end
+
+  #   it 'renders the edit page' do
+  #       get :edit, params: { id: @customer_request.id }
+  #       expect(response).to render_template('edit.html.erb')
+  #   end
+    
   # end
 
   # describe 'PATCH #update' do

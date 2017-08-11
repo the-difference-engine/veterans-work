@@ -1,0 +1,44 @@
+<%= form_for @customer_request do |f| %>
+
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="field">
+        <h3>Enter Work Request</h3>
+        <%= label_tag :address %>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :city %>
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :state %>
+        <%= f.text_field :state, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :zipcode %>
+        <%= f.text_field :zipcode, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :description %>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= label_tag :expires_date %>
+          <%= f.date_field :expires_date, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= label_tag :service_category_id %>
+        <%= f.select :service_category_id, options_from_collection_for_select(@categories, "id", "name", @customer_request.service_category_id),
+          {}, prompt: "select type of work", class: "form-control" %>
+      </div>
+      <br>
+      <%= submit_tag "Submit", class: "btn btn-info btn-theme-dark" %>
+    </div>
+  <% end %>
