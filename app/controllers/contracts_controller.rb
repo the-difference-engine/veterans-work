@@ -1,4 +1,15 @@
 class ContractsController < ApplicationController
+
+  def index
+    if current_customer && current_customer.contracts.any?
+      @contracts = current_customer.contracts
+    elsif current_company && current_company.contracts.any?
+      @contracts = current_company.contracts
+    else
+      redirect_to '/'
+    end
+  end
+
   def create
     accepted_quote = Quote.find(params[:contract][:quote_id])
     customer_request = accepted_quote.customer_request
@@ -29,7 +40,7 @@ class ContractsController < ApplicationController
   def show
     if current_customer || current_company
       @contract = Contract.find(params[:id])
-      render "show.html.erb"
+      render 'show.html.erb'
     else
       redirect_to '/'
     end

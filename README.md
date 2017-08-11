@@ -12,6 +12,9 @@
 * Development Mailbox - [Mailcatcher](https://mailcatcher.me/)
 * Node Dependency Managment - [Yarn](https://yarnpkg.com/lang/en/)
 * Project Management - [Trello](https://trello.com/b/xNkJUl4n/veterans-work)
+* Fun Times - [Booze](https://en.wikipedia.org/wiki/Alcohol#Alcoholic_beverages)
+* App Health Monitoring - [Sentry](https://sentry.io/tdengine/)
+* App Hosting - [Heroku](https://dashboard.heroku.com/pipelines/59144ee6-73bf-4f9a-91ea-43da97e9108f)
 * [Make](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html)
 
 ### Example workflow:
