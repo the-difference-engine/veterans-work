@@ -79,4 +79,12 @@ class CompaniesController < ApplicationController
       redirect_to "/"
     end
   end
+
+  # private
+
+  # def company_image
+  #   params.require(:company).permit(:avatar)
+  # end
+
 end
+
