@@ -5,7 +5,6 @@ class ContractsController < ApplicationController
       @contracts = current_customer.contracts
     elsif current_company && current_company.contracts.any?
       @contracts = current_company.contracts
-      render 'index.html.erb'
     else
       redirect_to '/'
     end
