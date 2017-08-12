@@ -49,7 +49,7 @@
           <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
           <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
-        <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#exampleModal">Decline Quote</button>
+        <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
         <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
       <% end %>
     </div>
@@ -71,8 +71,8 @@
       Do you want to decline this quote?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-md" data-dismiss="modal">No</button>
-        <%= button_to "Yes", { action: "update", id: @quote.id},class: "btn btn-danger btn-md", method: :patch %>
+        <%= button_to "Yes", { action: "update", id: @quote.id},class: "btn btn-success btn-md", method: :patch %>
+        <button type="button" class="btn btn-danger btn-md top-margin-button" data-dismiss="modal">No</button>
       </div>
     </div>
   </div>

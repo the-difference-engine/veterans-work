@@ -63,7 +63,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer rejects quote' do
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    first(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
     click_link 'Details'
     click_button "Decline Quote"
     click_button "Yes"
@@ -73,7 +73,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   it 'customer accepts quote' do
     find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
     click_link 'Details'
-    find(:css, 'input.btn.btn-md.btn-success').click
+    first(:css, 'input.btn.btn-md.btn-success').click
     expect(page).to have_content 'Contract created and saved!'
   end
 end
