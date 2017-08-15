@@ -14,17 +14,15 @@
 
 .navbar {
   background-color: $white;
-  // border-bottom: 3px solid $muddy-brown;
   height: 60px;
 }
 
 .right-nav {
-  // padding: 0 -20px;
+ 
   margin: 0 -12px;
 }
 
 .navbar ul li a {
-  // border: 1px solid red;
 }
 
 .navbar button {
@@ -39,11 +37,24 @@
 }
 
 .footer {
-  background-image: image-url("camo_banner");
-  height: 75px;
-  border-top: 2px solid $muddy-brown;
+  
+  background-color: #EFEFEF;
+  height: 100px;
   text-align: center;
-  img {
-    margin-top: 10px;
+  
+  #MilitaryLogoContainer {
+    margin: 0 auto;
   }
+
+  img {
+    margin: 10px auto;
+    padding: 0 40px;
+    // border: 1px solid red;
+    width: auto;
+    display: inline;
+    // border: 1px solid red;
+    
+    
+  }
+
 }

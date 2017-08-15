@@ -106,20 +106,29 @@
           <p class="notice"><%= notice || alert %></p>
         </div>
       <% end %>
-      <%= javascript_pack_tag 'hello_react' %>
+      <!-- <!%= javascript_pack_tag 'hello_react' %> -->
       <%= yield %>
     </div>
-    <div class="footer navbar-fixed-bottom">
+    <div class="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="row">
-              <div class="col-xs-2"><%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'national_gaurd.png', alt: "national gaurd logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'coast_gaurd.png', alt: "coast gaurd logo", class: "small-military-logo" %></div>
+            <div class="col-sm-12" id="MilitaryLogoContainer">
+              <%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %>
+              <%= image_tag 'national_gaurd.png', alt: "national gaurd logo", class: "small-military-logo" %>
+              <%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %>
+              <%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %>
+              <%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %>
+              <%= image_tag 'coast_gaurd.png', alt: "coast gaurd logo", class: "small-military-logo" %>
+            </div>
+            <p>© Veterans Work All Rights Reserved</p>
+              <!-- <div class="col-xs-2"><!%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'national_gaurd.png', alt: "national gaurd logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'coast_gaurd.png', alt: "coast gaurd logo", class: "small-military-logo" %></div> -->
             </div>
           </div>
         </div>
