@@ -26,8 +26,23 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+          <% if current_page?( :action => 'index') %>
+            <li class="current-page"><a href="/">Home</a></li>
             <li><a href="/how">How It Works</a></li>
             <li><a href="/about">About</a></li>
+          <% elsif current_page?(:action => 'how') %>
+            <li><a href="/">Home</a></li>
+            <li class="current-page"><a href="/how">How It Works</a></li>
+            <li><a href="/about">About</a></li>
+          <% elsif current_page?(:action => 'about') %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/how">How It Works</a></li>
+            <li class="current-page"><a href="/about">About</a></li>
+          <% else %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/how">How It Works</a></li>
+            <li><a href="/about">About</a></li>
+          <% end %>
           </ul>
           <div class="navbar-form navbar-left">
             <% if current_admin %>
@@ -69,8 +84,12 @@
             </ul>
           <% else %>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Customer Sign Up", "/customers/sign_up" %></li>
-              <li><%= link_to "Company Sign Up", "/companies/sign_up" %></li>
+
+              <li class='right-nav'><a>Not Registered?</a></li>
+              <li class='right-nav'><a id='sign-up'>Sign-Up</a></li>
+              <li><a><button>Sign-In</button></a></li>
+              <!-- <li><!%= link_to "Customer Sign Up", "/customers/sign_up" %></li> -->
+              <!-- <li><!%= link_to "Company Sign Up", "/companies/sign_up" %></li> -->
             </ul>
           <% end %>
         </div><!-- /.navbar-collapse -->
