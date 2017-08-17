@@ -40,6 +40,7 @@ class CustomerRequestsController < ApplicationController
 
   def show
     @request = CustomerRequest.find(params[:id])
+
   end
 
   def edit
@@ -47,6 +48,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def update
+    p 'got to update'
     @categories = ServiceCategory.all
     if @customer_request.update(customer_request_params)
       flash[:success] = "Request Succesfully Updated!"
@@ -75,6 +77,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def validate_customer_request!
+    p 'got to validate_customer_request'
     @customer_request = CustomerRequest.find(params[:id])
     unless @customer_request.customer == current_customer || (
         current_company.eligible_customer_requests.include?(
@@ -86,6 +89,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def has_quote?
+    p 'got to has_quote'
     @customer_request = CustomerRequest.find(params[:id])
     if (@customer_request.quotes.length > 0)
       redirect_to :customer_request, notice: "You cannot edit a request once a quote has been made."

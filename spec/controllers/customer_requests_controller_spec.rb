@@ -20,6 +20,8 @@
 #
 #  index_customer_requests_on_expires_date  (expires_date)
 #
+require 'rails_helper'
+
 
 RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #index' do
@@ -194,15 +196,43 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'renders the show page' do
         get :show, params: { id: @customer_request.id }
-        expect(response).to render_template('show.html.erb')
+        expect(response).to render_template :show
       end
     end
 
     context 'customer signed in' do
       it 'assigns current customer\'s customer_request to @request' do
-
       end
     end
+  end
+
+  describe 'PATCH #update' do
+    it 'assigns all the service categories to @service_categories' do
+      customer = create :customer
+      sign_in customer
+      customer_request = create(:customer_request, customer: customer)
+      sc1 = create :service_category
+      sc2 = create :service_category
+      sc3 = create :service_category
+      put :update, { customer_request: { id: customer_request.id } }
+      expect(assigns(:categories)).to match_array([sc1, sc2, sc3])
+    end
+
+    context "with valid attributes" do
+      it "updates the contact in the database" do 
+        patch :update, params: { id: @customer_request.id }
+      end
+      it "redirects to the contact" do
+        patch :update, params: {}
+      end
+    end
+
+    context "with invalid attributes" do 
+      it "does not update the contact" do
+      end
+      it "re-renders the :edit template" do 
+      end
+    end 
   end
 
   # describe 'GET #edit' do
