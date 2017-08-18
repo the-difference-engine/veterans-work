@@ -41,6 +41,7 @@ gem 'rolify', '~> 5.1.0'
 gem 'geocoder', '~> 1.4.3'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'
+gem 'ratyrate'
 # validate submited company websites
 gem 'validate_url'
 # pg_search allows fast seaching by any field on model

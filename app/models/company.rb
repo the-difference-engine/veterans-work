@@ -154,4 +154,8 @@ class Company < ApplicationRecord
     "#{address}, #{city}, #{state}, #{zip_code}"
   end
 
+  def review_average
+    self.review
+  end
+
 end
