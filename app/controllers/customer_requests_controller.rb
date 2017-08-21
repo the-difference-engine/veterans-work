@@ -77,7 +77,6 @@ class CustomerRequestsController < ApplicationController
   end
 
   def validate_customer_request!
-    p 'got to validate_customer_request'
     @customer_request = CustomerRequest.find(params[:id])
     unless @customer_request.customer == current_customer || (
         current_company.eligible_customer_requests.include?(
@@ -89,9 +88,8 @@ class CustomerRequestsController < ApplicationController
   end
 
   def has_quote?
-    p 'got to has_quote'
     @customer_request = CustomerRequest.find(params[:id])
-    if (@customer_request.quotes.length > 0)
+    if @customer_request.quotes.any?
       redirect_to :customer_request, notice: "You cannot edit a request once a quote has been made."
     end
   end
