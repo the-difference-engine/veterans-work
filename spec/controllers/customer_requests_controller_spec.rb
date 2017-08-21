@@ -235,24 +235,48 @@ RSpec.describe CustomerRequestsController, type: :controller do
     end 
   end
 
-  # describe 'GET #edit' do
+  describe 'GET #edit' do
+    context 'customer signed in' do
+      before :each do
+        @customer = create(:customer)
+        sign_in @customer
+        current_customer = @customer
+        @customer_request = create(:customer_request)
+      end
 
-  #   before :each do
-  #     @customer_request = create(:customer_request)
-  #   end
+      it 'assigns the requested request to @customer_request' do
+        get :edit, params: { id: @customer_request.id }
+        expect(assigns(:customer_request)).to eq(@customer_request)
+      end
 
-  #   it 'renders the edit page' do
-  #       get :edit, params: { id: @customer_request.id }
-  #       expect(response).to render_template('edit.html.erb')
-  #   end
-    
-  # end
+      it 'renders edit page' do
+        get :edit, params: { id: @customer_request.id }
+        expect(response).to render_template("edit.html.erb")
+      end
+    end
 
-  # describe 'PATCH #update' do
+  end
 
-  # end
+  describe 'PATCH #update' do
+    it 'update the values of the customer_request' do
+      customer_request = create(:customer_request,
+        city: "old city",
+        description: "old description"
+      )
+      customer = create(:customer)
+      sign_in customer
+      patch :update, params: {
+        id: customer_request.id,
+        city: "new city",
+        description: "new description"
+      }
+      customer_request.reload
+      expect(customer_request.city).to eq("new city")
+      expect(customer_request.description).to eq("old city")
+    end
 
-  # describe 'DELETE #destroy' do
+    # context 'with params[:status] && current_admin' do
 
-  # end
+    # end
+  end
 end
