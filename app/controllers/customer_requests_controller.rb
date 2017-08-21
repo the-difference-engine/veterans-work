@@ -48,7 +48,6 @@ class CustomerRequestsController < ApplicationController
   end
 
   def update
-    p 'got to update'
     @categories = ServiceCategory.all
     if @customer_request.update(customer_request_params)
       flash[:success] = "Request Succesfully Updated!"
