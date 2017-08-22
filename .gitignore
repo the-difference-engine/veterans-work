@@ -67,10 +67,3 @@ spec/examples.txt
 /public/packs
 /node_modules
 /public/packs-test
-
-# Ignore AWS configuration
-AWS_S3_REGION=us-east-2
-AWS_S3_BUCKET=example-app-veterans
-AWS_ACCESS_KEY_ID=AKIAIDZENA4ZUS5SHU7Q
-AWS_SECRET_ACCESS_KEY=Uqd+BspyO4VSfQcmgaUD8B41KOHnRZ5+GLOpxjL2
-AWS_HOST_NAME=s3.us-east-2.amazonaws.com
