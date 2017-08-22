@@ -148,6 +148,19 @@ class Company < ApplicationRecord
     quotes.where(accepted: true)
   end
 
+ 
+  def star_avg
+    reviews = self.reviews.all
+    sum = 0
+    reviews.each do |review|
+      sum += review[:stars]
+    end
+    avg = sum.to_f / reviews.length.to_f
+  end
+
+  end
+    
+
   private
 
   def full_street_address
@@ -158,4 +171,3 @@ class Company < ApplicationRecord
     self.review
   end
 
-end
