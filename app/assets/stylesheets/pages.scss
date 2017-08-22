@@ -4,6 +4,15 @@
 @import "colors";
 @import 'typography';
 
+body.homepage {
+  width: 100%;
+}
+
+body.homepage .main-content {
+  width: 100%;
+  padding: 0;
+}
+
 h1.home-title {
   font: $h1;
   text-align: center;
@@ -20,13 +29,25 @@ h1.home-title {
 .icons ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: center;
 }
 
 .icons li {
   text-shadow: 2px 2px 1px gray;
 }
+
+
+
+#home-content {
+  background-color: blue;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
 
 .caption, h3 {
   text-align: center;
