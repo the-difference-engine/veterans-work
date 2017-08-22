@@ -1,4 +1,4 @@
-<h1>Hi!</h1>
+<h1>Contract #<%= @contract.id %></h1>
 <table class="table">
   <thead class="thead-inverse">
       <tr>
@@ -27,5 +27,5 @@
   </tbody>
 </table>
 <button type="button">Complete?</button>
-<button type="button">Leave Review</button>
+<input type=button onClick="location.href='/reviews/new'" value='Leave Review'>
 <a href="/contracts"> Back to all Contracts </a>
