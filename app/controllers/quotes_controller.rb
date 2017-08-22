@@ -30,7 +30,7 @@ class QuotesController < ApplicationController
         flash[:notice] = "New Quote created successfully!"
         redirect_to '/customer_requests'
       else
-        flash[:notice] = "Sorry, the quote did not save. Please try again."
+        flash[:notice] = "Sorry, the quote did not save. Please try again. #{@quote.errors.full_messages.join(', ')}."
         render "new.html.erb"
       end
     else
