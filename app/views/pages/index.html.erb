@@ -30,8 +30,12 @@
 </div>
 
 <div id="home-content">
-  <div id="service-search">
-    <h3>Find a Service</h3>
+  <div id="service-search" class="row">
+    <h4 class="col-xs-12">Find a Service</h4>
+    <%= form_tag do %>
+      <%= text_field_tag "TBD", nil, placeholder: "What service do you need?", class: "service-text-box col-md-8 col-sm-12" %>
+      <%= submit_tag "Get Started", class: "button col-sm-3 " %>
+    <% end %>
   </div>
 
   <div class="row">

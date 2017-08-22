@@ -17,7 +17,6 @@ h1.home-title {
   font: $h1;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
-
 }
 
 #home-header h3 {
@@ -29,24 +28,54 @@ h1.home-title {
 .icons ul {
   list-style: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   text-align: center;
 }
 
 .icons li {
+  padding: 0 20px;
   text-shadow: 2px 2px 1px gray;
+  h4 {
+    font: $h4;
+  }
 }
-
-
 
 #home-content {
-  background-color: blue;
+  background-color: #EFEFEF;
   width: 100%;
-  margin: 0;
+  margin-top: 30px;
   padding: 0;
+  #service-search {
+    width: 50%;
+    margin: 0 auto;
+    h4 {
+      font: $h4;
+      color: black;
+      padding-left: 3px;
+    }
+    input {
+      margin-right: 20px;
+    }
+    .service-text-box {
+      // width: 80%;
+      height: 35px;
+      padding-left: 10px;
+      font-family: Lato;
+      
+    }
+    .service-text-box::-webkit-input-placeholder {
+      color: rgba(150, 150, 150, 0.9);
+    }
+  }
 }
 
-
+.button {
+  background-color: #136E29;
+  color: white;
+  border: 0;
+  height: 35px;
+  font: $button;
+}
 
 
 .caption, h3 {
