@@ -28,7 +28,7 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :change_password %> <i>(leave blank if not changing)</i><br />
+        <%= f.label :password %> <i>(leave blank if not changing)</i><br />
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
         <% if @minimum_password_length %>
           <br />
