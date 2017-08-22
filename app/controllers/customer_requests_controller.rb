@@ -36,7 +36,7 @@ class CustomerRequestsController < ApplicationController
       flash[:success] = "You did it!"
       redirect_to "/customers/#{current_customer.id}"
     else
-      flash[:notice] = "Customer Request was not accepted. Please try again. #{@request.errors.full_messages.join(", ")}."
+      flash[:notice] = "Customer Request was not accepted. Please try again. #{@request.errors.full_messages.join(', ')}."
       redirect_to "/customer_requests/new"
     end
   end
