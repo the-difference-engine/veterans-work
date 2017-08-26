@@ -32,6 +32,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
       end
 
       it 'assigns all eligible customer request to @requests' do
+        allow(controller).to receive(:validate_customer_request!).and_return(true)
         all_requests = [
           create(:customer_request),
           create(:customer_request)
@@ -210,6 +211,8 @@ RSpec.describe CustomerRequestsController, type: :controller do
     it 'assigns all the service categories to @service_categories' do
       customer = create :customer
       sign_in customer
+        allow(controller).to receive(:validate_customer_request!).and_return(true)
+        
       customer_request = create(:customer_request, customer: customer)
       sc1 = create :service_category
       sc2 = create :service_category
@@ -254,7 +257,6 @@ RSpec.describe CustomerRequestsController, type: :controller do
         expect(response).to render_template("edit.html.erb")
       end
     end
-
   end
 
   describe 'PATCH #update' do
