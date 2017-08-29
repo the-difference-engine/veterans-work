@@ -113,10 +113,8 @@ class Company < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :name, uniqueness: true
-  validates :address, presence: true
-  validates :city, presence: true
+  validates :address, :city, :description, presence: true
   validates :state, presence: true, length: { is: 2 }
-  validates :description, presence: true
   validates :service_radius, presence: true, numericality: true
   validates :phone, presence: true,
                     numericality: true,
@@ -148,26 +146,14 @@ class Company < ApplicationRecord
     quotes.where(accepted: true)
   end
 
- 
   def star_avg
-    reviews = self.reviews.all
-    sum = 0
-    reviews.each do |review|
-      sum += review[:stars]
-    end
-    avg = sum.to_f / reviews.length.to_f
+    stars = reviews.pluck(:stars)
+    stars.reduce(:+).to_f/stars.size
   end
-
-  end
-    
 
   private
 
   def full_street_address
     "#{address}, #{city}, #{state}, #{zip_code}"
   end
-
-  def review_average
-    self.review
-  end
-
+end
