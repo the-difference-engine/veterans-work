@@ -165,7 +165,8 @@ RSpec.describe CustomerRequestsController, type: :controller do
     it 'redirects to the customer_requests index' do
       customer = create(:customer)
       sign_in customer
-      post :create, params: { customer_request: attributes_for(:customer_request) }
+      service_category = create(:service_category)
+      post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id) } 
       expect(response).to redirect_to("/customers/#{customer.id}")
     end
   end
