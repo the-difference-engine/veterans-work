@@ -274,7 +274,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
       }
       customer_request.reload
       expect(customer_request.city).to eq("new city")
-      expect(customer_request.description).to eq("old city")
+      expect(customer_request.description).to eq("new description")
     end
 
     # context 'with params[:status] && current_admin' do
