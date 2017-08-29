@@ -32,6 +32,8 @@ class CustomerRequestsController < ApplicationController
 
   def create
     @request = CustomerRequest.new(customer_request_params)
+    @request.valid?
+    p @request.errors.full_messages
     @request.save
     flash[:success] = "You did it!"
     redirect_to "/customers/#{current_customer.id}"
@@ -54,6 +56,7 @@ class CustomerRequestsController < ApplicationController
   private
 
   def customer_request_params
+
     params.require(:customer_request).permit(
       :address,
       :city,
