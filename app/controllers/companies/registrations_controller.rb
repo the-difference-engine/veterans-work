@@ -7,6 +7,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    @services = []
     @service_categories = ServiceCategory.all
     super
   end
