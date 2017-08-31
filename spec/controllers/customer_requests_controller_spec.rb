@@ -157,14 +157,16 @@ RSpec.describe CustomerRequestsController, type: :controller do
   describe 'POST #create' do
     it 'creates and saves a new customer request to the database' do
       sign_in create(:customer)
+      service_category = create(:service_category)
       expect{
-        post :create, params: { customer_request: attributes_for(:customer_request) }
+        post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id)}
       }.to change(CustomerRequest, :count).by(1)
     end
     it 'redirects to the customer_requests index' do
       customer = create(:customer)
       sign_in customer
-      post :create, params: { customer_request: attributes_for(:customer_request) }
+      service_category = create(:service_category)
+      post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id) } 
       expect(response).to redirect_to("/customers/#{customer.id}")
     end
   end

@@ -58,6 +58,7 @@ class CustomerRequestsController < ApplicationController
   private
 
   def customer_request_params
+
     params.require(:customer_request).permit(
       :address,
       :city,
