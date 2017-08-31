@@ -20,9 +20,12 @@
 #
 #  index_customer_requests_on_expires_date  (expires_date)
 #
+require 'rails_helper'
+
 
 RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #index' do
+
     context 'company signed in' do
 
       before :each do
@@ -69,7 +72,6 @@ RSpec.describe CustomerRequestsController, type: :controller do
           service_category_id: service_category.id,
           expires_date: Date.today - 2
         )
-
 
         get :index
         expect(assigns(:requests)).to match_array([customer_request_1])
@@ -172,9 +174,9 @@ RSpec.describe CustomerRequestsController, type: :controller do
   end
 
   describe 'GET #show' do
-
     before :each do
       @customer_request = create(:customer_request)
+      allow_any_instance_of
     end
 
     context 'company signed in' do
@@ -196,26 +198,89 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'renders the show page' do
         get :show, params: { id: @customer_request.id }
-        expect(response).to render_template('show.html.erb')
+        expect(response).to render_template :show
       end
     end
 
     context 'customer signed in' do
       it 'assigns current customer\'s customer_request to @request' do
-
       end
     end
   end
 
-  # describe 'GET #edit' do
+  describe 'PATCH #update' do
+    it 'assigns all the service categories to @service_categories' do
+      customer = create :customer
+      sign_in customer
+      customer_request = create(:customer_request, customer: customer)
+      sc1 = create :service_category
+      sc2 = create :service_category
+      sc3 = create :service_category
+      put :update, { customer_request: { id: customer_request.id } }
+      expect(assigns(:categories)).to match_array([sc1, sc2, sc3])
+    end
 
-  # end
+    context "with valid attributes" do
+      it "updates the contact in the database" do 
+        patch :update, params: { id: @customer_request.id }
+      end
+      it "redirects to the contact" do
+        patch :update, params: {}
+      end
+    end
 
-  # describe 'PATCH #update' do
+    context "with invalid attributes" do 
+      it "does not update the contact" do
+      end
+      it "re-renders the :edit template" do 
+      end
+    end 
+  end
 
-  # end
+  describe 'GET #edit' do
+    context 'customer signed in' do
+      before :each do
+        @customer = create(:customer)
+        sign_in @customer
+        current_customer = @customer
+        @customer_request = create(:customer_request)
+      end
 
-  # describe 'DELETE #destroy' do
+      it 'assigns the requested request to @customer_request' do
+        get :edit, params: { id: @customer_request.id }
+        expect(assigns(:customer_request)).to eq(@customer_request)
+      end
 
-  # end
+      it 'renders edit page' do
+        get :edit, params: { id: @customer_request.id }
+        expect(response).to render_template("edit.html.erb")
+      end
+    end
+
+  end
+
+  describe 'PATCH #update' do
+    it 'updates the values of the customer_request' do
+      customer = create :customer
+      sign_in customer
+      allow(controller).to receive(:authenticate_customer!).and_return(true)
+      allow(controller).to receive(:has_quote?).and_return(false)
+      customer_request = create(:customer_request,
+        city: "old city",
+        description: "old description",
+        customer_id: customer.id
+      )
+
+      patch :update, params: {
+        id: customer_request.id,
+        customer_request: {
+          city: "new city",
+          description: "new description"
+        }
+      }
+      customer_request.reload
+      expect(customer_request.city).to eq("new city")
+      expect(customer_request.description).to eq("new description")
+    end
+  end
 end
