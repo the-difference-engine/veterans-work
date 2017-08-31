@@ -1,4 +1,4 @@
-class CompaniesController < ApplicationController
+ class CompaniesController < ApplicationController
 
   before_action :assign_company, only: [:show, :edit, :update, :destroy]
 
