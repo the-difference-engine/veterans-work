@@ -45,6 +45,7 @@ class CustomerRequestsController < ApplicationController
 
   def edit
     @categories = ServiceCategory.all
+    
   end
 
   def update
