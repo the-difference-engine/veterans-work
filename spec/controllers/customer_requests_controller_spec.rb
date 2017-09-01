@@ -312,6 +312,12 @@ RSpec.describe CustomerRequestsController, type: :controller do
           expect(response).to render_template :edit
         end
 
+        it 'does not delete from the database' do
+          expect{
+            delete :destroy, params: { id: @customer_request.id }
+          }.to change(CustomerRequest, :count).by(0)
+        end
+
         it 'updates the flash message' do
           delete :destroy, params: { id: @customer_request.id }
           expect(flash[:notice]).to eq(
@@ -329,6 +335,12 @@ RSpec.describe CustomerRequestsController, type: :controller do
       it 'renders the edit view' do
         delete :destroy, params: { id: @customer_request.id }
         expect(response).to render_template :edit
+      end
+
+      it 'does not delete from the database' do
+        expect{
+          delete :destroy, params: { id: @customer_request.id }
+        }.to change(CustomerRequest, :count).by(0)
       end
 
       it 'updates the flash message' do
