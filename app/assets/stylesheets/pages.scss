@@ -24,20 +24,30 @@ h1.home-title {
   letter-spacing: 2px;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
+  padding-bottom: 20px;
 }
 
 .icons ul {
   list-style: none;
-  display: flex;
-  justify-content: center;
+  float: middle;
+  width: 1000px;
+  margin: 0 auto;
   text-align: center;
+  padding-bottom: 170px;
 }
 
 .icons li {
-  padding: 0 20px;
+  // padding: 0 10px;
+  // position: absolute;
+  left: 0;
+  right: 0;
   text-shadow: 2px 2px 1px gray;
   h4 {
     font: $h4;
+  }
+
+  img {
+
   }
 }
 
@@ -49,8 +59,10 @@ h1.home-title {
   #service-search {
     width: 50%;
     margin: 0 auto;
+    padding-top: 10px;
     h4 {
       font: $h4;
+      font-weight: bold;
       color: black;
       padding-left: 3px;
     }
@@ -62,7 +74,7 @@ h1.home-title {
       height: 35px;
       padding-left: 10px;
       font-family: Lato;
-      
+
     }
     .service-text-box::-webkit-input-placeholder {
       color: rgba(150, 150, 150, 0.9);
@@ -79,9 +91,10 @@ h1.home-title {
 }
 
 .home-info {
+  margin: 30px auto 0 auto;
   background-color: $white;
-  margin-top: 30px; 
-  padding: 20px 0 40px 0;
+  width: 100%;
+  padding: 0;
 }
 
 .home-about {
@@ -99,7 +112,9 @@ h1.home-title {
 
 .vet-sign-in {
   background-color: #EFEFEF;
+  margin-top: 35px;
   padding-bottom: 20px;
+
   h4 {
     font: $h4;
     font-weight: bold;
@@ -110,11 +125,16 @@ h1.home-title {
    text-align: center;
   }
   button {
-    
+
   }
   p.sign-up {
     text-align: left;
     padding-top: 10px;
+    a {
+      color: #136E29;
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 }
 
@@ -124,6 +144,17 @@ h1.home-title {
   }
   h1.home-title {
     // font-size: 4em;
+  }
+
+  .vet-sign-in {
+    width: 50%;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  p.sign-up {
+    margin: auto;
+    text-align: center;
   }
 }
 
