@@ -222,7 +222,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
     end
 
     context 'with valid attributes' do
-      it 'update the values of the customer_request' do
+      it 'updates the values of the customer_request' do
         customer = create(:customer)
         customer_request = create(:customer_request,
           city: 'old city',
@@ -255,10 +255,9 @@ RSpec.describe CustomerRequestsController, type: :controller do
   describe 'GET #edit' do
     context 'customer signed in' do
       before :each do
-        @customer = create(:customer)
-        sign_in @customer
-        current_customer = @customer
-        @customer_request = create(:customer_request, customer: @customer)
+        customer = create(:customer)
+        sign_in customer
+        @customer_request = create(:customer_request, customer: customer)
       end
 
       it 'assigns the requested request to @customer_request' do
@@ -269,6 +268,86 @@ RSpec.describe CustomerRequestsController, type: :controller do
       it 'renders edit page' do
         get :edit, params: { id: @customer_request.id }
         expect(response).to render_template(:edit)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    before :each do
+      customer = create :customer
+      sign_in customer
+      @customer_request = create :customer_request, customer: customer
+    end
+
+    context 'request not under contract' do
+      context 'delete successful' do
+        it 'redirects to the index page' do
+          delete :destroy, params: { id: @customer_request.id }
+          expect(response).to redirect_to '/customer_requests'
+        end
+
+        it 'removes the customer request form the database' do
+          expect{
+            delete :destroy, params: { id: @customer_request.id }
+          }.to change(CustomerRequest, :count).by(-1)
+        end
+
+        it 'updates the flash message' do
+          delete :destroy, params: { id: @customer_request.id }
+          expect(flash[:success]).to eq(
+            "#{@customer_request.description} has been successfully cancelled"
+          )
+        end
+      end
+
+      context 'delete unsuccessful' do
+        before :each do
+          allow_any_instance_of(
+            CustomerRequest
+          ).to receive(:destroy).and_return(false)
+        end
+
+        it 'redirects to the edit page' do
+          delete :destroy, params: { id: @customer_request.id }
+          expect(response).to render_template :edit
+        end
+
+        it 'does not delete from the database' do
+          expect{
+            delete :destroy, params: { id: @customer_request.id }
+          }.to change(CustomerRequest, :count).by(0)
+        end
+
+        it 'updates the flash message' do
+          delete :destroy, params: { id: @customer_request.id }
+          expect(flash[:notice]).to eq(
+            'Something went wrong, please try again.'
+          )
+        end
+      end
+    end
+
+    context 'request under contract' do
+      before :each do
+        create :contract, customer_request: @customer_request
+      end
+
+      it 'renders the edit view' do
+        delete :destroy, params: { id: @customer_request.id }
+        expect(response).to render_template :edit
+      end
+
+      it 'does not delete from the database' do
+        expect{
+          delete :destroy, params: { id: @customer_request.id }
+        }.to change(CustomerRequest, :count).by(0)
+      end
+
+      it 'updates the flash message' do
+        delete :destroy, params: { id: @customer_request.id }
+        expect(flash[:notice]).to eq(
+          'This request is under contract and cannot be cancelled'
+        )
       end
     end
   end

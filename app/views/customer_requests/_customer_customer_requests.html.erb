@@ -4,7 +4,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <table class="table table-hover">
-            <h4><%= cr.description %></h4>
+            <h4><%= link_to cr.description, "/customer_requests/#{cr.id}" %></h4>
               <thead>
                 <tr>
                   <th>Service Category</th>
@@ -17,29 +17,19 @@
                 <tr>
                   <td><%= cr.service_category.name%></td>
                   <td><%= cr.expires_date.strftime("%B %e, %Y") %> </td>
-                    <% if cr.quotes.count == 0 %>
+                  <td><%= cr.quotes.count %> of 3</td>
                   <td>
-                    0 of 3
-                  </td>
-                    <% elsif cr.quotes.count == 1 %>
-                  <td>
-                    1 of 3
-                  </td>
-                    <% elsif cr.quotes.count == 2 %>
-                  <td>
-                    2 of 3
-                  </td>
-                    <% elsif cr.quotes.count == 3 %>
-                  <td>
-                    3 of 3
+                    <a href="/quotes?request_id=<%=cr.id%>" class="btn btn-success">
+                      View Quotes
+                    </a>
                   </td>
                 </tr>
-                  <td><a href="/quotes?request_id=<%=cr.id%>"><button class="btn btn-theme-bg btn-md">View Quotes</button></a></td>
-                  <% end %>
               </tbody>
           </table>
         </div>
-      </div>  
+      </div>
     <% end %>
-  <a href="/customer_requests/new"><button class="btn btn-theme-bg btn-lg pull-right">New Work Request</button>
+  <a href="/customer_requests/new">
+    <button class="btn btn-success pull-right">New Work Request</button>
+  </a>
 <% end %>
