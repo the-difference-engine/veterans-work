@@ -44,12 +44,10 @@ class CustomerRequestsController < ApplicationController
 
   def show
     @request = CustomerRequest.find(params[:id])
-
   end
 
   def edit
     @categories = ServiceCategory.all
-    
   end
 
   def update
