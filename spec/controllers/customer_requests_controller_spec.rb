@@ -28,7 +28,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
     context 'company signed in' do
 
       before :each do
-        sign_in create :company, status: "Active"
+        sign_in create :company, status: 'Active'
       end
 
       it 'assigns all eligible customer request to @requests' do
@@ -44,13 +44,13 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'renders the index html' do
         get :index
-        expect(response).to render_template("index.html.erb")
+        expect(response).to render_template('index.html.erb')
       end
 
       it 'doesn\'t assign expired customer request to @requests' do
         service_category = create(:service_category)
         company = create(:company,
-          status: "Active",
+          status: 'Active',
           latitude: 41.9013087,
           longitude: -87.68276759999999,
           service_radius: 1.0
@@ -73,7 +73,6 @@ RSpec.describe CustomerRequestsController, type: :controller do
           expires_date: Date.today - 2
         )
 
-
         get :index
         expect(assigns(:requests)).to match_array([customer_request_1])
       end
@@ -90,7 +89,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
     context 'company has a pending status' do
 
       before :each do
-        @company = create :company, status: "Pending"
+        @company = create :company, status: 'Pending'
         sign_in @company
       end
 
@@ -145,7 +144,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'renders the new html' do
         get :new
-        expect(response).to render_template("new.html.erb")
+        expect(response).to render_template('new.html.erb')
       end
     end
 
@@ -160,14 +159,16 @@ RSpec.describe CustomerRequestsController, type: :controller do
   describe 'POST #create' do
     it 'creates and saves a new customer request to the database' do
       sign_in create(:customer)
+      service_category = create(:service_category)
       expect{
-        post :create, params: { customer_request: attributes_for(:customer_request) }
+        post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id)}
       }.to change(CustomerRequest, :count).by(1)
     end
     it 'redirects to the customer_requests index' do
       customer = create(:customer)
       sign_in customer
-      post :create, params: { customer_request: attributes_for(:customer_request) }
+      service_category = create(:service_category)
+      post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id) }
       expect(response).to redirect_to("/customers/#{customer.id}")
     end
   end
@@ -211,31 +212,44 @@ RSpec.describe CustomerRequestsController, type: :controller do
     it 'assigns all the service categories to @service_categories' do
       customer = create :customer
       sign_in customer
-        allow(controller).to receive(:validate_customer_request!).and_return(true)
-        
       customer_request = create(:customer_request, customer: customer)
+      ServiceCategory.destroy_all
       sc1 = create :service_category
       sc2 = create :service_category
       sc3 = create :service_category
-      put :update, { customer_request: { id: customer_request.id } }
+      put :update, params: { id: customer_request.id, customer_request: { id: customer_request.id } }
       expect(assigns(:categories)).to match_array([sc1, sc2, sc3])
     end
 
-    context "with valid attributes" do
-      it "updates the contact in the database" do 
-        patch :update, params: { id: @customer_request.id }
-      end
-      it "redirects to the contact" do
-        patch :update, params: {}
+    context 'with valid attributes' do
+      it 'update the values of the customer_request' do
+        customer = create(:customer)
+        customer_request = create(:customer_request,
+          city: 'old city',
+          description: 'old description',
+          customer: customer
+        )
+        sign_in customer
+        put :update, params: {
+          id: customer_request.id,
+          customer_request: {
+            city: 'new city',
+            description: 'new description'
+          }
+        }
+        customer_request.reload
+        expect(customer_request.city).to eq('new city')
+        expect(customer_request.description).to eq('new description')
       end
     end
 
-    context "with invalid attributes" do 
-      it "does not update the contact" do
+    context 'with invalid attributes' do
+      it 'does not update the contact' do
       end
-      it "re-renders the :edit template" do 
+      it 're-renders the :edit template' do
       end
-    end 
+    end
+
   end
 
   describe 'GET #edit' do
@@ -244,7 +258,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         @customer = create(:customer)
         sign_in @customer
         current_customer = @customer
-        @customer_request = create(:customer_request)
+        @customer_request = create(:customer_request, customer: @customer)
       end
 
       it 'assigns the requested request to @customer_request' do
@@ -254,31 +268,8 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'renders edit page' do
         get :edit, params: { id: @customer_request.id }
-        expect(response).to render_template("edit.html.erb")
+        expect(response).to render_template(:edit)
       end
     end
-  end
-
-  describe 'PATCH #update' do
-    it 'update the values of the customer_request' do
-      customer_request = create(:customer_request,
-        city: "old city",
-        description: "old description"
-      )
-      customer = create(:customer)
-      sign_in customer
-      patch :update, params: {
-        id: customer_request.id,
-        city: "new city",
-        description: "new description"
-      }
-      customer_request.reload
-      expect(customer_request.city).to eq("new city")
-      expect(customer_request.description).to eq("new description")
-    end
-
-    # context 'with params[:status] && current_admin' do
-
-    # end
   end
 end

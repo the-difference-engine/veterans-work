@@ -33,19 +33,21 @@ class CustomerRequestsController < ApplicationController
 
   def create
     @request = CustomerRequest.new(customer_request_params)
-    @request.save
-    flash[:success] = "You did it!"
-    redirect_to "/customers/#{current_customer.id}"
+    if @request.save
+      flash[:success] = "You did it!"
+      redirect_to "/customers/#{current_customer.id}"
+    else
+      flash[:notice] = "Customer Request was not accepted. Please try again. #{@request.errors.full_messages.join(', ')}."
+      redirect_to "/customer_requests/new"
+    end
   end
 
   def show
     @request = CustomerRequest.find(params[:id])
-
   end
 
   def edit
     @categories = ServiceCategory.all
-    
   end
 
   def update
@@ -66,6 +68,7 @@ class CustomerRequestsController < ApplicationController
   private
 
   def customer_request_params
+
     params.require(:customer_request).permit(
       :address,
       :city,
