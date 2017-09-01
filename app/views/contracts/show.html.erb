@@ -1,26 +1,22 @@
 <h1>Contract #<%= @contract.id %></h1>
-<table class="table">
+<table class="table table-responsive">
   <thead class="thead-inverse">
       <tr>
-        <th>Customer Request ID:</th>
-        <th>Company ID:</th>
-        <th>Material Cost Estimate:</th>
+        <th>Customer Request</th>
+        <th>Materials Cost Estimate</th>
         <th>Labor Cost Estimate</th>
-        <th>Completion Date:</th>
-        <th>Notes:</th>
-        <th>Accepted:</th>
+        <th>Completion Date</th>
+        <th>Notes</th>
       </tr>
   </thead>
 
   <tbody>
       <tr>
-        <td><%= @contract.quote.customer_request_id %></td>
-        <td><%= @contract.quote.company_id %></td>
+        <td><%= @contract.customer_request.description %></td>
         <td><%= @contract.quote.materials_cost_estimate %></td>
         <td><%= @contract.quote.labor_cost_estimate %></td>
-        <td><%= @contract.quote.completion_date_estimate %></td>
+        <td><%= @contract.quote.completion_date_estimate.strftime('%a, %e %b %Y') %></td>
         <td><%= @contract.quote.notes %></td>
-        <td><%= @contract.quote.accepted %></td>
       </tr>
   </tbody>
 </table>
