@@ -51,6 +51,8 @@ class ContractsController < ApplicationController
   private
 
   def get_contracts_by_status(contracts, status)
+    p contracts
+    p status
     if status == :active
       contracts = contracts.select { |contract| contract.completion_date.nil? }
     elsif status == :complete
