@@ -4,17 +4,57 @@
   padding: 5px 15px 15px 15px;
 }
 
+.current-page a {
+  color: #136E29 !important;
+}
+
+.current-page a:hover {
+  color: #271E16 !important;
+}
+
 .navbar {
   background-color: $white;
-  border-bottom: 3px solid $muddy-brown;
+  height: 60px;
+}
+
+.right-nav {
+
+  margin: 0 -12px;
+}
+
+.navbar ul li a {
+}
+
+.navbar button {
+  background-color: #136E29;
+  color: white;
+  border: 0;
+  width: 100px;
+}
+
+#sign-up {
+  color: #136E29;
 }
 
 .footer {
-  background-image: image-url("camo_banner");
-  height: 75px;
-  border-top: 2px solid $muddy-brown;
+
+  background-color: #EFEFEF;
+  height: 100px;
   text-align: center;
-  img {
-    margin-top: 10px;
+
+
+
+  // white-space: nowrap;
+
+  #MilitaryLogoContainer {
+    margin: 10px auto;
   }
+
+  img {
+    padding: 0 15px;
+    width: auto;
+    display: inline;
+    // border: 1px solid red;
+  }
+
 }

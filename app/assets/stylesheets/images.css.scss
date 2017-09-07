@@ -14,14 +14,15 @@
   .small-military-logo {
     height: 46px;
     margin-right: 60px;
-    padding: 5px 46px 0px 2px;
+    padding: 5px 40px;
   }
 }
 
 @media only screen and (min-device-width: 768px) {
   .small-military-logo {
     height: 46px;
-    margin-left: 40px;
-    padding: 5px 45px 0px 2px;
+    // margin-left: 40px;
+    // padding: 5px 40px;
+    // padding: 5px 45px 0px 2px;
   }
 }

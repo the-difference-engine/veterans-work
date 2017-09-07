@@ -1,13 +1,32 @@
+
+
+
+
 .homepage {
-  background: image-url("combat_boots") no-repeat center center fixed;
+  background: gray;
+}
+
+.homepage:after {
+  background: image-url("flag1");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  opacity: 0.4;
+  content: '';
+  display: block;
+  position: absolute;
+  height: 800px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+
 }
 
 .main-content {
-  margin-bottom: 78px;
+  // margin-bottom: 78px;
 }
 
 .non-homepage {
