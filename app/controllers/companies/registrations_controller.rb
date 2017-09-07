@@ -13,6 +13,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    @services = params["service_category"]
     @service_categories = ServiceCategory.all
     super
   end

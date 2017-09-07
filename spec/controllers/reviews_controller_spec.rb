@@ -24,6 +24,8 @@ RSpec.describe ReviewsController, type: :controller do
 
   describe 'GET #new' do
     it 'assigns a new instance of review to @review' do
+      sign_in create(:customer)
+      company = create(:company)
       get :new
       expect(assigns(:review)).to be_a_new(Review)
     end
