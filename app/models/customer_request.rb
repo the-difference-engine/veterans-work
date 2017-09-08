@@ -23,8 +23,9 @@
 class CustomerRequest < ApplicationRecord
   belongs_to :service_category
   belongs_to :customer
-  
-  has_many :contracts
+
+  has_one :contract
+
   has_many :quotes
 
   geocoded_by :full_street_address
