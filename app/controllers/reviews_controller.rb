@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    @companies = current_customer.contracts.map{|contract| contract.quote.company}.uniq
     @review = Review.new
     render 'new.html.erb'
   end

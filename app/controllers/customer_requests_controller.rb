@@ -63,12 +63,23 @@ class CustomerRequestsController < ApplicationController
   end
 
   def destroy
+    unless @customer_request.contract
+      if @customer_request.destroy
+        flash[:success] = "#{@customer_request.description} has been successfully cancelled"
+        redirect_to '/customer_requests'
+      else
+        flash[:notice] = 'Something went wrong, please try again.'
+        render :edit
+      end
+    else
+      flash[:notice] = 'This request is under contract and cannot be cancelled'
+      render :edit
+    end
   end
 
   private
 
   def customer_request_params
-
     params.require(:customer_request).permit(
       :address,
       :city,
@@ -82,7 +93,6 @@ class CustomerRequestsController < ApplicationController
 
   def validate_customer_request!
     @customer_request = CustomerRequest.find(params[:id])
-
     unless @customer_request.customer == current_customer || (
         current_company.eligible_customer_requests.include?(
           @customer_request
