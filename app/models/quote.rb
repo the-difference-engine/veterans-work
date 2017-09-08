@@ -23,6 +23,11 @@ class Quote < ApplicationRecord
   has_many :contracts
 
   validates_uniqueness_of :company_id, scope: :customer_request_id
+  validates :materials_cost_estimate, presence: true
+  validates :labor_cost_estimate, presence: true
+  validates :completion_date_estimate, presence: true
+  validates :start_date, presence: true
+  validates :notes, presence: true
 
   def total_cost_estimate
     materials_cost_estimate + labor_cost_estimate

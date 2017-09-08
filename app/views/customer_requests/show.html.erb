@@ -1,4 +1,4 @@
-<% if @request.contracts.any? %>
+<% if @request.contract %>
   <h2><%= @request.customer.email %> needs ...</h2>
   <div>
     <p><%= @request.description %></p>
@@ -16,5 +16,11 @@
     <p>State: <%= @request.state %></p>
     <p>Zipcode: <%= @request.zipcode %></p>
   </div>
-  <%= link_to "New Quote", "/quotes/new?customer_request_id=#{@request.id}" if current_company %>
+  <% if current_company %>
+    <%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
+  <% end %>
+<% end %>
+<% if current_customer %>
+  <%= link_to 'Cancel Request', customer_request_path(@request),
+    data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger' %>
 <% end %>

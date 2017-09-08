@@ -26,6 +26,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
             <li><a href="/how">How It Works</a></li>
             <li><a href="/about">About</a></li>
           </ul>
@@ -69,8 +70,12 @@
             </ul>
           <% else %>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Customer Sign Up", "/customers/sign_up" %></li>
-              <li><%= link_to "Company Sign Up", "/companies/sign_up" %></li>
+
+              <li class='right-nav'><a>Not Registered?</a></li>
+              <li class='right-nav'><a href='/customers/sign_up' id='sign-up'>Sign-Up</a></li>
+              <li><a href='/customers/sign_in'><button>Sign-In</button></a></li>
+              <!-- <li><!%= link_to "Customer Sign Up", "/customers/sign_up" %></li> -->
+              <!-- <li><!%= link_to "Company Sign Up", "/companies/sign_up" %></li> -->
             </ul>
           <% end %>
         </div><!-- /.navbar-collapse -->
@@ -87,20 +92,29 @@
           <p class="notice"><%= notice || alert %></p>
         </div>
       <% end %>
-      <%= javascript_pack_tag 'hello_react' %>
+      <!-- <!%= javascript_pack_tag 'hello_react' %> -->
       <%= yield %>
     </div>
-    <div class="footer navbar-fixed-bottom">
+    <div class="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="row">
-              <div class="col-xs-2"><%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'national_gaurd.png', alt: "national gaurd logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %></div>
-              <div class="col-xs-2"><%= image_tag 'coast_gaurd.png', alt: "coast gaurd logo", class: "small-military-logo" %></div>
+            <div class="col-sm-12" id="MilitaryLogoContainer">
+              <%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %>
+              <%= image_tag 'national_guard.png', alt: "national guard logo", class: "small-military-logo" %>
+              <%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %>
+              <%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %>
+              <%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %>
+              <%= image_tag 'coast_guard.png', alt: "coast guard logo", class: "small-military-logo" %>
+            </div>
+            <p>© Veterans Work All Rights Reserved</p>
+              <!-- <div class="col-xs-2"><!%= image_tag 'air_force.png', alt: "airforce logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'national_guard.png', alt: "national guard logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'marines.png', alt: "marines logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'navy.png', alt: "navy logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'army.png', alt: "army logo", class: "small-military-logo" %></div>
+              <div class="col-xs-2"><!%= image_tag 'coast_guard.png', alt: "coast guard logo", class: "small-military-logo" %></div> -->
             </div>
           </div>
         </div>
