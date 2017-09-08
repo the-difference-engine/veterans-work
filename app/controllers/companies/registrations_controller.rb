@@ -7,14 +7,14 @@ class Companies::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @services = []
+    @selected_service_categories = []
     @service_categories = ServiceCategory.all
     super
   end
 
   # POST /resource
   def create
-    @services = params["service_category"]
+    @selected_service_categories = params["service_category"]
     @service_categories = ServiceCategory.all
     super
   end
