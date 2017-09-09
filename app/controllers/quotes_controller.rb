@@ -94,8 +94,4 @@ class QuotesController < ApplicationController
   def has_fewer_than_3_siblings?(quote)
     quote.customer_request.quotes.count < 3
   end
-
-  def company_has_available_credits?
-    current_company.has_credit?
-  end
 end
