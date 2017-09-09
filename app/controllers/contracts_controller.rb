@@ -1,12 +1,23 @@
 class ContractsController < ApplicationController
 
   def index
+    contracts = []
+    @active_contracts = []
+    @completed_contracts = []
     if current_customer && current_customer.contracts.any?
-      @contracts = current_customer.contracts
+      contracts = current_customer.contracts
     elsif current_company && current_company.contracts.any?
-      @contracts = current_company.contracts
+      contracts = current_company.contracts
     else
       redirect_to '/'
+    end
+    if contracts.any?
+      @completed_contracts = contracts.select do |contract|
+        contract.completion_date.present?
+      end
+      @active_contracts = contracts.select do |contract|
+        contract.completion_date.nil?
+      end
     end
   end
 
