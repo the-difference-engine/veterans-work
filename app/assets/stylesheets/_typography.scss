@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Allerta+Stencil');
 @import url('https://fonts.googleapis.com/css?family=Allerta');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 @import "colors";
 
-$title-font: Allerta Stencil, sans-serif;
-$body-font: Allerta, sans-serif;
+
+$title-font: Lato, sans-serif;
+$body-font: Lato, sans-serif;
+
+$h1: 76px Lato;
+$h2: bold 40px Lato;
+$h3: 36px Lato;
+$h4: 24px Lato;
+$h5: 20px Lato;
+$h6: 16px Lato;
+$button: bold 16px Lato;
 
 h1,h2,h3,h4,h5,h6 {
   font-family: $title-font;
-  color: $wet-concrete;
+  color: $white;
 }
 
 p, a {

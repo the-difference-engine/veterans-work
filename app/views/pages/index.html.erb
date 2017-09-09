@@ -1,48 +1,60 @@
-<div class="jumbotron">
+
+<div id="home-header">
   <h1 class="home-title">Veterans Work</h1>
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8 ">
-        <p id="jumbotron-message">For our beloved veterans in the skilled trades, work opportunities can sometimes be hard to come by. Veterans Work's mission is to connect customers in need with hard working, dedicated veterans who are qualified and ready.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div>
-          <%= link_to "Customer Sign In", "/customers/sign_in", class: "btn btn-success btn-lg" %>
-        </div>
-        <p>Customers can post work requests and receive competitive bids from veterans and veteran-owned companies.</p>
-      </div>
-      <div class="col-md-6">
-        <div>
-          <%= link_to "Company Sign In", "/companies/sign_in", class: "btn btn-success btn-lg" %>
-        </div>
-        <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
-      </div>
-    </div>
-    <%= link_to "administrator login", "/admins/sign_in" %>
+  <h3>Connect Customers in Need with Veterans in Skilled Trades</h3>
+
+  <div class="icons">
+    <ul>
+      <li class="col-sm-2 col-sm-offset-1">
+        <h4>Paint</h4>
+        <%= image_tag 'paint_icon.png', alt: "Paint icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Plumbing</h4>
+        <%= image_tag 'plumbing_icon.png', alt: "plumbing icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Carpentry</h4>
+        <%= image_tag 'carpentry_icon.png', alt: "carpentry icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Mechanical</h4>
+        <%= image_tag 'mechanical_icon.png', alt: "mechanical icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Electrical</h4>
+        <%= image_tag 'electrical_icon.png', alt: "electrical icon", class: "work-icon img-responsive" %>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<div class="jumbotron help">
-  <h2>What do you need help with?</h2>
-</div>
+<div id="home-content">
+  <div id="service-search" class="row">
+    <h4 class="col-xs-12">Find a Service</h4>
+    <%= form_tag do %>
+      <%= text_field_tag "TBD", nil, placeholder: "What service do you need?", class: "service-text-box col-md-8 col-sm-12" %>
+      <%= submit_tag "Get Started", class: "button col-sm-3 " %>
+    <% end %>
+  </div>
 
-<div class="jumbotron how">
-  <h2>How It Works</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <p>Text would go here</p>
-      </div>
-      <div class="col-md-6">
-        <p>More text would go here</p>
+  <div class="row home-info">
+    <div class=" home-about col-lg-5 col-lg-offset-1">
+      <h2>About Veterans Work</h2>
+      <p> Work opportunities can sometimes be hard to come by for our beloved veterans in skilled trades. Veterans Work's mission is to connect customers in need with hard-working, dedicated veterans who are qualified and ready to work.</p>
+    </div>
+    <div class="vet-sign-in col-lg-4 col-lg-offset-1">
+      <h4>Veterans Sign-In</h4>
+      <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
+      <div class="row">
+        <a href="/companies/sign_in">
+          <button class="button col-lg-3 col-lg-offset-2">Sign-In</button>
+        </a>
+        <p class="sign-up col-lg-7">Not registered?
+          <a href="/companies/sign_up">Sign-Up</a>
+        </p>
       </div>
     </div>
+  </div>
 </div>
 
-<div class="jumbotron about">
-  <h2>About</h2>
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8 ">
-        <p id="jumbotron-message">Text would go here.</p>
-      </div>
-    </div>
-</div>
