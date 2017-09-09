@@ -73,8 +73,6 @@ RSpec.configure do |config|
   # Use color not only in STDOUT but also in pagers and files
   config.tty = true
 
-  # Use the specified formatter
-  config.formatter = :documentation
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
