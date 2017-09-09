@@ -53,10 +53,10 @@ RSpec.describe CustomerRequestsController, type: :controller do
           status: 'Active',
           latitude: 41.9013087,
           longitude: -87.68276759999999,
-          service_radius: 1.0
+          service_radius: 100.0
         )
         sign_in company
-        company_service = create(:company_service,
+        create(:company_service,
           service_category_id: service_category.id,
           company_id: company.id
         )
@@ -66,7 +66,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
           service_category_id: service_category.id,
           expires_date: Date.today + 2
         )
-        customer_request_3 = create(:customer_request,
+        create(:customer_request,
           latitude: 41.9013087,
           longitude: -87.68276759999999,
           service_category_id: service_category.id,
@@ -212,13 +212,18 @@ RSpec.describe CustomerRequestsController, type: :controller do
     it 'assigns all the service categories to @service_categories' do
       customer = create :customer
       sign_in customer
-      customer_request = create(:customer_request, customer: customer)
-      ServiceCategory.destroy_all
-      sc1 = create :service_category
-      sc2 = create :service_category
-      sc3 = create :service_category
-      put :update, params: { id: customer_request.id, customer_request: { id: customer_request.id } }
-      expect(assigns(:categories)).to match_array([sc1, sc2, sc3])
+      customer_request = create(
+        :customer_request,
+        customer: customer,
+      )
+      service_category = create :service_category
+      put :update, params: {
+        id: customer_request.id,
+        customer_request: { id: customer_request.id }
+      }
+      expect(assigns(:categories)).to match_array(
+        [service_category, customer_request.service_category]
+      )
     end
 
     context 'with valid attributes' do
