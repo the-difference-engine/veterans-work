@@ -36,8 +36,6 @@ gem 'paperclip', '~> 5.0.0'
 gem 'aws-sdk', '~> 2.3'
 gem 'area'
 gem 'devise', '~> 4.3.0'
-gem 'cancancan', '~> 1.15.0'
-gem 'rolify', '~> 5.1.0'
 gem 'geocoder', '~> 1.4.3'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'

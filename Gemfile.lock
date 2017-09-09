@@ -68,7 +68,6 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
-    cancancan (1.15.0)
     capybara (2.14.4)
       addressable
       mime-types (>= 1.16)
@@ -220,7 +219,6 @@ GEM
     roadie (3.2.2)
       css_parser (~> 1.4)
       nokogiri (~> 1.5)
-    rolify (5.1.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -316,7 +314,6 @@ DEPENDENCIES
   aws-sdk (~> 2.3)
   bootstrap-sass (~> 3.3.6)
   byebug
-  cancancan (~> 1.15.0)
   capybara (~> 2.14.4)
   coffee-rails (~> 4.2)
   database_cleaner
@@ -339,7 +336,6 @@ DEPENDENCIES
   rake (~> 11.3.0)
   react-rails
   roadie
-  rolify (~> 5.1.0)
   rspec-rails (~> 3.5.2)
   rubocop (~> 0.47.1)
   sass-rails (~> 5.0)
