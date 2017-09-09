@@ -2,40 +2,46 @@ class QuotesController < ApplicationController
   def index
     if current_customer
       if params[:request_id]
-        @customer_requests = CustomerRequest.where("id = ?", params[:request_id]).where("expires_date >= ?", Date.today())
+        @customer_requests = CustomerRequest.where('id = ?', params[:request_id]).where('expires_date >= ?', Date.today())
       else
-        @customer_requests = current_customer.customer_requests.where("expires_date >= ?", Date.today())
+        @customer_requests = current_customer.customer_requests.where('expires_date >= ?', Date.today())
       end
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
     elsif current_company
-      @open_quotes = current_company.open_quotes.order("start_date")
+      @open_quotes = current_company.open_quotes.order('start_date')
       @accepted_quotes = current_company.accepted_quotes
     else
-      redirect_to "/"
+      redirect_to '/'
     end
   end
 
   def new
     @quote = Quote.new
     @quote.customer_request_id = params[:customer_request_id]
-    render "new.html.erb"
+    render 'new.html.erb'
   end
 
   def create
-    @quote = Quote.new(quote_params)
-    sanitize_blank_costs(@quote)
-    if has_fewer_than_3_siblings?(@quote)
-      if @quote.save
-        flash[:notice] = "New Quote created successfully!"
-        redirect_to '/customer_requests'
+    if current_company.has_credit?
+      @quote = Quote.new(quote_params)
+      sanitize_blank_costs(@quote)
+      if has_fewer_than_3_siblings?(@quote)
+        if @quote.save
+          current_company.decrement!(:credits, 1)
+          flash[:notice] = 'New Quote created successfully!'
+          redirect_to '/customer_requests'
+        else
+          flash[:notice] = "Sorry, the quote did not save. Please try again. #{@quote.errors.full_messages.join(', ')}."
+          render 'new.html.erb'
+        end
       else
-        flash[:notice] = "Sorry, the quote did not save. Please try again. #{@quote.errors.full_messages.join(', ')}."
-        render "new.html.erb"
+        flash[:notice] = 'Sorry, this Customer Request has already recieved its max number of quotes.'
+        render 'new.html.erb'
       end
     else
-      flash[:notice] = "Sorry, this Customer Request has already recieved its max number of quotes."
-      render 'new.html.erb'
+      flash[:notiece] = 'Sorry, you don\'t have an available credit with which to bid on this customer request.'
+      redirect_to '/orders/new'
     end
   end
 
@@ -86,8 +92,10 @@ class QuotesController < ApplicationController
   end
 
   def has_fewer_than_3_siblings?(quote)
-    if quote.customer_request.quotes.count < 3
-      return true
-    end
+    quote.customer_request.quotes.count < 3
+  end
+
+  def company_has_available_credits?
+    current_company.has_credit?
   end
 end
