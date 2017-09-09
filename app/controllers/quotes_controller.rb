@@ -40,7 +40,7 @@ class QuotesController < ApplicationController
         render 'new.html.erb'
       end
     else
-      flash[:notiece] = 'Sorry, you don\'t have an available credit with which to bid on this customer request.'
+      flash[:notice] = 'Sorry, you don\'t have an available credit with which to bid on this customer request.'
       redirect_to '/orders/new'
     end
   end
