@@ -113,9 +113,18 @@ RSpec.describe QuotesController, type: :controller do
 
   describe 'GET #new' do
     it 'renders a new form' do
-      sign_in create(:company)
+      company = create(:company)
+      sign_in company
+      order = create(:order, company_id: company.id)
+      credit = create(:credit, order_id: order.id)
       get :new
       expect(response).to render_template("new.html.erb")
+    end
+
+    it "is invalid if company does not have any tokens" do
+      sign_in create(:company)
+      get :new
+      expect(response).to redirect_to('/')
     end
   end
 
@@ -126,6 +135,12 @@ RSpec.describe QuotesController, type: :controller do
       @company_two = create(:company)
       @company_three = create(:company)
       sign_in @company_one
+      @order_one = create(:order, company_id: @company_one.id)
+      @order_two = create(:order, company_id: @company_two.id)
+      @order_three = create(:order, company_id: @company_three.id)
+      @credit_one = create(:credit, order_id: @order_one.id)
+      @credit_two = create(:credit, order_id: @order_two.id)
+      @credit_three = create(:credit, order_id: @order_three.id)
     end
 
     it 'does not create a new quote if 3 quotes already exist' do

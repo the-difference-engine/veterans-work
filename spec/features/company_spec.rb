@@ -38,6 +38,8 @@ end
 RSpec.describe 'company creates quote', :type => :feature do
   before :each do
     @company = create :company, email: 'user@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
+    @order = create :order, company_id: @company.id
+    @credit = create :credit, order_id: @order.id
     @service_category = create :service_category, name: 'Paint'
     @company_service = create :company_service, service_category_id: @service_category.id, company_id: @company.id
     @customer = create :customer, email: 'customer@example.com', password: 'password'
