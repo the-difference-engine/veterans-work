@@ -24,29 +24,37 @@ RSpec.describe ContractsController, type: :controller do
         expect(response).to render_template("index")
       end
 
-      it 'assigns the expected active_contracts to current_customer' do
+      it 'assigns the expected active contracts to @active_contracts' do
         customer = create(:customer)
         sign_in customer
         customer_request = create(:customer_request, customer: customer)
-        contract = create(:contract, customer_request: customer_request
+        contract = create(
+          :contract,
+          customer_request: customer_request,
+          completion_date: nil
         )
         get :index
         expect(assigns(:active_contracts)).to match_array([contract])
       end
 
-      it 'assigns the expected contract to current_company' do
+    end
+
+    context 'when current_company is logged in' do
+      it 'assigns the expected active contracts to @active_contracts' do
         company = create(:company)
         sign_in company
         customer_request = create(:customer_request)
         quote = create(:quote, customer_request_id: customer_request.id, company_id: company.id)
-        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id
+        contract = create(
+          :contract,
+          customer_request_id: customer_request.id,
+          quote_id: quote.id,
+          completion_date: nil
         )
         get :index
-        expect(assigns(:contracts)).to match_array([contract])
+        expect(assigns(:active_contracts)).to match_array([contract])
       end
-    end
 
-    context 'when current_company is logged in' do
       it 'renders the index html showing contracts of the signed in company' do
         customer = create(:customer)
         company = create(:company)
