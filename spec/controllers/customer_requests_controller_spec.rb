@@ -212,13 +212,18 @@ RSpec.describe CustomerRequestsController, type: :controller do
     it 'assigns all the service categories to @service_categories' do
       customer = create :customer
       sign_in customer
-      customer_request = create(:customer_request, customer: customer)
-      ServiceCategory.destroy_all
-      sc1 = create :service_category
-      sc2 = create :service_category
-      sc3 = create :service_category
-      put :update, params: { id: customer_request.id, customer_request: { id: customer_request.id } }
-      expect(assigns(:categories)).to match_array([sc1, sc2, sc3])
+      customer_request = create(
+        :customer_request,
+        customer: customer,
+      )
+      service_category = create :service_category
+      put :update, params: {
+        id: customer_request.id,
+        customer_request: { id: customer_request.id }
+      }
+      expect(assigns(:categories)).to match_array(
+        [service_category, customer_request.service_category]
+      )
     end
 
     context 'with valid attributes' do
