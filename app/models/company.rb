@@ -27,9 +27,21 @@
 #  state                  :string
 #  service_radius         :float
 #  status                 :string           default("Pending")
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  companies_file_name    :string
+#  companies_content_type :string
+#  companies_file_size    :integer
+#  companies_updated_at   :datetime
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
 # Indexes
 #
+#  index_companies_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_companies_on_email                 (email) UNIQUE
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
