@@ -125,7 +125,7 @@ RSpec.describe CompaniesController, type: :controller do
     end
 
     context 'customer with a contract linking to company' do
-      before :each do 
+      before :each do
         customer = create :customer
         sign_in customer
         @company = create :company
