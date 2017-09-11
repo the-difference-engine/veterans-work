@@ -12,6 +12,8 @@
 
 FactoryGirl.define do
   factory :contract do
-    
+    quote
+    customer_request
+    completion_date Date.new
   end
 end

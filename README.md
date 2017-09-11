@@ -49,7 +49,7 @@ To interact with the app's mailers, you need to run **Mailcatcher** in tandem wi
 
 This will spin up an inbound mailbox app that you can interact with by opening `localhost:1080` in your browser.
 
-### Deployment Guide
+## Deployment Guide
 
 As discussed in our first meeting, we will follow a strict protocol for pull requests and deployments. Overall, Veterans Work will be **deployed** in three environments:
 

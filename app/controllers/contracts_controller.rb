@@ -1,6 +1,9 @@
 class ContractsController < ApplicationController
 
   def index
+    contracts = []
+    @active_contracts = []
+    @completed_contracts = []
     if current_customer && current_customer.contracts.any?
       contracts = current_customer.contracts
     elsif current_company && current_company.contracts.any?
@@ -8,8 +11,14 @@ class ContractsController < ApplicationController
     else
       redirect_to '/'
     end
-    @completed_contracts = get_contracts_by_status(contracts, :complete)
-    @active_contracts = get_contracts_by_status(contracts, :active)
+    if contracts.any?
+      @completed_contracts = contracts.select do |contract|
+        contract.completion_date.present?
+      end
+      @active_contracts = contracts.select do |contract|
+        contract.completion_date.nil?
+      end
+    end
   end
 
   def create
@@ -46,16 +55,5 @@ class ContractsController < ApplicationController
     else
       redirect_to '/'
     end
-  end
-
-  private
-
-  def get_contracts_by_status(contracts, status)
-    if status == :active
-      contracts = contracts.select { |contract| contract.completion_date.nil? }
-    elsif status == :complete
-      contracts = contracts.select { |contract| contract.completion_date.present? }
-    end
-    contracts
   end
 end

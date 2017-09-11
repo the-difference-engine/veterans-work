@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829010958) do
+ActiveRecord::Schema.define(version: 20170909214141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,17 +68,10 @@ ActiveRecord::Schema.define(version: 20170829010958) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer "credits", default: 0
     t.index ["confirmation_token"], name: "index_companies_on_confirmation_token", unique: true
     t.index ["email"], name: "index_companies_on_email", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
-  end
-
-  create_table "companies_roles", id: false, force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "role_id"
-    t.index ["company_id", "role_id"], name: "index_companies_roles_on_company_id_and_role_id"
-    t.index ["company_id"], name: "index_companies_roles_on_company_id"
-    t.index ["role_id"], name: "index_companies_roles_on_role_id"
   end
 
   create_table "company_services", id: :serial, force: :cascade do |t|
@@ -133,6 +126,13 @@ ActiveRecord::Schema.define(version: 20170829010958) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quotes", id: :serial, force: :cascade do |t|
     t.integer "customer_request_id"
     t.integer "company_id"
@@ -154,17 +154,6 @@ ActiveRecord::Schema.define(version: 20170829010958) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "roles", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.integer "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["name"], name: "index_roles_on_name"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
   create_table "service_categories", id: :serial, force: :cascade do |t|

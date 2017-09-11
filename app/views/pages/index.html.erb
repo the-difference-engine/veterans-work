@@ -2,6 +2,7 @@
 <div id="home-header">
   <h1 class="home-title">Veterans Work</h1>
   <h3>Connect Customers in Need with Veterans in Skilled Trades</h3>
+<<<<<<< HEAD
 
   <div class="icons">
     <ul>
@@ -39,6 +40,44 @@
     <% end %>
   </div>
 
+=======
+
+  <div class="icons">
+    <ul>
+      <li class="col-sm-2 col-sm-offset-1">
+        <h4>Paint</h4>
+        <%= image_tag 'paint_icon.png', alt: "Paint icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Plumbing</h4>
+        <%= image_tag 'plumbing_icon.png', alt: "plumbing icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Carpentry</h4>
+        <%= image_tag 'carpentry_icon.png', alt: "carpentry icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Mechanical</h4>
+        <%= image_tag 'mechanical_icon.png', alt: "mechanical icon", class: "work-icon img-responsive" %>
+      </li>
+      <li class="col-sm-2">
+        <h4>Electrical</h4>
+        <%= image_tag 'electrical_icon.png', alt: "electrical icon", class: "work-icon img-responsive" %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="home-content">
+  <div id="service-search" class="row">
+    <h4 class="col-xs-12">Find a Service</h4>
+    <%= form_tag do %>
+      <%= text_field_tag "TBD", nil, placeholder: "What service do you need?", class: "service-text-box col-md-8 col-sm-12" %>
+      <%= submit_tag "Get Started", class: "button col-sm-3 " %>
+    <% end %>
+  </div>
+
+>>>>>>> 61112712af7c29b9387abd62910ce2d81d5c55e4
   <div class="row home-info">
     <div class=" home-about col-lg-5 col-lg-offset-1">
       <h2>About Veterans Work</h2>
@@ -48,8 +87,17 @@
       <h4>Veterans Sign-In</h4>
       <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
       <div class="row">
+<<<<<<< HEAD
         <a href="/companies/sign_in"><button class="button col-lg-3 col-lg-offset-2">Sign-In</button></a>
         <p class="sign-up col-lg-7">Not registered? <a href="/companies/sign_up">Sign-Up</a></p>
+=======
+        <a href="/companies/sign_in">
+          <button class="button col-lg-3 col-lg-offset-2">Sign-In</button>
+        </a>
+        <p class="sign-up col-lg-7">Not registered?
+          <a href="/companies/sign_up">Sign-Up</a>
+        </p>
+>>>>>>> 61112712af7c29b9387abd62910ce2d81d5c55e4
       </div>
     </div>
   </div>

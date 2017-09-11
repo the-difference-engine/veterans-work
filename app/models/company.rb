@@ -38,46 +38,11 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  credits                :integer
 #
 # Indexes
 #
 #  index_companies_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_companies_on_email                 (email) UNIQUE
-#  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
-#
-
-  # == Schema Information
-#
-# Table name: companies
-#
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  name                   :string
-#  zip_code               :string
-#  phone                  :string
-#  description            :text
-#  url                    :string
-#  latitude               :float
-#  longitude              :float
-#  address                :string
-#  city                   :string
-#  state                  :string
-#  service_radius         :float
-#  status                 :string           default("Pending")
-#
-# Indexes
-#
 #  index_companies_on_email                 (email) UNIQUE
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -96,7 +61,6 @@ class Company < ApplicationRecord
     :state,
     :status
   ]
-  rolify
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -108,15 +72,14 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
   has_many :contracts, through: :quotes
+  has_many :orders
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :name, uniqueness: true
-  validates :address, presence: true
-  validates :city, presence: true
+  validates :address, :city, :description, presence: true
   validates :state, presence: true, length: { is: 2 }
-  validates :description, presence: true
   validates :service_radius, presence: true, numericality: true
   validates :phone, presence: true,
                     numericality: true,
@@ -147,10 +110,18 @@ class Company < ApplicationRecord
     quotes.where(accepted: true)
   end
 
+  def star_avg
+    stars = reviews.pluck(:stars)
+    stars.reduce(:+).to_f/stars.size
+  end
+
+  def has_credit?
+    credits > 0
+  end
+
   private
 
   def full_street_address
     "#{address}, #{city}, #{state}, #{zip_code}"
   end
-
 end
