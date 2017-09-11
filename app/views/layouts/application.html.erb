@@ -47,11 +47,12 @@
                 <ul class="dropdown-menu">
                   <% if current_customer %>
                     <li><a href="/customers/edit">Edit My Profile</a></li>
-                    <li><a href="/reviews/new">Leave Review</a></li>
                     <li><a href="/quotes">View Quotes</a></li>
+                    <li><a href="/contracts">View Contracts</a></li>
                   <% elsif current_company %>
                     <li><a href="/companies/<%=current_company.id%>">Profile</a></li>
                     <li><a href="/companies/edit">Edit My Profile</a></li>
+                    <li><a href="/contracts">View Contracts</a></li>
                   <% elsif current_admin %>
                     <li><a href="/pages/">Home Page</a></li>
                     <li><a href="/credits/">Credits</a></li>
