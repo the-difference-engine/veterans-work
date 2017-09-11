@@ -38,6 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  credits                :integer
 #
 # Indexes
 #
@@ -71,6 +72,7 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
   has_many :contracts, through: :quotes
+  has_many :orders
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
@@ -111,6 +113,10 @@ class Company < ApplicationRecord
   def star_avg
     stars = reviews.pluck(:stars)
     stars.reduce(:+).to_f/stars.size
+  end
+
+  def has_credit?
+    credits > 0
   end
 
   private

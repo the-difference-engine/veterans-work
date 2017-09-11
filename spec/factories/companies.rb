@@ -38,6 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  credits                :integer
 #
 # Indexes
 #
@@ -60,5 +61,10 @@ FactoryGirl.define do
     url Faker::Internet.url('example.com', '/foobar.html')
     service_radius 35
     description Faker::Lorem.paragraph
+    credits 10
+  end
+
+  trait :without_credits do
+    credits 0
   end
 end
