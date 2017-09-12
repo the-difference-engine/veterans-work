@@ -23,7 +23,6 @@ class QuotesController < ApplicationController
   end
 
   def create
-    binding.pry
     if current_company.has_credit?
       @quote = Quote.new(quote_params)
       sanitize_blank_costs(@quote)
