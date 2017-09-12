@@ -38,7 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  credits                :integer
+#  credits                :integer          default(0)
 #
 # Indexes
 #
@@ -111,8 +111,12 @@ class Company < ApplicationRecord
   end
 
   def star_avg
-    stars = reviews.pluck(:stars)
-    stars.reduce(:+).to_f/stars.size
+    if reviews.count > 0 
+      stars = reviews.pluck(:stars)
+      (stars.reduce(:+).to_f/stars.size).round
+    else
+      0.0
+    end
   end
 
   def has_credit?
