@@ -75,6 +75,7 @@ group :test do
   gem 'capybara', '~> 2.14.4'
   gem 'rake', '~> 11.3.0'
   gem 'database_cleaner'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

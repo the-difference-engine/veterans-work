@@ -54,10 +54,10 @@ FactoryGirl.define do
     sequence(:name) {|n| "company #{n}"}
     phone "1234567890"
     confirmed_at Time.now
-    address Faker::Address.street_address
-    city Faker::Address.city
-    state Faker::Address.state_abbr
-    zip_code Faker::Address.zip_code
+    address '301 N Michigan Ave'
+    city 'Chicago'
+    state 'IL'
+    zip_code '60601'
     url Faker::Internet.url('example.com', '/foobar.html')
     service_radius 35
     description Faker::Lorem.paragraph

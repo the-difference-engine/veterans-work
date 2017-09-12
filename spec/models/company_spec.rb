@@ -51,7 +51,7 @@ require 'rails_helper'
 
 COMPANY_ADDRESS_DETAILS = {
   address: '2515 W FLETCHER',
-  city: 'CHIACGO',
+  city: 'CHICAGO',
   state: 'IL',
   zip_code: '60618'
 }
@@ -86,16 +86,16 @@ RSpec.describe Company, type: :model do
   end
 
   describe '#star_avg' do
-    before :each do 
+    before :each do
       @company = create(:company)
     end
 
     it 'returns the average of company stars' do
-      create(:review, stars: 4, company_id: @company.id)     
-      create(:review, stars: 5, company_id: @company.id)      
-      create(:review, stars: 2, company_id: @company.id)     
-      create(:review, stars: 1, company_id: @company.id) 
-      expect(@company.star_avg).to eq(3.0)     
+      create(:review, stars: 4, company_id: @company.id)
+      create(:review, stars: 5, company_id: @company.id)
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      expect(@company.star_avg).to eq(3.0)
     end
 
     it 'returns an average of 2.66 stars as 3.0' do

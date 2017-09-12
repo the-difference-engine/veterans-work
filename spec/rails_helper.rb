@@ -24,6 +24,7 @@ require 'devise'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'webmock/rspec'
 require 'spec_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -46,10 +47,82 @@ require 'spec_helper'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    Geocoder.configure(:lookup => :test)
+    Geocoder::Lookup::Test.add_stub(
+      "301 N Michigan Ave, Chicago, IL, 60601", [
+        {
+          'latitude'     => 41.8869615,
+          'longitude'    => -87.6264112,
+          'address'      => '301 N Michigan Ave',
+          'state'        => 'Illinois',
+          'state_code'   => 'IL',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
+
+    Geocoder::Lookup::Test.add_stub(
+      "215 W Ohio St, Chicago, IL, 60601", [
+        {
+          'latitude'     => 41.8921404,
+          'longitude'    => -87.6370182,
+          'address'      => '215 W Ohio St',
+          'state'        => 'Illinois',
+          'state_code'   => 'IL',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
+
+    Geocoder::Lookup::Test.add_stub(
+      "2515 W FLETCHER, CHICAGO, IL, 60618", [
+        {
+          'latitude'     => 41.9385003,
+          'longitude'    => -87.6922708,
+          'address'      => '2515 W FLETCHER',
+          'state'        => 'Illinois',
+          'state_code'   => 'IL',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
+
+    Geocoder::Lookup::Test.add_stub(
+      "2600 W LAWRENCE, CHICAGO, IL, 60625", [
+        {
+          'latitude'     => 41.9687596,
+          'longitude'    => -87.6961608,
+          'address'      => '2600 W LAWRENCE',
+          'state'        => 'Illinois',
+          'state_code'   => 'IL',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
+
+    Geocoder::Lookup::Test.add_stub(
+      "14915 CHARLEVOIX ST, DETROIT, MI, 48230", [
+        {
+          'latitude'     => 42.384867,
+          'longitude'    => -82.9477555,
+          'address'      => '14915 CHARLEVOIX ST',
+          'state'        => 'Michigan',
+          'state_code'   => 'MI',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
   end
 
   config.around(:each) do |example|
@@ -57,6 +130,7 @@ RSpec.configure do |config|
       example.run
     end
   end
+
 
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
