@@ -125,6 +125,7 @@ RSpec.describe QuotesController, type: :controller do
       @company_one = create(:company)
       @company_two = create(:company)
       @company_three = create(:company)
+      @company_four = create(:company, :without_credits)
       sign_in @company_one
     end
 
@@ -150,6 +151,18 @@ RSpec.describe QuotesController, type: :controller do
           customer_request_id: @customer_request.id
         }
       }.to change(Quote, :count).by(0)
+    end
+
+    it 'does not create a quote if they dont have enough credits' do
+      sign_in @company_four
+
+      expect{
+        post :create, params: {
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
+          }
+      }.to change(Quote, :count).by(0)
+
     end
 
     it 'creates and saves a new company quote to the database' do
