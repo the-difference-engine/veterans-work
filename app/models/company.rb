@@ -111,8 +111,12 @@ class Company < ApplicationRecord
   end
 
   def star_avg
-    stars = reviews.pluck(:stars)
-    stars.reduce(:+).to_f/stars.size
+    if reviews.count > 0 
+      stars = reviews.pluck(:stars)
+      (stars.reduce(:+).to_f/stars.size).round
+    else
+      0.0
+    end
   end
 
   def has_credit?
