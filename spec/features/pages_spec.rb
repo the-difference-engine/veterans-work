@@ -35,16 +35,16 @@ end
 
 RSpec.describe "Clicking content links on splash page", :type => :feature do
 
-  # it 'goes to the Company Sign-in page' do
-  #   visit '/'
-  #   page.find('#company-sign-in').click
-  #   expect(page).to have_content 'Company Sign In'
-  # end
+  it 'goes to the Company Sign-in page' do
+    visit '/'
+    page.find('#company-sign-in').click
+    expect(page).to have_content 'Company Sign In'
+  end
 
-  # it 'goes to the Company Sign-up page' do
-  #   visit '/'
-  #   page.find('#company-sign-up').click
-  #   expect(page).to have_content 'Company Sign Up'
-  # end
+  it 'goes to the Company Sign-up page' do
+    visit '/'
+    page.find('#company-sign-up').click
+    expect(page).to have_content 'Company Registration'
+  end
 
 end
