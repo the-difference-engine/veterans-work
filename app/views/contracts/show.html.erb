@@ -14,7 +14,7 @@
       <tr>
         <td><%= @contract.customer_request.description %></td>
         <td><%= number_to_currency(@contract.quote.materials_cost_estimate) %></td>
-        <td><%= @contract.quote.labor_cost_estimate %></td>
+        <td><%= number_to_currency(@contract.quote.labor_cost_estimate) %></td>
         <td><%= @contract.quote.completion_date_estimate.strftime('%a, %e %b %Y') %></td>
         <td><%= @contract.quote.notes %></td>
       </tr>
