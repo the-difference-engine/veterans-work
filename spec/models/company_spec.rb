@@ -38,7 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  credits                :integer
+#  credits                :integer          default(0)
 #
 # Indexes
 #
@@ -46,6 +46,7 @@
 #  index_companies_on_email                 (email) UNIQUE
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
+
 require 'rails_helper'
 
 COMPANY_ADDRESS_DETAILS = {
