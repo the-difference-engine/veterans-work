@@ -174,6 +174,15 @@ RSpec.describe QuotesController, type: :controller do
       }.to change(Quote, :count).by(1)
     end
 
+    it 'lowers the company credits after creating quote' do
+       post :create, params: {
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
+        }
+
+        expect(@company_one.credits).to eq(9)
+    end
+
     it 'replaces blank values in any cost field with 0' do
       post :create, params: {
         quote: attributes_for(:quote, :blank_costs),
