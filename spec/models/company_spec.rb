@@ -38,7 +38,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
-#  credits                :integer
+#  credits                :integer          default(0)
 #
 # Indexes
 #
@@ -47,44 +47,80 @@
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
+require 'rails_helper'
+
 COMPANY_ADDRESS_DETAILS = {
-  address: "2515 W FLETCHER",
-  city: "CHIACGO",
-  state: "IL",
-  zip_code: "60618"
+  address: '2515 W FLETCHER',
+  city: 'CHIACGO',
+  state: 'IL',
+  zip_code: '60618'
 }
 
 CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS = {
-  address: "2600 W LAWRENCE",
-  city: "CHICAGO",
-  state: "IL",
-  zipcode: "60625"
+  address: '2600 W LAWRENCE',
+  city: 'CHICAGO',
+  state: 'IL',
+  zipcode: '60625'
 }
 
 FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS = {
-  address: "14915 CHARLEVOIX ST",
-  city: "DETROIT",
-  state: "MI",
-  zipcode: "48230"
+  address: '14915 CHARLEVOIX ST',
+  city: 'DETROIT',
+  state: 'MI',
+  zipcode: '48230'
 }
 
 RSpec.describe Company, type: :model do
 
-  describe "validations" do
-    it "has a valid factory" do
+  describe 'validations' do
+    it 'has a valid factory' do
       expect(FactoryGirl.build(:company)).to be_valid
     end
   end
 
-  describe "#shorten_zip_code" do
-    it "returns the first 5 characters of a zip_code" do
-      company = build(:company, zip_code: "12345-6789")
-      expect(company.shorten_zip_code).to eq("12345")
+  describe '#shorten_zip_code' do
+    it 'returns the first 5 characters of a zip_code' do
+      company = build(:company, zip_code: '12345-6789')
+      expect(company.shorten_zip_code).to eq('12345')
     end
   end
 
-  describe "#eligible_customer_requests" do
-    it "doesn't return expired customer requests" do
+  describe '#star_avg' do
+    before :each do 
+      @company = create(:company)
+    end
+
+    it 'returns the average of company stars' do
+      create(:review, stars: 4, company_id: @company.id)     
+      create(:review, stars: 5, company_id: @company.id)      
+      create(:review, stars: 2, company_id: @company.id)     
+      create(:review, stars: 1, company_id: @company.id) 
+      expect(@company.star_avg).to eq(3.0)     
+    end
+
+    it 'returns an average of 2.66 stars as 3.0' do
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 3, company_id: @company.id)
+      expect(@company.star_avg).to eq(3.0)
+    end
+
+    it 'returns an average of 1.4 stars as 1.0' do
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      expect(@company.star_avg).to eq(1.0)
+    end
+
+    it 'gracefully fails when a company doesnt have any reviews' do
+      company = create(:company)
+      expect(company.star_avg.nan?).to eq(false)
+    end
+  end
+
+  describe '#eligible_customer_requests' do
+    it 'doesn\'t return expired customer requests' do
       service_category = create(:service_category)
       company = create(:company,
         COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
@@ -102,7 +138,7 @@ RSpec.describe Company, type: :model do
       expect(company.eligible_customer_requests).to_not include(expired_customer_request)
     end
 
-    it "returns ONLY customer requests that are in the service radius" do
+    it 'returns ONLY customer requests that are in the service radius' do
       service_category = create(:service_category)
       company = create(:company,
         COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
