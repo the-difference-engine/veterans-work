@@ -49,12 +49,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       it 'doesn\'t assign expired customer request to @requests' do
         service_category = create(:service_category)
-        company = create(:company,
-          status: 'Active',
-          latitude: 41.9013087,
-          longitude: -87.68276759999999,
-          service_radius: 100.0
-        )
+        company = create(:company, status: 'Active')
         sign_in company
         create(:company_service,
           service_category_id: service_category.id,
@@ -235,7 +230,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
       it 'updates the values of the customer_request' do
         customer = create(:customer)
         customer_request = create(:customer_request,
-          city: 'old city',
+          address: '301 N Michigan Ave',
           description: 'old description',
           customer: customer
         )
@@ -243,12 +238,12 @@ RSpec.describe CustomerRequestsController, type: :controller do
         put :update, params: {
           id: customer_request.id,
           customer_request: {
-            city: 'new city',
+            address: '215 W Ohio St',
             description: 'new description'
           }
         }
         customer_request.reload
-        expect(customer_request.city).to eq('new city')
+        expect(customer_request.address).to eq('215 W Ohio St')
         expect(customer_request.description).to eq('new description')
       end
     end
