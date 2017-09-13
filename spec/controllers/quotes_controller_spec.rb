@@ -180,6 +180,8 @@ RSpec.describe QuotesController, type: :controller do
           customer_request_id: @customer_request.id
         }
 
+        @company_one.reload
+
         expect(@company_one.credits).to eq(9)
     end
 
