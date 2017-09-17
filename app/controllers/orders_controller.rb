@@ -56,8 +56,6 @@ class OrdersController < ApplicationController
   end
 
   def process_payment
-    ActiveMerchant::Billing::Base.mode = :test
-
     gateway = ActiveMerchant::Billing::TrustCommerceGateway.new(
       login: ENV['ACTIVE_MERCHANT_LOGIN'],
       password: ENV['ACTIVE_MERCHANT_PASSWORD']
