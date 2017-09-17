@@ -1,7 +1,26 @@
 class PaypalController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def get_access_token
+    p ENV['PAYPAL_CLIENT_ID']
+    p ENV['PAYPAL_SECRET']
+    Unirest.post(
+      'https://api.sandbox.paypal.com/v1/oauth2/token',
+      auth: {
+        user: ENV['PAYPAL_CLIENT_ID'],
+        password: ENV['PAYPAL_SECRET']
+      },
+      headers: {
+        'Content-Type' => 'application/x-www-form-urlencoded',
+      },
+      parameters: {
+        grant_type: 'client_credentials',
+      }
+    )
+  end
+
   def create_payment
+    render json: get_access_token
     response = Unirest.post 'https://api.sandbox.paypal.com/v1/payments/payment',
       headers: {
         'Accept' => 'application/json',
@@ -50,6 +69,6 @@ class PaypalController < ApplicationController
           custom: 'merchant custom data'
         }]
       }
-    render json: response
+    # render json: response
   end
 end
