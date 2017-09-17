@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      assign_credits_to_company(@order)
+      process_payment
       flash[:success] = 'Your order has been successfully processed.'
       redirect_to "/orders/#{@order.id}"
     else
@@ -34,10 +34,10 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      flash[:success] = 'Your order has been successfully updated.'
+      flash[:notice] = 'Your order has been successfully updated.'
       redirect_to "/orders/#{@order.id}"
     else
-      flash[:danger] = 'Something went wrong please submit again.'
+      flash[:notice] = 'Something went wrong please submit again.'
       render :edit
     end
   end
@@ -53,6 +53,40 @@ class OrdersController < ApplicationController
     params.require(:order).permit(
       :quantity
     ).merge(company_id: current_company.id)
+  end
+
+  def process_payment
+    ActiveMerchant::Billing::Base.mode = :test
+
+    gateway = ActiveMerchant::Billing::TrustCommerceGateway.new(
+      login: ENV['ACTIVE_MERCHANT_LOGIN'],
+      password: ENV['ACTIVE_MERCHANT_PASSWORD']
+    )
+
+    # ActiveMerchant accepts all amounts as Integer values in cents
+    amount = 500 * @order.quantity
+
+    # The card verification value is also known as CVV2, CVC2, or CID
+    credit_card = ActiveMerchant::Billing::CreditCard.new(
+                    :first_name         => 'Bob',
+                    :last_name          => 'Bobsen',
+                    :number             => '4242424242424242',
+                    :month              => '8',
+                    :year               => Time.now.year+1,
+                    :verification_value => '000')
+
+    # Validating the card automatically detects the card type
+    if credit_card.validate.empty?
+      # Capture $10 from the credit card
+      response = gateway.purchase(amount, credit_card)
+
+      if response.success?
+        assign_credits_to_company(@order)
+        puts "Successfully charged $#{sprintf("%.2f", amount / 100)} to the credit card #{credit_card.display_number}"
+      else
+        raise StandardError, response.message
+      end
+    end
   end
 
   def assign_credits_to_company(order)
