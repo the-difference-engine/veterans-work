@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
+      assign_credits_to_company(@order)
       flash[:success] = 'Your order has been successfully processed.'
       redirect_to "/orders/#{@order.id}"
     else
@@ -52,5 +53,9 @@ class OrdersController < ApplicationController
     params.require(:order).permit(
       :quantity
     ).merge(company_id: current_company.id)
+  end
+
+  def assign_credits_to_company(order)
+    order.company.increment!(:credits, order.quantity)
   end
 end

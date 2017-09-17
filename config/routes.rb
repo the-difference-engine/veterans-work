@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   resources :reviews
   resources :quotes
   resources :contracts
+  resources :orders
 end
 
