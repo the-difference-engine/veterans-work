@@ -40,7 +40,7 @@ gem 'geocoder', '~> 1.4.3'
 gem 'rubocop', '~> 0.47.1', require: false
 gem 'figaro'
 gem 'activemerchant'
-gem 'unirest'
+gem 'httparty'
 
 # pg_search allows fast seaching by any field on model
 gem 'pg_search'
