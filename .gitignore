@@ -14,7 +14,6 @@
 !/tmp/.keep
 *.rbc
 capybara-*.html
-.rspec
 /log
 /tmp
 /public/system

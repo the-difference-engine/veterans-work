@@ -14,7 +14,7 @@ RSpec.describe "the signin process", :type => :feature do
     click_button 'Log in'
     expect(page).to have_content 'Signed in successfully'
   end
-end 
+end
 
 RSpec.describe "the signout process", :type => :feature do
   before :each do
@@ -41,7 +41,7 @@ RSpec.describe 'company creates quote', :type => :feature do
     @service_category = create :service_category, name: 'Paint'
     @company_service = create :company_service, service_category_id: @service_category.id, company_id: @company.id
     @customer = create :customer, email: 'customer@example.com', password: 'password'
-    @customer_request = create :customer_request, customer_id: @customer.id, service_category_id: @service_category.id, zipcode: '60622', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
+    @customer_request = create :customer_request, customer_id: @customer.id, service_category_id: @service_category.id, zipcode: '60601', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
     visit '/companies/sign_in'
     within(".login-form") do
       fill_in 'company[email]', with: 'user@example.com'

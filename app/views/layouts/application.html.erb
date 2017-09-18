@@ -54,7 +54,7 @@
                     <li><a href="/companies/edit">Edit My Profile</a></li>
                     <li><a href="/contracts">View Contracts</a></li>
                   <% elsif current_admin %>
-                    <li><a href="/pages/">Home Page</a></li>
+                    <li><a href="/admins/">Home Page</a></li>
                     <li><a href="/credits/">Credits</a></li>
                     <li><a href="/companies/">Companies</a></li>
                     <li><a href="/admins/">Customers</a></li>
@@ -73,8 +73,8 @@
             <ul class="nav navbar-nav navbar-right">
 
               <li class='right-nav'><a>Not Registered?</a></li>
-              <li class='right-nav'><a href='/customers/sign_up' id='sign-up'>Sign-Up</a></li>
-              <li><a href='/customers/sign_in'><button>Sign-In</button></a></li>
+              <li class='right-nav'><a href='/customers/sign_up' id='customer-sign-up'>Sign-Up</a></li>
+              <li><a href='/customers/sign_in' id='customer-sign-in'><button>Sign-In</button></a></li>
               <!-- <li><!%= link_to "Customer Sign Up", "/customers/sign_up" %></li> -->
               <!-- <li><!%= link_to "Company Sign Up", "/companies/sign_up" %></li> -->
             </ul>
