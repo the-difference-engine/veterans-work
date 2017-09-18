@@ -45,7 +45,7 @@ RSpec.describe CustomersController, type: :controller do
       expect(response).to redirect_to("/")
     end
   end
-  describe 'Canelled account' do
+  describe 'Cancelled account' do
     it 'should destroy all items associated to cancelled customer' do
       customer = create(:customer)
       sign_in customer
