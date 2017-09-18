@@ -125,7 +125,6 @@ RSpec.describe QuotesController, type: :controller do
       @company_one = create(:company)
       @company_two = create(:company)
       @company_three = create(:company)
-      @company_four = create(:company, :without_credits)
       sign_in @company_one
     end
 
@@ -154,6 +153,7 @@ RSpec.describe QuotesController, type: :controller do
     end
 
     it 'does not create a quote if they dont have enough credits' do
+      @company_four = create(:company, :without_credits)
       sign_in @company_four
 
       expect{
