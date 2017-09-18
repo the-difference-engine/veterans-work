@@ -69,8 +69,8 @@ RSpec.describe ContractsController, type: :controller do
 
     context 'when current_company or current_customer is not logged in' do
       it 'redirects to the root' do
-        get :root
-        expect(response).to redirect_to("/")
+        get :index
+        expect(response).to redirect_to('/')
       end
     end
   end
