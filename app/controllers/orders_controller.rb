@@ -35,7 +35,13 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-      :quantity
+      :quantity,
+      :first_name,
+      :last_name,
+      :credit_card_number,
+      :security_code,
+      :exp_date
+
     ).merge(company_id: current_company.id)
   end
 
@@ -53,7 +59,7 @@ class OrdersController < ApplicationController
                     :first_name         => 'Bob',
                     :last_name          => 'Bobsen',
                     :number             => '4242424242424242',
-                    :month              => '8',
+                    :month              => params[:exp_date][0..1],
                     :year               => Time.now.year+1,
                     :verification_value => '000')
 
