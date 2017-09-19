@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_company!, only: [:create]
+
   def index
     if current_company
       @orders = current_company.orders
     elsif current_admin
       @orders = Order.all
+    else
+      redirect_to '/'
     end
   end
 
@@ -27,26 +31,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def edit
-    @order = Order.find(params[:id])
-  end
-
-  def update
-    @order = Order.find(params[:id])
-    if @order.update(order_params)
-      flash[:notice] = 'Your order has been successfully updated.'
-      redirect_to "/orders/#{@order.id}"
-    else
-      flash[:notice] = 'Something went wrong please submit again.'
-      render :edit
-    end
-  end
-
-  def destroy
-    Order.find(params[:id]).destroy
-    redirect_to '/orders'
-  end
-
   private
 
   def order_params
@@ -60,7 +44,6 @@ class OrdersController < ApplicationController
       login: ENV['ACTIVE_MERCHANT_LOGIN'],
       password: ENV['ACTIVE_MERCHANT_PASSWORD']
     )
-
     # ActiveMerchant accepts all amounts as Integer values in cents
     amount = 500 * @order.quantity
 
