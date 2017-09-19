@@ -109,16 +109,30 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested order to @order' do
-      order = create :order
-      get :show, params: { id: order.id }
-      expect(assigns(:order)).to eq(order)
+    context 'company signed in' do
+      before :each do
+        company = create :company
+        sign_in company
+        @order = create :order, company: company
+      end
+
+      it 'assigns the requested order to @order' do
+        get :show, params: { id: @order.id }
+        expect(assigns(:order)).to eq(@order)
+      end
+
+      it 'renders the show template' do
+        get :show, params: { id: @order.id }
+        expect(response).to render_template :show
+      end
     end
 
-    it 'renders the show template' do
-      order = create :order
-      get :show, params: { id: order.id }
-      expect(response).to render_template :show
+    context 'company not signed in' do
+      it 'redirect to root' do
+        order = create :order
+        get :show, params: { id: order.id }
+        expect(response).to redirect_to '/'
+      end
     end
   end
 end

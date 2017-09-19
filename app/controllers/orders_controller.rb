@@ -28,7 +28,12 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    order = Order.find(params[:id])
+    if order.company == current_company
+      @order = order
+    else
+      redirect_to '/'
+    end
   end
 
   private

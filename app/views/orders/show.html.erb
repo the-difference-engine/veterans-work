@@ -1,1 +1,23 @@
-<%= @order %>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2 class="panel-title">Order ID: <%= @order.id %></h2>
+      </div>
+      <div class="panel-body">
+        <p>Purchased At: <%= @order.created_at %></p>
+        <p>Quantity: <%= @order.quantity %></p>
+        <%= link_to 'back to all orders', '/orders' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="form">
+  <div class="group-form">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+</div>
