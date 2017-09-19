@@ -11,7 +11,7 @@
 
 FactoryGirl.define do
   factory :order do
-    company_id 1
+    company
     quantity 1
   end
 end

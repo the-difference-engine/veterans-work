@@ -14,6 +14,9 @@ SimpleCov.start 'rails' do
   add_filter '/lib/tasks/*'
 end
 
+require 'dotenv'
+
+Dotenv.load(".env.local")
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -48,6 +51,8 @@ require 'spec_helper'
 ActiveRecord::Migration.maintain_test_schema!
 
 WebMock.disable_net_connect!(allow_localhost: true)
+
+ActiveMerchant::Billing::Base.mode = :test
 
 RSpec.configure do |config|
   config.before(:suite) do
