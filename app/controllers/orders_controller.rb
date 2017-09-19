@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
     ).merge(company_id: current_company.id)
   end
 
+# :nocov:
   def process_payment
     gateway = ActiveMerchant::Billing::TrustCommerceGateway.new(
       login: ENV['ACTIVE_MERCHANT_LOGIN'],
@@ -73,4 +74,5 @@ class OrdersController < ApplicationController
   def assign_credits_to_company(order)
     order.company.increment!(:credits, order.quantity)
   end
+# :nocov:
 end

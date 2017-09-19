@@ -1,4 +1,6 @@
+
 class PaypalController < ApplicationController
+# :nocov:
   skip_before_action :verify_authenticity_token
 
   def get_access_token
@@ -71,4 +73,6 @@ class PaypalController < ApplicationController
     p response
     render json: response
   end
+# :nocov:
 end
+
