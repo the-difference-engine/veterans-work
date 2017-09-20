@@ -14,7 +14,7 @@
           <h4>Reviews: </h4>
           <h3><a href="/reviews/new">Leave a Review</a></h3>
           <% @company.reviews.each do |review| %>
-            <%= react_component("Review", { review: review, customer: review.customer }) %>
+            <%= review %>
           <% end %>
         <a href="/companies">Back to all companies</a>
       </div>
