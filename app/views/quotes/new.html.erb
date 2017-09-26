@@ -16,12 +16,12 @@
         <div class="form-group">
           <label for="start date">Start Date</label>
           <br>
-          <%= f.date_field :start_date, class: "form-control"%>
+          <%= f.date_field :start_date, min: Date.today, max: @quote.customer_request.expires_date, class: "form-control"%>
         </div>
          <div class="form-group">
           <label for="completion date estimate">Completion Date Estimate</label>
           <br>
-          <%= f.date_field :completion_date_estimate, class: "form-control"%>
+          <%= f.date_field :completion_date_estimate, min: Date.today, class: "form-control"%>
         </div>
         <div class="form-group">
           <label for="notes">Notes</label>
