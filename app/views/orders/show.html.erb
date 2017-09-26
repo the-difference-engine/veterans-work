@@ -5,7 +5,7 @@
         <h2 class="panel-title">Order ID: <%= @order.id %></h2>
       </div>
       <div class="panel-body">
-        <p>Purchased At: <%= @order.created_at %></p>
+        <p>Purchased At: <%= @order.created_at.strftime('%a, %e %b %Y, %l:%M %p') %></p>
         <p>Quantity: <%= @order.quantity %></p>
         <%= link_to 'back to all orders', '/orders' %>
       </div>

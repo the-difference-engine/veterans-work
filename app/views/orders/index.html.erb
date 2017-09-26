@@ -1,3 +1,26 @@
-<% @orders.each do |order| %>
-  <p><%= order %></p>
-<% end %>
+<h1>My Orders</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Orders</h3>
+    <table class="table table-hover table-responsive">
+      <thead class="thead-inverse">
+        <tr>
+          <th></th>
+          <th>Order ID</th>
+          <th>Purchase Date</th>
+          <th>Quantity<th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><a href="/orders/<%= order.id %>">view</td>
+            <td><%= order.id %></td>
+            <td><%= order.created_at.strftime('%a, %e %b %Y') %></td>
+            <td><%= order.quantity %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
