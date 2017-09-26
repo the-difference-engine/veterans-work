@@ -40,6 +40,7 @@ class Customer < ApplicationRecord
 
   def open_quotes
     quotes = []
+    p customer_requests
     customer_requests.each do |cr|
       cr.quotes.each do |quote|
         if quote.accepted == nil
