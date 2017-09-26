@@ -18,11 +18,19 @@ $button: bold 16px Lato;
 
 h1,h2,h3,h4,h5,h6 {
   font-family: $title-font;
-  color: $white;
+  color: $pine-green;
+}
+
+p {
+  color: $lucky-green;
 }
 
 p, a {
   font-family: $body-font;
+}
+
+strong {
+  color: $lucky-green;
 }
 
 .jumbotron {
@@ -41,3 +49,32 @@ p, a {
     padding: 10px;
   }
 }
+
+.field {
+  color: $lucky-green;
+}
+
+.actions {
+  color: $lucky-green;
+}
+
+.form-group {
+    color: $lucky-green;
+}
+
+.table {
+  color: $lucky-green;
+}
+
+.label {
+  color: $lucky-green;
+}
+
+.form-check {
+  color: $lucky-green;
+}
+
+.file {
+  color: $lucky-green;
+}
+
