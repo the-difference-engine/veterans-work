@@ -5,7 +5,7 @@
 }
 
 .current-page a {
-  color: #136E29 !important;
+  color: $design-green !important;
 }
 
 .current-page a:hover {
@@ -26,14 +26,14 @@
 }
 
 .navbar button {
-  background-color: #136E29;
+  background-color: $design-green;
   color: white;
   border: 0;
   width: 100%;
 }
 
 #customer-sign-up {
-  color: #136E29;
+  color: $design-green;
 }
 
 .footer {
