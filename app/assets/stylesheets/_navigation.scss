@@ -32,8 +32,13 @@
   width: 100%;
 }
 
-#customer-sign-up {
+#customer-sign-up, #company-sign-up {
   color: $design-green;
+  padding-right: 20px;
+}
+
+#company-sign-in, #customer-sign-in {
+  padding-right: 20px;
 }
 
 .footer {
