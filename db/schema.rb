@@ -89,14 +89,6 @@ ActiveRecord::Schema.define(version: 20170909214141) do
     t.date "completion_date"
   end
 
-  create_table "credits", force: :cascade do |t|
-    t.decimal "cost"
-    t.integer "order_id"
-    t.integer "quote_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "customer_requests", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
