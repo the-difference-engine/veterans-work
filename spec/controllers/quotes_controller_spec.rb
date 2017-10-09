@@ -152,6 +152,19 @@ RSpec.describe QuotesController, type: :controller do
       }.to change(Quote, :count).by(0)
     end
 
+    it 'does not create a quote if they dont have enough credits' do
+      @company_four = create(:company, :without_credits)
+      sign_in @company_four
+
+      expect{
+        post :create, params: {
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
+          }
+      }.to change(Quote, :count).by(0)
+
+    end
+
     it 'creates and saves a new company quote to the database' do
       expect{
         post :create, params: {
@@ -159,6 +172,17 @@ RSpec.describe QuotesController, type: :controller do
           customer_request_id: @customer_request.id
         }
       }.to change(Quote, :count).by(1)
+    end
+
+    it 'lowers the company credits after creating quote' do
+       post :create, params: {
+          quote: attributes_for(:quote),
+          customer_request_id: @customer_request.id
+        }
+
+        @company_one.reload
+
+        expect(@company_one.credits).to eq(9)
     end
 
     it 'replaces blank values in any cost field with 0' do
