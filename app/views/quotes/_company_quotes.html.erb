@@ -4,9 +4,10 @@
     <h2>Open Quotes</h2>
       <% @open_quotes.each do |open_quote| %>
         <table class="table table-hover table-condensed">
-        <span><h3><%= open_quote.customer_request.description %></h3><h5>Request Expires: <%= open_quote.customer_request.expires_date %></h5></span> 
           <thead>
             <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>              
               <th>Company</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
@@ -17,6 +18,8 @@
           <tbody>
           <% if open_quote.customer_viewed == false %>
             <tr style="font-weight: bold;">
+              <td><%= open_quote.customer_request.description %></td>
+              <td><%= open_quote.customer_request.expires_date %></td>
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
@@ -25,6 +28,8 @@
             </tr>
           <% else %>
             <tr>
+              <td><%= open_quote.customer_request.description %></td>
+              <td><%= open_quote.customer_request.expires_date %></td>              
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
@@ -44,9 +49,10 @@
     <h2>Accepted Quotes</h2>
       <% @accepted_quotes.each do |accepted_quote| %>
         <table class="table table-hover table-condensed">
-        <span><h3><%= accepted_quote.customer_request.description %></h3><h5>Request Expires: <%= accepted_quote.customer_request.expires_date %></h5></span> 
           <thead>
             <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>                 
               <th>Company</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
@@ -56,6 +62,8 @@
           </thead>
           <tbody>
             <tr>
+              <td><%= accepted_quote.customer_request.description %></td>
+              <td><%= accepted_quote.customer_request.expires_date %></td>                  
               <td><%= accepted_quote.company.name%></td>
               <td><%= accepted_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= accepted_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
