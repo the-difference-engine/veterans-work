@@ -51,6 +51,7 @@ RSpec.describe 'company creates quote', :type => :feature do
   end
 
   it 'company creates quote' do
+    expect(page).to have_content 'Signed in successfully.'
     find('td:first-child').click_link
     click_link 'New Quote'
     fill_in 'quote[materials_cost_estimate]', with: '100'
