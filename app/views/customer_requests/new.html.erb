@@ -30,7 +30,7 @@
 
       <div class="field">
         <%= label_tag :expires_date %>
-          <%= f.date_field :expires_date, class: "form-control" %>
+          <%= f.date_field :expires_date, min: Date.today, max: (Date.today + 1.month).end_of_month  ,class: "form-control" %>
       </div>
 
       <div class="actions">
@@ -39,7 +39,7 @@
           {}, prompt: "select type of work", class: "form-control" %>
       </div>
       <br>
-      <%= submit_tag "Submit", class: "btn btn-info btn-theme-dark" %>
+      <%= submit_tag "Submit", class: "btn btn-success" %>
     </div>
   <% end %>
   </div>

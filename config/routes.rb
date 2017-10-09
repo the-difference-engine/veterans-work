@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  post '/paypal/create-payment' => 'paypal#create_payment'
+
   namespace :api do
     namespace :v1 do
       get '/reviews/new' => 'reviews#new'
@@ -32,5 +35,6 @@ Rails.application.routes.draw do
   resources :reviews
   resources :quotes
   resources :contracts
+  resources :orders
 end
 

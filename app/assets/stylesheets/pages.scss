@@ -19,12 +19,14 @@ body.homepage .main-content {
 
 h1.home-title {
   font: $h1;
+  color: $white;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
 }
 
 #home-header h3 {
   font: $h3;
+  color: $white;
   letter-spacing: 2px;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
@@ -43,11 +45,13 @@ h1.home-title {
 .icons li {
   // padding: 0 10px;
   // position: absolute;
+  color: $white;
   left: 0;
   right: 0;
   text-shadow: 2px 2px 1px gray;
   h4 {
     font: $h4;
+    color: $white;
   }
 
   img {
@@ -160,6 +164,10 @@ h1.home-title {
     margin: auto;
     text-align: center;
   }
+}
+
+.non-clickable {
+  pointer-events: none;
 }
 
 

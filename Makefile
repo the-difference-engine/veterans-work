@@ -30,7 +30,4 @@ seed:
 coverage: test
 	open ./coverage/index.html
 
-js_dev:
-	./bin/webpack --watch --progress --colors
-
 .PHONY: install test server console migrate coverage
