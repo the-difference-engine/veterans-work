@@ -2,7 +2,6 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h2>Open Quotes</h2>
-      <% @open_quotes.each do |open_quote| %>
         <table class="table table-hover table-condensed">
           <thead>
             <tr>
@@ -16,6 +15,7 @@
             </tr>
           </thead>
           <tbody>
+            <% @open_quotes.each do |open_quote| %>
             <tr>
               <td><%= open_quote.customer_request.description %></td>
               <td><%= open_quote.customer_request.expires_date %></td>
@@ -25,9 +25,9 @@
               <td><%= number_to_currency(open_quote.total_cost_estimate) %></td>
               <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
-      <% end %>
     </div>
   </div>
 <% end %>
@@ -35,7 +35,6 @@
   <div class="panel panel-default">
     <div class="panel-body">
     <h2>Accepted Quotes</h2>
-      <% @accepted_quotes.each do |accepted_quote| %>
         <table class="table table-hover table-condensed">
           <thead>
             <tr>
@@ -49,6 +48,7 @@
             </tr>
           </thead>
           <tbody>
+            <% @accepted_quotes.each do |accepted_quote| %>
             <tr>
               <td><%= accepted_quote.customer_request.description %></td>
               <td><%= accepted_quote.customer_request.expires_date %></td>              
@@ -58,9 +58,9 @@
               <td><%= number_to_currency(accepted_quote.total_cost_estimate) %></td>
               <td><a href="/quotes/<%= accepted_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
-      <% end %>
     </div>
   </div>
 <% end %>
