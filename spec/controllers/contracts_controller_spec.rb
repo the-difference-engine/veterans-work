@@ -156,14 +156,12 @@ RSpec.describe ContractsController, type: :controller do
           company_id: company_two.id,
           customer_request_id: customer_request.id
         )
-        # expect {
-          post :create, params: {
-            contract: {
-              quote_id: quote_one.id,
-              customer_request_id: customer_request.id
-            }
-         }
-        # }.to change{ quote_one.accepted }.to(true)
+        post :create, params: {
+          contract: {
+            quote_id: quote_one.id,
+            customer_request_id: customer_request.id
+          }
+        }
         expect(quote_one.reload.accepted).to eq(true)
         expect(quote_two.reload.accepted).to eq(false)
       end

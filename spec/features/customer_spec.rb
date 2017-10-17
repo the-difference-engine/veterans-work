@@ -76,4 +76,41 @@ RSpec.describe "customer decides on quote", :type => :feature do
     first(:css, 'input.btn.btn-md.btn-success').click
     expect(page).to have_content 'Contract created and saved!'
   end
+
+  context 'customer view of quotes table for open quotes' do
+    before :each do
+      @customer_request.update(description: 'Sample request description')
+      visit('/quotes')
+    end
+
+    it 'should show open quotes in open quote table' do
+      within '#open_quotes' do
+        expect(page).to have_content('Sample request description')
+      end
+    end
+    it 'should not show open quotes in accepted quote table' do
+      within '#accepted_quotes' do
+        expect(page).to_not have_content('Sample request description')
+      end
+    end
+  end
+
+  context 'customer view of quotes table for accepted quotes' do
+    before :each do
+      @customer_request.update(description: 'Sample request description')
+      @quote.update(accepted: true)
+      visit('/quotes')
+    end
+
+    it 'should not show accepted quotes in open quote table' do
+      within '#open_quotes' do
+        expect(page).to_not have_content('Sample request description')
+      end
+    end
+    it 'should show accepted quotes in accepted quote table' do
+      within '#accepted_quotes' do
+        expect(page).to have_content('Sample request description')
+      end
+    end
+  end
 end
