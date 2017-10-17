@@ -67,7 +67,7 @@ RSpec.describe QuotesController, type: :controller do
         q2 = create(:quote, company_id: company1.id, accepted: true)
         q3 = create(:quote, company_id: company1.id, accepted: nil)
         get :index
-        expect(assigns(:open_quotes)).to eq([q1, q3])
+        expect(assigns(:open_quotes)).to match_array([q1, q3])
       end
     end
 
