@@ -2,11 +2,11 @@
   <div class="panel panel-default">
     <div class="panel-body">
     <h2>Open Quotes</h2>
-      <% @open_quotes.each do |open_quote| %>
-        <table class="table table-hover table-condensed">
-        <span><h3><%= open_quote.customer_request.description %></h3><h5>Request Expires: <%= open_quote.customer_request.expires_date %></h5></span> 
+        <table id="open_quotes" class="table table-hover table-condensed">
           <thead>
             <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>              
               <th>Company</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
@@ -15,8 +15,11 @@
             </tr>
           </thead>
           <tbody>
+          <% @open_quotes.each do |open_quote| %>
           <% if open_quote.customer_viewed == false %>
             <tr style="font-weight: bold;">
+              <td><%= open_quote.customer_request.description %></td>
+              <td><%= open_quote.customer_request.expires_date %></td>
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
@@ -25,6 +28,8 @@
             </tr>
           <% else %>
             <tr>
+              <td><%= open_quote.customer_request.description %></td>
+              <td><%= open_quote.customer_request.expires_date %></td>              
               <td><%= open_quote.company.name%></td>
               <td><%= open_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= open_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
@@ -32,9 +37,9 @@
               <td><a href="/quotes/<%= open_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
           <% end %>
+          <% end %>
           </tbody>
         </table>
-      <% end %>
     </div>
   </div>
 <% end %>
@@ -42,11 +47,11 @@
   <div class="panel panel-default">
     <div class="panel-body">
     <h2>Accepted Quotes</h2>
-      <% @accepted_quotes.each do |accepted_quote| %>
-        <table class="table table-hover table-condensed">
-        <span><h3><%= accepted_quote.customer_request.description %></h3><h5>Request Expires: <%= accepted_quote.customer_request.expires_date %></h5></span> 
+        <table id="accepted_quotes" class="table table-hover table-condensed">
           <thead>
             <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>                 
               <th>Company</th>
               <th>Start Date</th>
               <th>Completion Date Estimate</th>
@@ -55,16 +60,19 @@
             </tr>
           </thead>
           <tbody>
+            <% @accepted_quotes.each do |accepted_quote| %>
             <tr>
+              <td><%= accepted_quote.customer_request.description %></td>
+              <td><%= accepted_quote.customer_request.expires_date %></td>                  
               <td><%= accepted_quote.company.name%></td>
               <td><%= accepted_quote.start_date.strftime("%B %e, %Y") %></td>
               <td><%= accepted_quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
               <td><%= number_to_currency(accepted_quote.total_cost_estimate) %></td>
               <td><a href="/quotes/<%= accepted_quote.id %>"><button class="btn btn-success">Details</button></a></td>
             </tr>
+            <% end %>
           </tbody>
         </table>
-      <% end %>
     </div>
   </div>
 <% end %>

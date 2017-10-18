@@ -138,6 +138,35 @@ RSpec.describe ContractsController, type: :controller do
         }
       }.to change { ActionMailer::Base.deliveries.count }.by(3)
     end
+
+    describe 'quote status updated' do
+      it 'marks declined quotes as false and accepted quotes as true' do
+        company_one = create(:company)
+        company_two = create(:company)
+        customer = create(:customer)
+        sign_in customer
+        customer_request = create(:customer_request, customer_id: customer.id)
+        quote_one = create(
+          :quote,
+          company_id: company_one.id,
+          customer_request_id: customer_request.id
+        )
+        quote_two = create(
+          :quote,
+          company_id: company_two.id,
+          customer_request_id: customer_request.id
+        )
+        post :create, params: {
+          contract: {
+            quote_id: quote_one.id,
+            customer_request_id: customer_request.id
+          }
+        }
+        expect(quote_one.reload.accepted).to eq(true)
+        expect(quote_two.reload.accepted).to eq(false)
+      end
+    end
+
   end
 
   describe 'GET #show' do

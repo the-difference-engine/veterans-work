@@ -34,8 +34,16 @@ class ContractsController < ApplicationController
             if quote.accepted
               CompanyMailer.accept_email(quote).deliver_now
             else
-              CompanyMailer.decline_email(quote).deliver_now
-              quote.update(accepted: false)
+              begin
+                CompanyMailer.decline_email(quote).deliver_now
+              rescue => e
+                Raven.capture_message(
+                  'Failed to send declined quote email.',
+                  extra: { error: e }
+                )
+              ensure
+                quote.update(accepted: false)
+              end
             end
           end
         end

@@ -19,38 +19,6 @@ require 'rails_helper'
 RSpec.describe QuotesController, type: :controller do
   describe 'GET #index' do
     context 'with customer signed in' do
-      context 'with request_id param' do
-        it 'assigns the proper customer_requests to @customer_requests' do
-          customer = create(:customer)
-          sign_in customer
-          cr1 = create(:customer_request, customer_id: customer.id)
-          create(:customer_request, customer_id: customer.id)
-          create(:customer_request, customer_id: customer.id)
-          get :index, params: { request_id: cr1.id }
-          expect(assigns(:customer_requests)).to match_array [cr1]
-        end
-      end
-
-      it 'only shows quotes that arent expired' do
-        customer = create(:customer)
-        sign_in customer
-        cr1 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()-1)
-        cr2 = create(:customer_request, customer_id: customer.id, expires_date: Date.today()+1)
-        create(:quote, customer_request_id: cr1.id)
-        create(:quote, customer_request_id: cr2.id)
-        get :index
-        expect(assigns(:customer_requests)).to match_array [cr2]
-      end
-
-      it 'assigns the proper customer_requests to @customer_requests' do
-        customer = create(:customer)
-        sign_in customer
-        cr1 = create(:customer_request, customer_id: customer.id)
-        cr2 = create(:customer_request, customer_id: customer.id)
-        cr3 = create(:customer_request, customer_id: customer.id)
-        get :index
-        expect(assigns(:customer_requests)).to match_array [cr1, cr2, cr3]
-      end
 
       it 'assigns all the customers open quotes to @open_quotes' do
         company1 = create(:company)
@@ -99,7 +67,7 @@ RSpec.describe QuotesController, type: :controller do
         q2 = create(:quote, company_id: company1.id, accepted: true)
         q3 = create(:quote, company_id: company1.id, accepted: nil)
         get :index
-        expect(assigns(:open_quotes)).to eq([q1, q3])
+        expect(assigns(:open_quotes)).to match_array([q1, q3])
       end
     end
 
