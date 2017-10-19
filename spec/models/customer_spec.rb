@@ -32,4 +32,78 @@ RSpec.describe Customer, type: :model do
       expect(build(:customer)).to be_valid
     end
   end
+
+  describe 'open quotes' do
+    it 'returns only open quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id
+      )
+      create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(customer.open_quotes).to eq([quote1])
+    end
+
+    it 'should not return accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(customer.open_quotes).not_to include(quote2)
+    end
+  end
+
+  describe 'accepted_quotes' do
+    it 'should not return anything but accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(customer.accepted_quotes).to eq([quote2])
+    end
+
+    it 'should return accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      expect(customer.accepted_quotes).not_to include(quote1)
+    end
+  end 
 end

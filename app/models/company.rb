@@ -74,7 +74,10 @@ class Company < ApplicationRecord
   has_many :contracts, through: :quotes
   has_many :orders
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, 
+    styles: { medium: '300x300>', thumb: '100x100>' }, 
+    default_url: 'army.png'
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :name, uniqueness: true
@@ -86,7 +89,7 @@ class Company < ApplicationRecord
                     length: { is: 10 }
   validates_format_of :zip_code,
                    with: /\A\d{5}-\d{4}|\A\d{5}\z/,
-                   message: "should be 12345 or 12345-1234",
+                   message: 'should be 12345 or 12345-1234',
                    presence: true
 
   geocoded_by :full_street_address
@@ -97,7 +100,7 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where("expires_date >= ?", Date.today()).where(
+    CustomerRequest.where('expires_date >= ?', Date.today()).where(
       service_category_id: service_categories
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end
