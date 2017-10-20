@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
 
   def index
-    @homepage = true
+    @page_class = "infopage  home-image"
+
     if current_company
       redirect_to "/customer_requests"
     elsif  current_customer
@@ -14,6 +15,7 @@ class PagesController < ApplicationController
   end
 
   def about
+    @page_class = "infopage  about-image"
     render "about.html"
   end
 end
