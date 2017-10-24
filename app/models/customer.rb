@@ -62,4 +62,7 @@ class Customer < ApplicationRecord
     quotes
   end
 
+  def rejected_quotes
+    @rejected_quotes = current_customer.quotes.where("accepted =?", false)
+  end
 end
