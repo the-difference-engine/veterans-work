@@ -1,7 +1,17 @@
 <h1>My Quotes</h1>
-<% if current_customer %>
-  <%= render 'customer_quotes' %>
-<% elsif current_company %>
-  <%= render 'company_quotes' %>
+<% if current_customer || current_company %>
+  <%= render "quotes_table", 
+    quotes: @open_quotes, 
+    title: "Open Quotes", 
+    table_id: "open_quotes"
+  %>
+
+  <%= render "quotes_table", 
+    quotes: @accepted_quotes, 
+    title: "Accepted Quotes", 
+    table_id: "accepted_quotes"
+  %>
+
 <% else @quotes %>
 <% end %>
+
