@@ -4,7 +4,7 @@
 @import "colors";
 @import 'typography';
 
-body.homepage {
+body.full-width-page {
   width: 100%;
 }
 
@@ -12,7 +12,7 @@ body.homepage {
   min-height: 100vh;
 }
 
-body.homepage .main-content {
+body.full-width-page .main-content {
   width: 100%;
   padding: 0;
 }
@@ -146,6 +146,59 @@ h1.home-title {
   }
 }
 
+
+#about {
+  .container {
+    width: 100%;
+    .mission {
+      float: left;
+      margin-top: 8vh;
+      margin-left: 20vh;
+      margin-bottom: 20vh;
+
+      background-color: rgba(1, 45, 1, 0.6);
+      border-radius: 15px;
+      box-shadow: 3px 3px 5px #888;
+      padding: 30px;
+
+      h1 {
+        font: $h1;
+        color: white;
+        text-shadow: 3px 3px 5px #666;
+      }
+
+      h3 {
+        font: $h4;
+        color: white;
+        text-shadow: 2px 2px 3px #222;
+      }
+    }
+
+  }
+  .history {
+    background: white;
+    padding: 20px 10% 20px 10%;
+
+    p {
+      font: $h5;
+    }
+  }
+}
+
+
+// .jumbotron{
+//   height: 150vh;
+//   padding: 0;
+//   max-width: none;
+//   width: 100vw;
+//   background-image: url("about-hero.jpg");
+//   background-repeat: no-repeat;
+// }
+
+.jumbotron.jumbotron-fluid {
+  padding: -10%;
+}
+
 @media only screen and (max-width: 768px) {
   .contact-us {
     font-size: 1.25em;
@@ -169,6 +222,3 @@ h1.home-title {
 .non-clickable {
   pointer-events: none;
 }
-
-
-

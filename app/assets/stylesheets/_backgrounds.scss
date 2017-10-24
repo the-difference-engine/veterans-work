@@ -1,19 +1,13 @@
 
 
-
-
-.homepage {
-  background: gray;
-}
-
-.homepage:after {
-  background: image-url("flag1");
+@mixin hero-image($url, $opacity: 1,) {
+  background: image-url($url);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
-  opacity: 0.4;
+  opacity: $opacity;
   content: '';
   display: block;
   position: absolute;
@@ -22,7 +16,22 @@
   top: 0;
   width: 100%;
   z-index: -1;
+}
 
+#homepage:after {
+  @include hero-image("flag1", 0.4);
+}
+
+#about:after {
+  @include hero-image("about-hero", 0.8);
+}
+
+#how:after {
+  // @include hero-image("flag1");
+}
+
+.full-width-page {
+  background: gray;
 }
 
 .main-content {
