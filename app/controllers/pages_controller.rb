@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
 
   def index
-    @page_class = "infopage  home-image"
-
+    @full_width_page = true
     if current_company
       redirect_to "/customer_requests"
     elsif  current_customer
@@ -15,7 +14,12 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_class = "infopage  about-image"
+    @full_width_page = true
     render "about.html"
   end
+
+  def how
+    @full_width_page = true
+  end
+
 end
