@@ -51,15 +51,7 @@ class Customer < ApplicationRecord
   end
 
   def accepted_quotes
-    quotes = []
-    customer_requests.each do |cr|
-      cr.quotes.each do |quote|
-        if quote.accepted
-          quotes << quote
-        end
-      end
-    end
-    quotes
+    quotes.where(accepted: nil)
   end
 
 end
