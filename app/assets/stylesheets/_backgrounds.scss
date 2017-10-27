@@ -27,7 +27,7 @@
 }
 
 #how:after {
-  // @include hero-image("flag1");
+  @include hero-image("carpentry", 0.7);
 }
 
 .full-width-page {
