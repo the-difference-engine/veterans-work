@@ -113,8 +113,12 @@ class Company < ApplicationRecord
     quotes.where(accepted: true)
   end
 
+  def rejected_quotes
+    quotes.where(accepted: false)
+  end
+
   def star_avg
-    if reviews.count > 0 
+    if reviews.count > 0
       stars = reviews.pluck(:stars)
       (stars.reduce(:+).to_f/stars.size).round
     else

@@ -4,10 +4,14 @@ class QuotesController < ApplicationController
       # current = current_customer
       @open_quotes = current_customer.open_quotes
       @accepted_quotes = current_customer.accepted_quotes
+      @rejected_quotes = current_customer.rejected_quotes
+      @completed_contracts = current_customer.contracts.where("completion_date !=?", nil)
     elsif current_company
       # current = current_company
       @open_quotes = current_company.open_quotes.order('start_date')
       @accepted_quotes = current_company.accepted_quotes
+      @rejected_quotes = current_company.rejected_quotes
+      @completed_contracts = current_company.contracts.where("completion_date !=?", nil)
     else
       redirect_to '/'
     end

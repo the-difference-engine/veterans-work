@@ -1,4 +1,6 @@
+
 <h1>My Quotes</h1>
+<button id="declinedBtn">Declined Quote</button> <button id="completedBtn">Completed Request</button>
 <% if current_customer || current_company %>
   <%= render "quotes_table", 
     quotes: @open_quotes, 
@@ -12,7 +14,69 @@
     table_id: "accepted_quotes"
   %>
 
-<% else @quotes %>
+
 <% end %>
 
-<%= console %>
+<div id="declined" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <table id="declined_quotes" class="table table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>              
+              <th>Company</th>
+              <th>Start Date</th>
+              <th>Completion Date Estimate</th>
+              <th>Total Cost Estimate</th>
+              <th>Quote Details</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @rejected_quotes.each do |rejected_quote| %>
+            <tr>
+              <td><%= rejected_quote.customer_request.description %></td>
+              <td><%= rejected_quote.customer_request.expires_date %></td>              
+              <td><%= rejected_quote.company.name%></td>
+              <td><%= rejected_quote.start_date.strftime("%B %e, %Y") %></td>
+              <td><%= rejected_quote.completion_date_estimate.strftime("%B %e, %Y")%></td>
+              <td><%= number_to_currency(rejected_quote.total_cost_estimate) %></td>
+              <td><a href="/quotes/<%= rejected_quote.id %>"><button class="btn btn-success">Details</button></a></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>
+<div id="completed" class="modal">
+    <div class="modal-content">
+    <span class="close">&times;</span>
+    <table id="completed_quotes" class="table table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Request Description</th>
+              <th>Request Expires</th>              
+              <th>Company</th>
+              <th>Start Date</th>
+              <th>Completion Date Estimate</th>
+              <th>Total Cost Estimate</th>
+              <th>Quote Details</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @completed_contracts.each do |completed_contract| %>
+            <tr>
+              <td><%= completed_contract.customer_request.description %></td>
+              <td><%= completed_contract.customer_request.expires_date %></td>              
+              <td><%= completed_contract.company.name%></td>
+              <td><%= completed_contract.start_date.strftime("%B %e, %Y") %></td>
+              <td><%= completed_contract.completion_date_estimate.strftime("%B %e, %Y")%></td>
+              <td><%= number_to_currency(completed_contract.total_cost_estimate) %></td>
+              <td><a href="/quotes/<%= completed_contract.id %>"><button class="btn btn-success">Details</button></a></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>
+
