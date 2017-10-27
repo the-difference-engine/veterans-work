@@ -1,35 +1,26 @@
 class QuotesController < ApplicationController
   def index
     if current_customer
-      # current = current_customer
-      @open_quotes = current_customer.open_quotes
-      @accepted_quotes = current_customer.accepted_quotes
-      @rejected_quotes = current_customer.rejected_quotes
-      @completed_contracts = current_customer.contracts.where("completion_date !=?", nil)
+      current = current_customer
     elsif current_company
-      # current = current_company
-      @open_quotes = current_company.open_quotes.order('start_date')
-      @accepted_quotes = current_company.accepted_quotes
-      @rejected_quotes = current_company.rejected_quotes
-      @completed_contracts = current_company.contracts.where("completion_date !=?", nil)
+      current = current_company
     else
       redirect_to '/'
     end
 
-    # completed_contracts = current.contracts.where.not(completion_date: nil)
-    # @completed_quotes = completed_contracts.map { |contract| contract.quote }
+    @open_quotes = current.open_quotes.order('start_date')
+    @accepted_quotes = current.accepted_quotes
+    @rejected_quotes = current.rejected_quotes
+    @completed_jobs = current.completed_quotes
 
-    # if params[:request_id]
-    #   @open_quotes = @open_quotes.select do |quote|
-    #     quote.customer_request_id == params[:request_id].to_i
-    #   end
-    #   @accepted_quotes = @accepted_quotes.select do |quote|
-    #     quote.customer_request_id == params[:request_id].to_i
-    #   end
-    #   @completed_quotes = @completed_quotes.select do |quote|
-    #     quote.customer_request_id == params[:request_id].to_i
-    #   end
-    # end
+    if params[:request_id]
+      @open_quotes = @open_quotes.select do |quote|
+        quote.customer_request_id == params[:request_id].to_i
+      end
+      @accepted_quotes = @accepted_quotes.select do |quote|
+        quote.customer_request_id == params[:request_id].to_i
+      end
+    end
   end
 
   def new
