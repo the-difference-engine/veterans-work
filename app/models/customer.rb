@@ -39,22 +39,18 @@ class Customer < ApplicationRecord
 
 
   def open_quotes
-    quotes = []
-    customer_requests.each do |cr|
-      cr.quotes.each do |quote|
-        if quote.accepted == nil
-          quotes << quote
-        end
-      end
-    end
-    quotes
-  end
-
-  def accepted_quotes
     quotes.where(accepted: nil)
   end
 
+  def accepted_quotes
+    quotes.where(accepted: true)
+  end
+
   def rejected_quotes
-    @rejected_quotes = current_customer.quotes.where("accepted =?", false)
+    quotes.where(accepted: false)
+  end
+
+  def completed_quotes
+    contracts.where.not(completion_date: nil).map(&:quote)
   end
 end

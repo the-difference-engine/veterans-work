@@ -117,6 +117,10 @@ class Company < ApplicationRecord
     quotes.where(accepted: false)
   end
 
+  def completed_quotes
+    contracts.where.not(completion_date: nil).map(&:quote)
+  end
+
   def star_avg
     if reviews.count > 0
       stars = reviews.pluck(:stars)
