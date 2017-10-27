@@ -5,6 +5,7 @@ $(document).ready(function() {
   // startDate.addEventListener('change', function() {
   //   endDate.min = startDate.value;
   // })
+  // Broken code
 
   // Get the modal
   var declineModal = document.getElementById('declined');
