@@ -10,7 +10,7 @@ class QuotesController < ApplicationController
 
     @open_quotes = current.open_quotes.order('start_date')
     @accepted_quotes = current.accepted_quotes
-    @rejected_quotes = current.rejected_quotes
+    @declined_quotes = current.declined_quotes
     @completed_jobs = current.completed_quotes
 
     if params[:request_id]
@@ -18,6 +18,12 @@ class QuotesController < ApplicationController
         quote.customer_request_id == params[:request_id].to_i
       end
       @accepted_quotes = @accepted_quotes.select do |quote|
+        quote.customer_request_id == params[:request_id].to_i
+      end
+      @declined_quotes = @declined_quotes.select do |quote|
+        quote.customer_request_id == params[:request_id].to_i
+      end
+      @completed_jobs = @completed_jobs.select do |quote|
         quote.customer_request_id == params[:request_id].to_i
       end
     end

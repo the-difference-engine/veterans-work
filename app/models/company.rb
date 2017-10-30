@@ -115,7 +115,7 @@ class Company < ApplicationRecord
     )
   end
 
-  def rejected_quotes
+  def declined_quotes
     quotes.where(accepted: false)
   end
 

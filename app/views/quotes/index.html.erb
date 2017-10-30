@@ -1,25 +1,36 @@
 
 <h1>My Quotes</h1>
 <div>
-  <% if @rejected_quotes != [] %>
+  <% if @declined_quotes != [] %>
     <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
   <% end %>
   <% if @completed_jobs != [] %>
     <button id="completedBtn" class="btn btn-success">Completed Requests</button>
   <% end %>
 </div>
-  
-<% if current_customer || current_company %>
-  <%= render "quotes_table", 
-    quotes: @open_quotes, 
-    title: "Open Quotes", 
-    table_id: "open_quotes"
-  %>
-  <%= render "quotes_table", 
-    quotes: @accepted_quotes, 
-    title: "Accepted Quotes", 
-    table_id: "accepted_quotes"
-  %>
+
+<% if @open_quotes != [] %>
+  <div class="panel panel-default">
+    <div class="panel-body">  
+      <%= render "quotes_table", 
+        quotes: @open_quotes, 
+        title: "Open Quotes", 
+        table_id: "open_quotes"
+      %>
+    </div>
+  </div>
+<% end %>
+
+<% if @accepted_quotes != [] %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= render "quotes_table", 
+        quotes: @accepted_quotes, 
+        title: "Accepted Quotes", 
+        table_id: "accepted_quotes"
+      %>
+    </div>
+  </div>
 <% end %>
 
 
@@ -28,7 +39,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <%= render "quotes_table", 
-      quotes: @rejected_quotes, 
+      quotes: @declined_quotes, 
       title: "Declined Quotes", 
       table_id: "declined_quotes"
     %>
