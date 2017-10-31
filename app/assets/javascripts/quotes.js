@@ -15,11 +15,10 @@ $(document).ready(function() {
   var declinedBtn = document.getElementById("declinedBtn");
   var completedBtn = document.getElementById("completedBtn");
 
-  // Get the <span> element that closes the modal
-  var declinedSpan = document.getElementsByClassName("close")[0];
-  var completedSpan = document.getElementsByClassName("close")[1];
+  // Get the <closedModal> element that closes the modal
+  var closedModals = document.getElementsByClassName("close");
 
-  // When the user clicks on the button, open the modal 
+  // When the user clicks on the button, open the modal
   declinedBtn.onclick = function() {
     declinedModal.style.display = "block";
   };
@@ -27,14 +26,12 @@ $(document).ready(function() {
     completedModal.style.display = "block";
   };
 
-  // When the user clicks on <span> (x), close the modal
-  declinedSpan.onclick = function() {
-    declinedModal.style.display = "none";
-  };
-  completedSpan.onclick = function() {
-    completedModal.style.display = "none";
-  };
-
+  // When the user clicks on <closedModal> (x), close the modal
+  for (var i = 0; i < closedModals.length; i++) {
+    closedModals[i].onclick = function() {
+      this.closest(".modal").style.display = "none";
+    };
+  }
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == declinedModal) {
