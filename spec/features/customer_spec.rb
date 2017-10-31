@@ -91,7 +91,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
       end
     end
     it 'should not show accepted quotes table if there are only open quotes' do
-      expect(page.has_css?('#accepted_quotes')).to eq(false)
+      expect(page).to_not have_css('#accepted_quotes')
     end
 
     it 'should not show open quotes in accepted quote table' do
@@ -106,7 +106,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
 
   context 'customer view of quotes index when there are accepted quotes' do
     before :each do
-      @quote.update(accepted: true)    
+      @quote.update(accepted: true)   
       create(:contract, quote_id: @quote.id, completion_date: nil)
       visit('/quotes')
     end
@@ -125,7 +125,33 @@ RSpec.describe "customer decides on quote", :type => :feature do
       @quote2.update(accepted: true)
       create(:contract, quote_id: @quote2.id, completion_date: nil)
       visit('/quotes')
-      expect(page.has_css?('#open_quotes')).to eq(false)
+      expect(page).to_not have_css('#open_quotes')
+    end
+  end
+
+  context 'customer view of quotes index when there are declined quotes' do
+    before :each do
+      @quote.update(accepted: false)
+      visit('/quotes')
+    end
+
+    it 'should show declined quotes button when there are declined quotes' do
+      expect(page).to have_css('#declinedBtn')
+    end
+
+    it 'should allow customer to view declined quotes' do
+      click_button 'Declined Quotes'
+      within '#declined_quotes' do
+        expect(page).to have_content('Sample request description')
+      end
+    end
+
+    it 'should hide declined quotes modal when customer clicks close x' do
+      click_button 'Declined Quotes'
+      within '#declined' do
+        find('.close').click
+      end
+      expect(page).to have_css('#declined', visible: false)
     end
   end
 end

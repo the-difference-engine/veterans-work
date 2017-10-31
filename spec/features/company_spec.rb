@@ -101,7 +101,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
       end
     end
     it 'should not show accepted quotes table if there are only open quotes' do
-      expect(page.has_css?('#accepted_quotes')).to eq(false)
+      expect(page).to_not have_css('#accepted_quotes')
     end
     it 'should not show open quotes in accepted quote table' do
       @quote3.update(accepted: true)
@@ -135,7 +135,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
       @quote3.update(accepted: true)
       create(:contract, quote_id: @quote3.id, completion_date: nil)
       visit('/quotes')
-      expect(page.has_css?('#open_quotes')).to eq(false)
+      expect(page).to_not have_css('#open_quotes')
     end
   end
 
@@ -148,7 +148,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
     end
 
     it 'should show declined quotes button' do
-      expect(page.has_css?('#declinedBtn')).to eq(true)
+      expect(page).to have_css('#declinedBtn')
     end
     it 'should not show own rejected quotes in open quote table' do
       within '#open_quotes' do

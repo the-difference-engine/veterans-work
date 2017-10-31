@@ -1,12 +1,12 @@
 class QuotesController < ApplicationController
   def index
     if current_customer || current_company
-      
+
       current = current_customer || current_company
       @open_quotes = current.open_quotes.order('start_date')
       @accepted_quotes = current.accepted_quotes
       @declined_quotes = current.declined_quotes
-      @completed_jobs = current.completed_quotes
+      @completed_quotes = current.completed_quotes
 
       if params[:request_id]
         @open_quotes = @open_quotes.select do |quote|

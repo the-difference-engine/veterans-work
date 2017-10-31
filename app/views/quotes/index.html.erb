@@ -4,7 +4,7 @@
   <% if @declined_quotes != [] %>
     <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
   <% end %>
-  <% if @completed_jobs != [] %>
+  <% if @completed_quotes != [] %>
     <button id="completedBtn" class="btn btn-success">Completed Requests</button>
   <% end %>
 </div>
@@ -35,6 +35,7 @@
 
 
 <!-- Modal Content -->
+
 <div id="declined" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -49,7 +50,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <%= render "quotes_table", 
-      quotes: @completed_jobs, 
+      quotes: @completed_quotes, 
       title: "Completed Jobs", 
       table_id: "completed_quotes"
     %>
