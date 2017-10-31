@@ -23,7 +23,7 @@
       <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
       <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
       <td><%= number_to_currency(quote.total_cost_estimate) %></td>
-      <td><a href="/quotes/<%= quote.id %>"><button class="btn btn-success">Details</button></a></td>
+      <td><a href="/quotes/<%= quote.id %>" id="quote<%=quote.id%>"><button class="btn btn-success">Details</button></a></td>
     </tr>
     <% end %>
   </tbody>

@@ -37,7 +37,6 @@ class Customer < ApplicationRecord
   has_many :quotes, through: :customer_requests
   has_many :contracts, through: :customer_requests
 
-
   def open_quotes
     quotes.where(accepted: nil)
   end

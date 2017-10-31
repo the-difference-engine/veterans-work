@@ -89,6 +89,10 @@ RSpec.describe Customer, type: :model do
         company_id: company.id,
         accepted: true
       )
+      create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
       expect(customer.accepted_quotes).to eq([quote2])
     end
 

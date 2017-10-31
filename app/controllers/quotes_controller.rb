@@ -1,31 +1,30 @@
 class QuotesController < ApplicationController
   def index
-    if current_customer
-      current = current_customer
-    elsif current_company
-      current = current_company
+    if current_customer || current_company
+      
+      current = current_customer || current_company
+      @open_quotes = current.open_quotes.order('start_date')
+      @accepted_quotes = current.accepted_quotes
+      @declined_quotes = current.declined_quotes
+      @completed_jobs = current.completed_quotes
+
+      if params[:request_id]
+        @open_quotes = @open_quotes.select do |quote|
+          quote.customer_request_id == params[:request_id].to_i
+        end
+        @accepted_quotes = @accepted_quotes.select do |quote|
+          quote.customer_request_id == params[:request_id].to_i
+        end
+        @declined_quotes = @declined_quotes.select do |quote|
+          quote.customer_request_id == params[:request_id].to_i
+        end
+        @completed_jobs = @completed_jobs.select do |quote|
+          quote.customer_request_id == params[:request_id].to_i
+        end
+      end
+
     else
       redirect_to '/'
-    end
-
-    @open_quotes = current.open_quotes.order('start_date')
-    @accepted_quotes = current.accepted_quotes
-    @declined_quotes = current.declined_quotes
-    @completed_jobs = current.completed_quotes
-
-    if params[:request_id]
-      @open_quotes = @open_quotes.select do |quote|
-        quote.customer_request_id == params[:request_id].to_i
-      end
-      @accepted_quotes = @accepted_quotes.select do |quote|
-        quote.customer_request_id == params[:request_id].to_i
-      end
-      @declined_quotes = @declined_quotes.select do |quote|
-        quote.customer_request_id == params[:request_id].to_i
-      end
-      @completed_jobs = @completed_jobs.select do |quote|
-        quote.customer_request_id == params[:request_id].to_i
-      end
     end
   end
 
