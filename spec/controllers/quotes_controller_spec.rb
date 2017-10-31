@@ -57,6 +57,126 @@ RSpec.describe QuotesController, type: :controller do
         expect(assigns(:open_quotes)).to include(q1, q3, q5)
         expect(assigns(:open_quotes)).to_not include(q2, q4)
       end
+
+      it 'assigns all the customers accepted quotes to @accepted_quotes' do
+        company1 = create(:company)
+        company2 = create(:company)
+        customer = create(:customer)
+        sign_in customer
+        cr1 = create(:customer_request, customer_id: customer.id)
+        cr2 = create(:customer_request, customer_id: customer.id)
+        cr3 = create(:customer_request, customer_id: customer.id)
+        q1 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr1.id,
+          accepted: false
+          )
+        q2 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr2.id,
+          accepted: true
+          )
+        q3 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr3.id,
+          accepted: nil
+          )
+        q4 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr1.id,
+          accepted: true
+          )
+        q5 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr2.id,
+          accepted: false
+          )
+        create(:contract, quote_id: q2.id, completion_date: nil)
+        create(:contract, quote_id: q4.id, completion_date: nil)
+        get :index
+        expect(assigns(:accepted_quotes)).to_not include(q1, q3, q5)
+        expect(assigns(:accepted_quotes)).to include(q2, q4)
+      end
+
+      it 'assigns all the customers declined quotes to @declined_quotes' do
+        company1 = create(:company)
+        company2 = create(:company)
+        customer = create(:customer)
+        sign_in customer
+        cr1 = create(:customer_request, customer_id: customer.id)
+        cr2 = create(:customer_request, customer_id: customer.id)
+        cr3 = create(:customer_request, customer_id: customer.id)
+        q1 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr1.id,
+          accepted: false
+          )
+        q2 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr2.id,
+          accepted: true
+          )
+        q3 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr3.id,
+          accepted: nil
+          )
+        q4 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr1.id,
+          accepted: true
+          )
+        q5 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr2.id,
+          accepted: false
+          )
+        create(:contract, quote_id: q2.id, completion_date: nil)
+        create(:contract, quote_id: q4.id, completion_date: nil)
+        get :index
+        expect(assigns(:declined_quotes)).to include(q1, q5)
+        expect(assigns(:declined_quotes)).to_not include(q2, q3, q4)
+      end
+
+      it 'assigns all the customers completed quotes to @completed_quotes' do
+        company1 = create(:company)
+        company2 = create(:company)
+        customer = create(:customer)
+        sign_in customer
+        cr1 = create(:customer_request, customer_id: customer.id)
+        cr2 = create(:customer_request, customer_id: customer.id)
+        cr3 = create(:customer_request, customer_id: customer.id)
+        q1 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr1.id,
+          accepted: false
+          )
+        q2 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr2.id,
+          accepted: true
+          )
+        q3 = create(:quote,
+          company_id: company1.id,
+          customer_request_id: cr3.id,
+          accepted: nil
+          )
+        q4 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr1.id,
+          accepted: true
+          )
+        q5 = create(:quote,
+          company_id: company2.id,
+          customer_request_id: cr2.id,
+          accepted: false
+          )
+        q2contract = create(:contract, quote_id: q2.id, completion_date: 1.day.from_now)
+        create(:contract, quote_id: q4.id, completion_date: nil)
+        get :index
+        expect(assigns(:completed_quotes)).to_not include(q1, q3, q4, q5)
+        expect(assigns(:completed_quotes)).to include(q2)
+      end
     end
 
     context 'with company signed in' do

@@ -154,4 +154,31 @@ RSpec.describe "customer decides on quote", :type => :feature do
       expect(page).to have_css('#declined', visible: false)
     end
   end
+
+  context 'customer view of quotes index when there are completed contracts' do
+    before :each do
+      @quote.update(accepted: true)
+      create(:contract, quote_id: @quote.id, completion_date: Time.current)
+      visit('/quotes')
+    end
+
+    it 'should show completed quotes button when there are completed quotes' do
+      expect(page).to have_css('#completedBtn')
+    end
+
+    it 'should allow customer to view completed quotes' do
+      click_button 'Completed Requests'
+      within '#completed_quotes' do
+        expect(page).to have_content('Sample request description')
+      end
+    end
+
+    it 'should hide completed quotes modal when customer clicks close x' do
+      click_button 'Completed Requests'
+      within '#completed' do
+        find('.close').click
+      end
+      expect(page).to have_css('#completed', visible: false)
+    end
+  end
 end

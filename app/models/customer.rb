@@ -52,6 +52,8 @@ class Customer < ApplicationRecord
   end
 
   def completed_quotes
-    contracts.where.not(completion_date: nil).map(&:quote)
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS NOT null'
+    )
   end
 end
