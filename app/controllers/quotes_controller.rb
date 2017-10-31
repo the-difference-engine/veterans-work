@@ -18,7 +18,7 @@ class QuotesController < ApplicationController
         @declined_quotes = @declined_quotes.select do |quote|
           quote.customer_request_id == params[:request_id].to_i
         end
-        @completed_jobs = @completed_jobs.select do |quote|
+        @completed_quotes = @completed_quotes.select do |quote|
           quote.customer_request_id == params[:request_id].to_i
         end
       end
