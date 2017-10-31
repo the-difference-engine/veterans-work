@@ -218,7 +218,7 @@ h1.home-title {
 #how {
   .container {
     width: 100%;
-    height: 80vh;
+    height: 90vh;
 
     .hero-text {
       float: left;
@@ -244,14 +244,43 @@ h1.home-title {
         text-align: justify;
         text-shadow: 2px 2px 3px #222;
       }
+
+      ul {
+        list-style: none;
+        li {
+          text-decoration: none;
+          font: $h5;
+          padding-top: 7px;
+
+          a {
+            color: white;
+
+            &:hover {
+              text-decoration: none;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
     }
 
+    .down-arrow {
+      width: 100%;
+      text-align: center;
+      padding: 0;
+
+      img {
+        width: 80px;
+      }
+
+      &:hover {
+        opacity: 0.8;
+        img {
+          width: 90px;
+        }
+      }
+    }
   }
-
-
-
-
-
 
   .steps {
     margin: 0;
@@ -290,7 +319,6 @@ h1.home-title {
           line-height: 70vh;
         }
 
-
         h2 {
           margin-top: 0;
           text-align: center;
@@ -303,6 +331,10 @@ h1.home-title {
           width: 80%;
           margin: 0 auto;
           color: white;
+        }
+
+        h5 {
+
         }
       }
     }
