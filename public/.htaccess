@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
-    background-image: url("https://i.pinimg.com/736x/f0/1f/c8/f01fc8ca9ffa0c9efd764ed3406d77f8--god-bless-america-god-bless-you.jpg");
-    background-repeat: no-repeat;
-    background-height: 100;
-    background-size: 1290px 825px;
+    background-color: #EFEFEF;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
@@ -29,14 +26,14 @@
     border-top: #B00100 solid 4px;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
-    background-color: green;
+    background-color: white;
     padding: 7px 12% 0;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
 
   h1 {
     font-size: 100%;
-    color: white;
+    color: #730E15;
     line-height: 1.5em;
   }
 
