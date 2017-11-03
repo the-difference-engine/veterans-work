@@ -1,15 +1,15 @@
 
 <h1>My Quotes</h1>
 <div>
-  <% if @declined_quotes != [] %>
+  <% if @declined_quotes.any? %>
     <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
   <% end %>
-  <% if @completed_quotes != [] %>
+  <% if @completed_quotes.any? %>
     <button id="completedBtn" class="btn btn-success">Completed Requests</button>
   <% end %>
 </div>
 
-<% if @open_quotes != [] %>
+<% if @open_quotes.any? %>
   <div class="panel panel-default">
     <div class="panel-body">  
       <%= render "quotes_table", 
@@ -21,7 +21,7 @@
   </div>
 <% end %>
 
-<% if @accepted_quotes != [] %>
+<% if @accepted_quotes.any? %>
   <div class="panel panel-default">
     <div class="panel-body">
       <%= render "quotes_table", 
