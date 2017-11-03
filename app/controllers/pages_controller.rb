@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def index
-    @homepage = true
+    @full_width_page = true
     if current_company
       redirect_to "/customer_requests"
     elsif  current_customer
@@ -14,6 +14,12 @@ class PagesController < ApplicationController
   end
 
   def about
+    @full_width_page = true
     render "about.html"
   end
+
+  def how
+    @full_width_page = true
+  end
+
 end

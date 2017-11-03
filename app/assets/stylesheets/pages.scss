@@ -4,7 +4,7 @@
 @import "colors";
 @import 'typography';
 
-body.homepage {
+body.full-width-page {
   width: 100%;
 }
 
@@ -12,7 +12,7 @@ body.homepage {
   min-height: 100vh;
 }
 
-body.homepage .main-content {
+body.full-width-page .main-content {
   width: 100%;
   padding: 0;
 }
@@ -146,6 +146,148 @@ h1.home-title {
   }
 }
 
+
+#about {
+  .container {
+    width: 100%;
+    .mission {
+      float: left;
+      margin-top: 8vh;
+      margin-left: 20vh;
+      margin-bottom: 20vh;
+      max-width: 50%;
+      background-color: rgba(1, 45, 1, 0.6);
+      border-radius: 15px;
+      box-shadow: 3px 3px 5px #888;
+      padding: 20px;
+
+      h1 {
+        margin: 0;
+        font: $h1;
+        color: white;
+        text-shadow: 3px 3px 5px #666;
+
+      }
+
+      h3 {
+        font: $h4;
+        color: white;
+        text-align: justify;
+        text-shadow: 2px 2px 3px #222;
+      }
+    }
+
+  }
+  .history {
+    background: white;
+    padding: 20px 10% 20px 10%;
+
+    p {
+      font: $h5;
+      text-align: justify;
+
+    }
+
+    h2 {
+      text-align: center;
+    }
+  }
+
+  hr {
+    width: 50%;
+    height: 1px;
+
+  }
+
+  .contact {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    // color: white;
+    background-color: rgba(1, 45, 1, 0.6);
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px #888;
+    padding: 10px;
+    h2, h3 {
+      color: white;
+    }
+
+  }
+}
+
+#how {
+  .container {
+    width: 100%;
+    height: 80vh;
+    .mission {
+      float: left;
+      margin-top: 8vh;
+      margin-left: 20vh;
+      margin-bottom: 20vh;
+      max-width: 50%;
+      background-color: rgba(1, 45, 1, 0.8);
+      border-radius: 15px;
+      padding: 20px;
+
+      h1 {
+        margin: 0;
+        font: $h1;
+        color: white;
+        text-shadow: 3px 3px 5px #666;
+
+      }
+
+      h3 {
+        font: $h4;
+        color: white;
+        text-align: justify;
+        text-shadow: 2px 2px 3px #222;
+      }
+    }
+
+  }
+  .history {
+    background: white;
+    padding: 20px 10% 20px 10%;
+
+    p {
+      font: $h5;
+      text-align: justify;
+
+    }
+
+    h2 {
+      text-align: center;
+    }
+  }
+
+  hr {
+    width: 50%;
+    height: 1px;
+
+  }
+
+  .contact {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    // color: white;
+    background-color: rgba(1, 45, 1, 0.6);
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px #888;
+    padding: 10px;
+    h2, h3 {
+      color: white;
+    }
+
+  }
+}
+
+
+.jumbotron.jumbotron-fluid {
+  padding: -10%;
+}
+
 @media only screen and (max-width: 768px) {
   .contact-us {
     font-size: 1.25em;
@@ -169,6 +311,3 @@ h1.home-title {
 .non-clickable {
   pointer-events: none;
 }
-
-
-
