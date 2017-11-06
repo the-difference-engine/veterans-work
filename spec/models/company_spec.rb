@@ -156,4 +156,281 @@ RSpec.describe Company, type: :model do
       expect(company.eligible_customer_requests).to eq([close_customer_request])
     end
   end
+
+  describe 'open_quotes' do
+    it 'returns only open quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id
+      )
+      create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(company.open_quotes).to include(quote1)
+    end
+
+    it 'should not return accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(company.open_quotes).not_to include(quote2)
+    end
+  end
+
+  describe 'accepted_quotes' do
+    it 'should return accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      expect(company.accepted_quotes).to include(quote2)
+    end
+
+    it 'should not return quotes that have not been accepted' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      expect(company.accepted_quotes).not_to include(quote1)
+    end
+
+    it 'should not return completed quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      contract.update(completion_date: 1.day.ago)
+      expect(company.accepted_quotes).not_to include(quote2)
+    end
+  end 
+
+  describe 'declined_quotes' do
+    it 'should return declined quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      quote1.update(accepted: false)
+      expect(company.declined_quotes).to include(quote1)
+    end
+
+    it 'should not return accepted quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      quote1.update(accepted: false)
+      expect(company.declined_quotes).not_to include(quote2)
+    end
+
+    it 'should not return open quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(company.declined_quotes).not_to include(quote1)
+    end    
+  end
+
+  describe 'completed_quotes' do
+    it 'should return completed quotes' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      contract.update(completion_date: 1.day.ago)
+      expect(company.completed_quotes).to include(quote2)
+    end 
+
+    it 'should not return accepted quotes that have not been completed' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      expect(company.completed_quotes).not_to include(quote2)
+    end
+
+    it 'should not return quotes that have not been accepted' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      contract = create(:contract,
+        quote_id: quote2.id,
+        customer_request_id: customer_request2.id,
+        completion_date: nil)
+      expect(company.completed_quotes).not_to include(quote1)
+    end
+  end
 end

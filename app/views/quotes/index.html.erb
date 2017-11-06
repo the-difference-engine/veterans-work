@@ -1,7 +1,59 @@
+
 <h1>My Quotes</h1>
-<% if current_customer %>
-  <%= render 'customer_quotes' %>
-<% elsif current_company %>
-  <%= render 'company_quotes' %>
-<% else @quotes %>
+<div>
+  <% if @declined_quotes.any? %>
+    <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
+  <% end %>
+  <% if @completed_quotes.any? %>
+    <button id="completedBtn" class="btn btn-success">Completed Requests</button>
+  <% end %>
+</div>
+
+<% if @open_quotes.any? %>
+  <div class="panel panel-default">
+    <div class="panel-body">  
+      <%= render "quotes_table", 
+        quotes: @open_quotes, 
+        title: "Open Quotes", 
+        table_id: "open_quotes"
+      %>
+    </div>
+  </div>
 <% end %>
+
+<% if @accepted_quotes.any? %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= render "quotes_table", 
+        quotes: @accepted_quotes, 
+        title: "Accepted Quotes", 
+        table_id: "accepted_quotes"
+      %>
+    </div>
+  </div>
+<% end %>
+
+
+<!-- Modal Content -->
+
+<div id="declined" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <%= render "quotes_table", 
+      quotes: @declined_quotes, 
+      title: "Declined Quotes", 
+      table_id: "declined_quotes"
+    %>
+  </div>
+</div>
+<div id="completed" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <%= render "quotes_table", 
+      quotes: @completed_quotes, 
+      title: "Completed Jobs", 
+      table_id: "completed_quotes"
+    %>
+  </div>
+</div>
+

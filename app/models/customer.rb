@@ -37,29 +37,23 @@ class Customer < ApplicationRecord
   has_many :quotes, through: :customer_requests
   has_many :contracts, through: :customer_requests
 
-
   def open_quotes
-    quotes = []
-    customer_requests.each do |cr|
-      cr.quotes.each do |quote|
-        if quote.accepted == nil
-          quotes << quote
-        end
-      end
-    end
-    quotes
+    quotes.where(accepted: nil)
   end
 
   def accepted_quotes
-    quotes = []
-    customer_requests.each do |cr|
-      cr.quotes.each do |quote|
-        if quote.accepted
-          quotes << quote
-        end
-      end
-    end
-    quotes
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS null'
+    )
   end
 
+  def declined_quotes
+    quotes.where(accepted: false)
+  end
+
+  def completed_quotes
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS NOT null'
+    )
+  end
 end

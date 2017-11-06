@@ -1,0 +1,30 @@
+<h2><%= title %></h2>
+<table id="<%= table_id %>" class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Request Description</th>
+      <th>Request Expires</th>
+      <th>Company</th>
+      <th>Start Date</th>
+      <th>Completion Date Estimate</th>
+      <th>Total Cost Estimate</th>
+      <th>Quote Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% quotes.each do |quote| %>
+    <tr 
+      <% if quote.customer_viewed == false %> 
+      style="font-weight: bold;"<% end %>
+    >
+      <td><%= quote.customer_request.description %></td>
+      <td><%= quote.customer_request.expires_date %></td>
+      <td><%= quote.company.name%></td>
+      <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
+      <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+      <td><%= number_to_currency(quote.total_cost_estimate) %></td>
+      <td><a href="/quotes/<%= quote.id %>" id="quote<%=quote.id%>"><button class="btn btn-success">Details</button></a></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
