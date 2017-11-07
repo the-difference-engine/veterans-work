@@ -221,19 +221,19 @@ h1.home-title {
     border-radius: 500px;
     background: white;
     color: rgba(1, 45, 1, 0.6);
-    height: 30px;
-    width: 30px;
+    height: 45px;
+    width: 45px;
     z-index: 10;
     // box-shadow: 0px 0px 3px #333;
     border: 1px solid rgba(100, 100, 100, 0.4);
 
     position: fixed;
-    bottom: 18px;
-    right: 18px;
+    bottom: 15px;
+    right: 15px;
 
     text-align: center;
     padding-top: 5px;
-    font: $h5;
+    font: $h3;
 
     &:hover {
       background: #eee;
@@ -249,7 +249,7 @@ h1.home-title {
       float: left;
       margin-top: 8vh;
       margin-left: 20vh;
-      margin-bottom: 20vh;
+      margin-bottom: 60px;
       max-width: 50%;
       background-color: rgba(1, 45, 1, 0.8);
       border-radius: 15px;
@@ -317,11 +317,11 @@ h1.home-title {
       line-height: 70vh;
 
       &:nth-child(even) {
-        background-color: blue;
+        background-color: #777;
       }
 
       &:nth-child(odd) {
-        background-color: red;
+        background-color: $design-green;
       }
 
       .image {
@@ -365,7 +365,7 @@ h1.home-title {
     }
   }
 
-  // .contact {
+/*  // .contact {
   //   width: 40%;
   //   margin: 0 auto;
   //   text-align: center;
@@ -376,7 +376,7 @@ h1.home-title {
   //   padding: 10px;
   //   h2, h3 {
   //     color: white;
-  //   }
+  //   }*/
 
 }
 
