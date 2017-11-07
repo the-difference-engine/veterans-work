@@ -12,7 +12,7 @@
 
 
   <body class="<%= @full_width_page ? 'full-width-page' : 'non-homepage' %>">
-    <%= render "sidenav" %>
+    <%= render "sidenav", headerClass: (@full_width_page ? 'clearHeader' : 'whiteHeader') %>
 
     <div class="container main-content">
       <% if notice || alert %>
@@ -28,7 +28,7 @@
 
       <%= yield %>
     </div>
-    
+
     <div class="footer">
       <div class="container">
         <div class="row">
