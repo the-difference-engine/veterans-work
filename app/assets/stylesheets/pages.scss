@@ -251,12 +251,13 @@ h1.home-title {
       margin-left: 20vh;
       margin-bottom: 60px;
       max-width: 50%;
-      background-color: rgba(1, 45, 1, 0.8);
+      background-color: rgba(60, 80, 109, 0.9);
       border-radius: 15px;
       padding: 20px;
 
       h1 {
         margin: 0;
+        text-align: center;
         font: $h1;
         color: white;
         text-shadow: 3px 3px 5px #666;
@@ -317,18 +318,26 @@ h1.home-title {
       line-height: 70vh;
 
       &:nth-child(even) {
-        background-color: #777;
+        // background: linear-gradient(#999, #888);
+        background: linear-gradient(#3b4f6b, #38517a);
+        // background: linear-gradient(#359e4e, $design-green)
+
       }
 
       &:nth-child(odd) {
         background-color: $design-green;
+        background-color: #359e4e;
+
+        // background: linear-gradient($design-green, #359e4e)
+        background: linear-gradient(#5b6f8e, #607289 )
       }
 
       .image {
         overflow: hidden;
+        text-align: center;
         img {
-          width: 100%;
-          height: auto;
+          height: 60vh;
+          width: auto;
           border-radius: 15px;
         }
       }
@@ -341,8 +350,9 @@ h1.home-title {
         span {
           display: inline-block;
           vertical-align: middle;
-          line-height: 70vh;
         }
+
+
 
         h2 {
           margin-top: 0;
@@ -356,6 +366,20 @@ h1.home-title {
           width: 80%;
           margin: 0 auto;
           color: white;
+
+          span.centered-link {
+            width: 100%;
+            text-align: center;
+            a {
+              color: white;
+
+              &:hover {
+                color: #bbb;
+                font-size: 105%;
+                text-decoration: none;
+              }
+            }
+          }
         }
 
         h5 {
