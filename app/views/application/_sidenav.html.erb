@@ -24,11 +24,11 @@
         <a href="/">HOME</a>
         <a href="
           <% if current_customer %>
-            /customers/edit
+            /customers/edit">Edit My 
           <% elsif current_company %>
-            /companies/<%=current_company.id%>
+            /companies/<%=current_company.id%>">My 
           <% end %>
-        ">My Profile</a>
+        Profile</a>
         <a href="/customer_requests">Customer Requests</a>
         <a href="/quotes">Quotes</a>
         <a href="/contracts">Contracts</a>
