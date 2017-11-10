@@ -24,6 +24,13 @@ h1.home-title {
   text-shadow: 2px 2px 1px gray;
 }
 
+#home-header {
+  padding-bottom: 20px;
+  .container {
+    padding: 0px;
+  }
+}
+
 #home-header h3 {
   font: $h3;
   color: $white;
@@ -36,7 +43,6 @@ h1.home-title {
 .icons ul {
   list-style: none;
   float: middle;
-  width: 1000px;
   margin: 0 auto;
   text-align: center;
   padding-bottom: 170px;
@@ -64,6 +70,9 @@ h1.home-title {
   width: 100%;
   margin-top: 30px;
   padding: 0;
+  .row {
+    margin: 0px;
+  }
   #service-search {
     width: 50%;
     margin: 0 auto;
@@ -134,8 +143,8 @@ h1.home-title {
    text-align: center;
    padding: 10px 10px 10px 10px;
   }
-  .button {
-
+  .button:hover {
+    color: black;
   }
   p.sign-up {
     text-align: center;
