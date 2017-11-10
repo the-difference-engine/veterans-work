@@ -13,8 +13,8 @@
         <ul>
           <li><a href="#first">Join Us</a></li>
           <li><a href="#second">Submit a Work Request</a></li>
-          <li><a href="#third">Pick your Poison</a></li>
-          <li><a href="#fourth">Get 'er Done</a></li>
+          <li><a href="#third">Choose your Company</a></li>
+          <li><a href="#fourth">Work Begins</a></li>
           <li><a href="#fifth">Leave a Review</a></li>
         </ul>
       </div>
@@ -24,10 +24,10 @@
 
   <div class="steps">
     <div class="section" id="first">
-      <div class="image col-sm-12 col-md-6">
+      <div class="image col-xs-12 col-md-6">
         <%= image_tag 'join-us.jpg' %>
       </div>
-      <div class="text col-sm-12 col-md-6">
+      <div class="text col-xs-12 col-md-6">
         <span>
           <h2>Join Us</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu libero quis ligula rutrum finibus. Praesent lobortis purus dolor, a porta ex mattis vel. Praesent ut fermentum odio. Vestibulum condimentum, arcu eu blandit blandit, ligula odio malesuada risus, eget porttitor sapien lorem vel tortor.
@@ -41,61 +41,70 @@
     </div>
 
     <div class="section" id="second">
-      <div class="text col-sm-12 col-md-6">
+      <div class="text col-xs-12 col-md-6">
         <span>
           <h2>Submit a Work Request</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu libero quis ligula rutrum finibus. Praesent lobortis purus dolor, a porta ex mattis vel. Praesent ut fermentum odio. Vestibulum condimentum, arcu eu blandit blandit, ligula odio malesuada risus, eget porttitor sapien lorem vel tortor.
-          <br><br><span class="centered-link">
-            <a href="/customers/sign_in">Log in Now</a>
+            <% if current_customer %>
+              <br><br>
+              <span class="centered-link"><a href="/customer_requests/new">Create a Request</a></span>
+            <% elsif current_company %>
+            <% else %>
+              <br><br>
+              <span class="centered-link"><a href="/customers/sign_in">Log In</a></span>
+            <% end %>
             </span>
           </h4>
         </span>
       </div>
-      <div class="image col-sm-12 col-md-6">
+
+      <div class="image col-xs-12 col-md-6">
         <%= image_tag 'submit.jpg' %>
       </div>
     </div>
 
     <div class="section" id="third">
-      <div class="image col-sm-12 col-md-6">
+      <div class="image col-xs-12 col-md-6">
         <%= image_tag 'choosing.jpg' %>
       </div>
-      <div class="text col-sm-12 col-md-6">
+      <div class="text col-xs-12 col-md-6">
         <span>
-          <h2>Pick your Poison</h2>
+          <h2>Choose your Company</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu libero quis ligula rutrum finibus. Praesent lobortis purus dolor, a porta ex mattis vel. Praesent ut fermentum odio. Vestibulum condimentum, arcu eu blandit blandit, ligula odio malesuada risus, eget porttitor sapien lorem vel tortor.
-          <br><br><span class="centered-link"><a href="#">Sign Up Now</a></span>
           </h4>
         </span>
       </div>
     </div>
 
     <div class="section" id="fourth">
-      <div class="text col-sm-12 col-md-6">
+      <div class="text col-xs-12 col-md-6">
         <span>
-          <h2>Get 'er Done</h2>
+          <h2>Work Begins</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu libero quis ligula rutrum finibus. Praesent lobortis purus dolor, a porta ex mattis vel. Praesent ut fermentum odio. Vestibulum condimentum, arcu eu blandit blandit, ligula odio malesuada risus, eget porttitor sapien lorem vel tortor.
-          <br><br><span class="centered-link"><a href="#">Sign Up Now</a></span>
           </h4>
         </span>
       </div>
-      <div class="image col-sm-12 col-md-6">
+      <div class="image col-xs-12 col-md-6">
         <%= image_tag 'contract.jpg' %>
       </div>
     </div>
 
     <div class="section" id="fifth">
-      <div class="image col-sm-12 col-md-6">
+      <div class="image col-xs-12 col-md-6">
         <%= image_tag 'Review-Stars.png', style: "width: 90%; height: auto;" %>
       </div>
-      <div class="text col-sm-12 col-md-6">
+      <div class="text col-xs-12 col-md-6">
         <span>
           <h2>Leave a Review</h2>
           <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu libero quis ligula rutrum finibus. Praesent lobortis purus dolor, a porta ex mattis vel. Praesent ut fermentum odio. Vestibulum condimentum, arcu eu blandit blandit, ligula odio malesuada risus, eget porttitor sapien lorem vel tortor.
-          <br><br><span class="centered-link"><a href="#">Sign Up Now</a></span>
+          <br><br><span class="centered-link"><a href="/customers/sign_up">Get Started Today!</a></span>
           </h4>
         </span>
       </div>
+    </div>
+
+    <div class="contact">
+        <%= render 'contact_info' %>
     </div>
   </div>
 </div>

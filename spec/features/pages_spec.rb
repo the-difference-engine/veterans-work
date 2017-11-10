@@ -48,3 +48,42 @@ RSpec.describe "Clicking content links on splash page", :type => :feature do
   end
 
 end
+
+
+RSpec.describe "Clicking links on How page", :type => :feature do
+
+  it 'goes to the Customer Sign up page' do
+    visit '/how'
+    page.find('#first div.text span span.centered-link a').click
+    expect(page).to have_content 'Customer Registration'
+  end
+
+  it 'goes to the Customer Log in page' do
+    visit '/how'
+    page.find('#second div.text span span.centered-link a').click
+    expect(page).to have_content 'Customer Sign In'
+  end
+
+  it 'goes to the Customer Request page' do
+    with_customer_signed_in
+    visit '/how'
+    page.find('#second div.text span span.centered-link a').click
+    expect(page).to have_content 'Enter Work Request'
+  end
+
+  it 'goes to the Customer Registration' do
+    visit '/how'
+    page.find('#fifth div.text span span.centered-link a').click
+    expect(page).to have_content 'Customer Registration'
+  end
+end
+
+  def with_customer_signed_in
+    @customer = create :customer, email: 'customer@example.com', password: 'password'
+    visit '/customers/sign_in'
+    within('.login-form') do
+      fill_in 'customer[email]', with: 'customer@example.com'
+      fill_in 'customer[password]', with: 'password'
+    end
+    click_button 'Log in'
+  end

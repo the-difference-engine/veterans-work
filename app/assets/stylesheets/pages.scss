@@ -310,7 +310,6 @@ h1.home-title {
 
   .steps {
     margin: 0;
-    background: red;
 
     .section {
       background-color: yellow;
@@ -318,26 +317,20 @@ h1.home-title {
       line-height: 70vh;
 
       &:nth-child(even) {
-        // background: linear-gradient(#999, #888);
-        background: linear-gradient(#3b4f6b, #38517a);
-        // background: linear-gradient(#359e4e, $design-green)
-
+        background: $blue-gradient;
       }
 
       &:nth-child(odd) {
-        background-color: $design-green;
-        background-color: #359e4e;
-
-        // background: linear-gradient($design-green, #359e4e)
-        background: linear-gradient(#5b6f8e, #607289 )
+        background: $gray-gradient;
       }
 
       .image {
         overflow: hidden;
         text-align: center;
+
         img {
-          height: 60vh;
-          width: auto;
+          height: auto;
+          width: 95%;
           border-radius: 15px;
         }
       }
@@ -382,31 +375,206 @@ h1.home-title {
           }
         }
 
-        h5 {
 
-        }
       }
     }
   }
 
-/*  // .contact {
-  //   width: 40%;
-  //   margin: 0 auto;
-  //   text-align: center;
-  //   // color: white;
-  //   background-color: rgba(1, 45, 1, 0.6);
-  //   border-radius: 15px;
-  //   box-shadow: 3px 3px 5px #888;
-  //   padding: 10px;
-  //   h2, h3 {
-  //     color: white;
-  //   }*/
+  .contact {
+    margin: 0 auto;
+    text-align: center;
+    // color: white;
+    background: $blue-gradient;
+    padding: 10px;
+    h2, h3 {
+      color: white;
+    }
+
+    h2 {
+      font: $h2;
+    }
+
+    h3 {
+      font: $h5;
+    }
+  }
 
 }
 
 
 .jumbotron.jumbotron-fluid {
   padding: -10%;
+}
+
+@media only screen and (max-width: 991px) {
+
+  #how {
+    .top-arrow {
+      border-radius: 500px;
+      background: white;
+      color: rgba(1, 45, 1, 0.6);
+      height: 45px;
+      width: 45px;
+      z-index: 10;
+      // box-shadow: 0px 0px 3px #333;
+      border: 1px solid rgba(100, 100, 100, 0.4);
+
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+
+      text-align: center;
+      padding-top: 5px;
+      font: $h3;
+
+      &:hover {
+        background: #eee;
+        color: rgba(1, 45, 1, 0.4);
+      }
+    }
+
+    .container {
+      width: 100%;
+      height: 90vh;
+
+      .hero-text {
+        float: left;
+        margin-top: 8vh;
+        margin-left: 20vh;
+        margin-bottom: 60px;
+        max-width: 50%;
+        background-color: rgba(60, 80, 109, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+
+        h1 {
+          margin: 0;
+          text-align: center;
+          font: $h1;
+          color: white;
+          text-shadow: 3px 3px 5px #666;
+
+        }
+
+        h3 {
+          font: $h4;
+          color: white;
+          text-align: justify;
+          text-shadow: 2px 2px 3px #222;
+        }
+
+        ul {
+          list-style: none;
+          li {
+            text-decoration: none;
+            font: $h5;
+            padding-top: 7px;
+
+            a {
+              color: white;
+
+              &:hover {
+                text-decoration: none;
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+
+      .down-arrow {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+
+        img {
+          width: 80px;
+        }
+
+        &:hover {
+          opacity: 0.8;
+          img {
+            width: 90px;
+          }
+        }
+      }
+    }
+
+    .steps {
+      margin: 0;
+
+      .section {
+        line-height: 0;
+        height: 90vh;
+
+
+        &:nth-child(even) {
+          background: $blue-gradient;
+          div {
+            float: right;
+          }
+        }
+
+        &:nth-child(odd) {
+          background: $gray-gradient;
+        }
+
+
+        .image {
+          margin-top: 40px;
+          text-align: center;
+
+          img {
+            width: 50%;
+            border-radius: 15px;
+          }
+        }
+
+        .text {
+          height: initial;
+          line-height: 15;
+          margin-top: 40px;
+          padding: default;
+          text-align: justify;
+
+          span {
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+
+
+          h2 {
+            margin-top: 0;
+            text-align: center;
+            font: $h2;
+            color: white;
+          }
+
+          h4 {
+            font: $h5;
+            width: 80%;
+            margin: 0 auto;
+            color: white;
+
+            span.centered-link {
+              width: 100%;
+              text-align: center;
+              a {
+                color: white;
+
+                &:hover {
+                  color: #bbb;
+                  font-size: 105%;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 768px) {
