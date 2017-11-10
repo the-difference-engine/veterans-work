@@ -121,6 +121,7 @@ h1.home-title {
 .vet-sign-in {
   background-color: #EFEFEF;
   margin-top: 35px;
+  padding-top: 20px;
   padding-bottom: 20px;
 
   h4 {
@@ -129,15 +130,16 @@ h1.home-title {
     color: black;
     text-align: center;
   }
-  p {
+  h5 {
    text-align: center;
+   padding: 10px 10px 10px 10px;
   }
-  button {
+  .button {
 
   }
   p.sign-up {
-    text-align: left;
-    padding-top: 10px;
+    text-align: center;
+    padding-top: 20px;
     a {
       color: #136E29;
       font-weight: bold;
