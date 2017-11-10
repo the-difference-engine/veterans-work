@@ -110,11 +110,23 @@ class Company < ApplicationRecord
   end
 
   def accepted_quotes
-    quotes.where(accepted: true)
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS null'
+    )
+  end
+
+  def declined_quotes
+    quotes.where(accepted: false)
+  end
+
+  def completed_quotes
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS NOT null'
+    )
   end
 
   def star_avg
-    if reviews.count > 0 
+    if reviews.count > 0
       stars = reviews.pluck(:stars)
       (stars.reduce(:+).to_f/stars.size).round
     else
