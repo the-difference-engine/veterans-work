@@ -71,8 +71,16 @@ RSpec.describe "customer decides on quote", :type => :feature do
     @service_category = create :service_category, name: 'Paint'
     @customer = create :customer, email: 'customer@example.com', password: 'password'
     @customer_request = create :customer_request, customer_id: @customer.id, description: 'Sample request description', service_category_id: @service_category.id, zipcode: '60601', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
-    @quote1 = create :quote, customer_request_id: @customer_request.id, company_id: @company1.id
-    @quote2 = create :quote, customer_request_id: @customer_request.id, company_id: @company2.id
+    @customer_request2 = create :customer_request, customer_id: @customer.id, description: 'A Second Request', service_category_id: @service_category.id, zipcode: '60601', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
+    @quote1 = create :quote,
+      customer_request_id: @customer_request.id,
+      company_id: @company1.id
+    @quote2 = create :quote,
+      customer_request_id: @customer_request.id,
+      company_id: @company2.id
+    @quote3 = create :quote,
+      customer_request_id: @customer_request2.id,
+      company_id: @company1.id
     visit '/companies/sign_in'
     within(".login-form") do
       fill_in 'company[email]', with: 'user1@example.com'
@@ -81,7 +89,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
     click_button 'Log in'
   end
 
-  context 'company view of quotes table for open quotes' do
+  context 'company view of quotes index when company has open quotes' do
     before :each do
       visit('/quotes')
     end
@@ -89,9 +97,16 @@ RSpec.describe "customer decides on quote", :type => :feature do
     it 'should show open quotes in open quote table' do
       within '#open_quotes' do
         expect(page).to have_content('Sample request description')
+        expect(page).to have_content('A Second Request')
       end
     end
+    it 'should not show accepted quotes table if there are only open quotes' do
+      expect(page).to_not have_css('#accepted_quotes')
+    end
     it 'should not show open quotes in accepted quote table' do
+      @quote3.update(accepted: true)
+      create(:contract, quote_id: @quote3.id, completion_date: nil)
+      visit('/quotes')
       within '#accepted_quotes' do
         expect(page).to_not have_content('Sample request description')
       end
@@ -101,6 +116,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   context 'company view of quotes table when own quote is accepted' do
     before :each do
       @quote1.update(accepted: true)
+      create(:contract, quote_id: @quote1.id, completion_date: nil)
       @quote2.update(accepted: false)
       visit('/quotes')
     end
@@ -115,24 +131,66 @@ RSpec.describe "customer decides on quote", :type => :feature do
         expect(page).to have_content('Sample request description')
       end
     end
+    it 'should not show open quotes table if there are only accepted quotes' do
+      @quote3.update(accepted: true)
+      create(:contract, quote_id: @quote3.id, completion_date: nil)
+      visit('/quotes')
+      expect(page).to_not have_css('#open_quotes')
+    end
   end
 
   context 'company view of quotes table when own quote is rejected' do
     before :each do
       @quote2.update(accepted: true)
+      create(:contract, quote_id: @quote2.id, completion_date: nil)
       @quote1.update(accepted: false)
       visit('/quotes')
     end
 
+    it 'should show declined quotes button' do
+      expect(page).to have_css('#declinedBtn')
+    end
     it 'should not show own rejected quotes in open quote table' do
       within '#open_quotes' do
         expect(page).to_not have_content('Sample request description')
       end
     end
     it 'should not show own rejected quotes in accepted quote table' do
+      @quote3.update(accepted: true)
+      create(:contract, quote_id: @quote3.id, completion_date: nil)
+      visit('/quotes')
       within '#accepted_quotes' do
         expect(page).to_not have_content('Sample request description')
       end
     end
+  end
+
+  context 'company view of quotes table after a job has been completed' do
+    before :each do
+      @quote1.update(accepted: true)
+      create(:contract, quote_id: @quote1.id, completion_date: 1.day.ago)
+      @quote2.update(accepted: false)
+      visit('/quotes')
+    end
+
+    it 'should show completed quotes button when there are completed quotes' do
+      expect(page).to have_css('#completedBtn')
+    end
+
+    it 'should allow company to view completed quotes' do
+      click_button 'Completed Requests'
+      within '#completed_quotes' do
+        expect(page).to have_content('Sample request description')
+      end
+    end
+
+    it 'should hide completed quotes modal when customer clicks close x' do
+      click_button 'Completed Requests'
+      within '#completed' do
+        find('.close').click
+      end
+      expect(page).to have_css('#completed', visible: false)
+    end
+
   end
 end
