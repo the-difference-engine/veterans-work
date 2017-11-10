@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top <%= headerClass %>">
+<nav class="navbar navbar-default navbar-static-top whiteHeader">
   <div class="container-fluid nav">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-left">
@@ -14,68 +14,67 @@
         <% end %>
       </div>
     <% end %>
-    <div class="navbar-right pull-right">
-      <div class="nav open-nav" onclick="openNav()">&#9776;</div>
-    </div>
+
+    <% if current_customer || current_company %>
+      <div class="navbar-right pull-right">
+        <div class="nav open-nav" onclick="openNav()">&#9776;</div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+        <div class="closebtn" onclick="closeNav()">&times;</div>
+        <a href="/">HOME</a>
+        <a href="
+          <% if current_customer %>
+            /customers/edit
+          <% elsif current_company %>
+            /companies/<%=current_company.id%>
+          <% end %>
+        ">My Profile</a>
+        <a href="/customer_requests">Customer Requests</a>
+        <a href="/quotes">Quotes</a>
+        <a href="/contracts">Contracts</a>
+        <a>_________</a>
+        <%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %>
+        <%= link_to "Logout #{current_customer.email}", destroy_customer_session_path, method: :delete if current_customer %>
+      </div>
+
+    <% elsif current_admin %>
+      <div id="mySidenav" class="sidenav">
+        <div class="closebtn" onclick="closeNav()">&times;</div>
+        <a href="/admins/">HOME</a>
+        <a href="/credits/">Credits</a>
+        <a href="/companies/">Companies</a>
+        <a href="/admins/">Customers</a>
+        <a>_________</a>
+        <a href="/admins/<%=current_admin.id%>">Profile</a>
+        <a href="/admins/edit">Edit My Profile</a>
+        <a>_________</a>
+        <%= link_to "Logout #{current_admin.email}", destroy_admin_session_path, method: :delete if current_admin %>
+      </div>
+
+    <% else %>
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how">How It Works</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class='right-nav'><a class='non-clickable' href="#" >Not Registered?</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign-Up <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href='/companies/sign_up' id='company-sign-up'>Company Sign-Up</a></li>
+            <li><a href='/customers/sign_up' id='customer-sign-up'>Customer Sign-Up</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button>Sign-In <span class="caret"></span> </button></a>
+          <ul class="dropdown-menu">
+            <li><a href='/companies/sign_in' id='company-sign-in'>Company Sign-In</a></li>
+            <li><a href='/customers/sign_in' id='customer-sign-in'>Customer Sign-In</a></li>
+          </ul>
+        </li>
+      </ul>
+    <% end %>
   </div>
-
-  <% if current_customer || current_company %>
-    <div id="mySidenav" class="sidenav">
-      <div class="closebtn" onclick="closeNav()">&times;</div>
-      <a href="/">HOME</a>
-      <a href="
-        <% if current_customer %>
-          /customers/edit
-        <% elsif current_company %>
-          /companies/<%=current_company.id%>
-        <% end %>
-      ">My Profile</a>
-      <a href="/customer_requests">Customer Requests</a>
-      <a href="/quotes">Quotes</a>
-      <a href="/contracts">Contracts</a>
-      <a>_________</a>
-      <%= link_to "Logout #{current_company.name}", destroy_company_session_path, method: :delete if current_company %>
-      <%= link_to "Logout #{current_customer.email}", destroy_customer_session_path, method: :delete if current_customer %>
-    </div>
-
-  <% elsif current_admin %>
-    <div id="mySidenav" class="sidenav">
-      <div class="closebtn" onclick="closeNav()">&times;</div>
-      <a href="/admins/">HOME</a>
-      <a href="/credits/">Credits</a>
-      <a href="/companies/">Companies</a>
-      <a href="/admins/">Customers</a>
-      <a>_________</a>
-      <a href="/admins/<%=current_admin.id%>">Profile</a>
-      <a href="/admins/edit">Edit My Profile</a>
-      <a>_________</a>
-      <%= link_to "Logout #{current_admin.email}", destroy_admin_session_path, method: :delete if current_admin %>
-    </div>
-
-  <% else %>
-    <div id="mySidenav" class="sidenav">
-      <div class="closebtn" onclick="closeNav()">&times;</div>
-      <a href="/">Home</a>
-      <a href="/how">How It Works</a>
-      <a href="/about">About</a>
-      <a>_________</a>
-      <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">Sign Up <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href='/companies/sign_up' id='company-sign-up'>Company Sign-Up</a></li>
-          <li><a href='/customers/sign_up' id='customer-sign-up'>Customer Sign-Up</a></li>
-        </ul>
-      </div>
-      <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">Log In <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href='/companies/sign_in' id='company-sign-in'>Company Sign-In</a></li>
-          <li><a href='/customers/sign_in' id='customer-sign-in'>Customer Sign-In</a></li>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-
 </nav>
 
