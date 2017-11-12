@@ -73,6 +73,7 @@ class Company < ApplicationRecord
   has_many :quotes
   has_many :contracts, through: :quotes
   has_many :orders
+  has_many :conversations
 
   has_attached_file :avatar, 
     styles: { medium: '300x300>', thumb: '100x100>' }, 

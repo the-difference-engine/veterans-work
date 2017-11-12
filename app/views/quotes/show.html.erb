@@ -50,7 +50,12 @@
           <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
         <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
-        <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
+        <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a><br>
+        <form action="/conversations" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="quote_id" value="<%= @quote.id %>">
+          <button class="btn btn-md">Start A Conversation</button>
+        </form>
       <% end %>
     </div>
   </div>

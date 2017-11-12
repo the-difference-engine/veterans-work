@@ -1,0 +1,31 @@
+<div class="container">
+    <h1 class="text-center">My Conversations</h1>
+  <% @conversations.each do |conversation| %>
+    <div class="row">
+        <div class="col-sm-6">
+                <div id="tb-testimonial" class="testimonial testimonial-default">
+                    <div class="testimonial-section">
+                    <% if conversation.messages.count > 0 %>
+                      <h2><%= conversation.messages.last.body %></h2>
+                    <% else %>
+                      <h2 class="no-message-header">You don't have any messages for this conversation</h2>
+                    <% end %>
+                  </div>
+                    <div class="testimonial-desc">
+                        <div class="testimonial-writer">
+                          <% if current_company %>
+                            <div class="testimonial-writer-name"><%= conversation.customer.email %></div>
+                            <div class="testimonial-writer-designation"><%= conversation.created_at.localtime.strftime("%m/%d/%Y - %H:%M %Z") %></div>
+                            <a href="/conversations/<%=conversation.id%>" class="testimonial-writer-company btn btn-success">Go To Conversation</a>
+                          <% else %>
+                            <div class="testimonial-writer-name"><%= conversation.company.email %></div>
+                            <div class="testimonial-writer-designation"><%= conversation.created_at.localtime.strftime("%m/%d/%Y - %H:%M %Z") %></div>
+                            <a href="/conversations/<%=conversation.id%>" class="testimonial-writer-company btn btn-success">Go To Conversation</a>
+                          <% end %>
+                        </div>
+                    </div>
+                </div>   
+          </div>
+      </div>
+    <% end %>
+</div>
