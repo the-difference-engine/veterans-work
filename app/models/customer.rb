@@ -37,7 +37,6 @@ class Customer < ApplicationRecord
   has_many :quotes, through: :customer_requests
   has_many :contracts, through: :customer_requests
 
-
   def open_quotes
     quotes.where(accepted: nil)
   end
@@ -53,6 +52,8 @@ class Customer < ApplicationRecord
   end
 
   def completed_quotes
-    contracts.where.not(completion_date: nil).map(&:quote)
+    quotes.joins(:contracts).where(
+      'quotes.accepted IS true AND contracts.completion_date IS NOT null'
+    )
   end
 end
