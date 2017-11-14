@@ -1,10 +1,601 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.caption {
-  text-align: center;
-}
-h3 {
-  text-align: center;
+@import "colors";
+@import 'typography';
+
+body.full-width-page {
+  width: 100%;
 }
 
+.main-content {
+  min-height: 100vh;
+}
+
+body.full-width-page .main-content {
+  width: 100%;
+  padding: 0;
+}
+
+h1.home-title {
+  font: $h1;
+  color: $white;
+  text-align: center;
+  text-shadow: 2px 2px 1px gray;
+}
+
+#home-header h3 {
+  font: $h3;
+  color: $white;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 2px 2px 1px gray;
+  padding-bottom: 20px;
+}
+
+.icons ul {
+  list-style: none;
+  float: middle;
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 170px;
+}
+
+.icons li {
+  // padding: 0 10px;
+  // position: absolute;
+  color: $white;
+  left: 0;
+  right: 0;
+  text-shadow: 2px 2px 1px gray;
+  h4 {
+    font: $h4;
+    color: $white;
+  }
+
+  img {
+
+  }
+}
+
+#home-content {
+  background-color: #EFEFEF;
+  width: 100%;
+  margin-top: 30px;
+  padding: 0;
+  #service-search {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 10px;
+    h4 {
+      font: $h4;
+      font-weight: bold;
+      color: black;
+      padding-left: 3px;
+    }
+    input {
+      margin-right: 20px;
+    }
+    .service-text-box {
+      // width: 80%;
+      height: 35px;
+      padding-left: 10px;
+      font-family: Lato;
+
+    }
+    .service-text-box::-webkit-input-placeholder {
+      color: rgba(150, 150, 150, 0.9);
+    }
+  }
+}
+
+.button {
+  background-color: #136E29;
+  color: white;
+  border: 0;
+  height: 35px;
+  font: $button;
+}
+
+.home-info {
+  margin: 30px auto 0 auto;
+  background-color: $white;
+  width: 100%;
+  padding: 30px 0 40px 0;
+}
+
+.home-about {
+  padding-top: 0;
+  h2 {
+    color: #136E29;
+    font: $h3;
+    font-weight: bold;
+  }
+  p {
+    font: $h5;
+    line-height: 35px;
+  }
+}
+
+.vet-sign-in {
+  background-color: #EFEFEF;
+  margin-top: 35px;
+  padding-bottom: 20px;
+
+  h4 {
+    font: $h4;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+  }
+  p {
+   text-align: center;
+  }
+  button {
+
+  }
+  p.sign-up {
+    text-align: left;
+    padding-top: 10px;
+    a {
+      color: #136E29;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}
+
+
+#about {
+  .container {
+    width: 100%;
+    .hero-text {
+      float: left;
+      margin-top: 8vh;
+      margin-left: 20vh;
+      margin-bottom: 20vh;
+      max-width: 50%;
+      background-color: rgba(1, 45, 1, 0.6);
+      border-radius: 15px;
+      box-shadow: 3px 3px 5px #888;
+      padding: 20px;
+
+      h1 {
+        margin: 0;
+        font: $h1;
+        color: white;
+        text-shadow: 3px 3px 5px #666;
+
+      }
+
+      h3 {
+        font: $h4;
+        color: white;
+        text-align: justify;
+        text-shadow: 2px 2px 3px #222;
+      }
+    }
+
+  }
+  .history {
+    background: white;
+    padding: 20px 10% 20px 10%;
+
+    p {
+      font: $h5;
+      text-align: justify;
+
+    }
+
+    h2 {
+      text-align: center;
+    }
+  }
+
+  hr {
+    width: 50%;
+    height: 1px;
+
+  }
+
+  .contact {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+    // color: white;
+    background-color: rgba(1, 45, 1, 0.6);
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px #888;
+    padding: 10px;
+    h2, h3 {
+      color: white;
+    }
+
+  }
+}
+
+#how {
+  // Change hero area height
+  .top-arrow {
+    border-radius: 500px;
+    background: white;
+    color: rgba(1, 45, 1, 0.6);
+    height: 45px;
+    width: 45px;
+    z-index: 10;
+    // box-shadow: 0px 0px 3px #333;
+    border: 1px solid rgba(100, 100, 100, 0.4);
+
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+
+    text-align: center;
+    padding-top: 5px;
+    font: $h3;
+
+    &:hover {
+      background: #eee;
+      color: rgba(1, 45, 1, 0.4);
+    }
+  }
+
+  .container {
+    width: 100%;
+    height: 90vh;
+
+    .hero-text {
+      float: left;
+      margin-top: 8vh;
+      margin-left: 20vh;
+      margin-bottom: 60px;
+      max-width: 50%;
+      background-color: rgba(60, 80, 109, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+
+      h1 {
+        margin: 0;
+        text-align: center;
+        font: $h1;
+        color: white;
+        text-shadow: 3px 3px 5px #666;
+
+      }
+
+      h3 {
+        font: $h4;
+        color: white;
+        text-align: justify;
+        text-shadow: 2px 2px 3px #222;
+      }
+
+      ul {
+        list-style: none;
+        li {
+          text-decoration: none;
+          font: $h5;
+          padding-top: 7px;
+
+          a {
+            color: white;
+
+            &:hover {
+              text-decoration: none;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+
+    .down-arrow {
+      width: 100%;
+      text-align: center;
+      padding: 0;
+
+      img {
+        width: 80px;
+      }
+
+      &:hover {
+        opacity: 0.8;
+        img {
+          width: 90px;
+        }
+      }
+    }
+  }
+
+  .steps {
+    margin: 0;
+
+    .section {
+      background-color: yellow;
+      height: 70vh;
+      line-height: 70vh;
+
+      &:nth-child(even) {
+        background: $blue-gradient;
+      }
+
+      &:nth-child(odd) {
+        background: $gray-gradient;
+      }
+
+      .image {
+        overflow: hidden;
+        text-align: center;
+
+        img {
+          height: auto;
+          width: 95%;
+          border-radius: 15px;
+        }
+      }
+
+      .text {
+        height: 70vh;
+        line-height: 70vh;
+        padding: 0;
+
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+
+
+        h2 {
+          margin-top: 0;
+          text-align: center;
+          font: $h2;
+          color: white;
+        }
+
+        h4 {
+          font: $h5;
+          width: 80%;
+          margin: 0 auto;
+          color: white;
+
+          span.centered-link {
+            width: 100%;
+            text-align: center;
+            a {
+              color: white;
+
+              &:hover {
+                color: #bbb;
+                font-size: 105%;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+
+
+      }
+    }
+  }
+
+  .contact {
+    margin: 0 auto;
+    text-align: center;
+    // color: white;
+    background: $blue-gradient;
+    padding: 10px;
+    h2, h3 {
+      color: white;
+    }
+
+    h2 {
+      font: $h2;
+    }
+
+    h3 {
+      font: $h5;
+    }
+  }
+}
+
+
+.jumbotron.jumbotron-fluid {
+  padding: -10%;
+}
+
+@media only screen and (max-width: 991px) {
+
+  #how {
+    .top-arrow {
+      border-radius: 500px;
+      background: white;
+      color: rgba(1, 45, 1, 0.6);
+      height: 45px;
+      width: 45px;
+      z-index: 10;
+      // box-shadow: 0px 0px 3px #333;
+      border: 1px solid rgba(100, 100, 100, 0.4);
+
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+
+      text-align: center;
+      padding-top: 5px;
+      font: $h3;
+
+      &:hover {
+        background: #eee;
+        color: rgba(1, 45, 1, 0.4);
+      }
+    }
+
+    .container {
+      width: 100%;
+      height: 90vh;
+
+      .hero-text {
+        float: left;
+        margin-top: 8vh;
+        margin-left: 20vh;
+        margin-bottom: 60px;
+        max-width: 50%;
+        background-color: rgba(60, 80, 109, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+
+        h1 {
+          margin: 0;
+          text-align: center;
+          font: $h1;
+          color: white;
+          text-shadow: 3px 3px 5px #666;
+
+        }
+
+        h3 {
+          font: $h4;
+          color: white;
+          text-align: justify;
+          text-shadow: 2px 2px 3px #222;
+        }
+
+        ul {
+          list-style: none;
+          li {
+            text-decoration: none;
+            font: $h5;
+            padding-top: 7px;
+
+            a {
+              color: white;
+
+              &:hover {
+                text-decoration: none;
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+
+      .down-arrow {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+
+        img {
+          width: 80px;
+        }
+
+        &:hover {
+          opacity: 0.8;
+          img {
+            width: 90px;
+          }
+        }
+      }
+    }
+
+    .steps {
+      margin: 0;
+
+      .section {
+        line-height: 0;
+        height: 90vh;
+
+
+        &:nth-child(even) {
+          background: $blue-gradient;
+          div {
+            float: right;
+          }
+        }
+
+        &:nth-child(odd) {
+          background: $gray-gradient;
+        }
+
+
+        .image {
+          margin-top: 40px;
+          text-align: center;
+
+          img {
+            width: 50%;
+            border-radius: 15px;
+          }
+        }
+
+        .text {
+          height: initial;
+          line-height: 15;
+          margin-top: 40px;
+          padding: default;
+          text-align: justify;
+
+          span {
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+
+
+          h2 {
+            margin-top: 0;
+            text-align: center;
+            font: $h2;
+            color: white;
+          }
+
+          h4 {
+            font: $h5;
+            width: 80%;
+            margin: 0 auto;
+            color: white;
+
+            span.centered-link {
+              width: 100%;
+              text-align: center;
+              a {
+                color: white;
+
+                &:hover {
+                  color: #bbb;
+                  font-size: 105%;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .contact-us {
+    font-size: 1.25em;
+  }
+  h1.home-title {
+    // font-size: 4em;
+  }
+
+  .vet-sign-in {
+    width: 50%;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  p.sign-up {
+    margin: auto;
+    text-align: center;
+  }
+}
+
+.non-clickable {
+  pointer-events: none;
+}

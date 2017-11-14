@@ -4,7 +4,6 @@ BE=bundle exec
 
 install:
 	bundle install
-	npm install
 
 migrate:
 	$(BE) rake db:migrate
@@ -18,7 +17,17 @@ server: install
 console: install
 	$(BE) rails c
 
-print_to_terminal: install
-	echo 'what the flip'
+mailcatcher:
+	@echo THIS COMMAND HAS BEEN DISABLED.
+	@echo please see the readme.
 
-.PHONY: install test server console migrate
+seed:
+	$(BE) rake db:drop
+	$(BE) rake db:create
+	$(BE) rake db:migrate
+	$(BE) rake db:seed
+
+coverage: test
+	open ./coverage/index.html
+
+.PHONY: install test server console migrate coverage

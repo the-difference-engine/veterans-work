@@ -1,0 +1,50 @@
+
+
+@mixin hero-image($url, $opacity: 1,) {
+  background: image-url($url);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  opacity: $opacity;
+  content: '';
+  display: block;
+  position: absolute;
+  height: 800px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+#homepage:after {
+  @include hero-image("flag1", 0.4);
+}
+
+#about:after {
+  @include hero-image("about-hero", 0.8);
+}
+
+#how:after {
+  @include hero-image("carpentry", 0.7);
+}
+
+.full-width-page {
+  background: gray;
+}
+
+.main-content {
+  // margin-bottom: 78px;
+}
+
+.non-infopage {
+  background-image: image-url("polaroid");
+}
+
+.jumbotron {
+  background-color: rgba(230,230,230,0.7);
+  background-height: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+}

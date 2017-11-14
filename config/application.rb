@@ -16,10 +16,18 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ActiveMerchant::Billing::Base.mode = :test
+
 module VeteransWork
   class Application < Rails::Application
     config.generators do |g|
       g.fixture_replacement :factory_girl
     end
+  end
+end
+
+unless Rails.env.test?
+  Raven.configure do |config|
+    config.dsn = ENV["SENTRY_DSN"]
   end
 end

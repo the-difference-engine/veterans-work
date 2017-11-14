@@ -13,25 +13,23 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
+#  customer_viewed          :boolean          default(FALSE)
 #
 
 class Quote < ApplicationRecord
   belongs_to :company
   belongs_to :customer_request
-  belongs_to :contract
+
+  has_many :contracts
 
   validates_uniqueness_of :company_id, scope: :customer_request_id
-  validate :has_fewer_than_3_siblings # quotes for the same customer request
+  validates :materials_cost_estimate, presence: true
+  validates :labor_cost_estimate, presence: true
+  validates :completion_date_estimate, presence: true
+  validates :start_date, presence: true
+  validates :notes, presence: true
 
   def total_cost_estimate
     materials_cost_estimate + labor_cost_estimate
-  end
-
-  private
-
-  def has_fewer_than_3_siblings
-    if customer_request.quotes.count >= 3
-      errors.add(:base, "Customer Request already has 3 quotes")
-    end
   end
 end

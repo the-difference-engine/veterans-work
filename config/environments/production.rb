@@ -1,6 +1,18 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.paperclip_defaults = {
+      storage: :s3,
+      s3_region: ENV["AWS_S3_REGION"],
+      s3_host_name:ENV['AWS_HOST_NAME'],
+      s3_credentials: {
+        bucket: ENV["AWS_S3_BUCKET"],
+        access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+        secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+        }
+      }
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -56,16 +68,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "veterans-work_#{Rails.env}"
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => ENV['gmail_username'],
-    :password             => ENV['gmail_password'],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -98,9 +101,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
    :address              => "smtp.gmail.com",
    :port                 => 587,
-   :user_name            => ENV['gmail_username'],
-   :password             => ENV['gmail_password'],
+   :domain               => ENV['HOST_APP'],
+   :user_name            => ENV['GMAIL_USERNAME'],
+   :password             => ENV['GMAIL_PASSWORD'],
    :authentication       => "plain",
-  :enable_starttls_auto => true
+   :enable_starttls_auto => true
   }
+  config.action_mailer.default_url_options = {:host => ENV['HOST_APP']}
 end

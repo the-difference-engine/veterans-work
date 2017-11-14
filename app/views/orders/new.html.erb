@@ -1,0 +1,84 @@
+<div class="col-xs-6 col-xs-offset-3">
+  <%= form_for @order, class: 'form-inline' do |f| %>
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
+            <%= f.label :quantity %>
+            <%= f.number_field :quantity, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-xs-3">
+          <div class="form-group">
+            <%= f.label :first_name, 'First Name' %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+          </div>
+          
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <%= f.label :last_name, 'Last Name' %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :credit_card_number, 'Credit Card Number' %>
+      <%= f.number_field :credit_card_number, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :security_code, 'Security Code' %>
+      <%= f.number_field :security_code, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :exp_date, 'Expiration Date' %>
+      <%= f.text_field :exp_date, class: 'form-control' %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<!-- 
+                    :first_name         => 'Bob',
+                    :last_name          => 'Bobsen',
+                    :number             => '4242424242424242',
+                    :month              => '8',
+                    :year               => Time.now.year+1,
+                    :verification_value => '000') -->
+<!-- <div id="paypal-button"></div>
+
+<script>
+  var CREATE_PAYMENT_URL  = '/paypal/create-payment';
+  var EXECUTE_PAYMENT_URL = '/paypal/execute-payment';
+
+  paypal.Button.render({
+
+    env: 'sandbox', // Or 'sandbox',
+
+    commit: true, // Show a 'Pay Now' button
+
+    payment: function() {
+        // Set up the payment here
+      return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+        return data.id;
+      });
+    },
+    onAuthorize: function(data, actions) {
+        // Execute the payment here
+      return paypal.request.post(EXECUTE_PAYMENT_URL, {
+          paymentID: data.paymentID,
+          payerID:   data.payerID
+      }).then(function() {
+        window.alert('Payment Complete!');
+          // The payment is complete!
+          // You can now show a confirmation message to the customer
+      });
+    }
+  }, '#paypal-button');
+</script> -->

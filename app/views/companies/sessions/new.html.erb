@@ -4,26 +4,29 @@
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
       <div class="login-form">
-      <h2>Company Sign In</h2>
+        
+        <div class="form-group">
+        <h2>Company Sign In</h2>
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="actions">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
         </div>
-      <% end %>
-      
-      <div class="actions">
-        <%= f.submit "Log in", class: "btn btn-info btn-theme-dark" %>
+
+        <div class="form-group">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        </div>
       </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="actions">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+  
+    <div class="actions">
+      <%= f.submit "Log in", class: "btn btn-success btn-md" %>
+    </div>
 
       <%= render "devise/shared/links" %>
 

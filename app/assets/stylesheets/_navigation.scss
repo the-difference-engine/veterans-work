@@ -1,0 +1,65 @@
+@import "colors";
+
+.navbar-brand {
+  padding: 5px 15px 15px 15px;
+}
+
+.current-page a {
+  color: $design-green !important;
+}
+
+.current-page a:hover {
+  color: #271E16 !important;
+}
+
+.navbar {
+  background-color: $white;
+  height: 60px;
+}
+
+.right-nav {
+
+  margin: 0 -12px;
+}
+
+.navbar ul li a {
+}
+
+.navbar button {
+  background-color: $design-green;
+  color: white;
+  border: 0;
+  width: 100%;
+}
+
+#customer-sign-up, #company-sign-up {
+  color: $design-green;
+  padding-right: 20px;
+}
+
+#company-sign-in, #customer-sign-in {
+  padding-right: 20px;
+}
+
+.footer {
+
+  background-color: #EFEFEF;
+  height: 100px;
+  text-align: center;
+
+
+
+  // white-space: nowrap;
+
+  #MilitaryLogoContainer {
+    margin: 10px auto;
+  }
+
+  img {
+    padding: 0 15px;
+    width: auto;
+    display: inline;
+    // border: 1px solid red;
+  }
+
+}

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Recent Customers</h4></div>
+      <div class="panel-body">
+        <% @recent_customers.each do |customer| %>
+          <p><%= customer.email %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Recent Companies</h4></div>
+      <div class="panel-body">
+        <% @recent_companies.each do |company| %>
+          <p><%= company.name %> - <%= link_to company.status, "/companies/#{company.id}/edit" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Recent Customer Requests</h4></div>
+      <div class="panel-body">
+        <% @recent_customer_requests.each do |customer_request| %>
+          <p><%= link_to customer_request.description, "/customer_requests/#{customer_request.id}" %> from <%= customer_request.customer.email %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Recent Quotes</h4></div>
+      <div class="panel-body">
+        <% @recent_quotes.each do |quote| %>
+          <p><%= number_to_currency(quote.total_cost_estimate) %> for <%= quote.customer_request.description %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

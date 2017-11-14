@@ -27,9 +27,22 @@
 #  state                  :string
 #  service_radius         :float
 #  status                 :string           default("Pending")
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  companies_file_name    :string
+#  companies_content_type :string
+#  companies_file_size    :integer
+#  companies_updated_at   :datetime
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  credits                :integer          default(0)
 #
 # Indexes
 #
+#  index_companies_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_companies_on_email                 (email) UNIQUE
 #  index_companies_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -39,5 +52,19 @@ FactoryGirl.define do
     sequence(:email) {|n| "horatio_gomez#{n}@mailmail.com" }
     password "12345678"
     sequence(:name) {|n| "company #{n}"}
+    phone "1234567890"
+    confirmed_at Time.now
+    address '301 N Michigan Ave'
+    city 'Chicago'
+    state 'IL'
+    zip_code '60601'
+    url Faker::Internet.url('example.com', '/foobar.html')
+    service_radius 35
+    description Faker::Lorem.paragraph
+    credits 10
+  end
+
+  trait :without_credits do
+    credits 0
   end
 end

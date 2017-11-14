@@ -1,20 +1,34 @@
 <section>
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <div>
-        <h1><%= @company.name %></h1>
-        <h2>Doing business in the <%= @company.shorten_zip_code.to_region %> area</h2>
-          <h4>Phone: <%= @company.phone %></h4>
-          <h4>Email: <%= @company.email %></h4>
-          <h4>Website: <%= @company.url %></h4>
-          <p>About: <%= @company.description %></p>
-          <hr>
-          <h4>Reviews: </h4>
-          <% @company.reviews.each do |review| %>
-            <%= react_component("Review", { review: review, customer: review.customer }) %>
-          <% end %>
-        <a href="/companies">Back to all companies</a>
-      </div>
+  <div class="row" style="margin-top: 5%">
+    <div class="col-sm-5" style="padding-right: 2%">
+      <%= image_tag @company.avatar.url(:medium), style: "float: right"%>
     </div>
+    <div class="col-sm-7">
+      <h1><%= @company.name %></h1>
+      <!-- placeholder photo, actual photo should be downloaded -->
+        <h4><%= @company.star_avg %><img style="width: 20%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/5_stars.svg/2000px-5_stars.svg.png"></h4>
+      <h3><img style="height: 30px" src="https://cdn2.iconfinder.com/data/icons/filled-icons/493/Geotag-512.png"><%= @company.shorten_zip_code.to_region %></h3>
+        <h4>Phone: <%= number_to_phone(@company.phone, area_code: true) %>  &nbsp;| &nbsp; <a href="mailto:<%= @company.email %>">Email Us</a></h4>
+        <h4>Website: <%= @company.url %></h4>
+        <p>About: <%= @company.description %></p>
+        <p>Services:</p>
+        <ul style="list-style: none">
+          <% @company.service_categories.each do |service| %>
+            <li style="display: inline"><%= service.name %></li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+  <div class="col-sm-10 col-sm-offset-1">
+    <hr>
+    <br>
+    <h3 style="width: 100%">Reviews:<span style="float: right"><a href="/reviews/new">Leave a Review</a></span></h3>
+    <% @company.reviews.reverse.each do |review| %>
+      <div class="well">
+        <p><%= review.created_at.strftime("%b %d, %Y") %></p>
+        <p><%= review.body %></p>
+      </div>
+    <% end %>
+    <a href="/companies">Back to all companies</a>
   </div>
 </section>

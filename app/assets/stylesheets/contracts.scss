@@ -1,3 +1,10 @@
-// Place all the styles related to the Contracts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.thead-inverse th {
+  color: #fff;
+  background-color: #3C501F;
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 0.9em;
+    }
+}

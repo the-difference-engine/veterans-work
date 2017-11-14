@@ -2,16 +2,19 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  after_action :create_company_services, only: [:create, :update]
+  after_action :reset_company_services, only: [:update]
+  after_action :create_company_services_at_sign_up, only: [:create]
 
   # GET /resource/sign_up
   def new
+    @selected_service_categories = []
     @service_categories = ServiceCategory.all
     super
   end
 
   # POST /resource
   def create
+    @selected_service_categories = params["service_category"]
     @service_categories = ServiceCategory.all
     super
   end
@@ -47,13 +50,13 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :zip_code, :phone,
-      :description, :url, :address, :city, :state, :service_radius, :service_category])
+      :description, :url, :address, :city, :state, :service_radius, :service_category, :avatar])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :zip_code, :phone,
-      :description, :url, :address, :city, :state, :service_radius, :service_category])
+      :description, :url, :address, :city, :state, :service_radius, :service_category, :avatar])
   end
 
   # The path used after sign up.
@@ -66,13 +69,19 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  def create_company_services
-    current_company.company_services.destroy_all if current_company.company_services
-    params[:service_category].each do |service_category|
-      CompanyService.create(
-        company_id: current_company.id,
-        service_category_id: service_category.to_i
-      )
+  def create_company_services_at_sign_up
+    reset_company_services
+  end
+
+  def reset_company_services
+    resource.company_services.destroy_all if resource.company_services
+    if params[:service_category]
+      params[:service_category].each do |service_category|
+        CompanyService.create(
+          company_id: resource.id,
+          service_category_id: service_category.to_i
+        )
+      end
     end
   end
 end

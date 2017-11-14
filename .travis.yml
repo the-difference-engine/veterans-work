@@ -13,5 +13,6 @@ before_script:
 addons:
   postgresql: "9.6"
 
-dist: trusty
-sudo: required
+sudo: false
+
+bundler_args: --without production development

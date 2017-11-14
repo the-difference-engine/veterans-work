@@ -1,8 +1,33 @@
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  minimum_coverage_by_file 80
+  add_filter '/controllers/companies/'
+  add_filter '/controllers/companies/'
+  add_filter '/controllers/customers/'
+  add_filter '/vendor/'
+  add_filter '/channels/'
+  add_filter '/spec/'
+  add_filter '/mailers/'
+  add_filter '/helpers/'
+  add_filter '/jobs/'
+  add_filter '/lib/tasks/*'
+end
+
+require 'dotenv'
+
+Dotenv.load(".env.local")
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
+
+require 'devise'
+require 'rspec/rails'
+require 'capybara/rspec'
+require 'database_cleaner'
+require 'webmock/rspec'
 require 'spec_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -25,7 +50,31 @@ require 'spec_helper'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+WebMock.disable_net_connect!(allow_localhost: true)
+
+ActiveMerchant::Billing::Base.mode = :test
+
 RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+    Geocoder.configure(lookup: :test)
+    require_relative 'address_stubs'
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+  config.include FactoryGirl::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+
+  # Use color not only in STDOUT but also in pagers and files
+  config.tty = true
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -33,7 +82,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  config.include FactoryGirl::Syntax::Methods
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
