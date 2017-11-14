@@ -8,7 +8,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  completion_date     :date
-#
+#  
 
 RSpec.describe Contract, type: :model do
   describe '#validations' do

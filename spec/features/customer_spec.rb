@@ -84,6 +84,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
       visit('/quotes')
     end
 
+
     it 'should show open quotes in open quote table' do
       within '#open_quotes' do
         expect(page).to have_content('Sample request description')

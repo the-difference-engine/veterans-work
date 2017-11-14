@@ -8,7 +8,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  completion_date     :date
-#
+#  
 
 FactoryGirl.define do
   factory :contract do

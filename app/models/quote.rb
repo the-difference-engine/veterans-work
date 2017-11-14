@@ -14,6 +14,7 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
+#  view_date                :datetime
 #
 
 class Quote < ApplicationRecord
@@ -32,4 +33,6 @@ class Quote < ApplicationRecord
   def total_cost_estimate
     materials_cost_estimate + labor_cost_estimate
   end
+
+ 
 end
