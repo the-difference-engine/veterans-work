@@ -7,6 +7,9 @@
 .navbar-left {
   padding: 5px 5px 5px 5px;
 }
+.navbar-right {
+  padding: 0px 15px 0px 15px;
+}
 
 .sidenav {
   height: 100%;
@@ -96,8 +99,15 @@
 }
 
 .right-nav {
-
   margin: 0 -12px;
+}
+
+.navbar-white {
+  background-color: $white;
+  font-size: 14px;
+  color: #b1b1b1;
+  width: 100vw;
+  margin: 0;
 }
 
 .navbar ul li a {

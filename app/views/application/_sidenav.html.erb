@@ -55,28 +55,32 @@
       </div>
 
     <% else %>
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/how">How It Works</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class='right-nav'><a class='non-clickable' href="#" >Not Registered?</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign-Up <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href='/companies/sign_up' id='company-sign-up'>Company Sign-Up</a></li>
-            <li><a href='/customers/sign_up' id='customer-sign-up'>Customer Sign-Up</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button class="btn btn-med">Sign-In <span class="caret"></span> </button></a>
-          <ul class="dropdown-menu">
-            <li><a href='/companies/sign_in' id='company-sign-in'>Company Sign-In</a></li>
-            <li><a href='/customers/sign_in' id='customer-sign-in'>Customer Sign-In</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div class="navbar-white">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/how">How It Works</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class='right-nav'><a class='non-clickable' href="#" >Not Registered?</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign-Up <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href='/companies/sign_up' id='company-sign-up'>Company Sign-Up</a></li>
+              <li><a href='/customers/sign_up' id='customer-sign-up'>Customer Sign-Up</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><button class="btn btn-med">Sign-In <span class="caret"></span> </button></a>
+            <ul class="dropdown-menu">
+              <li><a href='/companies/sign_in' id='company-sign-in'>Company Sign-In</a></li>
+              <li><a href='/customers/sign_in' id='customer-sign-in'>Customer Sign-In</a></li>
+            </ul>
+          </li>
+        
+      </div>
+        
+      </div>
     <% end %>
   </div>
 </nav>
