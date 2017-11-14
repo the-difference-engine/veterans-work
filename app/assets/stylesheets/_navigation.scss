@@ -8,7 +8,7 @@
   padding: 5px 5px 5px 5px;
 }
 .navbar-right {
-  padding: 0px 15px 0px 15px;
+  margin: 0px 0px 0px 0px;
 }
 
 .sidenav {
@@ -55,7 +55,7 @@
   font-size:22px;
   cursor:pointer;
   color: $design-green;
-  padding: 10px 20px 10px 10px;
+  padding: 5px 0px 0px 0px;
 }
 
 #overlay {
@@ -108,6 +108,7 @@
   color: #b1b1b1;
   width: 100vw;
   margin: 0;
+  text-align: center;
 }
 
 .navbar ul li a {
