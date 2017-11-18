@@ -9,7 +9,7 @@ body.full-width-page {
 }
 
 .main-content {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 body.full-width-page .main-content {
@@ -42,18 +42,15 @@ h1.home-title {
 
 .icons ul {
   list-style: none;
-  float: middle;
-  margin: 0 auto;
-  text-align: center;
+  margin: auto;
   padding-bottom: 170px;
+  text-align: center;
 }
 
 .icons li {
-  // padding: 0 10px;
+  padding: 0 10px;
   // position: absolute;
   color: $white;
-  left: 0;
-  right: 0;
   text-shadow: 2px 2px 1px gray;
   h4 {
     font: $h4;
@@ -70,9 +67,6 @@ h1.home-title {
   width: 100%;
   margin-top: 30px;
   padding: 0;
-  .row {
-    margin: 0px;
-  }
   #service-search {
     width: 50%;
     margin: 0 auto;
@@ -134,7 +128,7 @@ h1.home-title {
 
 .vet-sign-in {
   background-color: #EFEFEF;
-  margin-top: 35px;
+  margin: 35px 0px 0px 0px;
   padding-top: 20px;
   padding-bottom: 20px;
 
@@ -601,7 +595,7 @@ h1.home-title {
   }
 
   .vet-sign-in {
-    width: 50%;
+    // width: 50%;
     margin: 10px auto;
     text-align: center;
   }
