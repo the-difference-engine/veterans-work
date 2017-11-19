@@ -31,9 +31,6 @@ RSpec.describe 'Clicking navbar links', :type => :feature do
     page.find('#customer-sign-in').click
     expect(page).to have_content 'Customer Sign In'
   end
-end
-
-RSpec.describe "Clicking content links on splash page", :type => :feature do
 
   it 'goes to the Company Sign-in page' do
     visit '/'
@@ -46,7 +43,61 @@ RSpec.describe "Clicking content links on splash page", :type => :feature do
     page.find('#company-sign-up').click
     expect(page).to have_content 'Company Registration'
   end
+end
 
+RSpec.describe "Clicking call-to-action links on splash page", :type => :feature do
+
+  it 'goes to the Company Sign-in page' do
+    visit '/'
+    within(".company-cta") do
+      find_link('Veterans Sign-In').click
+    end
+    expect(page).to have_content 'Company Sign In'
+  end
+
+  it 'goes to the Company Sign-up page' do
+    visit '/'
+    within(".company-cta") do
+      find_link("Sign-Up").click
+    end
+    expect(page).to have_content 'Company Registration'
+  end
+
+  it 'goes to the Customers Sign-in page' do
+    visit '/'
+    within(".customer-cta") do
+      find_link('Customers Sign-In').click
+    end
+    expect(page).to have_content 'Customer Sign In'
+  end
+
+  it 'goes to the Customers Sign-up page' do
+    visit '/'
+    within(".customer-cta") do
+      find_link("Sign-Up").click
+    end
+    expect(page).to have_content 'Customer Registration'
+  end
+
+  it 'goes to the How It Works page' do
+    visit '/'
+    within(".learn-cta") do
+      find_link('Learn More').click
+    end
+    within('#how') do
+      expect(page).to have_content 'How it Works'
+    end
+  end
+
+  it 'goes to the About page' do
+    visit '/'
+    within('.home-about') do
+      find_link('Read More. . .').click
+    end
+    within('#about') do
+      expect(page).to have_content 'Our Mission'
+    end
+  end
 end
 
 
