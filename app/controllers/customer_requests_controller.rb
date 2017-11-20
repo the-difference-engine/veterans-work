@@ -3,6 +3,7 @@ class CustomerRequestsController < ApplicationController
   before_action :validate_customer_request!, only: [:show, :edit, :update, :destroy]
   before_action :has_quote?, only: [:edit, :update]
 
+
   def index
     if current_customer
       @requests = current_customer.customer_requests.where(
@@ -43,6 +44,7 @@ class CustomerRequestsController < ApplicationController
   end
 
   def show
+    # @quote = Quote.find(params[:id])
     @request = CustomerRequest.find(params[:id])
   end
 

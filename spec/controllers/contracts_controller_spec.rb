@@ -8,6 +8,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  completion_date     :date
+#  view_date           :date
 #
 
 require 'rails_helper'

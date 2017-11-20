@@ -1,6 +1,7 @@
 class QuotesController < ApplicationController
   def index
     if current_customer || current_company
+    @quotes = Quote.order(view_date: :desc)
 
       current = current_customer || current_company
       @open_quotes = current.open_quotes.order('start_date')
@@ -61,8 +62,10 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @customer_request = @quote.customer_request
     @company = @quote.company
-    if current_customer
-      @quote.update(customer_viewed: true)
+    @now = Time.current 
+    @view_date = @quote.view_date
+    if current_customer && !@view_date 
+      @quote.update(customer_viewed: true, view_date: Time.now) 
     end
   end
 
@@ -77,7 +80,7 @@ class QuotesController < ApplicationController
     end
   end
 
-  private
+private
 
   def quote_params
     params.require(:quote).permit(

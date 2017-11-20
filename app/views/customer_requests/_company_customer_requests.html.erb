@@ -14,7 +14,7 @@
        <tbody>
            <% @requests.each do |request| %>
             <% if request.expires_date > Date.today %>
-             <tr>
+             <tr class="clickable-row" data-href=<%= "/customer_requests/#{request.id}" %>>
                <td>
                  <%= link_to "/customer_requests/#{request.id}" do %>
                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>

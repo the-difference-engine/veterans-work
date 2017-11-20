@@ -14,6 +14,7 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
+#  view_date                :datetime
 #
 
 class Quote < ApplicationRecord
@@ -32,4 +33,12 @@ class Quote < ApplicationRecord
   def total_cost_estimate
     materials_cost_estimate + labor_cost_estimate
   end
+
+  def view_check
+    @quote= Quote.find(params[:id]) 
+    view_check = view_check.update
+    view_check.timestamp = time
+    view_check.save
+  end
+
 end

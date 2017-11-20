@@ -14,6 +14,7 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
+#  view_date                :datetime
 #
 
 FactoryGirl.define do
