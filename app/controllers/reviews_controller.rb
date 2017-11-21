@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+#test
   def index
     @reviews = Review.all
     render 'index.html.erb'
