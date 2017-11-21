@@ -19,6 +19,7 @@ body.full-width-page .main-content {
 
 h1.home-title {
   font: $h1;
+  font-size: 7em;
   color: $white;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
@@ -33,6 +34,7 @@ h1.home-title {
 
 #home-header h3 {
   font: $h3;
+  font-size: 3em;
   color: $white;
   letter-spacing: 2px;
   text-align: center;
@@ -43,7 +45,7 @@ h1.home-title {
 .icons ul {
   list-style: none;
   margin: auto;
-  padding-bottom: 170px;
+  // padding-bottom: 170px;
   text-align: center;
 }
 
@@ -55,10 +57,6 @@ h1.home-title {
   h4 {
     font: $h4;
     color: $white;
-  }
-
-  img {
-
   }
 }
 
@@ -123,6 +121,7 @@ h1.home-title {
     color: #136E29;
     font: $h5;
     line-height: 35px;
+    text-decoration: underline;
   }
 }
 
@@ -590,9 +589,6 @@ h1.home-title {
   .contact-us {
     font-size: 1.25em;
   }
-  h1.home-title {
-    // font-size: 4em;
-  }
 
   .vet-sign-in {
     // width: 50%;
@@ -604,16 +600,15 @@ h1.home-title {
     margin: auto;
     text-align: center;
   }
+
+  .icons li {
+    padding: 0 5px;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-  .icons {
-    margin-left: -30px;
-  }
-  #home-header {
-    h4 {
-      font-size: 2em;
-    }
+  .icons li {
+    padding: 0 1px;
   }
 }
 
