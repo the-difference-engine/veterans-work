@@ -100,7 +100,13 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where('expires_date >= ?', Date.today()).where(
+    CustomerRequest.joins(:quotes).where('expires_date >= ? AND quotes.company_id != ?', Date.today(), self.id).where(
+      service_category_id: service_categories
+    ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
+  end
+
+  def requests_with_quotes
+    CustomerRequest.joins(:quotes).where('expires_date >= ? AND quotes.company_id = ?', Date.today(), self.id).where(
       service_category_id: service_categories
     ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
   end

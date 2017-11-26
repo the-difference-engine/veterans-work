@@ -14,6 +14,7 @@ class CustomerRequestsController < ApplicationController
     elsif current_company
       if current_company.status == "Active"
         @requests = current_company.eligible_customer_requests
+        @requests_with_quotes = current_company.requests_with_quotes
         @company = current_company
         render "index.html.erb"
       elsif current_company.status == "Pending"
