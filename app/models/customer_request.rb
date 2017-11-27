@@ -27,6 +27,7 @@ class CustomerRequest < ApplicationRecord
   has_one :contract
 
   has_many :quotes
+  has_many :companies, through: :quotes
 
   geocoded_by :full_street_address
   after_validation :geocode

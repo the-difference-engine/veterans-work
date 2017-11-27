@@ -95,8 +95,10 @@ class CustomerRequestsController < ApplicationController
     @customer_request = CustomerRequest.find(params[:id])
     unless @customer_request.customer == current_customer || (
         current_company.eligible_customer_requests.include?(
-          @customer_request
-        ) if current_company
+          @customer_request )
+        ) || (
+        current_company.requests_with_quotes.include?(@customer_request
+        )if current_company
       ) || current_admin
       redirect_to '/', notice: 'insufficient privileges'
     end

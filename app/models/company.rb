@@ -72,6 +72,7 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
   has_many :contracts, through: :quotes
+  has_many :customer_requests, through: :quotes
   has_many :orders
 
   has_attached_file :avatar, 
@@ -100,15 +101,15 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.joins(:quotes).where('expires_date >= ? AND quotes.company_id != ?', Date.today(), self.id).where(
+    CustomerRequest.where('expires_date >= ?', Date.today()).where(
       service_category_id: service_categories
-    ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
+    ).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius && cr.companies.include?(self) == false}
   end
 
   def requests_with_quotes
-    CustomerRequest.joins(:quotes).where('expires_date >= ? AND quotes.company_id = ?', Date.today(), self.id).where(
+    CustomerRequest.where('expires_date >= ?', Date.today()).where(
       service_category_id: service_categories
-    ).select {|cr| cr.distance_from([latitude, longitude]) <= service_radius }
+    ).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius && cr.companies.include?(self)}
   end
 
   def open_quotes
