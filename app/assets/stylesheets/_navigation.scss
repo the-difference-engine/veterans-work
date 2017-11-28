@@ -4,6 +4,13 @@
   padding: 5px 15px 15px 15px;
 }
 
+.navbar-left {
+  padding: 5px 5px 5px 5px;
+}
+.navbar-right {
+  margin: 0px 0px 0px 0px;
+}
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -48,7 +55,7 @@
   font-size:22px;
   cursor:pointer;
   color: $design-green;
-  padding: 10px 20px 10px 10px;
+  padding: 5px 0px 0px 0px;
 }
 
 #overlay {
@@ -92,14 +99,27 @@
 }
 
 .right-nav {
-
   margin: 0 -12px;
+}
+
+.navbar-white {
+  background-color: $white;
+  font-size: 14px;
+  color: #b1b1b1;
+  width: 100vw;
+  margin: 0;
+  text-align: center;
 }
 
 .navbar ul li a {
 }
 
 .navbar button {
+  color: white;
+  border: 0;
+}
+
+.btn-nav {
   background-color: $design-green;
   color: white;
   border: 0;
@@ -107,19 +127,17 @@
 }
 
 #customer-sign-up, #company-sign-up {
-  color: $design-green;
   padding-right: 20px;
 }
 
 #company-sign-in, #customer-sign-in {
-  color: $design-green;
   padding-right: 20px;
 }
 
 .footer {
 
   background-color: #EFEFEF;
-  height: 100px;
+  height: auto;
   text-align: center;
 
 

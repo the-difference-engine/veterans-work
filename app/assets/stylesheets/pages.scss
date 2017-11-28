@@ -9,7 +9,7 @@ body.full-width-page {
 }
 
 .main-content {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 body.full-width-page .main-content {
@@ -19,13 +19,22 @@ body.full-width-page .main-content {
 
 h1.home-title {
   font: $h1;
+  font-size: 7em;
   color: $white;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
 }
 
+#home-header {
+  padding-bottom: 20px;
+  .container {
+    padding: 0px;
+  }
+}
+
 #home-header h3 {
   font: $h3;
+  font-size: 3em;
   color: $white;
   letter-spacing: 2px;
   text-align: center;
@@ -35,27 +44,19 @@ h1.home-title {
 
 .icons ul {
   list-style: none;
-  float: middle;
-  width: 1000px;
-  margin: 0 auto;
+  margin: auto;
+  // padding-bottom: 170px;
   text-align: center;
-  padding-bottom: 170px;
 }
 
 .icons li {
-  // padding: 0 10px;
+  padding: 0 10px;
   // position: absolute;
   color: $white;
-  left: 0;
-  right: 0;
   text-shadow: 2px 2px 1px gray;
   h4 {
     font: $h4;
     color: $white;
-  }
-
-  img {
-
   }
 }
 
@@ -116,11 +117,18 @@ h1.home-title {
     font: $h5;
     line-height: 35px;
   }
+  a {
+    color: #136E29;
+    font: $h5;
+    line-height: 35px;
+    text-decoration: underline;
+  }
 }
 
 .vet-sign-in {
   background-color: #EFEFEF;
-  margin-top: 35px;
+  margin: 35px 0px 0px 0px;
+  padding-top: 20px;
   padding-bottom: 20px;
 
   h4 {
@@ -129,15 +137,16 @@ h1.home-title {
     color: black;
     text-align: center;
   }
-  p {
+  h5 {
    text-align: center;
+   padding: 10px 10px 10px 10px;
   }
-  button {
-
+  .button:hover {
+    color: #2f2f2f;
   }
   p.sign-up {
-    text-align: left;
-    padding-top: 10px;
+    text-align: center;
+    padding-top: 20px;
     a {
       color: #136E29;
       font-weight: bold;
@@ -580,12 +589,9 @@ h1.home-title {
   .contact-us {
     font-size: 1.25em;
   }
-  h1.home-title {
-    // font-size: 4em;
-  }
 
   .vet-sign-in {
-    width: 50%;
+    // width: 50%;
     margin: 10px auto;
     text-align: center;
   }
@@ -593,6 +599,16 @@ h1.home-title {
   p.sign-up {
     margin: auto;
     text-align: center;
+  }
+
+  .icons li {
+    padding: 0 5px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .icons li {
+    padding: 0 1px;
   }
 }
 
