@@ -47,8 +47,9 @@ class ContractsController < ApplicationController
             end
           end
         end
-      flash[:notice] = "Contract created and saved!"
-      redirect_to '/quotes'
+        customer_request.update(expires_date: Date.today())
+        flash[:notice] = "Contract created and saved!"
+        redirect_to '/quotes'
       else
         flash[:notice] = "Quote was not accepted. Try again. #{@quote.errors.full_messages.join(', ')}."
         redirect_to "/quotes/#{@quote.id}"

@@ -4,9 +4,9 @@
   <% if @declined_quotes.any? %>
     <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
   <% end %>
-  <% if @completed_quotes.any? %>
-    <button id="completedBtn" class="btn btn-success">Completed Requests</button>
-  <% end %>
+  <a class="btn btn-success" href="/contracts">
+    My Contracts
+  </a>
 </div>
 
 <% if @open_quotes.any? %>

@@ -101,15 +101,11 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where('expires_date >= ?', Date.today()).where(
-      service_category_id: service_categories
-    ).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius && cr.companies.include?(self) == false}
+    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius}.delete_if{ |cr| cr.quotes.any?{ |quote| quote.company_id == self.id || quote.accepted != nil } }
   end
 
   def requests_with_quotes
-    CustomerRequest.where('expires_date >= ?', Date.today()).where(
-      service_category_id: service_categories
-    ).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius && cr.companies.include?(self)}
+    open_quotes.map { |quote| quote.customer_request }
   end
 
   def open_quotes
