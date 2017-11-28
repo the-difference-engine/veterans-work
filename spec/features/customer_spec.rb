@@ -158,7 +158,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   context 'customer view of quotes index when there are contracts' do
     before :each do
       @quote.update(accepted: true)
-      create(:contract, quote_id: @quote.id, completion_date: Time.current)
+      create(:contract, quote_id: @quote.id, customer_request_id: @customer_request.id, completion_date: Time.current)
       visit('/quotes')
     end
 
@@ -166,19 +166,10 @@ RSpec.describe "customer decides on quote", :type => :feature do
       expect(page).to have_css('#contractsBtn')
     end
 
-    it 'should allow customer to view completed quotes' do
-      click_button 'Completed Requests'
-      within '#completed_quotes' do
-        expect(page).to have_content('Sample request description')
-      end
+    it 'should allow customer to go to contracts page' do
+      click_link 'My Contracts'
+      expect(page).to have_content('Completed Contracts')
     end
 
-    it 'should hide completed quotes modal when customer clicks close x' do
-      click_button 'Completed Requests'
-      within '#completed' do
-        find('.close').click
-      end
-      expect(page).to have_css('#completed', visible: false)
-    end
   end
 end

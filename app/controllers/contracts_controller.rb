@@ -47,7 +47,6 @@ class ContractsController < ApplicationController
             end
           end
         end
-        customer_request.update(expires_date: Date.today())
         flash[:notice] = "Contract created and saved!"
         redirect_to '/quotes'
       else

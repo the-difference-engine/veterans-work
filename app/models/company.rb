@@ -72,7 +72,6 @@ class Company < ApplicationRecord
   has_many :customers, through: :reviews
   has_many :quotes
   has_many :contracts, through: :quotes
-  has_many :customer_requests, through: :quotes
   has_many :orders
 
   has_attached_file :avatar, 
@@ -101,7 +100,7 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius}.delete_if{ |cr| cr.quotes.any?{ |quote| quote.company_id == self.id || quote.accepted != nil } }
+    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || !quote.accepted.nil? } }
   end
 
   def requests_with_quotes
