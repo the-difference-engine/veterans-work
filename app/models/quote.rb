@@ -21,7 +21,7 @@ class Quote < ApplicationRecord
   belongs_to :company
   belongs_to :customer_request
 
-  has_many :contracts
+  has_one :contract
 
   validates_uniqueness_of :company_id, scope: :customer_request_id
   validates :materials_cost_estimate, presence: true

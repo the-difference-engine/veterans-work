@@ -71,7 +71,7 @@ class Company < ApplicationRecord
   has_many :reviews
   has_many :customers, through: :reviews
   has_many :quotes
-  has_many :contracts, through: :quotes
+  has_many :contracts
   has_many :orders
 
   has_attached_file :avatar, 
