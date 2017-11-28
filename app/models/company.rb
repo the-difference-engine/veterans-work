@@ -110,7 +110,7 @@ class Company < ApplicationRecord
   end
 
   def accepted_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS null'
     )
   end
@@ -120,7 +120,7 @@ class Company < ApplicationRecord
   end
 
   def completed_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS NOT null'
     )
   end
