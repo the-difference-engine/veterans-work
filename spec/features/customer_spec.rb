@@ -20,7 +20,7 @@ RSpec.describe 'the work request creation process', :type => :feature do
   it 'directs to new work request form' do
     create :service_category, name: 'paint'
     with_customer_signed_in
-    find_link('New Work Request').click()
+    first(:css, '#new-request-top').click()
     expect(page).to have_content 'Enter Work Request'
     within('#new_customer_request') do
       fill_in 'customer_request[address]', with: '301 N Michigan Ave'
@@ -155,15 +155,15 @@ RSpec.describe "customer decides on quote", :type => :feature do
     end
   end
 
-  context 'customer view of quotes index when there are completed contracts' do
+  context 'customer view of quotes index when there are contracts' do
     before :each do
       @quote.update(accepted: true)
       create(:contract, quote_id: @quote.id, completion_date: Time.current)
       visit('/quotes')
     end
 
-    it 'should show completed quotes button when there are completed quotes' do
-      expect(page).to have_css('#completedBtn')
+    it 'should show contracts button when the customer has contracts' do
+      expect(page).to have_css('#contractsBtn')
     end
 
     it 'should allow customer to view completed quotes' do
