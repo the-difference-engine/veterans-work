@@ -14,7 +14,6 @@ class CustomerRequestsController < ApplicationController
     elsif current_company
       if current_company.status == "Active"
         @requests = current_company.eligible_customer_requests
-        @requests_with_quotes = current_company.requests_with_quotes
         @company = current_company
         render "index.html.erb"
       elsif current_company.status == "Pending"
@@ -95,10 +94,8 @@ class CustomerRequestsController < ApplicationController
     @customer_request = CustomerRequest.find(params[:id])
     unless @customer_request.customer == current_customer || (
         current_company.eligible_customer_requests.include?(
-          @customer_request )
-        ) || (
-        current_company.requests_with_quotes.include?(@customer_request
-        )if current_company
+          @customer_request
+        ) if current_company
       ) || current_admin
       redirect_to '/', notice: 'insufficient privileges'
     end

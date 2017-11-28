@@ -103,10 +103,6 @@ class Company < ApplicationRecord
     CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || !quote.accepted.nil? } }
   end
 
-  def requests_with_quotes
-    open_quotes.map { |quote| quote.customer_request }
-  end
-
   def open_quotes
     quotes.where(accepted: nil)
   end
