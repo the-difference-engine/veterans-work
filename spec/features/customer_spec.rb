@@ -4,7 +4,7 @@ RSpec.describe 'the signout process', :type => :feature do
   it 'signs me out' do
     with_customer_signed_in
     visit "/customers/#{@customer.id}"
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on("Logout #{@customer.email}")
+    find(:css, 'div#mySidenav').click_on("Logout #{@customer.email}")
     expect(page).to have_content 'Signed out successfully'
   end
 end
@@ -65,7 +65,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer rejects quote' do
-    first(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    first(:css, 'div#mySidenav').click_on('Quotes')
     click_link "quote#{@quote.id}"
     click_button "Decline Quote"
     click_button "Yes"
@@ -73,7 +73,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer accepts quote' do
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    find(:css, 'div#mySidenav').click_on('Quotes')
     click_link "quote#{@quote.id}"
     first(:css, 'input.btn.btn-md.btn-success').click
     expect(page).to have_content 'Contract created and saved!'
