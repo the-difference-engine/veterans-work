@@ -5,11 +5,11 @@
     </div>
     <div class="col-sm-7">
       <h1><%= @company.name %></h1>
-
-      <% @company.star_avg.times do  %>
+ 
+      <% @company.star_avg.to_i.times do  %>
         <span style="color: gold" class="glyphicon glyphicon-star"></span>
       <% end %>
-      <% @company.empty_stars.times do %>
+      <% @company.empty_stars.to_i.times do %>
         <span style="color: gold" class="glyphicon glyphicon-star-empty"></span>
       <% end %>
 
@@ -28,7 +28,11 @@
   <div class="col-sm-10 col-sm-offset-1">
     <hr>
     <br>
-    <h3 style="width: 100%">Reviews:<span style="float: right"><a href="/reviews/new">Leave a Review</a></span></h3>
+    <h3 style="width: 100%">Reviews:
+    <% if current_customer %>
+      <span style="float: right"><a href="/reviews/new">Leave a Review</a></span>
+    <% end %>
+    </h3>
     <% @company.reviews.reverse.each do |review| %>
       <div class="well">
         <p><%= review.created_at.strftime("%b %d, %Y") %></p>
