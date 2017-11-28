@@ -68,8 +68,10 @@ class CompaniesController < ApplicationController
     elsif current_customer
       if (current_customer.contracts & company.contracts).any?
         @company = company
+        @readaction_boolean = false
       elsif (current_customer.quotes.map(&:id) & company.quotes.map(&:id)).any?
         @company = company
+        @readaction_boolean = true
       else
         redirect_to "/"
       end
