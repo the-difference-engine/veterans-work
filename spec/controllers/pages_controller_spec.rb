@@ -10,11 +10,11 @@ RSpec.describe PagesController, type: :controller do
     end
 
     context "with an active customer session" do
-      it "redirects to the customer's show page" do
+      it "redirects to the customer requests index page" do
         customer = create :customer
         sign_in customer
         get :index
-        expect(response).to redirect_to("/customers/#{customer.id}")
+        expect(response).to redirect_to("/customer_requests")
       end
     end
 

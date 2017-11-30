@@ -4,6 +4,81 @@
   padding: 5px 15px 15px 15px;
 }
 
+.navbar-left {
+  padding: 5px 5px 5px 5px;
+}
+.navbar-right {
+  margin: 0px 0px 0px 0px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #2a2a2a;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #b1b1b1;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+  background-color: $design-green;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 24px;
+  margin-left: 50px;
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn:hover {
+  cursor:pointer;
+}
+
+.open-nav {
+  font-size:22px;
+  cursor:pointer;
+  color: $design-green;
+  padding: 5px 0px 0px 0px;
+}
+
+#overlay {
+  position: fixed; 
+  display: none; 
+  width: 100%;
+  height: 100%; 
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 2; 
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
 .current-page a {
   color: $design-green !important;
 }
@@ -13,19 +88,38 @@
 }
 
 .navbar {
-  background-color: $white;
   height: 60px;
+  width: 100%;
+  border-color: transparent;
+}
+
+.whiteHeader {
+  background-color: $white;
+  position: relative;
 }
 
 .right-nav {
-
   margin: 0 -12px;
+}
+
+.navbar-white {
+  background-color: $white;
+  font-size: 14px;
+  color: #b1b1b1;
+  width: 100vw;
+  margin: 0;
+  text-align: center;
 }
 
 .navbar ul li a {
 }
 
 .navbar button {
+  color: white;
+  border: 0;
+}
+
+.btn-nav {
   background-color: $design-green;
   color: white;
   border: 0;
@@ -33,7 +127,6 @@
 }
 
 #customer-sign-up, #company-sign-up {
-  color: $design-green;
   padding-right: 20px;
 }
 
@@ -44,7 +137,7 @@
 .footer {
 
   background-color: #EFEFEF;
-  height: 100px;
+  height: auto;
   text-align: center;
 
 

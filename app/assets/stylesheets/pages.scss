@@ -9,7 +9,7 @@ body.full-width-page {
 }
 
 .main-content {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 body.full-width-page .main-content {
@@ -19,13 +19,22 @@ body.full-width-page .main-content {
 
 h1.home-title {
   font: $h1;
+  font-size: 7em;
   color: $white;
   text-align: center;
   text-shadow: 2px 2px 1px gray;
 }
 
+#home-header {
+  padding-bottom: 20px;
+  .container {
+    padding: 0px;
+  }
+}
+
 #home-header h3 {
   font: $h3;
+  font-size: 3em;
   color: $white;
   letter-spacing: 2px;
   text-align: center;
@@ -35,27 +44,19 @@ h1.home-title {
 
 .icons ul {
   list-style: none;
-  float: middle;
-  width: 1000px;
-  margin: 0 auto;
+  margin: auto;
+  // padding-bottom: 170px;
   text-align: center;
-  padding-bottom: 170px;
 }
 
 .icons li {
-  // padding: 0 10px;
+  padding: 0 10px;
   // position: absolute;
   color: $white;
-  left: 0;
-  right: 0;
   text-shadow: 2px 2px 1px gray;
   h4 {
     font: $h4;
     color: $white;
-  }
-
-  img {
-
   }
 }
 
@@ -116,11 +117,18 @@ h1.home-title {
     font: $h5;
     line-height: 35px;
   }
+  a {
+    color: #136E29;
+    font: $h5;
+    line-height: 35px;
+    text-decoration: underline;
+  }
 }
 
 .vet-sign-in {
   background-color: #EFEFEF;
-  margin-top: 35px;
+  margin: 35px 0px 0px 0px;
+  padding-top: 20px;
   padding-bottom: 20px;
 
   h4 {
@@ -129,15 +137,16 @@ h1.home-title {
     color: black;
     text-align: center;
   }
-  p {
+  h5 {
    text-align: center;
+   padding: 10px 10px 10px 10px;
   }
-  button {
-
+  .button:hover {
+    color: #2f2f2f;
   }
   p.sign-up {
-    text-align: left;
-    padding-top: 10px;
+    text-align: center;
+    padding-top: 20px;
     a {
       color: #136E29;
       font-weight: bold;
@@ -150,7 +159,7 @@ h1.home-title {
 #about {
   .container {
     width: 100%;
-    .mission {
+    .hero-text {
       float: left;
       margin-top: 8vh;
       margin-left: 20vh;
@@ -216,21 +225,48 @@ h1.home-title {
 }
 
 #how {
+  // Change hero area height
+  .top-arrow {
+    border-radius: 500px;
+    background: white;
+    color: rgba(1, 45, 1, 0.6);
+    height: 45px;
+    width: 45px;
+    z-index: 10;
+    // box-shadow: 0px 0px 3px #333;
+    border: 1px solid rgba(100, 100, 100, 0.4);
+
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+
+    text-align: center;
+    padding-top: 5px;
+    font: $h3;
+
+    &:hover {
+      background: #eee;
+      color: rgba(1, 45, 1, 0.4);
+    }
+  }
+
   .container {
     width: 100%;
-    height: 80vh;
-    .mission {
+    height: 90vh;
+
+    .hero-text {
       float: left;
       margin-top: 8vh;
       margin-left: 20vh;
-      margin-bottom: 20vh;
+      margin-bottom: 60px;
       max-width: 50%;
-      background-color: rgba(1, 45, 1, 0.8);
+      background-color: rgba(60, 80, 109, 0.9);
       border-radius: 15px;
       padding: 20px;
 
       h1 {
         margin: 0;
+        text-align: center;
         font: $h1;
         color: white;
         text-shadow: 3px 3px 5px #666;
@@ -243,43 +279,133 @@ h1.home-title {
         text-align: justify;
         text-shadow: 2px 2px 3px #222;
       }
+
+      ul {
+        list-style: none;
+        li {
+          text-decoration: none;
+          font: $h5;
+          padding-top: 7px;
+
+          a {
+            color: white;
+
+            &:hover {
+              text-decoration: none;
+              opacity: 0.8;
+            }
+          }
+        }
+      }
     }
 
-  }
-  .history {
-    background: white;
-    padding: 20px 10% 20px 10%;
-
-    p {
-      font: $h5;
-      text-align: justify;
-
-    }
-
-    h2 {
+    .down-arrow {
+      width: 100%;
       text-align: center;
+      padding: 0;
+
+      img {
+        width: 80px;
+      }
+
+      &:hover {
+        opacity: 0.8;
+        img {
+          width: 90px;
+        }
+      }
     }
   }
 
-  hr {
-    width: 50%;
-    height: 1px;
+  .steps {
+    margin: 0;
 
+    .section {
+      background-color: yellow;
+      height: 70vh;
+      line-height: 70vh;
+
+      &:nth-child(even) {
+        background: $blue-gradient;
+      }
+
+      &:nth-child(odd) {
+        background: $gray-gradient;
+      }
+
+      .image {
+        overflow: hidden;
+        text-align: center;
+
+        img {
+          height: auto;
+          width: 95%;
+          border-radius: 15px;
+        }
+      }
+
+      .text {
+        height: 70vh;
+        line-height: 70vh;
+        padding: 0;
+
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+
+
+        h2 {
+          margin-top: 0;
+          text-align: center;
+          font: $h2;
+          color: white;
+        }
+
+        h4 {
+          font: $h5;
+          width: 80%;
+          margin: 0 auto;
+          color: white;
+
+          span.centered-link {
+            width: 100%;
+            text-align: center;
+            a {
+              color: white;
+
+              &:hover {
+                color: #bbb;
+                font-size: 105%;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+
+
+      }
+    }
   }
 
   .contact {
-    width: 40%;
     margin: 0 auto;
     text-align: center;
     // color: white;
-    background-color: rgba(1, 45, 1, 0.6);
-    border-radius: 15px;
-    box-shadow: 3px 3px 5px #888;
+    background: $blue-gradient;
     padding: 10px;
     h2, h3 {
       color: white;
     }
 
+    h2 {
+      font: $h2;
+    }
+
+    h3 {
+      font: $h5;
+    }
   }
 }
 
@@ -288,16 +414,184 @@ h1.home-title {
   padding: -10%;
 }
 
+@media only screen and (max-width: 991px) {
+
+  #how {
+    .top-arrow {
+      border-radius: 500px;
+      background: white;
+      color: rgba(1, 45, 1, 0.6);
+      height: 45px;
+      width: 45px;
+      z-index: 10;
+      // box-shadow: 0px 0px 3px #333;
+      border: 1px solid rgba(100, 100, 100, 0.4);
+
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+
+      text-align: center;
+      padding-top: 5px;
+      font: $h3;
+
+      &:hover {
+        background: #eee;
+        color: rgba(1, 45, 1, 0.4);
+      }
+    }
+
+    .container {
+      width: 100%;
+      height: 90vh;
+
+      .hero-text {
+        float: left;
+        margin-top: 8vh;
+        margin-left: 20vh;
+        margin-bottom: 60px;
+        max-width: 50%;
+        background-color: rgba(60, 80, 109, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+
+        h1 {
+          margin: 0;
+          text-align: center;
+          font: $h1;
+          color: white;
+          text-shadow: 3px 3px 5px #666;
+
+        }
+
+        h3 {
+          font: $h4;
+          color: white;
+          text-align: justify;
+          text-shadow: 2px 2px 3px #222;
+        }
+
+        ul {
+          list-style: none;
+          li {
+            text-decoration: none;
+            font: $h5;
+            padding-top: 7px;
+
+            a {
+              color: white;
+
+              &:hover {
+                text-decoration: none;
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+
+      .down-arrow {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+
+        img {
+          width: 80px;
+        }
+
+        &:hover {
+          opacity: 0.8;
+          img {
+            width: 90px;
+          }
+        }
+      }
+    }
+
+    .steps {
+      margin: 0;
+
+      .section {
+        line-height: 0;
+        height: 90vh;
+
+
+        &:nth-child(even) {
+          background: $blue-gradient;
+          div {
+            float: right;
+          }
+        }
+
+        &:nth-child(odd) {
+          background: $gray-gradient;
+        }
+
+
+        .image {
+          margin-top: 40px;
+          text-align: center;
+
+          img {
+            width: 50%;
+            border-radius: 15px;
+          }
+        }
+
+        .text {
+          height: initial;
+          line-height: 15;
+          margin-top: 40px;
+          padding: default;
+          text-align: justify;
+
+          span {
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+
+
+          h2 {
+            margin-top: 0;
+            text-align: center;
+            font: $h2;
+            color: white;
+          }
+
+          h4 {
+            font: $h5;
+            width: 80%;
+            margin: 0 auto;
+            color: white;
+
+            span.centered-link {
+              width: 100%;
+              text-align: center;
+              a {
+                color: white;
+
+                &:hover {
+                  color: #bbb;
+                  font-size: 105%;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .contact-us {
     font-size: 1.25em;
   }
-  h1.home-title {
-    // font-size: 4em;
-  }
 
   .vet-sign-in {
-    width: 50%;
+    // width: 50%;
     margin: 10px auto;
     text-align: center;
   }
@@ -305,6 +599,16 @@ h1.home-title {
   p.sign-up {
     margin: auto;
     text-align: center;
+  }
+
+  .icons li {
+    padding: 0 5px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .icons li {
+    padding: 0 1px;
   }
 }
 
