@@ -1,6 +1,6 @@
 <div class="panel panel-quotes panel-default text-center" style="width: 60%;">
   <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
-    <h3 class="panel-title">Quote from <a style="text-decoration: underline" href="/companies/<%= @company.id %>"><%= @quote.company.name %></a></h3>
+    <h3 class="panel-title">Quote from <b><%= link_to @quote.company.name, "/companies/#{@quote.company.id}" %></b></h3>
   </div>
   <div>
     <table class="table table-condensed">
