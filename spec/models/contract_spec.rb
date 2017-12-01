@@ -16,4 +16,10 @@ RSpec.describe Contract, type: :model do
       expect(build(:contract)).to be_valid
     end
   end
+  describe User do
+    describe '#ids' do
+      it { is_expected.to validate_presence_of(:quote_id) }
+      it { is_expected.to validate_presence_of(:customer_request_id) }
+    end
+  end
 end
