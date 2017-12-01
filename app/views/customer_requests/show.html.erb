@@ -13,7 +13,6 @@
       <h2>A customer needs...</h2>
       <div>
         <p><%= @request.description %></p>
-        <p>Address: <%= @request.address %></p>
         <p>City: <%= @request.city %></p>
         <p>State: <%= @request.state %></p>
         <p>Zipcode: <%= @request.zipcode %></p>
@@ -46,11 +45,12 @@
   function initMap() {
     var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
     var map = new google.maps.Map(document.getElementById('customer-request-map'), {
-      zoom: 16,
+      zoom: 14,
       center: requestCoords
     });
-    var marker = new google.maps.Marker({
-      position: requestCoords,
+    var marker = new google.maps.Circle({
+      center: requestCoords,
+      radius: 1000,
       map: map
     });
   }
