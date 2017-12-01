@@ -7,10 +7,5 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :credit do
-    cost "9.99"
-    order_id 1
-    quote_id 1
-  end
+class Credit < ApplicationRecord
 end

@@ -7,10 +7,8 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :credit do
-    cost "9.99"
-    order_id 1
-    quote_id 1
-  end
+require 'rails_helper'
+
+RSpec.describe Credit, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
