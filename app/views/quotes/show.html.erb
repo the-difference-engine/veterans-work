@@ -46,7 +46,7 @@
       <% else %>
         <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
           <%= f.hidden_field :quote_id, value: @quote.id %>
-          <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
+          <%= f.hidden_field :customer_request_id, value: @request.id %>
           <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
         <% end %>
         <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
@@ -54,6 +54,10 @@
       <% end %>
     </div>
   </div>
+</div>
+
+<div class="container">
+  <%= render "shared/customer_request_info" %>
 </div>
 
 

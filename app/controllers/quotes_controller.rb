@@ -60,7 +60,7 @@ class QuotesController < ApplicationController
 
   def show
     @quote = Quote.find(params[:id])
-    @customer_request = @quote.customer_request
+    @request = @quote.customer_request
     @company = @quote.company
     if current_customer
       @quote.update(customer_viewed: true)
