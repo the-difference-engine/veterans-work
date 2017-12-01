@@ -100,7 +100,7 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || !quote.accepted.nil? } }
+    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || quote.accepted == true } || cr.open_quotes.count >= 3 }
   end
 
   def open_quotes

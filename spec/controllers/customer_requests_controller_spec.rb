@@ -159,7 +159,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id)}
       }.to change(CustomerRequest, :count).by(1)
     end
-    it 'redirects to the customer_requests index' do
+    it 'redirects to the /' do
       customer = create(:customer)
       sign_in customer
       service_category = create(:service_category)
@@ -169,7 +169,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
           service_category_id: service_category.id
         )
       }
-      expect(response).to redirect_to("/customers/#{customer.id}")
+      expect(response).to redirect_to("/")
     end
   end
 

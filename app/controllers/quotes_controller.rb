@@ -105,6 +105,6 @@ class QuotesController < ApplicationController
   end
 
   def has_fewer_than_3_siblings?(quote)
-    quote.customer_request.quotes.count < 3
+    quote.customer_request.open_quotes.count < 3
   end
 end
