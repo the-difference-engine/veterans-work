@@ -20,7 +20,7 @@
       >
         <td><%= quote.customer_request.description %></td>
         <td><%= quote.customer_request.expires_date %></td>
-        <td><%= quote.company.name%></td>
+        <td><%= link_to quote.company.name, company_path(quote.company) %></td>
         <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
         <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
         <td><%= number_to_currency(quote.total_cost_estimate) %></td>
