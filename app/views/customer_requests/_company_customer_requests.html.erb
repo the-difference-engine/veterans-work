@@ -4,7 +4,8 @@ LOOK AT QUOTES.JS TO GET THE MODAL TO WORK
 <h1>Customer Requests</h1>
 <div id="credit-summary" class="clearfix">
   <ol>
-    <li><button class="btn btn-primary" data-target="#test" data-toggle="modal">Buy More Credits</button></li>
+    <li><button type="button" class="brn-primary wow" data-container="body" data-toggle="popover" data-placement="top">
+    Buy More Credits</button></li>
     <li><p>Credits: <%= @company.credits %></li></p>
   </ol>
 </div>
@@ -43,3 +44,24 @@ LOOK AT QUOTES.JS TO GET THE MODAL TO WORK
     </div>
   </div>
 
+  <script type="text/javascript">
+    $(function () {
+      $('button.wow').popover({
+        html: true,
+        container: 'body',
+        title: 'Quantity:',
+        content: '<div><input type="number" onclick="changeTotal()" onkeyup="changeTotal()" id="credits" name="quantity" min="1"> </div> <p>Total: <span id="credit-total"></span> <br><br><button class="btn btn-primary">Checkout</button>'
+      })
+    })
+      function changeTotal() {
+        console.log('hello world');
+        var quantity = document.getElementById('credits').value;
+        if(quantity > 0) {
+          document.getElementById('credit-total').innerHTML = '$' + quantity;
+        }
+      }
+
+
+
+  </script>
+<input type="" name="">
