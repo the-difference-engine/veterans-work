@@ -71,7 +71,7 @@ class Company < ApplicationRecord
   has_many :reviews
   has_many :customers, through: :reviews
   has_many :quotes
-  has_many :contracts, through: :quotes
+  has_many :contracts
   has_many :orders
 
   has_attached_file :avatar, 
@@ -110,7 +110,7 @@ class Company < ApplicationRecord
   end
 
   def accepted_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS null'
     )
   end
@@ -120,7 +120,7 @@ class Company < ApplicationRecord
   end
 
   def completed_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS NOT null'
     )
   end
