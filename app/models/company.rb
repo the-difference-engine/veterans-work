@@ -134,6 +134,10 @@ class Company < ApplicationRecord
     end
   end
 
+  def empty_stars
+    5 - star_avg
+  end
+
   def has_credit?
     credits > 0
   end

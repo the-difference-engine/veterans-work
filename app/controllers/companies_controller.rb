@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    if current_admin || current_company || current_customer
+    if current_customer || current_company || current_admin
       render 'show.html.erb'
     else
       redirect_to '/'

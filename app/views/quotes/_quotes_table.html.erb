@@ -23,14 +23,12 @@
         <td><%= quote.company.name%></td>
         <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
         <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
-       
         <td><%= number_to_currency(quote.total_cost_estimate) %></td>
         <% if quote.customer_viewed == true %>
           <td><%= quote.view_date.strftime("%Y, %b. %e, \%\I:%M %p") %> </td> 
         <% else %>
           <td></td>
         <% end %>
-
         <td><a href="/quotes/<%= quote.id %>" id="quote<%=quote.id%>"><button class="btn btn-success">Details</button></a></td>
       </tr>
       <% end %>
