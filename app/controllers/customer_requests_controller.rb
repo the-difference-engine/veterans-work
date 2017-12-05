@@ -4,6 +4,8 @@ class CustomerRequestsController < ApplicationController
   before_action :has_quote?, only: [:edit, :update]
 
   def index
+    @credit_cost = ENV["CREDIT_COST"]
+
     if current_customer
       @requests = current_customer.customer_requests.where(
         "expires_date >= ?",

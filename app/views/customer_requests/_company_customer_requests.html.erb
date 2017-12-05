@@ -1,10 +1,7 @@
-LOOK AT QUOTES.JS TO GET THE MODAL TO WORK
-
-
 <h1>Customer Requests</h1>
 <div id="credit-summary" class="clearfix">
   <ol>
-    <li><button type="button" class="brn-primary wow" data-container="body" data-toggle="popover" data-placement="top">
+    <li><button type="button" id="creditBtn" class="brn-primary" data-container="body" data-toggle="popover" data-placement="top">
     Buy More Credits</button></li>
     <li><p>Credits: <%= @company.credits %></li></p>
   </ol>
@@ -44,24 +41,22 @@ LOOK AT QUOTES.JS TO GET THE MODAL TO WORK
     </div>
   </div>
 
-  <script type="text/javascript">
-    $(function () {
-      $('button.wow').popover({
-        html: true,
-        container: 'body',
-        title: 'Quantity:',
-        content: '<div><input type="number" onclick="changeTotal()" onkeyup="changeTotal()" id="credits" name="quantity" min="1"> </div> <p>Total: <span id="credit-total"></span> <br><br><button class="btn btn-primary">Checkout</button>'
-      })
-    })
-      function changeTotal() {
-        console.log('hello world');
-        var quantity = document.getElementById('credits').value;
-        if(quantity > 0) {
-          document.getElementById('credit-total').innerHTML = '$' + quantity;
-        }
-      }
+  <div id="credit" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1>Purchase Credits:</h1>
+      <hr>
+      <%= form_tag do %>
+        <h3 style='color: black'>
+          <%= label_tag 'Quantity:' %>
+          <%= number_field_tag :quantity, '1', min: '1', id: 'credit-quantity',
+          :data => { :credit_cost => ENV['CREDIT_COST']} %>
+        </h3 style='color: black'>
 
+        <h3>Total: <span id="credit-subtotal">$<%= ENV['CREDIT_COST']%></span></h3>
 
+        <%= submit_tag 'Checkout', class: 'btn btn-primary' %>
 
-  </script>
-<input type="" name="">
+      <% end %>
+    </div>
+  </div>

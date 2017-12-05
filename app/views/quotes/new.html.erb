@@ -1,6 +1,12 @@
 <%= form_for @quote do |f| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+      <% if current_company.credits < 0 %>
+        <h4 style="text-align: right">Current Credits: <%= current_company.credits %></h4>
+      <% else %>
+        <h4 style="text-align: right">Current Credits: <%= current_company.credits %></h4>
+        <button type="button" style="float: right" id="creditBtn" class="btn-primary clearfix" data-container="body" data-toggle="popover" data-placement="top">Buy More Credits</button>
+      <% end %>
       <div class="form">
         <h3>New Quote</h3>
         <div class="form-group">
@@ -30,9 +36,31 @@
         </div>
         <%= hidden_field_tag(:customer_request_id, @quote.customer_request_id) %>
         <div>
-          <button type="submit" class="btn btn-theme-bg">Submit</button>
+          <%= submit_tag 'Submit', class: 'btn btn-primary' %>
         </div>
       </div>
     </div>
   </div>
+  <br>
 <% end %>
+
+
+<div id="credit" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Purchase Credits:</h1>
+    <hr>
+    <%= form_tag do %>
+      <h3 style='color: black'>
+        <%= label_tag 'Quantity:' %>
+        <%= number_field_tag :quantity, '1', min: '1', id: 'credit-quantity',
+        :data => { :credit_cost => ENV['CREDIT_COST']} %>
+      </h3 style='color: black'>
+
+      <h3>Total: <span id="credit-subtotal">$<%= ENV['CREDIT_COST']%></span></h3>
+
+      <%= submit_tag 'Checkout', class: 'btn btn-primary' %>
+
+    <% end %>
+  </div>
+</div>

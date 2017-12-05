@@ -7,6 +7,7 @@
 #  quantity   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  total      :decimal(6, 2)
 #
 
 class Order < ApplicationRecord
