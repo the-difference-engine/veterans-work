@@ -1,1 +1,61 @@
-<%= render "shared/customer_request_info" %>
+<div class="row">
+  <div class="col-sm-6">
+    <% if @request.contract %>
+      <h2><%= @request.customer.email %> needs ...</h2>
+      <div>
+        <h3><%= @request.description %></h3>
+        <h4>Address: <%= @request.address %></h4>
+        <h4>City: <%= @request.city %></h4>
+        <h4>State: <%= @request.state %></h4>
+        <h4>Zipcode: <%= @request.zipcode %></h4>
+      </div>
+    <% else %>
+      <h2>A customer needs...</h2>
+      <div>
+        <h3><%= @request.description %></h3>
+        <h4>City: <%= @request.city %></h4>
+        <h4>State: <%= @request.state %></h4>
+        <h4>Zipcode: <%= @request.zipcode %></h4>
+      </div>
+      <% if current_company %>
+        <button class="btn btn-success"><%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %></button>
+      <% end %>
+      <% if current_customer && @request.quotes.empty? %>
+        <%= link_to 'Cancel Request',
+          customer_request_path(@request),
+          data: {confirm: 'Are you sure?'},
+          method: :delete,
+          class: 'btn btn-danger'
+        %>
+        <%= link_to 'Edit Request',
+          edit_customer_request_path(@request),
+          method: :get,
+          class: 'btn btn-info'
+        %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-6">
+    <div id="customer-request-map"></div>
+  </div>
+</div>
+
+
+<script>
+  function initMap() {
+    var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
+    var map = new google.maps.Map(document.getElementById('customer-request-map'), {
+      zoom: 14,
+      center: requestCoords
+    });
+    var marker = new google.maps.Circle({
+      center: requestCoords,
+      radius: 1000,
+      map: map
+    });
+  }
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+</script>

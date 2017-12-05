@@ -62,6 +62,16 @@ RSpec.describe 'company creates quote', :type => :feature do
     click_button 'Submit'
     expect(page).to have_content 'New Quote created successfully!'
   end
+
+  context 'company view of quotes show page with no contract' do
+    it 'should not contain customer email address' do
+      @quote = create(:quote,
+        customer_request_id: @customer_request.id,
+        company_id: @company.id)
+      visit("/quotes/#{@quote.id}")
+      expect(page).not_to have_content('customer@example.com')
+    end
+  end
 end
 
 RSpec.describe "customer decides on quote", :type => :feature do
@@ -182,5 +192,25 @@ RSpec.describe "customer decides on quote", :type => :feature do
       expect(page).to have_content('Completed Contracts')
     end
 
+  end
+
+  context 'company view of quotes show page with contract' do
+    it "should show customer's email if own quote is accepted" do
+      @quote1.update(accepted: true)
+      create(:contract, quote_id: @quote1.id, customer_request_id: @customer_request.id, completion_date: nil)
+      @quote2.update(accepted: false)
+      visit("/quotes/#{@quote1.id}")
+
+      expect(page).to have_content('customer@example.com')
+    end
+
+    it "should not show customer's email if own quote is rejected" do
+      @quote1.update(accepted: false)
+      @quote2.update(accepted: true)
+      create(:contract, quote_id: @quote2.id, customer_request_id: @customer_request.id, completion_date: nil)
+      visit("/quotes/#{@quote1.id}")
+
+      expect(page).not_to have_content('customer@example.com')
+    end
   end
 end
