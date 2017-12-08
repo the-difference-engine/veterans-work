@@ -1,11 +1,15 @@
 <div class="panel panel-quotes panel-default text-center" style="width: 60%;">
   <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
-    <h3 class="panel-title">Quote from <%= @quote.company.name %></h3>
+    <h3 class="panel-title">Quote from <b><%= link_to @quote.company.name, company_path(@quote.company) %></b></h3>
   </div>
   <div>
     <table class="table table-condensed">
       <tbody>
         <tr>
+          <th>Viewed</th>
+          <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
+        </tr>
+        <tr>   
           <th>Category</th>
           <td><%= @quote.customer_request.service_category.name%></td>
         </tr>
