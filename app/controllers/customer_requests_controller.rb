@@ -15,6 +15,8 @@ class CustomerRequestsController < ApplicationController
       if current_company.status == "Active"
         @requests = current_company.eligible_customer_requests
         @company = current_company
+        @has_quotes = current_company.quotes.any?
+        @has_contracts = current_company.contracts.any?
         render "index.html.erb"
       elsif current_company.status == "Pending"
         flash[:notice] = "Thank you for registering! Your company is currently under review."

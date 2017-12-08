@@ -1,11 +1,15 @@
 <h1>Customer Requests</h1>
 <div>
-  <a class="btn btn-success" href="/quotes">
-    My Quotes
-  </a>
-  <a class="btn btn-success" href="/contracts">
-    My Contracts
-  </a>
+  <% if @has_quotes %>
+    <a class="btn btn-success" href="/quotes">
+      My Quotes
+    </a>
+  <% end %>
+  <% if @has_contracts %>
+    <a class="btn btn-success" href="/contracts">
+      My Contracts
+    </a>
+  <% end %>
 </div>
 <br>
 
@@ -18,7 +22,7 @@
            <th></th>
            <th>Distance</th>
            <th>Address</th>
-           <th># of Bids</th>
+           <th># of Open Bids</th>
            <th>Category</th>
            <th>Expires</th>
          </tr>
@@ -35,7 +39,7 @@
                  <%= request.distance_from([@company.latitude, @company.longitude]).round(1) %> mi.
                </td>
                <td><%= request.full_street_address.titleize %></td>
-               <td><%= request.quotes.count %> of 3</td>
+               <td><%= request.open_quotes.count %> of 3</td>
                <td><%= request.service_category.name.capitalize %></td>
                <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
              </tr>

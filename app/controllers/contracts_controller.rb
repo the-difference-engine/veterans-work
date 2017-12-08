@@ -59,7 +59,7 @@ class ContractsController < ApplicationController
   def show
     if current_customer || current_company
       @contract = Contract.find(params[:id])
-      render 'show.html.erb'
+      redirect_to "/quotes/#{@contract.quote.id}"
     else
       redirect_to '/'
     end

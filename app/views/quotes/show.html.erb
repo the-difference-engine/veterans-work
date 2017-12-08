@@ -22,7 +22,6 @@
         <% end %>        
       </div>
     </div>
-
     <div class="row">
       <div class="panel panel-quotes panel-default text-center">
         <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
@@ -31,6 +30,12 @@
         <div>
           <table class="table table-condensed">
             <tbody>
+              <% if @quote.view_date %>
+                <tr>
+                  <th>Quote Viewed</th>
+                  <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
+                </tr>
+              <% end %>
               <tr>
                 <th>Category</th>
                 <td><%= @quote.customer_request.service_category.name%></td>
@@ -62,6 +67,8 @@
             </tbody>
           </table>
           <div align="center">
+            <a class="btn btn-success" href="/quotes" role="button">My Quotes</a>
+            <a class="btn btn-success" href="/contracts" role="button">My Contracts</a>
             <% if current_customer %>
               <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
                 <%= f.hidden_field :quote_id, value: @quote.id %>
