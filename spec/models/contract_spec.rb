@@ -15,11 +15,10 @@ RSpec.describe Contract, type: :model do
     it 'has a valid factory' do
       expect(build(:contract)).to be_valid
     end
-  end
-  describe User do
-    describe '#ids' do
-      it { is_expected.to validate_presence_of(:quote_id) }
-      it { is_expected.to validate_presence_of(:customer_request_id) }
+    it 'should give an error when saving quoteless contract' do
+      record = Contract.new
+      # record.quote_id = nil
+      record.save
     end
   end
 end
