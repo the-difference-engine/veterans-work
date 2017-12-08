@@ -61,8 +61,9 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @customer_request = @quote.customer_request
     @company = @quote.company
-    if current_customer
-      @quote.update(customer_viewed: true)
+    @view_date = @quote.view_date
+    if current_customer && !@view_date 
+      @quote.update(customer_viewed: true, view_date: Time.now) 
     end
   end
 

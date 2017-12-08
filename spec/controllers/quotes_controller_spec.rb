@@ -14,7 +14,9 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
+#  view_date                :datetime
 #
+
 require 'rails_helper'
 RSpec.describe QuotesController, type: :controller do
   describe 'GET #index' do
