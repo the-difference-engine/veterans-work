@@ -2,9 +2,9 @@
   <div class="col-sm-6">
     <div class="row">
       <div class="well">
-        <% if @request.contract && 
-          @request.contract.quote.company == current_company || 
-          @request.customer == current_customer %>
+        <% if @quote.contract && 
+          (@quote.company == current_company || 
+                     @request.customer == current_customer) %>
           <h2><%= @request.customer.email %> needs ...</h2>
           <div>
             <h3><%= @request.description %></h3>
@@ -40,7 +40,7 @@
               <% end %>
               <tr>
                 <th>Category</th>
-                <td><%= @quote.customer_request.service_category.name%></td>
+                <td><%= @request.service_category.name%></td>
               </tr>
               <tr>
                 <th>Start Date</th>
@@ -69,8 +69,6 @@
             </tbody>
           </table>
           <div align="center">
-            <a class="btn btn-success" href="/quotes" role="button">My Quotes</a>
-            <a class="btn btn-success" href="/contracts" role="button">My Contracts</a>
             <% if current_customer && @quote.accepted == nil %>
               <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
                 <%= f.hidden_field :quote_id, value: @quote.id %>
@@ -79,10 +77,9 @@
               <% end %>
               <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
               <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
-            <% end %>
-            <% if @request.contract && 
-              @request.contract.quote.company == current_company || 
-              @request.customer == current_customer %>
+            <% elsif @quote.contract && 
+              (@quote.company == current_company || 
+              @request.customer == current_customer) %>
               <a class="btn btn-danger" role="button">Mark As Complete</a>
             <% end %>
           </div>
@@ -96,6 +93,8 @@
     <div id="customer-request-map"></div>
   </div>
 </div>
+
+
 
 
 
