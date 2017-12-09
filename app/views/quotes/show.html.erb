@@ -4,7 +4,8 @@
       <div class="well">
         <% if @quote.contract && 
           (@quote.company == current_company || 
-                     @request.customer == current_customer) %>
+          @request.customer == current_customer) 
+        %>
           <h2><%= @request.customer.email %> needs ...</h2>
           <div>
             <h3><%= @request.description %></h3>
@@ -77,9 +78,10 @@
               <% end %>
               <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
               <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
-            <% elsif @quote.contract && 
+            <% elsif @quote.contract && @quote.contract.completion_date &&
               (@quote.company == current_company || 
-              @request.customer == current_customer) %>
+              @request.customer == current_customer) 
+            %>
               <a class="btn btn-danger" role="button">Mark As Complete</a>
             <% end %>
           </div>
@@ -135,9 +137,10 @@
       zoom: 14,
       center: requestCoords
     });
-    <% if @request.contract && 
-          @request.contract.quote.company == current_company || 
-          @request.customer == current_customer %>
+    <% if @quote.contract && 
+      (@quote.company == current_company || 
+      @request.customer == current_customer) 
+    %>
       var marker = new google.maps.Marker({
         position: requestCoords,
         map: map
