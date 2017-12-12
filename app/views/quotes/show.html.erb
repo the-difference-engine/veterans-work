@@ -78,11 +78,19 @@
               <% end %>
               <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
               <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
-            <% elsif @quote.contract && @quote.contract.completion_date &&
+            <% elsif @quote.contract && !@quote.contract.completion_date &&
               (@quote.company == current_company || 
               @request.customer == current_customer) 
             %>
               <a class="btn btn-danger" role="button">Mark As Complete</a>
+            <% elsif @quote.contract && @quote.contract.completion_date &&
+              (@quote.company == current_company || 
+              @request.customer == current_customer) 
+            %>
+              <h4>This job was completed on: <%= @quote.contract.completion_date.strftime("%B %e, %Y") %></h4>
+              <% if current_customer %>
+                <input class="btn btn-success" type=button onClick="location.href='/reviews/new'" value='Leave Review'>
+              <% end %>
             <% end %>
           </div>
           <br>
