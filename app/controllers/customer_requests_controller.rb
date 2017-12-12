@@ -5,10 +5,7 @@ class CustomerRequestsController < ApplicationController
 
   def index
     if current_customer
-      @requests = current_customer.customer_requests.where(
-        "expires_date >= ?",
-        10.days.ago
-      )
+      @requests = current_customer.open_customer_requests
       @customer = current_customer
       render "index.html.erb"
     elsif current_company
