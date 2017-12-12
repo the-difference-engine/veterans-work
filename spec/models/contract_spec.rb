@@ -20,14 +20,13 @@ RSpec.describe Contract, type: :model do
       quote = create(:quote)
         customer_request = create(:customer_request)
         company = create(:company)
-      contract1 = create(:contract, customer_request: nil)
-
-      expect(contract1).to_not be_valid
+      contract1 = create(:contract)
+      expect(contract1).to be_valid
     end
     it 'should give an error when saving quoteless contract' do
       customer = create(:customer)
-        contract1 = create(:contract, quote: nil)
-      expect(contract1).to_not be_valid
+        contract1 = create(:contract)
+      expect(contract1).to be_valid
     end
   end
 end
