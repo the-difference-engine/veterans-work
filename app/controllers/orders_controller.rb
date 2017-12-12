@@ -16,11 +16,16 @@ class OrdersController < ApplicationController
   end
 
   def create
-    p '================'
-      # puts params[companyId]
-      puts params[quantity]
-      puts params[total]
-    p '================'
+    order = Order.new(
+              company_id: params['companyId'],
+              quantity: params['quantity'].to_i,
+              total: params['total'].to_d
+              )
+    company_credits = current_company.credits
+
+    # if order.save
+    # else
+    # end
   end
 
   def show
