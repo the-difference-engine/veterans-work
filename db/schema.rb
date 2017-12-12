@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20171205011445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "completion_date"
+    t.integer "company_id"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -151,6 +152,7 @@ ActiveRecord::Schema.define(version: 20171205011445) do
     t.datetime "updated_at", null: false
     t.boolean "accepted"
     t.boolean "customer_viewed", default: false
+    t.datetime "view_date"
   end
 
   create_table "reviews", id: :serial, force: :cascade do |t|

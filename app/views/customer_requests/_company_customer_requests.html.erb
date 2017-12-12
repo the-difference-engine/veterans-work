@@ -1,7 +1,7 @@
 <h1>Customer Requests</h1>
 <div id="credit-summary" class="clearfix">
   <ol>
-    <li><button type="button" id="creditBtn" class="brn-primary" data-container="body" data-toggle="popover" data-placement="top">
+    <li><button type="button" id="creditBtn" class="brn-primary">
     Buy More Credits</button></li>
     <li><p>Credits: <%= @company.credits %></li></p>
   </ol>
@@ -50,12 +50,17 @@
         <h3 style='color: black'>
           <%= label_tag 'Quantity:' %>
           <%= number_field_tag :quantity, '1', min: '1', id: 'credit-quantity',
-          :data => { :credit_cost => ENV['CREDIT_COST']} %>
+          :data => {
+            :credit_cost => ENV['CREDIT_COST'],
+            :company_id => @current_company.id
+          } %>
         </h3 style='color: black'>
 
         <h3>Total: <span id="credit-subtotal">$<%= ENV['CREDIT_COST']%></span></h3>
 
         <%= submit_tag 'Checkout', class: 'btn btn-primary' %>
+
+        <div id="paypal-button"></div>
 
       <% end %>
     </div>

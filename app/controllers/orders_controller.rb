@@ -16,15 +16,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.save
-      process_payment
-      flash[:success] = 'Your order has been successfully processed.'
-      redirect_to "/orders/#{@order.id}"
-    else
-      flash[:danger] = 'Something went wrong please submit again.'
-      render :new
-    end
+    p '================'
+      # puts params[companyId]
+      puts params[quantity]
+      puts params[total]
+    p '================'
   end
 
   def show
