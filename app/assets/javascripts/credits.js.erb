@@ -23,6 +23,7 @@ $(document).ready(function() {
     };
   }
 
+  var creditCost = <%= ENV['CREDIT_COST'] %>;
   var checkoutTotal = 5;
 
   // When the user clicks anywhere outside of the modal, close it
@@ -38,17 +39,17 @@ $(document).ready(function() {
   // var creditCost = window.creditCost = '{{env('CREDIT_COST')}}';
 
   quantity.addEventListener('change', function() {
-    checkoutTotal = quantity.value * quantity.dataset.creditCost;
+    checkoutTotal = quantity.value * creditCost;
     console.log(quantity.dataset.companyId);
-    subtotal.innerHTML = '$' + (quantity.value * quantity.dataset.creditCost).toFixed(2);
+    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
   })
   quantity.addEventListener('keyup', function() {
-    checkoutTotal = quantity.value * quantity.dataset.creditCost;
-    subtotal.innerHTML = '$' + (quantity.value * quantity.dataset.creditCost).toFixed(2);
+    checkoutTotal = quantity.value * creditCost;
+    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
   })
   quantity.addEventListener('click', function() {
-    checkoutTotal = quantity.value * quantity.dataset.creditCost;
-    subtotal.innerHTML = '$' + (quantity.value * quantity.dataset.creditCost).toFixed(2);
+    checkoutTotal = quantity.value * creditCost;
+    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
   })
 // THIS IS WHAT COMMUNICATES WITH PAYPAL
 
@@ -56,7 +57,7 @@ paypal.Button.render({
   env: 'sandbox', // Or 'sandbox',
 
   client: {
-    sandbox:    'AahhvpJhVNinS5Rw9NZxLToVPGGTIMeO4ANQou-h5OpiAoOmtr1eQ_zVAccpj4tLbtmCdmC7GurpaRhg',
+    sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
     production: 'PAYPAL_PRODUCTION_CLIENT_ID'
   },
 
