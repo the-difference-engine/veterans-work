@@ -168,7 +168,11 @@ RSpec.describe "customer decides on quote", :type => :feature do
   context 'company view of quotes table after a job has been completed' do
     before :each do
       @quote1.update(accepted: true)
-      create(:contract, quote_id: @quote1.id, completion_date: 1.day.ago)
+      create(:contract,
+        quote_id: @quote1.id,
+        customer_request_id: @customer_request.id,
+        company_id: @company1.id,
+        completion_date: 1.day.ago)
       @quote2.update(accepted: false)
       visit('/quotes')
     end

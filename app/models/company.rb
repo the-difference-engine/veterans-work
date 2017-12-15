@@ -71,7 +71,7 @@ class Company < ApplicationRecord
   has_many :reviews
   has_many :customers, through: :reviews
   has_many :quotes
-  has_many :contracts, through: :quotes
+  has_many :contracts
   has_many :orders
 
   has_attached_file :avatar, 
@@ -100,7 +100,7 @@ class Company < ApplicationRecord
   end
 
   def eligible_customer_requests
-    CustomerRequest.where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || quote.accepted == true } || cr.open_quotes.count >= 3 }
+    CustomerRequest.includes(:quotes).where('expires_date >= ? AND service_category_id in (?)', Date.today, service_categories.map(&:id)).select { |cr| cr.distance_from([latitude, longitude]) <= service_radius }.delete_if { |cr| cr.quotes.any? { |quote| quote.company_id == id || quote.accepted == true } || cr.open_quotes.count >= 3 }
   end
 
   def open_quotes
@@ -108,7 +108,7 @@ class Company < ApplicationRecord
   end
 
   def accepted_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS null'
     )
   end
@@ -118,7 +118,7 @@ class Company < ApplicationRecord
   end
 
   def completed_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS NOT null'
     )
   end
@@ -130,6 +130,10 @@ class Company < ApplicationRecord
     else
       0.0
     end
+  end
+
+  def empty_stars
+    5 - star_avg
   end
 
   def has_credit?

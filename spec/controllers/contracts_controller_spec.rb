@@ -8,6 +8,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  completion_date     :date
+#  company_id          :integer
 #
 
 require 'rails_helper'
@@ -49,7 +50,8 @@ RSpec.describe ContractsController, type: :controller do
           :contract,
           customer_request_id: customer_request.id,
           quote_id: quote.id,
-          completion_date: nil
+          completion_date: nil,
+          company_id: company.id
         )
         get :index
         expect(assigns(:active_contracts)).to match_array([contract])
@@ -61,7 +63,7 @@ RSpec.describe ContractsController, type: :controller do
         sign_in company
         customer_request = create(:customer_request)
         quote = create(:quote, customer_request_id: customer_request.id, company_id: company.id)
-        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id)
+        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id, company_id: company.id) 
         get :index
         expect(response).to render_template(:index)
       end
