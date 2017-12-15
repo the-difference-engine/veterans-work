@@ -23,6 +23,11 @@
             <li style="display: inline"><%= service.name %></li>
           <% end %>
         </ul>
+        <% if current_admin %>
+          <a href=<%= "/companies/#{@company.id}/edit"%>>
+            <button class="btn btn-success pull-left">Edit Profile</button>
+          </a>
+        <% end %>
     </div>
   </div>
   <div class="col-sm-10 col-sm-offset-1">

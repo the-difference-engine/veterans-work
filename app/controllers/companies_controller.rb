@@ -24,8 +24,15 @@ class CompaniesController < ApplicationController
   end
 
   def edit
-    @company = Company.find_by(id: params[:id])
-    render 'edit.html.erb'
+    if current_admin
+      @company = Company.find_by(id: params[:id])
+      render 'edit.html.erb'
+    elsif current_company
+      @company = current_company
+      render 'edit.html.erb'
+    else
+      redirect_to '/'
+    end
   end
 
   def update
