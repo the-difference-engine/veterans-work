@@ -41,6 +41,7 @@
   </div>
 </div>
 
+
 <script>
   function initMap() {
     var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
@@ -58,3 +59,4 @@
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
 </script>
+
