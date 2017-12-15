@@ -4,6 +4,10 @@
 @import "colors";
 @import 'typography';
 
+body {
+  height: 100vh;
+}
+
 body.full-width-page {
   width: 100%;
 }

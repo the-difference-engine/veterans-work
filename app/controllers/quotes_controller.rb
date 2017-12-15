@@ -7,6 +7,7 @@ class QuotesController < ApplicationController
       @accepted_quotes = current.accepted_quotes
       @declined_quotes = current.declined_quotes
       @completed_quotes = current.completed_quotes
+      @has_contracts = current.contracts.any?
 
       if params[:request_id]
         @open_quotes = @open_quotes.select do |quote|
@@ -105,6 +106,6 @@ class QuotesController < ApplicationController
   end
 
   def has_fewer_than_3_siblings?(quote)
-    quote.customer_request.quotes.count < 3
+    quote.customer_request.open_quotes.count < 3
   end
 end

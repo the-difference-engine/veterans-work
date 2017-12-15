@@ -61,9 +61,9 @@
       </button>
       <div class="navbar-white collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/how">How It Works</a></li>
-          <li><a href="/about">About</a></li>
+          <li><%= link_to 'Home', '/', :class => is_active?("index") %></li>
+          <li><%= link_to 'How It Works', '/how', :class=> is_active?("how") %></a></li>
+          <li><%= link_to 'About', '/about', :class=> is_active?("about") %></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class='right-nav'><a class='non-clickable' href="#" >Not Registered?</a></li>

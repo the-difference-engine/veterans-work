@@ -1,4 +1,5 @@
 <h1>Customer Requests</h1>
+
 <div id="credit-summary" class="clearfix">
   <ol>
     <li><button type="button" id="creditBtn" class="brn-primary">
@@ -6,6 +7,18 @@
     <li><p>Credits: <%= @company.credits %></li></p>
   </ol>
 </div>
+
+<div>
+  <a class="btn btn-success" href="/quotes">
+    My Quotes
+  </a>
+  <a class="btn btn-success" href="/contracts">
+    My Contracts
+  </a>
+</div>
+<br>
+
+<% if @requests.any? %>
  <div class="panel panel-default">
    <div class="panel-body">
      <table class="table table-hover">
@@ -14,13 +27,13 @@
            <th></th>
            <th>Distance</th>
            <th>Address</th>
+           <th># of Open Bids</th>
            <th>Category</th>
            <th>Expires</th>
          </tr>
        </thead>
        <tbody>
            <% @requests.each do |request| %>
-            <% if request.expires_date > Date.today %>
              <tr>
                <td>
                  <%= link_to "/customer_requests/#{request.id}" do %>
@@ -31,15 +44,24 @@
                  <%= request.distance_from([@company.latitude, @company.longitude]).round(1) %> mi.
                </td>
                <td><%= request.full_street_address.titleize %></td>
+               <td><%= request.open_quotes.count %> of 3</td>
                <td><%= request.service_category.name.capitalize %></td>
                <td><%= request.expires_date.strftime("%m/%d/%Y") %></td>
              </tr>
-            <% end %>
            <% end %>
         </tbody>
       </table>
     </div>
   </div>
+
+
+<% else %>
+ <div class="panel panel-default">
+   <div class="panel-body">
+      <h3> No customer requests at this time.  Please check back later.</h3>
+    </div>
+  </div>
+<% end %>
 
   <div id="credit" class="modal">
     <div class="modal-content">
