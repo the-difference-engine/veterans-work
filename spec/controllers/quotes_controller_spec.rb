@@ -14,7 +14,7 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
-#  view_date                :datetime
+#  view_date                :date
 #
 
 require 'rails_helper'

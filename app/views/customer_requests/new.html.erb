@@ -4,6 +4,17 @@
     <div class="col-sm-4 col-sm-offset-4">
       <div class="field">
         <h3>Enter Work Request</h3>
+        <%= label_tag :description %>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= label_tag :service_category_id %>
+        <%= f.select :service_category_id, options_from_collection_for_select(@categories, "id", "name"),
+          {}, prompt: "select type of work", class: "form-control" %>
+      </div>
+      
+      <div class="field">
         <%= label_tag :address %>
         <%= f.text_field :address, class: "form-control" %>
       </div>
@@ -24,22 +35,15 @@
       </div>
 
       <div class="field">
-        <%= label_tag :description %>
-        <%= f.text_area :description, class: "form-control" %>
-      </div>
-
-      <div class="field">
         <%= label_tag :expires_date %>
           <%= f.date_field :expires_date, min: Date.today, max: (Date.today + 1.month).end_of_month  ,class: "form-control" %>
       </div>
 
-      <div class="actions">
-        <%= label_tag :service_category_id %>
-        <%= f.select :service_category_id, options_from_collection_for_select(@categories, "id", "name"),
-          {}, prompt: "select type of work", class: "form-control" %>
-      </div>
       <br>
-      <%= submit_tag "Submit", class: "btn btn-success" %>
+      <a href="/customer_requests/new">
+        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+      </a>
+      <button class="btn btn-success pull-right" type="submit"><span class="glyphicon glyphicon-ok"></span>  Done</button>
     </div>
   <% end %>
   </div>
