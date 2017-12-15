@@ -14,7 +14,7 @@
 #  updated_at               :datetime         not null
 #  accepted                 :boolean
 #  customer_viewed          :boolean          default(FALSE)
-#  view_date                :date
+#  view_date                :datetime
 #
 
 RSpec.describe Quote, type: :model do

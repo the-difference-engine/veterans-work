@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20171205011445) do
     t.datetime "updated_at", null: false
     t.boolean "accepted"
     t.boolean "customer_viewed", default: false
-    t.date "view_date"
+    t.datetime "view_date"
   end
 
   create_table "reviews", id: :serial, force: :cascade do |t|
