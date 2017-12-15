@@ -7,7 +7,7 @@ RSpec.describe 'Clicking navbar links', :type => :feature do
     within('.navbar') do
       find_link('Home').click
     end
-    expect(page).to have_content 'Connect Customers in Need with Veterans in Skilled Trades'
+    expect(page).to have_content 'Connect Customers with Veterans in Skilled Trades'
   end
 
   it 'goes to the how page' do
