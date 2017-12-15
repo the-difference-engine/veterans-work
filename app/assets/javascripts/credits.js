@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   // Get the modal
   var creditModal = document.getElementById('credit');
 
@@ -75,19 +74,17 @@ paypal.Button.render({
   },
 
   onAuthorize: function(data, actions) {
-    console.log("Company ID = " + quantity.dataset.companyId);
-    console.log("Credit Quantity = " + quantity.value);
-    console.log((checkoutTotal).toFixed(2));
-
     $.post('/orders', {
       companyId: quantity.dataset.companyId,
       quantity: quantity.value,
       total: (checkoutTotal).toFixed(2)
+    }, function() {
+        var currentLocation = window.location.href;
+        window.location.href = currentLocation;
+        window.alert(quantity.value + ' Credits were added to your account')
+    }).fail(function(response) {
+        window.alert('Something went wrong. Please try again')
     });
-    creditModal.style.display = "none";
-    window.alert('Yay, credits were added');
-    // You'll implement this callback later when you're
-    // ready to execute the payment
   }
 }, '#paypal-button');
 

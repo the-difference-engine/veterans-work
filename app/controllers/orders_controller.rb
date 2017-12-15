@@ -21,11 +21,11 @@ class OrdersController < ApplicationController
               quantity: params['quantity'].to_i,
               total: params['total'].to_d
               )
-    company_credits = current_company.credits
-
-    # if order.save
-    # else
-    # end
+    if order.save
+      assign_credits_to_company(order)
+    else
+      raise 'test error'
+    end
   end
 
   def show
