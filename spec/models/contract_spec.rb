@@ -16,5 +16,18 @@ RSpec.describe Contract, type: :model do
     it 'has a valid factory' do
       expect(build(:contract)).to be_valid
     end
+    it 'should give an error when saving a contract without a customer_request' do
+      customer = create(:customer)
+      quote = create(:quote)
+        customer_request = create(:customer_request)
+        company = create(:company)
+      contract1 = create(:contract)
+      expect(contract1).to be_valid
+    end
+    it 'should give an error when saving quoteless contract' do
+      customer = create(:customer)
+        contract1 = create(:contract)
+      expect(contract1).to be_valid
+    end
   end
 end
