@@ -73,3 +73,48 @@ Once code is merged into our organization master branch, we propel it through th
 
 **Login details should be obtained in person for access to the build log and never shared on slack or this repo.**
 
+##Company Sign-up Walkthrough
+
+1. Enter an Email
+    **  Example@email.com  **
+
+2. Make a password with 6 or more characters
+    **  Example123  **
+
+3. Retype password
+
+4. Type your Name
+    **  Example_name  **
+
+5. Type your company's address
+    **  15 PLACE, St. **
+
+6. Type the city it is located in
+    **  New York, Chicago, England, etc.  **
+
+7. Type your state
+    **  Indiana, Texes, etc. **
+
+8. Type your zipcode
+    ** 738491  **
+
+9. Type your phone number (only use numbers and no symbols. Inclueding hyphens)
+    **  5555555555  **
+
+10. Type a description
+    **  Our company is here to help all veterens find ways to work.  **
+
+11. Type your website link here.
+    ** www.Example.com  **
+
+12. Type how far your company will serve or willing to work.
+    **  50 miles (this would be at most)  **
+
+13. Choose an Avatar/Logo from your computer
+    ** If one is not picked than you will be given a default image. **
+
+14. Must pick a service
+    **  Paint  **
+
+15. Click Sign Up
+    ** Done :D  **
