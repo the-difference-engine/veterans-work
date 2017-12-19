@@ -119,6 +119,20 @@ RSpec.describe Company, type: :model do
     end
   end
 
+  describe '#empty_stars' do
+    before :each do
+      @company = create(:company)
+    end
+
+    it 'returns the average of company stars' do
+      create(:review, stars: 4, company_id: @company.id)
+      create(:review, stars: 5, company_id: @company.id)
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      expect(@company.empty_stars).to eq(2.0)
+    end
+  end
+
   describe '#eligible_customer_requests' do
     before :each do
       @service_category = create(:service_category, name: 'Paint')
