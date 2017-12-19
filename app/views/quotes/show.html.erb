@@ -175,31 +175,14 @@
 <% end %>
 
 
-<script>
-  function initMap() {
-    var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
-    var map = new google.maps.Map(document.getElementById('customer-request-map'), {
-      zoom: 14,
-      center: requestCoords
-    });
-    <% if @quote.contract && 
-      (@quote.company == current_company || 
-      @request.customer == current_customer) 
-    %>
-      var marker = new google.maps.Marker({
-        position: requestCoords,
-        map: map
-      });
-    <% else %>
-      var marker = new google.maps.Circle({
-        center: requestCoords,
-        radius: 1000,
-        map: map
-      });
-    <% end %>
-  }
+
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
 </script>
 
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+<script>
+  initMap(parseFloat(<%= @request.latitude %>), 
+    parseFloat(<%= @request.longitude %>), 
+    <%= @has_permissions %>)
 </script>
