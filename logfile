@@ -1,6 +1,0 @@
-2017-12-11 20:42:08.278 CST [9476] FATAL:  database files are incompatible with server
-2017-12-11 20:42:08.278 CST [9476] DETAIL:  The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.1.
-2017-12-11 20:48:59.025 CST [9582] FATAL:  database files are incompatible with server
-2017-12-11 20:48:59.025 CST [9582] DETAIL:  The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.1.
-2017-12-11 21:00:36.002 CST [840] FATAL:  database files are incompatible with server
-2017-12-11 21:00:36.002 CST [840] DETAIL:  The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.1.
