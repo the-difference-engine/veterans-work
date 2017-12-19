@@ -5,16 +5,15 @@ class CustomerRequestsController < ApplicationController
 
   def index
     if current_customer
-      @requests = current_customer.customer_requests.where(
-        "expires_date >= ?",
-        10.days.ago
-      )
+      @requests = current_customer.open_customer_requests
       @customer = current_customer
       render "index.html.erb"
     elsif current_company
       if current_company.status == "Active"
         @requests = current_company.eligible_customer_requests
         @company = current_company
+        @has_quotes = current_company.quotes.any?
+        @has_contracts = current_company.contracts.any?
         render "index.html.erb"
       elsif current_company.status == "Pending"
         flash[:notice] = "Thank you for registering! Your company is currently under review."
@@ -44,6 +43,10 @@ class CustomerRequestsController < ApplicationController
 
   def show
     @request = CustomerRequest.find(params[:id])
+    @has_permissions =
+      @request.customer == current_customer ||
+      (@request.contract &&
+      @request.contract.company == current_company)
   end
 
   def edit
