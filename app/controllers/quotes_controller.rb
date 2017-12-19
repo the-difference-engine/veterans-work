@@ -63,6 +63,9 @@ class QuotesController < ApplicationController
     @request = @quote.customer_request
     @company = @quote.company
     @view_date = @quote.view_date
+    @has_permissions = @quote.contract && (
+      @quote.company == current_company ||
+      @request.customer == current_customer)
     if current_customer == @request.customer ||
        current_company == @quote.company ||
        current_admin
