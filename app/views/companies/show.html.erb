@@ -24,8 +24,7 @@
           <% end %>
         </ul>
         <% if current_admin %>
-          <a href=<%= "/companies/#{@company.id}/edit"%>>
-            <button class="btn btn-success pull-left">Edit Profile</button>
+          <%= link_to "Edit Profile", edit_company_path(@company), class: "btn btn-success pull-left" %>
           </a>
         <% end %>
     </div>
