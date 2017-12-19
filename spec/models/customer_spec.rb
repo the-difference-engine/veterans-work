@@ -33,6 +33,52 @@ RSpec.describe Customer, type: :model do
     end
   end
 
+  describe 'open_customer_requests' do
+    it 'does not return requests that have quotes that have already been accepted' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(customer.open_customer_requests).not_to include(customer_request2)
+    end
+
+    it 'returns requests whose quotes have not already been accepted' do
+      customer = create(:customer)
+      company = create(:company)
+      customer_request1 = create(:customer_request,
+        customer_id: customer.id
+        )
+      customer_request2 = create(:customer_request,
+        customer_id: customer.id
+        )
+      quote1 = create(:quote,
+        customer_request_id: customer_request1.id,
+        company_id: company.id,
+        accepted: nil
+      )
+      quote2 = create(:quote,
+        customer_request_id: customer_request2.id,
+        company_id: company.id,
+        accepted: true
+      )
+      expect(customer.open_customer_requests).to include(customer_request1)
+    end
+  end
+
   describe 'open_quotes' do
     it 'returns only open quotes' do
       customer = create(:customer)
