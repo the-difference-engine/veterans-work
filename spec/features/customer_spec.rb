@@ -30,7 +30,7 @@ RSpec.describe 'the work request creation process', :type => :feature do
       fill_in 'customer_request[description]', with: 'abc'
       fill_in 'customer_request[expires_date]', with: Date.today + 1
       select('paint', from: 'customer_request[service_category_id]')
-      click_button 'Submit'
+      click_button 'Done'
     end
     expect(page).to have_content 'My Work Requests'
   end

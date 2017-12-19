@@ -23,6 +23,10 @@
             <li style="display: inline"><%= service.name %></li>
           <% end %>
         </ul>
+        <% if current_admin %>
+          <%= link_to "Edit Profile", edit_company_path(@company), class: "btn btn-success pull-left" %>
+          </a>
+        <% end %>
     </div>
   </div>
   <div class="col-sm-10 col-sm-offset-1">

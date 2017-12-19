@@ -167,7 +167,8 @@ RSpec.describe CompaniesController, type: :controller do
   describe 'GET #edit' do
     before :each do
       @company = create(:company)
-      sign_in @company
+      @admin = create(:admin)
+      sign_in @admin
     end
     it 'asigns the requested company to @company' do
       get :edit, params: { id: @company.id }
