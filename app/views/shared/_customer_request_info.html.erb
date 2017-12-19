@@ -40,12 +40,23 @@
   </div>
 </div>
 
-<script
+
+<script>
+  function initMap() {
+    var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
+    var map = new google.maps.Map(document.getElementById('customer-request-map'), {
+      zoom: 14,
+      center: requestCoords
+    });
+    var marker = new google.maps.Circle({
+      center: requestCoords,
+      radius: 1000,
+      map: map
+    });
+  }
+</script>
+
+<script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
 </script>
 
-<script>
-  initMap(parseFloat(<%= @request.latitude %>), 
-    parseFloat(<%= @request.longitude %>), 
-    <%= @has_permissions %>)
-</script>
