@@ -43,6 +43,10 @@ class CustomerRequestsController < ApplicationController
 
   def show
     @request = CustomerRequest.find(params[:id])
+    @has_permissions =
+      @request.customer == current_customer ||
+      (@request.contract &&
+      @request.contract.company == current_company)
   end
 
   def edit
