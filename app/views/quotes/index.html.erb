@@ -1,13 +1,15 @@
-
 <h1>My Quotes</h1>
 <div>
   <% if @declined_quotes.any? %>
     <button id="declinedBtn" class="btn btn-success">Declined Quotes</button> 
   <% end %>
-  <% if @completed_quotes.any? %>
-    <button id="completedBtn" class="btn btn-success">Completed Requests</button>
+  <% if @has_contracts %>
+    <a id="contractsBtn" class="btn btn-success" href="/contracts">
+      My Contracts
+    </a>
   <% end %>
 </div>
+<br>
 
 <% if @open_quotes.any? %>
   <div class="panel panel-default">

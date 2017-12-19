@@ -1,5 +1,9 @@
 @import "colors";
 
+.active-nav {
+  text-decoration: underline;
+}
+
 .navbar-brand {
   padding: 5px 15px 15px 15px;
 }
@@ -109,6 +113,16 @@
   width: 100vw;
   margin: 0;
   text-align: center;
+}
+
+.navbar-white .navbar-nav li a:hover {
+  color: #136E29;
+  text-decoration: underline;
+}
+
+.navbar-white .navbar-nav li a:active {
+  color: #136E29;
+  text-decoration: underline;
 }
 
 .navbar ul li a {

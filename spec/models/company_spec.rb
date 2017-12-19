@@ -119,42 +119,119 @@ RSpec.describe Company, type: :model do
     end
   end
 
+  describe '#empty_stars' do
+    before :each do
+      @company = create(:company)
+    end
+
+    it 'returns the average of company stars' do
+      create(:review, stars: 4, company_id: @company.id)
+      create(:review, stars: 5, company_id: @company.id)
+      create(:review, stars: 2, company_id: @company.id)
+      create(:review, stars: 1, company_id: @company.id)
+      expect(@company.empty_stars).to eq(2.0)
+    end
+  end
+
   describe '#eligible_customer_requests' do
-    it 'doesn\'t return expired customer requests' do
-      service_category = create(:service_category)
-      company = create(:company,
+    before :each do
+      @service_category = create(:service_category, name: 'Paint')
+      @service_category2 = create(:service_category, name: 'Plumbing')
+      @company = create(:company,
         COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
       )
-      company_service = create(:company_service,
-        company_id: company.id,
-        service_category_id: service_category.id
+      @company_service = create(:company_service,
+        company_id: @company.id,
+        service_category_id: @service_category.id
       )
+    end
+
+    it 'doesn\'t return expired customer requests' do
       expired_customer_request = create(:customer_request,
         CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({
-          service_category_id: service_category.id,
+          service_category_id: @service_category.id,
           expires_date: Date.today() - 1
         })
       )
-      expect(company.eligible_customer_requests).to_not include(expired_customer_request)
+      expect(@company.eligible_customer_requests).to_not include(expired_customer_request)
     end
 
     it 'returns ONLY customer requests that are in the service radius' do
-      service_category = create(:service_category)
-      company = create(:company,
-        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
-      )
-      company_service = create(:company_service,
-        company_id: company.id,
-        service_category_id: service_category.id
-      )
       close_customer_request = create(:customer_request,
-        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: service_category.id })
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
       )
       far_customer_request = create(:customer_request,
-        FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: service_category.id })
+        FAR_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
       )
-      expect(company.eligible_customer_requests).to eq([close_customer_request])
+      expect(@company.eligible_customer_requests).to eq([close_customer_request])
     end
+
+    it 'returns ONLY customer requests that are in the correct service category' do
+      wrong_customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category2.id })
+      )
+      right_customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      expect(@company.eligible_customer_requests).to eq([right_customer_request])
+    end
+
+    it "doesn't return customer requests that my company has bid on" do
+      customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      create(:quote, customer_request_id: customer_request.id, company_id: @company.id)
+      expect(@company.eligible_customer_requests).not_to include(customer_request)
+    end
+
+    it "doesn't return customer requests that have been accepted" do
+      @company2 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )      
+      customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      create(:quote, customer_request_id: customer_request.id, company_id: @company2.id, accepted: true)
+      expect(@company.eligible_customer_requests).not_to include(customer_request)
+    end
+
+     it "doesn't return customer requests that have 3 open quotes" do
+      @company2 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )
+      @company3 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )
+      @company4 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )    
+      customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      create(:quote, customer_request_id: customer_request.id, company_id: @company2.id, accepted: nil)
+      create(:quote, customer_request_id: customer_request.id, company_id: @company3.id, accepted: nil)
+      create(:quote, customer_request_id: customer_request.id, company_id: @company4.id, accepted: nil)
+      expect(@company.eligible_customer_requests).not_to include(customer_request)
+    end
+
+     it "return customer requests that have less than 3 open quotes if some have been declined" do
+      @company2 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )
+      @company3 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )
+      @company4 = create(:company,
+        COMPANY_ADDRESS_DETAILS.merge({service_radius: 50.0})
+      )    
+      customer_request = create(:customer_request,
+        CLOSE_CUSTOMER_REQUEST_ADDRESS_DETAILS.merge({ service_category_id: @service_category.id })
+      )
+      create(:quote, customer_request_id: customer_request.id, company_id: @company2.id, accepted: nil)
+      create(:quote, customer_request_id: customer_request.id, company_id: @company3.id, accepted: nil)
+      create(:quote, customer_request_id: customer_request.id, company_id: @company4.id, accepted: false)
+      expect(@company.eligible_customer_requests).to include(customer_request)
+    end 
   end
 
   describe 'open_quotes' do

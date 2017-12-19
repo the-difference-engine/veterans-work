@@ -6,6 +6,10 @@
     <table class="table table-condensed">
       <tbody>
         <tr>
+          <th>Viewed</th>
+          <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
+        </tr>
+        <tr>   
           <th>Category</th>
           <td><%= @quote.customer_request.service_category.name%></td>
         </tr>

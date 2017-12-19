@@ -23,6 +23,7 @@ module VeteransWork
     config.generators do |g|
       g.fixture_replacement :factory_girl
     end
+    config.time_zone = "Central Time (US & Canada)"
   end
 end
 

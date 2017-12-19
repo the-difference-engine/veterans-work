@@ -1,4 +1,8 @@
 <h1>My Work Requests</h1>
+  <a href="/customer_requests/new" id="new-request-top">
+    <button class="btn btn-success">New Work Request</button>
+  </a>
+  <br>
 <% if @customer.customer_requests %>
   <% @customer.customer_requests.each do |cr| %>
       <div class="panel panel-default">
