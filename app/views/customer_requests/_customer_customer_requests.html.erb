@@ -3,6 +3,7 @@
     <button class="btn btn-success">New Work Request</button>
   </a>
   <br>
+  <br>
 <% if @customer.customer_requests %>
   <% @requests.each do |cr| %>
       <div class="panel panel-default">
@@ -33,7 +34,9 @@
         </div>
       </div>
     <% end %>
+  <% if @customer.customer_requests.length >= 5 %>
   <a href="/customer_requests/new">
     <button class="btn btn-success pull-right">New Work Request</button>
   </a>
+  <% end %>
 <% end %>
