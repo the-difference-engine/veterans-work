@@ -28,11 +28,11 @@
     <div class="row">
       <div class="panel panel-quotes panel-default text-center">
         <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
-          <h3 class="panel-title">Details</b></h3>
+          <h3 class="panel-title">Details of Quote from <a href="/companies/<%= @quote.company.id %>"><%= @quote.company.name %></a></h3>
         </div>
         <div>
           <table class="table table-condensed">
-            <tbody>
+            <tbody>             
               <% if @quote.view_date %>
                 <tr>
                   <th>Quote Viewed</th>
