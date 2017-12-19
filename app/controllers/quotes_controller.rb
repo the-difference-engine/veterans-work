@@ -63,8 +63,17 @@ class QuotesController < ApplicationController
     @request = @quote.customer_request
     @company = @quote.company
     @view_date = @quote.view_date
-    if current_customer && !@view_date 
-      @quote.update(customer_viewed: true, view_date: Time.now) 
+    @has_permissions = @quote.contract && (
+      @quote.company == current_company ||
+      @request.customer == current_customer)
+    if current_customer == @request.customer ||
+       current_company == @quote.company ||
+       current_admin
+      @quote.update(customer_viewed: true, view_date: Time.now) if current_customer && !@view_date
+      render 'show.html.erb'
+    else
+      flash[:notice] = 'Sorry, you do not have the permissions to view this page!'
+      redirect_to '/'
     end
   end
 
