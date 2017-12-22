@@ -8,41 +8,36 @@
 * Feature Testing - [Capybara](https://github.com/teamcapybara/capybara)
 * Test Coverage - [Simplecov](https://github.com/colszowka/simplecov#simplecov----)
 * Continuous Integration (CI) - [Travis](https://travis-ci.org/)
-* Frontend Framework - [React](https://facebook.github.io/react/)
 * Development Mailbox - [Mailcatcher](https://mailcatcher.me/)
-* Node Dependency Managment - [Yarn](https://yarnpkg.com/lang/en/)
 * Project Management - [Trello](https://trello.com/b/xNkJUl4n/veterans-work)
-* Fun Times - [Booze](https://en.wikipedia.org/wiki/Alcohol#Alcoholic_beverages)
 * App Health Monitoring - [Sentry](https://sentry.io/tdengine/)
 * App Hosting - [Heroku](https://dashboard.heroku.com/pipelines/59144ee6-73bf-4f9a-91ea-43da97e9108f)
 * [Make](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html)
+* Way of handling Payments - [Paypal](https://developer.paypal.com/docs/classic/paypal-payments-standard/integration-guide/pps_integration/)
 
 ### Example workflow:
 1. I start at my local repo's master branch and cut a new feature
 
     `git checkout -b <branch_name>`
-2. I write some hot code.
-
-    `x += 1 #whoa`
-3. I add all and commit.
+2. I add all and commit.
 
     `git add --all`
 
-    `git commit -m "descriptive and short af message"`
-4. I push my commits to my forked github repo.
+    `git commit -m "descriptive and short message"`
+3. I push my commits to my forked github repo.
 
     `git push <user_name> <branch_name>`
-5. I go to the organization repo **or** my forked copy on github.com and trigger a pull request with the message waiting for me on the page.
+4. I go to the organization repo **or** my forked copy on github.com and trigger a pull request with the message waiting for me on the page.
 
-6. I add my trello board story URL and a description of my work to the PR comments description field.
+5. I add my trello board story URL and a description of my work to the PR comments description field.
 
-7. I post in the slack channel with @here prbeg <link to pull request>
+6. I post in the slack channel with @here prbeg <link to pull request>
 
-8. I await a thumbs up emoji and rebeg if no one responds.
+7. I await a thumbs up emoji and rebeg if no one responds.
 
-9. I merge my PR into master.
+8. I merge my PR into master.
 
-10. Once merged I await my changes to be deployed to the [qa environment](http://qa-veterans-work.herokuapp.com/).
+9. Once merged I await my changes to be deployed to the [qa environment](http://qa-veterans-work.herokuapp.com/).
 
 ### Working with Mailers in Development Mode
 To interact with the app's mailers, you need to run **Mailcatcher** in tandem with Veterans Work. To do this, make sure you've installed it by using `gem install mailcatcher` and then open a separate terminal window and activate Mailcatcher with: `mailcatcher`.
@@ -72,49 +67,3 @@ Once code is merged into our organization master branch, we propel it through th
 >Note: No need to open PR's from one branch to another on github.
 
 **Login details should be obtained in person for access to the build log and never shared on slack or this repo.**
-
-##Company Sign-up Walkthrough
-
-1. Enter an Email
-    **  Example@email.com  **
-
-2. Make a password with 6 or more characters
-    **  Example123  **
-
-3. Retype password
-
-4. Type your Name
-    **  Example_name  **
-
-5. Type your company's address
-    **  15 PLACE, St. **
-
-6. Type the city it is located in
-    **  New York, Chicago, England, etc.  **
-
-7. Type your state
-    **  Indiana, Texes, etc. **
-
-8. Type your zipcode
-    ** 738491  **
-
-9. Type your phone number (only use numbers and no symbols. Inclueding hyphens)
-    **  5555555555  **
-
-10. Type a description
-    **  Our company is here to help all veterens find ways to work.  **
-
-11. Type your website link here.
-    ** www.Example.com  **
-
-12. Type how far your company will serve or willing to work.
-    **  50 miles (this would be at most)  **
-
-13. Choose an Avatar/Logo from your computer
-    ** If one is not picked than you will be given a default image. **
-
-14. Must pick a service
-    **  Paint  **
-
-15. Click Sign Up
-    ** Done :D  **
