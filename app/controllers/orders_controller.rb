@@ -11,10 +11,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @order = Order.new
-  end
-
   def create
     order = Order.new(
               company_id: params['companyId'],

@@ -74,7 +74,7 @@ class Company < ApplicationRecord
   has_many :contracts
   has_many :orders
 
-  has_attached_file :avatar, 
+  has_attached_file :avatar,
     styles: { medium: '300x300>', thumb: '100x100>' }, 
     default_url: 'army.png'
 

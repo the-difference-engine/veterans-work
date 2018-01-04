@@ -58,7 +58,7 @@ paypal.Button.render({
 
   client: {
     sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
-    production: 'PAYPAL_PRODUCTION_CLIENT_ID'
+    production: "<%= ENV['PRODUCTION_PAYPAL'] %>"
   },
 
   payment: function(data, actions) {

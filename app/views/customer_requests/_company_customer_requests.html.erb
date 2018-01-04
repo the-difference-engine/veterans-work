@@ -9,12 +9,16 @@
 </div>
 
 <div>
-  <a class="btn btn-success" href="/quotes">
-    My Quotes
-  </a>
-  <a class="btn btn-success" href="/contracts">
-    My Contracts
-  </a>
+  <% if @has_quotes %>
+    <a class="btn btn-success" href="/quotes">
+      My Quotes
+    </a>
+  <% end %>
+  <% if @has_contracts %>
+    <a class="btn btn-success" href="/contracts">
+      My Contracts
+    </a>
+  <% end %>
 </div>
 <br>
 

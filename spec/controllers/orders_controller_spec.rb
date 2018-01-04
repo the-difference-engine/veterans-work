@@ -66,12 +66,12 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
-    it 'assigns a new instance of order to @order' do
-      get :new
-      expect(assigns(:order)).to be_an_instance_of(Order)
-    end
-  end
+  # describe 'GET #new' do
+  #   it 'assigns a new instance of order to @order' do
+  #     get :new
+  #     expect(assigns(:order)).to be_an_instance_of(Order)
+  #   end
+  # end
 
   describe 'POST #create' do
     before :each do

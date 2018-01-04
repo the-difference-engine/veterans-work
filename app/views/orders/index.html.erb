@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @orders.each do |order| %>
+        <% @orders.reverse_each do |order| %>
           <tr>
             <td><a href="/orders/<%= order.id %>">view</td>
             <td><%= order.id %></td>
