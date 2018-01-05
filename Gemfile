@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip', '~> 5.0.0'
-gem 'aws-sdk', '~> 2.3'
+
 gem 'area'
 gem 'devise', '~> 4.3.0'
 gem 'geocoder', '~> 1.4.3'
