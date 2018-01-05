@@ -7,9 +7,11 @@ class ReviewsController < ApplicationController
 
   def new
     if params[:company]
-      @companies = [Company.find_by(id: params[:company])]
+      @companies = Company.where(id: params[:company])
     else
-      @companies = current_customer.contracts.map{|contract| contract.quote.company}.uniq
+      @companies = current_customer.contracts.includes(:company)
+                                   .map { |contract| contract.quote.company }
+                                   .uniq
     end
     @review = Review.new
     render 'new.html.erb'
