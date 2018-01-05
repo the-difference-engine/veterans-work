@@ -64,4 +64,24 @@ class ContractsController < ApplicationController
       redirect_to '/'
     end
   end
+
+  def update
+    @contract = Contract.find(params[:id])
+    if current_customer == @contract.customer_request.customer ||
+       current_company == @contract.company ||
+       current_admin
+      if (params[:contract][:completion_date]).to_date <= Date.today
+        @contract.update(completion_date: params[:contract][:completion_date])
+      end
+      if @contract.save
+        flash[:notice] = 'Your contract has been marked as completed!'
+      else
+        flash[:alert] = 'Your changes have not been saved'
+      end
+      redirect_to "/quotes/#{@contract.quote.id}"
+    else
+      flash[:alert] = "Sorry, you don't have the permissions to update this contract."
+      redirect_to "/"
+    end    
+  end
 end

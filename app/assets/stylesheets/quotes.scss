@@ -8,6 +8,14 @@
     font-size: 12px;
 }
 
+td a {
+    color: $design-green;
+    &:hover {
+        color: $design-green;
+        text-decoration: none;
+    }
+}
+
 .btn-success  {
   background-color: $logo-green;
   border-color: $logo-green;
@@ -53,4 +61,8 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.close {
+    opacity: 1;
 }

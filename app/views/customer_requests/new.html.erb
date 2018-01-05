@@ -26,7 +26,7 @@
 
       <div class="field">
         <%= label_tag :state %>
-        <%= f.text_field :state, class: "form-control" %>
+        <%= f.select :state, options_for_select(us_states),{include_blank: true}, class: "form-control" %>
       </div>
 
       <div class="field">
