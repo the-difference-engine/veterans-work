@@ -70,7 +70,9 @@ class ContractsController < ApplicationController
     if current_customer == @contract.customer_request.customer ||
        current_company == @contract.company ||
        current_admin
-      @contract.update(completion_date: params[:contract][:completion_date])
+      if (params[:contract][:completion_date]).to_date <= Date.today
+        @contract.update(completion_date: params[:contract][:completion_date])
+      end
       if @contract.save
         flash[:notice] = 'Your contract has been marked as completed!'
       else
