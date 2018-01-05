@@ -1,11 +1,19 @@
 <div class="comment-form">
-  <h3>Leave A Review</h3>
+  <h3>Leave A Review
+    <% if @company %>
+      for <%= @company.name%>
+    <% end %>
+  </h3>
   <%= form_tag '/reviews', method: :post do  %>
     <div class="form-contact">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Company</label>
-        <%= collection_select("",:company_id, @companies, :id, :name, prompt: "Select one...") %>
-      </div>
+      <% if @company %>
+        <%= hidden_field(:company_id, value: params[:company]) %>
+      <% else %>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Company</label>
+          <%= collection_select("",:company_id, @companies, :id, :name, prompt: "Select one...") %>
+        </div>
+      <% end %>
 
       <div class="form-group">
         <label for="message">Rating</label>

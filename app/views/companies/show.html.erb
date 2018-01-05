@@ -34,7 +34,7 @@
     <br>
     <h3 style="width: 100%">Reviews:
     <% if current_customer %>
-      <span style="float: right"><a href="/reviews/new">Leave a Review</a></span>
+      <span style="float: right"><a href="/reviews/new?company=<%=@company.id%>">Leave a Review</a></span>
     <% end %>
     </h3>
     <% @company.reviews.reverse.each do |review| %>
