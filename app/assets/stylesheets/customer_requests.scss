@@ -5,6 +5,10 @@
   height: 75vh;
 }
 
+#body {
+  background-color: #e0dede;
+}
+
 button {
   a {
     text-decoration: none;
@@ -18,4 +22,8 @@ button {
     text-decoration: none;
     color: white;    
   }
+}
+
+#cr_table th, #cr_table td {
+  width: 25%;
 }

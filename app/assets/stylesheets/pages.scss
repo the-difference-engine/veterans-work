@@ -26,7 +26,6 @@ h1.home-title {
   font-size: 7em;
   color: $white;
   text-align: center;
-  text-shadow: 2px 2px 1px gray;
 }
 
 #home-header {
@@ -42,7 +41,6 @@ h1.home-title {
   color: $white;
   letter-spacing: 2px;
   text-align: center;
-  text-shadow: 2px 2px 1px gray;
   padding-bottom: 20px;
 }
 
@@ -169,16 +167,14 @@ h1.home-title {
       margin-left: 20vh;
       margin-bottom: 20vh;
       max-width: 50%;
-      background-color: rgba(1, 45, 1, 0.6);
+      background-color: rgba(1, 45, 1, 0.8);
       border-radius: 15px;
-      box-shadow: 3px 3px 5px #888;
       padding: 20px;
 
       h1 {
         margin: 0;
         font: $h1;
         color: white;
-        text-shadow: 3px 3px 5px #666;
 
       }
 
@@ -186,7 +182,6 @@ h1.home-title {
         font: $h4;
         color: white;
         text-align: justify;
-        text-shadow: 2px 2px 3px #222;
       }
     }
 
@@ -217,7 +212,7 @@ h1.home-title {
     margin: 0 auto;
     text-align: center;
     // color: white;
-    background-color: rgba(1, 45, 1, 0.6);
+    background-color: rgba(1, 45, 1, 0.8);
     border-radius: 15px;
     box-shadow: 3px 3px 5px #888;
     padding: 10px;
@@ -273,15 +268,12 @@ h1.home-title {
         text-align: center;
         font: $h1;
         color: white;
-        text-shadow: 3px 3px 5px #666;
-
       }
 
       h3 {
         font: $h4;
         color: white;
         text-align: justify;
-        text-shadow: 2px 2px 3px #222;
       }
 
       ul {
@@ -464,15 +456,12 @@ h1.home-title {
           text-align: center;
           font: $h1;
           color: white;
-          text-shadow: 3px 3px 5px #666;
-
         }
 
         h3 {
           font: $h4;
           color: white;
           text-align: justify;
-          text-shadow: 2px 2px 3px #222;
         }
 
         ul {

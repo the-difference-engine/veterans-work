@@ -2,9 +2,9 @@
   <div class="col-sm-6">
     <div class="row">
       <div class="well">
-        <% if @quote.contract && 
-          (@quote.company == current_company || 
-          @request.customer == current_customer) 
+        <% if @quote.contract &&
+          (@quote.company == current_company ||
+          @request.customer == current_customer)
         %>
           <h2><%= @request.customer.email %> needs ...</h2>
           <div>
@@ -21,8 +21,8 @@
             <h4>City: <%= @request.city %></h4>
             <h4>State: <%= @request.state %></h4>
             <h4>Zipcode: <%= @request.zipcode %></h4>
-          </div>        
-        <% end %>        
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row">
@@ -74,18 +74,18 @@
               <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
                 <%= f.hidden_field :quote_id, value: @quote.id %>
                 <%= f.hidden_field :customer_request_id, value: @request.id %>
-                <%= f.submit "Accept Quote", class: "btn btn-md btn-success" %> 
+                <%= f.submit "Accept", class: "btn btn-md btn-success" %>
               <% end %>
               <button type="button" class="btn btn-danger btn-md top-margin-button" id="declinedBtn">Decline Quote</button><br>
               <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
             <% elsif @quote.contract && !@quote.contract.completion_date &&
-              (@quote.company == current_company || 
-              @request.customer == current_customer) 
+              (@quote.company == current_company ||
+              @request.customer == current_customer)
             %>
               <button class="btn btn-danger" id="completedBtn">Mark As Complete</button>
             <% elsif @quote.contract && @quote.contract.completion_date &&
-              (@quote.company == current_company || 
-              @request.customer == current_customer) 
+              (@quote.company == current_company ||
+              @request.customer == current_customer)
             %>
               <h4>This job was completed on: <%= @quote.contract.completion_date.strftime("%B %e, %Y") %></h4>
               <% if current_customer %>
@@ -95,7 +95,7 @@
           </div>
           <br>
         </div>
-      </div>      
+      </div>
     </div>
 
   </div>
@@ -104,6 +104,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 
 
 
@@ -118,6 +119,11 @@
 <!-- Decline Modal -->
 <div class="modal" id="declined">
   <div class="modal-dialog">
+=======
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+>>>>>>> bfb991d2a6d9ea948fdf07b5be8a069cb30dba3a
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -142,6 +148,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- Complete Modal -->
 <% if @quote.contract %>
 <div class="modal" id="completed">
@@ -177,12 +184,14 @@
 
 
 
+=======
+>>>>>>> bfb991d2a6d9ea948fdf07b5be8a069cb30dba3a
 <script
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
 </script>
 
 <script>
-  initMap(parseFloat(<%= @request.latitude %>), 
-    parseFloat(<%= @request.longitude %>), 
+  initMap(parseFloat(<%= @request.latitude %>),
+    parseFloat(<%= @request.longitude %>),
     <%= @has_permissions %>)
 </script>
