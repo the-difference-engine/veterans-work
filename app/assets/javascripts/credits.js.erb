@@ -24,7 +24,7 @@ $(document).ready(function() {
   }
 
   var creditCost = <%= ENV['CREDIT_COST'] %>;
-  var checkoutTotal = 5;
+  var checkoutTotal = <%= ENV['CREDIT_COST'] %>;
 
   // When the user clicks anywhere outside of the modal, close it
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
 // THIS IS WHAT COMMUNICATES WITH PAYPAL
 
 paypal.Button.render({
-  env: 'sandbox', // Or 'sandbox',
+  env: 'production', // Or 'production',
 
   client: {
     sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
@@ -81,8 +81,8 @@ paypal.Button.render({
       total: (checkoutTotal).toFixed(2)
     }, function() {
         var currentLocation = window.location.href;
-        window.location.href = currentLocation;
-        window.alert(quantity.value + ' Credits were added to your account')
+        // window.location.href = currentLocation;
+        // window.alert(quantity.value + ' Credits were added to your account')
     }).fail(function(response) {
         window.alert('Something went wrong. Please try again')
     });

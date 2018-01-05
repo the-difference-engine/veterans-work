@@ -14,5 +14,6 @@ FactoryGirl.define do
   factory :order do
     company
     quantity 1
+    total 5.00
   end
 end

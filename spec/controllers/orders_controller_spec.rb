@@ -66,57 +66,40 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
 
-  # describe 'GET #new' do
-  #   it 'assigns a new instance of order to @order' do
-  #     get :new
-  #     expect(assigns(:order)).to be_an_instance_of(Order)
-  #   end
-  # end
+  describe 'GET #new' do
+    it 'redirects to customer request page' do
+      get :new
+      expect(response).to redirect_to '/customer_requests'
+    end
+  end
 
   describe 'POST #create' do
     before :each do
-      sign_in create :company
-      OrdersController.any_instance.stub(:process_payment).and_return(nil)
+      @company = create :company, status: 'Active', credits: 2
+      sign_in @company
     end
 
-    it 'assigns a new instance of order with passed attributes to @order' do
-      sign_in create :company
-      post :create, params: { order: attributes_for(:order) }
-      expect(assigns(:order)).to be_an_instance_of(Order)
-    end
-
-    context 'instance saves' do
-      it 'saves a new order to the database' do
+    context 'Company purchases 5 credits' do
+      it 'Adds order to database' do
         expect{
-          post :create, params: { order: attributes_for(:order) }
+          post :create, params: {
+                                  'companyId' => @company.id,
+                                  'quantity' => 5,
+                                  'total' => 25.00
+                                }
         }.to change(Order, :count).by(1)
       end
-
-      it 'updates the flash message' do
-        post :create, params: { order: attributes_for(:order) }
-        expect(flash[:success]).to eq('Your order has been successfully processed.')
-      end
-
-      it 'redirects the user to the created orders show page' do
-        post :create, params: { order: attributes_for(:order) }
-        expect(response).to redirect_to order_path(assigns(:order))
-      end
     end
 
-    context 'instance doesnt save' do
-      before :each do
-        allow_any_instance_of(Order).to receive(:save).and_return(false)
-      end
+    it 'Company credits updated to 7' do
+      post :create, params: {
+                              'companyId' => @company.id,
+                              'quantity' => 5,
+                              'total' => 25.00
+                            }
 
-      it 'updates the flash message' do
-        post :create, params: { order: attributes_for(:order) }
-        expect(flash[:danger]).to eq('Something went wrong please submit again.')
-      end
-
-      it 'renders the new template' do
-        post :create, params: { order: attributes_for(:order) }
-        expect(response).to render_template :new
-      end
+      @company.reload
+      expect(@company.credits).to eq(7)
     end
   end
 
