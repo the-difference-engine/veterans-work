@@ -1,13 +1,13 @@
 <div class="comment-form">
   <h3>Leave A Review
-    <% if @company %>
+    <% if @companies.include?(@company) %>
       for <%= @company.name%>
     <% end %>
   </h3>
   <%= form_tag '/reviews', method: :post do  %>
     <div class="form-contact">
-      <% if @company %>
-        <%= hidden_field(:company_id, value: params[:company]) %>
+      <% if @companies.include?(@company) %>
+        <%= hidden_field_tag(:company_id, @company.id) %>
       <% else %>
         <div class="form-group">
           <label for="exampleInputEmail1">Company</label>
