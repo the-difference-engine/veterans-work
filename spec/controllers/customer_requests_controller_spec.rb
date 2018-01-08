@@ -264,7 +264,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
           customer: customer
         )
         sign_in customer
-        put :update, params: {
+        patch :update, params: {
           id: customer_request.id,
           customer_request: {
             address: '215 W Ohio St',
