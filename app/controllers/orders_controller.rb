@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   def index
     if current_company
-      @orders = current_company.orders
+      @orders = current_company.orders.order(created_at: :desc)
     elsif current_admin
       @orders = Order.all
     else
