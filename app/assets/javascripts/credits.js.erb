@@ -54,7 +54,7 @@ $(document).ready(function() {
 // THIS IS WHAT COMMUNICATES WITH PAYPAL
 
 paypal.Button.render({
-  env: 'production', // Or 'production',
+  env: 'sandbox', // Or 'production',
 
   client: {
     sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
