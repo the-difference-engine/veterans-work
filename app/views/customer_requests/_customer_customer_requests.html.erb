@@ -1,39 +1,47 @@
 <h1>My Work Requests</h1>
-  <a href="/customer_requests/new" id="new-request-top">
-    <button class="btn btn-success">New Work Request</button>
-  </a>
+  <div>
+    <a href="/customer_requests/new" id="new-request-top">
+      <button class="btn btn-success">New Work Request</button>
+    </a>
+    <a href="/contracts" id="contracts">
+      <button class="btn btn-success">My Contracts</button>
+    </a>
+  </div>
+  <br>
   <br>
 <% if @customer.customer_requests %>
-  <% @customer.customer_requests.each do |cr| %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table class="table table-hover">
-            <h4><%= link_to cr.description, "/customer_requests/#{cr.id}" %></h4>
-              <thead>
-                <tr>
-                  <th>Service Category</th>
-                  <th>Expiration Date</th>
-                  <th>Quotes Received</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%= cr.service_category.name%></td>
-                  <td><%= cr.expires_date.strftime("%B %e, %Y") %> </td>
-                  <td><%= cr.quotes.count %> of 3</td>
-                  <td>
-                    <a href="/quotes?request_id=<%=cr.id%>" class="btn btn-success">
-                      View Quotes
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
-        </div>
+  <% @requests.each do |cr| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-hover" id="cr_table">
+          <h4><%= link_to cr.description, "/customer_requests/#{cr.id}" %></h4>
+            <thead>
+              <tr>
+                <th>Service Category</th>
+                <th>Expiration Date</th>
+                <th>Quotes Received</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= cr.service_category.name%></td>
+                <td><%= cr.expires_date.strftime("%B %e, %Y") %> </td>
+                <td><%= cr.open_quotes.count %> of 3</td>
+                <% if cr.open_quotes.count > 0 %> 
+                  <td><a class="btn btn-success" href="/quotes?request_id=<%=cr.id%>">View Quotes</a></td>
+                <% else %>
+                  <td><a class="btn btn-success" href="/quotes?request_id=<%=cr.id%>" style="opacity: 0.3">No Quotes</a></td>
+                <% end %>
+              </tr>
+            </tbody>
+        </table>
       </div>
-    <% end %>
-  <a href="/customer_requests/new">
-    <button class="btn btn-success pull-right">New Work Request</button>
-  </a>
+    </div>
+  <% end %>
+  <% if @customer.customer_requests.length >= 5 %>
+    <a href="/customer_requests/new">
+      <button class="btn btn-success pull-right">New Work Request</button>
+    </a>
+  <% end %>
 <% end %>

@@ -42,7 +42,7 @@
 
       <div class="field">
         <%= f.label :state %><br />
-        <%= f.text_field :state, autofocus: true, class: "form-control"  %>
+        <%= f.select :state, options_for_select(us_states),{include_blank: true}, autofocus: true, class: 'form-control' %>
       </div>
 
       <div class="field">
@@ -52,7 +52,7 @@
 
       <div class="field">
         <%= f.label :phone %><br />
-        <%= f.text_field :phone, autofocus: true, class: "form-control"  %>
+        <%= f.text_field :phone, placeholder: "Numbers Only eg. 1234567890", autofocus: true, class: "form-control"  %>
       </div>
     </div>
 

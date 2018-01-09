@@ -1,83 +1,187 @@
-<div class="panel panel-quotes panel-default text-center" style="width: 60%;">
-  <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
-    <h3 class="panel-title">Quote from <b><%= link_to @quote.company.name, company_path(@quote.company) %></b></h3>
-  </div>
-  <div>
-    <table class="table table-condensed">
-      <tbody>
-        <tr>
-          <th>Viewed</th>
-          <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
-        </tr>
-        <tr>   
-          <th>Category</th>
-          <td><%= @quote.customer_request.service_category.name%></td>
-        </tr>
-        <tr>
-          <th>Zip Code</th>
-          <td><%= @quote.customer_request.zipcode%></td>
-        </tr>
-        <tr>
-          <th>Start Date</th>
-          <td><%= @quote.start_date.strftime("%B %e, %Y") %></td>
-        </tr>
-        <tr>
-          <th>Completion Date Estimate</th>
-          <td><%= @quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
-        </tr>
-        <tr>
-          <th>Notes</th>
-          <td><%= @quote.notes %></td>
-        </tr>
-        <tr>
-          <th>Materials Cost Estimate</th>
-          <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
-        </tr>
-        <tr>
-          <th>Labor Cost Estimate</th>
-          <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
-        </tr>
-        <tr>
-          <th>Total Cost Estimate</th>
-          <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
-        </tr>
-      </tbody>
-    </table>
-    <div align="center">
-      <% if current_company || current_customer && @quote.accepted %>
-        <a class="btn btn-primary" href="/quotes" role="button">Back to Quotes</a>
-        <a class="btn btn-primary" href="/customer_requests" role="button">Home</a>
-      <% else %>
-        <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
-          <%= f.hidden_field :quote_id, value: @quote.id %>
-          <%= f.hidden_field :customer_request_id, value: @customer_request.id %>
-          <%= f.submit "Accept", class: "btn btn-md btn-success" %> 
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="well">
+        <% if @quote.contract &&
+          (@quote.company == current_company ||
+          @request.customer == current_customer)
+        %>
+          <h2><%= @request.customer.email %> needs ...</h2>
+          <div>
+            <h3><%= @request.description %></h3>
+            <h4>Address: <%= @request.address %></h4>
+            <h4>City: <%= @request.city %></h4>
+            <h4>State: <%= @request.state %></h4>
+            <h4>Zipcode: <%= @request.zipcode %></h4>
+          </div>
+        <% else %>
+          <h2>A customer needs...</h2>
+          <div>
+            <h3><%= @request.description %></h3>
+            <h4>City: <%= @request.city %></h4>
+            <h4>State: <%= @request.state %></h4>
+            <h4>Zipcode: <%= @request.zipcode %></h4>
+          </div>
         <% end %>
-        <button type="button" class="btn btn-danger btn-md top-margin-button" data-toggle="modal" data-target="#myModal">Decline Quote</button><br>
-        <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
-      <% end %>
+      </div>
     </div>
+    <div class="row">
+      <div class="panel panel-quotes panel-default text-center">
+        <div class="panel-heading" style="background-color: white;color:rgb(60,114,58)">
+          <h3 class="panel-title">Details of Quote from <a href="/companies/<%= @quote.company.id %>"><%= @quote.company.name %></a></h3>
+        </div>
+        <div>
+          <table class="table table-condensed">
+            <tbody>             
+              <% if @quote.view_date %>
+                <tr>
+                  <th>Quote Viewed</th>
+                  <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th>Category</th>
+                <td><%= @request.service_category.name%></td>
+              </tr>
+              <tr>
+                <th>Start Date</th>
+                <td><%= @quote.start_date.strftime("%B %e, %Y") %></td>
+              </tr>
+              <tr>
+                <th>Completion Date Estimate</th>
+                <td><%= @quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+              </tr>
+              <tr>
+                <th>Notes</th>
+                <td><%= @quote.notes %></td>
+              </tr>
+              <tr>
+                <th>Materials Cost Estimate</th>
+                <td><%= number_to_currency(@quote.materials_cost_estimate) %></td>
+              </tr>
+              <tr>
+                <th>Labor Cost Estimate</th>
+                <td><%= number_to_currency(@quote.labor_cost_estimate) %></td>
+              </tr>
+              <tr>
+                <th>Total Cost Estimate</th>
+                <td><%= number_to_currency(@quote.total_cost_estimate) %></td>
+              </tr>
+            </tbody>
+          </table>
+          <div align="center">
+            <% if current_customer && @quote.accepted == nil %>
+              <%= form_for :contract, url: '/contracts/', method: :post do |f| %>
+                <%= f.hidden_field :quote_id, value: @quote.id %>
+                <%= f.hidden_field :customer_request_id, value: @request.id %>
+                <%= f.submit "Accept", class: "btn btn-md btn-success" %>
+              <% end %>
+              <button type="button" class="btn btn-danger btn-md top-margin-button" id="declinedBtn">Decline Quote</button><br>
+              <a class="btn btn-theme-bg" href="/quotes" role="button"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>Back</a>
+            <% elsif @quote.contract && !@quote.contract.completion_date &&
+              (@quote.company == current_company ||
+              @request.customer == current_customer)
+            %>
+              <button class="btn btn-danger" id="completedBtn">Mark As Complete</button>
+            <% elsif @quote.contract && @quote.contract.completion_date &&
+              (@quote.company == current_company ||
+              @request.customer == current_customer)
+            %>
+              <h4>This job was completed on: <%= @quote.contract.completion_date.strftime("%B %e, %Y") %></h4>
+              <% if current_customer %>
+                <%= link_to 'Leave Review', "/reviews/new?company=#{@quote.company.id}", type: "button", class: "btn btn-success"%>
+              <% end %>
+            <% end %>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-6">
+    <div id="customer-request-map"></div>
   </div>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+
+
+
+
+
+
+
+
+<!-- Decline Modal -->
+<div class="modal" id="declined">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Decline Quote</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <h3 class="modal-title" id="exampleModalLabel">Decline Quote</h3>
       </div>
       <div class="modal-body">
       Do you want to decline this quote?
       </div>
       <div class="modal-footer">
-        <%= button_to "Yes", { action: "update", id: @quote.id},class: "btn btn-success btn-md", method: :patch %>
-        <button type="button" class="btn btn-danger btn-md top-margin-button" data-dismiss="modal">No</button>
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-8">
+            <%= button_to "Yes", { action: "update", id: @quote.id},class: "btn btn-success btn-md", method: :patch %>
+          </div>          
+          <div class="col-sm-2 close">
+            <button type="button" class="btn btn-danger btn-md" data-dismiss="modal">No</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Complete Modal -->
+<% if @quote.contract %>
+  <div class="modal" id="completed">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h3 class="modal-title" id="completeModalLabel">Mark As Complete</h3>
+        </div>
+        <%= form_for :contract, url: '/contracts/' + @quote.contract.id.to_s, method: :patch do |f| %>
+          <div class="modal-body">
+            When was this job completed?
+            <%= f.date_field :completion_date, max: Date.today, class: "form-control" %>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-6">
+                <%= f.submit "Mark As Complete", class: "btn btn-md btn-success" %> 
+              </div>          
+              <div class="col-sm-2 close">
+                <button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+</script>
+
+<script>
+  initMap(parseFloat(<%= @request.latitude %>),
+    parseFloat(<%= @request.longitude %>),
+    <%= @has_permissions %>)
+</script>

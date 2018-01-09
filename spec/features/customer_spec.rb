@@ -25,12 +25,12 @@ RSpec.describe 'the work request creation process', :type => :feature do
     within('#new_customer_request') do
       fill_in 'customer_request[address]', with: '301 N Michigan Ave'
       fill_in 'customer_request[city]', with: 'Chicago'
-      fill_in 'customer_request[state]', with: 'IL'
+      select('Illinois', from: 'customer_request[state]')
       fill_in 'customer_request[zipcode]', with: '60601'
       fill_in 'customer_request[description]', with: 'abc'
       fill_in 'customer_request[expires_date]', with: Date.today + 1
       select('paint', from: 'customer_request[service_category_id]')
-      click_button 'Submit'
+      click_button 'Done'
     end
     expect(page).to have_content 'My Work Requests'
   end

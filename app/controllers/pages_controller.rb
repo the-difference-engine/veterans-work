@@ -19,5 +19,4 @@ class PagesController < ApplicationController
   def how
     @full_width_page = true
   end
-
 end
