@@ -1,6 +1,6 @@
 <div class="comment-form">
   <h3>Leave A Review
-    <% if @companies.include?(@company) %>
+    <% if @company && @companies.include?(@company) %>
       for <%= @company.name%>
     <% end %>
   </h3>
