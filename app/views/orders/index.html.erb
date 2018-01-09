@@ -22,7 +22,7 @@
           <tr>
             <td><a href="/orders/<%= order.id %>">view</td>
             <td><%= order.id %></td>
-            <td><%= order.created_at.strftime('%a, %e %b %Y') %></td>
+            <td><%= order.created_at.localtime.strftime('%a, %e %b %Y') %></td>
             <td><%= order.quantity %></td>
           </tr>
         <% end %>
