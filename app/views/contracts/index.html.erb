@@ -15,7 +15,7 @@
           <tr>
             <td><a href="/contracts/<%= contract.id %>">view</td>
             <td><%= contract.customer_request.description %></td>
-            <td><%= contract.quote.completion_date_estimate.localtime.strftime('%a, %e %b %Y') %></td>
+            <td><%= contract.quote.completion_date_estimate.strftime('%a, %e %b %Y') %></td>
           </tr>
         <% end %>
       </tbody>
@@ -36,7 +36,7 @@
           <tr>
             <td><a href="/contracts/<%= contract.id %>">view</td>
             <td><%= contract.customer_request.description %></td>
-            <td><%= contract.completion_date.localtime.strftime('%a, %e %b %Y') %></td>
+            <td><%= contract.completion_date.strftime('%a, %e %b %Y') %></td>
           </tr>
          <% end %>
       </tbody>
