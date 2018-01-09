@@ -52,8 +52,6 @@ ActiveRecord::Migration.maintain_test_schema!
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
-ActiveMerchant::Billing::Base.mode = :test
-
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
