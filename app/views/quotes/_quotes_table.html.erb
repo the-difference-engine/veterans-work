@@ -17,8 +17,8 @@
     </thead>
     <tbody>
       <% quotes.each do |quote| %>
-      <tr 
-        <% if quote.customer_viewed == false %> 
+      <tr
+        <% if quote.customer_viewed == false %>
         style="font-weight: bold;"<% end %>
       >
         <td><%= quote.customer_request.description %></td>
