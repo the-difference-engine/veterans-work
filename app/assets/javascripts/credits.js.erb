@@ -37,57 +37,59 @@ $(document).ready(function() {
   var quantity = document.getElementById('credit-quantity');
   var subtotal = document.getElementById('credit-subtotal');
   // var creditCost = window.creditCost = '{{env('CREDIT_COST')}}';
+if (quantity !== null) {
 
-  quantity.addEventListener('change', function() {
-    checkoutTotal = quantity.value * creditCost;
-    console.log(quantity.dataset.companyId);
-    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
-  })
-  quantity.addEventListener('keyup', function() {
-    checkoutTotal = quantity.value * creditCost;
-    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
-  })
-  quantity.addEventListener('click', function() {
-    checkoutTotal = quantity.value * creditCost;
-    subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
-  })
-// THIS IS WHAT COMMUNICATES WITH PAYPAL
+    quantity.addEventListener('change', function() {
+      checkoutTotal = quantity.value * creditCost;
+      console.log(quantity.dataset.companyId);
+      subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
+    })
+    quantity.addEventListener('keyup', function() {
+      checkoutTotal = quantity.value * creditCost;
+      subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
+    })
+    quantity.addEventListener('click', function() {
+      checkoutTotal = quantity.value * creditCost;
+      subtotal.innerHTML = '$' + (quantity.value * creditCost).toFixed(2);
+    })
+  // THIS IS WHAT COMMUNICATES WITH PAYPAL
 
-paypal.Button.render({
-  // env: 'sandbox', //uncomment line to test paypal
+  paypal.Button.render({
+    // env: 'sandbox', //uncomment line to test paypal
 
-  client: {
-    sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
-    production: "<%= ENV['PRODUCTION_PAYPAL'] %>"
-  },
+    client: {
+      sandbox: "<%= ENV['SANDBOX_PAYPAL'] %>",
+      production: "<%= ENV['PRODUCTION_PAYPAL'] %>"
+    },
 
-  payment: function(data, actions) {
-    return actions.payment.create({
-      payment: {
-        transactions: [{
-          amount: {
-            total: checkoutTotal,
-            currency: 'USD'
-          }
-        }]
-      }
-    });
-  },
+    payment: function(data, actions) {
+      return actions.payment.create({
+        payment: {
+          transactions: [{
+            amount: {
+              total: checkoutTotal,
+              currency: 'USD'
+            }
+          }]
+        }
+      });
+    },
 
-  onAuthorize: function(data, actions) {
-    $.post('/orders', {
-      companyId: quantity.dataset.companyId,
-      quantity: quantity.value,
-      total: (checkoutTotal).toFixed(2)
-    }, function() {
-        var currentLocation = window.location.href;
-        window.location.href = currentLocation;
-        window.alert(quantity.value + ' Credits were added to your account')
-    }).fail(function(response) {
-        window.alert('Something went wrong. Please try again')
-    });
-  }
-}, '#paypal-button');
+    onAuthorize: function(data, actions) {
+      $.post('/orders', {
+        companyId: quantity.dataset.companyId,
+        quantity: quantity.value,
+        total: (checkoutTotal).toFixed(2)
+      }, function() {
+          var currentLocation = window.location.href;
+          window.location.href = currentLocation;
+          window.alert(quantity.value + ' Credits were added to your account')
+      }).fail(function(response) {
+          window.alert('Something went wrong. Please try again')
+      });
+    }
+  }, '#paypal-button');
 
-});
+  };
+})
 
