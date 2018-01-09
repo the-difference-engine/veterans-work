@@ -77,7 +77,7 @@ end
 RSpec.describe "customer decides on quote", :type => :feature do
   before :each do
     @company1 = create :company, email: 'user1@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
-    @company2 = create :company, email: 'user2@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721    
+    @company2 = create :company, email: 'user2@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
     @service_category = create :service_category, name: 'Paint'
     @customer = create :customer, email: 'customer@example.com', password: 'password'
     @customer_request = create :customer_request, customer_id: @customer.id, description: 'Sample request description', service_category_id: @service_category.id, zipcode: '60601', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
@@ -215,6 +215,26 @@ RSpec.describe "customer decides on quote", :type => :feature do
       visit("/quotes/#{@quote1.id}")
 
       expect(page).not_to have_content('customer@example.com')
+    end
+  end
+end
+
+RSpec.describe "company decides to purchase credits", :type => :feature do
+  before :each do
+    @company = create :company, email: 'company@example.com', password: 'password', status: 'Active'
+    visit '/companies/sign_in'
+    within(".login-form") do
+      fill_in 'company[email]', with: 'company@example.com'
+      fill_in 'company[password]', with: 'password'
+    end
+    click_button 'Log in'
+  end
+
+  context 'company clicks BUY MORE CREDITS' do
+    it 'should cause the modal to appear' do
+      visit '/customer_requests'
+      find('#creditBtn').click
+      expect(page).to have_content 'Purchase Credits:'
     end
   end
 end

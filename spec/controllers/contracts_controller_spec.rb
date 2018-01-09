@@ -208,13 +208,22 @@ RSpec.describe ContractsController, type: :controller do
 
     context 'when current_customer or current_company is not logged in' do
       it 'redirects to show page if not logged in as current Company or Customer' do
-      @contract = create(
-        :contract,
-        customer_request_id: 5,
-        quote_id: 1
-      )
-      get :show, params: { id: @contract.id }
-      expect(response).to redirect_to('/')
+        @company = create(:company)
+        @customer = create(:customer)
+        @customer_request = create(:customer_request, customer_id: @customer.id)
+        @quote = create(
+          :quote,
+          company_id: @company.id,
+          customer_request_id: @customer_request.id,
+          accepted: nil
+        )
+        @contract = create(
+          :contract,
+          customer_request_id: @customer_request.id,
+          quote_id: @quote.id
+        )
+        get :show, params: { id: @contract.id }
+        expect(response).to redirect_to('/')
       end
     end
   end
