@@ -16,7 +16,7 @@
             <tbody>
               <tr>
                 <td><%= cr.service_category.name%></td>
-                <td><%= cr.expires_date.strftime("%B %e, %Y") %></td>
+                <td><%= cr.expires_date.localtime.strftime("%B %e, %Y") %></td>
               </tr>
             </tbody>
           </table>

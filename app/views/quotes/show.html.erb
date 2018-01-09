@@ -36,7 +36,7 @@
               <% if @quote.view_date %>
                 <tr>
                   <th>Quote Viewed</th>
-                  <td><%= @quote.view_date.strftime("%B %e, %Y") %></td>
+                  <td><%= @quote.view_date.localtime.strftime("%B %e, %Y") %></td>
                 </tr>
               <% end %>
               <tr>
@@ -45,11 +45,11 @@
               </tr>
               <tr>
                 <th>Start Date</th>
-                <td><%= @quote.start_date.strftime("%B %e, %Y") %></td>
+                <td><%= @quote.start_date.localtime.strftime("%B %e, %Y") %></td>
               </tr>
               <tr>
                 <th>Completion Date Estimate</th>
-                <td><%= @quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+                <td><%= @quote.completion_date_estimate.localtime.strftime("%B %e, %Y") %></td>
               </tr>
               <tr>
                 <th>Notes</th>
@@ -87,7 +87,7 @@
               (@quote.company == current_company ||
               @request.customer == current_customer)
             %>
-              <h4>This job was completed on: <%= @quote.contract.completion_date.strftime("%B %e, %Y") %></h4>
+              <h4>This job was completed on: <%= @quote.contract.completion_date.localtime.strftime("%B %e, %Y") %></h4>
               <% if current_customer %>
                 <%= link_to 'Leave Review', "/reviews/new?company=#{@quote.company.id}", type: "button", class: "btn btn-success"%>
               <% end %>

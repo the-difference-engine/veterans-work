@@ -39,7 +39,7 @@
     </h3>
     <% @company.reviews.reverse.each do |review| %>
       <div class="well">
-        <p><%= review.created_at.strftime("%b %d, %Y") %></p>
+        <p><%= review.created_at.localtime.strftime("%b %d, %Y") %></p>
         <p><%= review.body %></p>
       </div>
     <% end %>

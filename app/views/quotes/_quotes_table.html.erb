@@ -24,11 +24,11 @@
         <td><%= quote.customer_request.description %></td>
         <td><%= quote.customer_request.expires_date %></td>
         <td><a href="/companies/<%= quote.company.id %>"><%= quote.company.name%></a></td>
-        <td><%= quote.start_date.strftime("%B %e, %Y") %></td>
-        <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
+        <td><%= quote.start_date.localtime.strftime("%B %e, %Y") %></td>
+        <td><%= quote.completion_date_estimate.localtime.strftime("%B %e, %Y") %></td>
         <td><%= number_to_currency(quote.total_cost_estimate) %></td>
         <% if quote.customer_viewed == true %>
-          <td><%= quote.view_date.strftime("%Y, %b. %e, \%\I:%M %p") %> </td> 
+          <td><%= quote.view_date.localtime.strftime("%Y, %b. %e, \%\I:%M %p") %> </td> 
         <% else %>
           <td></td>
         <% end %>
