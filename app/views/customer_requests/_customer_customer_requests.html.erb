@@ -26,7 +26,7 @@
             <tbody>
               <tr>
                 <td><%= cr.service_category.name%></td>
-                <td><%= cr.expires_date.localtime.strftime("%B %e, %Y") %> </td>
+                <td><%= cr.expires_date.strftime("%B %e, %Y") %> </td>
                 <td><%= cr.open_quotes.count %> of 3</td>
                 <% if cr.open_quotes.count > 0 %> 
                   <td><a class="btn btn-success" href="/quotes?request_id=<%=cr.id%>">View Quotes</a></td>
