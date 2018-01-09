@@ -17,8 +17,8 @@
     </thead>
     <tbody>
       <% quotes.each do |quote| %>
-      <tr 
-        <% if quote.customer_viewed == false %> 
+      <tr
+        <% if quote.customer_viewed == false %>
         style="font-weight: bold;"<% end %>
       >
         <td><%= quote.customer_request.description %></td>
@@ -28,7 +28,7 @@
         <td><%= quote.completion_date_estimate.strftime("%B %e, %Y") %></td>
         <td><%= number_to_currency(quote.total_cost_estimate) %></td>
         <% if quote.customer_viewed == true %>
-          <td><%= quote.view_date.strftime("%Y, %b. %e, \%\I:%M %p") %> </td> 
+          <td><%= quote.view_date.strftime("%Y, %b. %e, \%\I:%M %p") %> </td>
         <% else %>
           <td></td>
         <% end %>
