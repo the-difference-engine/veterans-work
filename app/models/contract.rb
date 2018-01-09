@@ -16,8 +16,7 @@ class Contract < ApplicationRecord
   belongs_to :quote
   
   belongs_to :customer_request
-  belongs_to :customer
-  belongs_to :company
+  belongs_to :company, optional: true
 
   validates :quote_id, presence: true
   validates :customer_request_id, presence: true

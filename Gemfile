@@ -37,7 +37,7 @@ gem 'paperclip', '~> 5.0.0'
 gem 'area'
 gem 'devise', '~> 4.3.0'
 gem 'geocoder', '~> 1.4.3'
-gem 'rubocop', '~> 0.47.1', require: false
+gem 'rubocop', '~> 0.49.0', require: false
 gem 'figaro'
 gem 'httparty'
 
