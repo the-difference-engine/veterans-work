@@ -29,7 +29,7 @@ RSpec.describe "the signout process", :type => :feature do
 
   it 'signs me out' do
     visit '/admins'
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on("Logout #{@admin.email}")
+    find(:css, 'div#mySidenav').click_on("Logout #{@admin.email}")
     expect(page).to have_content 'Signed out successfully'
   end
 end

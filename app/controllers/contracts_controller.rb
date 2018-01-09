@@ -47,8 +47,8 @@ class ContractsController < ApplicationController
             end
           end
         end
-      flash[:notice] = "Contract created and saved!"
-      redirect_to '/quotes'
+        flash[:notice] = "Contract created and saved!"
+        redirect_to '/quotes'
       else
         flash[:notice] = "Quote was not accepted. Try again. #{@quote.errors.full_messages.join(', ')}."
         redirect_to "/quotes/#{@quote.id}"
@@ -59,9 +59,29 @@ class ContractsController < ApplicationController
   def show
     if current_customer || current_company
       @contract = Contract.find(params[:id])
-      render 'show.html.erb'
+      redirect_to "/quotes/#{@contract.quote.id}"
     else
       redirect_to '/'
     end
+  end
+
+  def update
+    @contract = Contract.find(params[:id])
+    if current_customer == @contract.customer_request.customer ||
+       current_company == @contract.company ||
+       current_admin
+      if (params[:contract][:completion_date]).to_date <= Date.today
+        @contract.update(completion_date: params[:contract][:completion_date])
+      end
+      if @contract.save
+        flash[:notice] = 'Your contract has been marked as completed!'
+      else
+        flash[:alert] = 'Your changes have not been saved'
+      end
+      redirect_to "/quotes/#{@contract.quote.id}"
+    else
+      flash[:alert] = "Sorry, you don't have the permissions to update this contract."
+      redirect_to "/"
+    end    
   end
 end

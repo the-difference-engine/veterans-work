@@ -1,12 +1,12 @@
 class ReviewsController < ApplicationController
-
   def index
     @reviews = Review.all
     render 'index.html.erb'
   end
 
   def new
-    @companies = current_customer.contracts.map{|contract| contract.quote.company}.uniq
+    @companies = current_customer.contracts.includes(:company).map(&:company).uniq
+    @company = Company.find(params[:company]) if params[:company]
     @review = Review.new
     render 'new.html.erb'
   end

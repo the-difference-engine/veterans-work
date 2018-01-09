@@ -37,12 +37,19 @@ class Customer < ApplicationRecord
   has_many :quotes, through: :customer_requests
   has_many :contracts, through: :customer_requests
 
+  def open_customer_requests
+    customer_requests.includes(:quotes).where(
+      "customer_requests.expires_date >= ?",
+      10.days.ago
+    ).to_a.delete_if { |cr| cr.quotes.any? { |q| q.accepted == true }}
+  end
+
   def open_quotes
     quotes.where(accepted: nil)
   end
 
   def accepted_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS null'
     )
   end
@@ -52,7 +59,7 @@ class Customer < ApplicationRecord
   end
 
   def completed_quotes
-    quotes.joins(:contracts).where(
+    quotes.joins(:contract).where(
       'quotes.accepted IS true AND contracts.completion_date IS NOT null'
     )
   end

@@ -4,7 +4,7 @@ RSpec.describe 'the signout process', :type => :feature do
   it 'signs me out' do
     with_customer_signed_in
     visit "/customers/#{@customer.id}"
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on("Logout #{@customer.email}")
+    find(:css, 'div#mySidenav').click_on("Logout #{@customer.email}")
     expect(page).to have_content 'Signed out successfully'
   end
 end
@@ -20,17 +20,17 @@ RSpec.describe 'the work request creation process', :type => :feature do
   it 'directs to new work request form' do
     create :service_category, name: 'paint'
     with_customer_signed_in
-    find_link('New Work Request').click()
+    first(:css, '#new-request-top').click()
     expect(page).to have_content 'Enter Work Request'
     within('#new_customer_request') do
       fill_in 'customer_request[address]', with: '301 N Michigan Ave'
       fill_in 'customer_request[city]', with: 'Chicago'
-      fill_in 'customer_request[state]', with: 'IL'
+      select('Illinois', from: 'customer_request[state]')
       fill_in 'customer_request[zipcode]', with: '60601'
       fill_in 'customer_request[description]', with: 'abc'
       fill_in 'customer_request[expires_date]', with: Date.today + 1
       select('paint', from: 'customer_request[service_category_id]')
-      click_button 'Submit'
+      click_button 'Done'
     end
     expect(page).to have_content 'My Work Requests'
   end
@@ -65,7 +65,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer rejects quote' do
-    first(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    first(:css, 'div#mySidenav').click_on('Quotes')
     click_link "quote#{@quote.id}"
     click_button "Decline Quote"
     click_button "Yes"
@@ -73,7 +73,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
   end
 
   it 'customer accepts quote' do
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on('View Quotes')
+    find(:css, 'div#mySidenav').click_on('Quotes')
     click_link "quote#{@quote.id}"
     first(:css, 'input.btn.btn-md.btn-success').click
     expect(page).to have_content 'Contract created and saved!'
@@ -83,6 +83,7 @@ RSpec.describe "customer decides on quote", :type => :feature do
     before :each do
       visit('/quotes')
     end
+
 
     it 'should show open quotes in open quote table' do
       within '#open_quotes' do
@@ -155,30 +156,21 @@ RSpec.describe "customer decides on quote", :type => :feature do
     end
   end
 
-  context 'customer view of quotes index when there are completed contracts' do
+  context 'customer view of quotes index when there are contracts' do
     before :each do
       @quote.update(accepted: true)
-      create(:contract, quote_id: @quote.id, completion_date: Time.current)
+      create(:contract, quote_id: @quote.id, customer_request_id: @customer_request.id, completion_date: Time.current)
       visit('/quotes')
     end
 
-    it 'should show completed quotes button when there are completed quotes' do
-      expect(page).to have_css('#completedBtn')
+    it 'should show contracts button when the customer has contracts' do
+      expect(page).to have_css('#contractsBtn')
     end
 
-    it 'should allow customer to view completed quotes' do
-      click_button 'Completed Requests'
-      within '#completed_quotes' do
-        expect(page).to have_content('Sample request description')
-      end
+    it 'should allow customer to go to contracts page' do
+      click_link 'My Contracts'
+      expect(page).to have_content('Completed Contracts')
     end
 
-    it 'should hide completed quotes modal when customer clicks close x' do
-      click_button 'Completed Requests'
-      within '#completed' do
-        find('.close').click
-      end
-      expect(page).to have_css('#completed', visible: false)
-    end
   end
 end

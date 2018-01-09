@@ -33,13 +33,12 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip', '~> 5.0.0'
-gem 'aws-sdk', '~> 2.3'
+
 gem 'area'
 gem 'devise', '~> 4.3.0'
 gem 'geocoder', '~> 1.4.3'
-gem 'rubocop', '~> 0.47.1', require: false
+gem 'rubocop', '~> 0.49.0', require: false
 gem 'figaro'
-gem 'activemerchant'
 gem 'httparty'
 
 # pg_search allows fast seaching by any field on model

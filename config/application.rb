@@ -16,13 +16,12 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ActiveMerchant::Billing::Base.mode = :test
-
 module VeteransWork
   class Application < Rails::Application
     config.generators do |g|
       g.fixture_replacement :factory_girl
     end
+    config.time_zone = "Central Time (US & Canada)"
   end
 end
 

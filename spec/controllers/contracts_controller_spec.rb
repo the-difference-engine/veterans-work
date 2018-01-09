@@ -8,6 +8,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  completion_date     :date
+#  company_id          :integer
 #
 
 require 'rails_helper'
@@ -49,7 +50,8 @@ RSpec.describe ContractsController, type: :controller do
           :contract,
           customer_request_id: customer_request.id,
           quote_id: quote.id,
-          completion_date: nil
+          completion_date: nil,
+          company_id: company.id
         )
         get :index
         expect(assigns(:active_contracts)).to match_array([contract])
@@ -61,7 +63,7 @@ RSpec.describe ContractsController, type: :controller do
         sign_in company
         customer_request = create(:customer_request)
         quote = create(:quote, customer_request_id: customer_request.id, company_id: company.id)
-        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id)
+        contract = create(:contract, customer_request_id: customer_request.id, quote_id: quote.id, company_id: company.id) 
         get :index
         expect(response).to render_template(:index)
       end
@@ -206,13 +208,177 @@ RSpec.describe ContractsController, type: :controller do
 
     context 'when current_customer or current_company is not logged in' do
       it 'redirects to show page if not logged in as current Company or Customer' do
-      @contract = create(
-        :contract,
-        customer_request_id: 5,
-        quote_id: 1
-      )
-      get :show, params: { id: @contract.id }
-      expect(response).to redirect_to('/')
+        @company = create(:company)
+        @customer = create(:customer)
+        @customer_request = create(:customer_request, customer_id: @customer.id)
+        @quote = create(
+          :quote,
+          company_id: @company.id,
+          customer_request_id: @customer_request.id,
+          accepted: nil
+        )
+        @contract = create(
+          :contract,
+          customer_request_id: @customer_request.id,
+          quote_id: @quote.id
+        )
+        get :show, params: { id: @contract.id }
+        expect(response).to redirect_to('/')
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    context 'with customer signed in' do
+      before :each do
+        @company_one = create(:company)
+        @company_two = create(:company)
+        @customer = create(:customer)
+        sign_in @customer
+        @customer_request = create(:customer_request, customer_id: @customer.id)
+        @customer_request2 = create(:customer_request, customer_id: @customer.id)
+        @quote_one = create(
+          :quote,
+          company_id: @company_one.id,
+          customer_request_id: @customer_request.id,
+          accepted: true
+        )
+        @quote_two = create(
+          :quote,
+          company_id: @company_one.id,
+          customer_request_id: @customer_request2.id,
+          accepted: true
+        )
+        @quote_three = create(
+          :quote,
+          company_id: @company_two.id,
+          customer_request_id: @customer_request.id,
+          accepted: nil
+        )
+        @contract_one = create(
+          :contract,
+          customer_request_id: @customer_request.id,
+          quote_id: @quote_one.id
+        )
+        @contract_two = create(
+          :contract,
+          customer_request_id: @customer_request2.id,
+          quote_id: @quote_two.id
+        )
+      end
+
+      it 'assigns the correct contract to @contract' do
+        put :update, params: {
+          id: @contract_one.id,
+          contract: {
+            completion_date: Date.today
+          }
+        }
+        expect(assigns(:contract)).to eq(@contract_one)
+      end
+
+      it 'should save the contract completion date' do
+        today = Date.today
+        put :update, params: {
+          id: @contract_one.id,
+          contract: {
+            completion_date: today
+          }
+        }
+        expect(@contract_one.reload.completion_date).to eq(today)
+      end
+    end
+
+    context 'with company signed in' do
+      before :each do
+        @company_one = create(:company)
+        @company_two = create(:company)
+        @customer = create(:customer)
+        sign_in @company_one
+        @customer_request = create(:customer_request, customer_id: @customer.id)
+        @customer_request2 = create(:customer_request, customer_id: @customer.id)
+        @quote_one = create(
+          :quote,
+          company_id: @company_one.id,
+          customer_request_id: @customer_request.id,
+          accepted: true
+        )
+        @quote_two = create(
+          :quote,
+          company_id: @company_one.id,
+          customer_request_id: @customer_request2.id,
+          accepted: nil
+        )
+        @quote_three = create(
+          :quote,
+          company_id: @company_two.id,
+          customer_request_id: @customer_request.id,
+          accepted: nil
+        )
+        @contract_one = create(
+          :contract,
+          customer_request_id: @customer_request.id,
+          quote_id: @quote_one.id,
+          company_id: @company_one.id,
+          completion_date: nil
+        )
+        @contract_two = create(
+          :contract,
+          customer_request_id: @customer_request2.id,
+          quote_id: @quote_two.id,
+          company_id: @company_one.id,
+          completion_date: nil
+        )
+        @contract_three = create(
+          :contract,
+          customer_request_id: @customer_request.id,
+          quote_id: @quote_three.id,
+          company_id: @company_two.id,
+          completion_date: nil
+        )
+      end
+
+      it 'assigns the correct contract to @contract' do
+        put :update, params: {
+          id: @contract_one.id,
+          contract: {
+            completion_date: Date.today
+          }
+        }
+        expect(assigns(:contract)).to eq(@contract_one)
+      end
+
+      it 'should save the contract completion date' do
+        today = Date.today
+        put :update, params: {
+          id: @contract_one.id,
+          contract: {
+            completion_date: today
+          }
+        }
+        expect(@contract_one.reload.completion_date).to eq(today)
+      end
+
+      it "should not allow edits for other people's contracts" do
+        today = Date.today
+        put :update, params: {
+          id: @contract_three.id,
+          contract: {
+            completion_date: today
+          }
+        }
+        expect(@contract_three.reload.completion_date).to eq(nil)
+      end
+
+      it 'should not allow completion dates in the future' do
+        today = Date.today
+        put :update, params: {
+          id: @contract_one.id,
+          contract: {
+            completion_date: today + 1.day
+          }
+        }
+        expect(@contract_one.reload.completion_date).to eq(nil)
       end
     end
   end

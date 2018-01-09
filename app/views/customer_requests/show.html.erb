@@ -3,23 +3,22 @@
     <% if @request.contract %>
       <h2><%= @request.customer.email %> needs ...</h2>
       <div>
-        <p><%= @request.description %></p>
-        <p>Address: <%= @request.address %></p>
-        <p>City: <%= @request.city %></p>
-        <p>State: <%= @request.state %></p>
-        <p>Zipcode: <%= @request.zipcode %></p>
+        <h3><%= @request.description %></h3>
+        <h4>Address: <%= @request.address %></h4>
+        <h4>City: <%= @request.city %></h4>
+        <h4>State: <%= @request.state %></h4>
+        <h4>Zipcode: <%= @request.zipcode %></h4>
       </div>
     <% else %>
       <h2>A customer needs...</h2>
       <div>
-        <p><%= @request.description %></p>
-        <p>Address: <%= @request.address %></p>
-        <p>City: <%= @request.city %></p>
-        <p>State: <%= @request.state %></p>
-        <p>Zipcode: <%= @request.zipcode %></p>
+        <h3><%= @request.description %></h3>
+        <h4>City: <%= @request.city %></h4>
+        <h4>State: <%= @request.state %></h4>
+        <h4>Zipcode: <%= @request.zipcode %></h4>
       </div>
       <% if current_company %>
-        <%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %>
+        <button class="btn btn-success"><%= link_to 'New Quote', "/quotes/new?customer_request_id=#{@request.id}" %></button>
       <% end %>
       <% if current_customer && @request.quotes.empty? %>
         <%= link_to 'Cancel Request',
@@ -41,20 +40,12 @@
   </div>
 </div>
 
-<script>
-  function initMap() {
-    var requestCoords = {lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
-    var map = new google.maps.Map(document.getElementById('customer-request-map'), {
-      zoom: 16,
-      center: requestCoords
-    });
-    var marker = new google.maps.Marker({
-      position: requestCoords,
-      map: map
-    });
-  }
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
 </script>
 
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+<script>
+  initMap(parseFloat(<%= @request.latitude %>), 
+    parseFloat(<%= @request.longitude %>), 
+    <%= @has_permissions %>)
 </script>

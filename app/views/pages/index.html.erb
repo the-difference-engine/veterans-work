@@ -1,60 +1,73 @@
 <div id="homepage">
   <div id="home-header">
-    <h1 class="home-title">Veterans Work</h1>
-    <h3>Connect Customers in Need with Veterans in Skilled Trades</h3>
-
-    <div class="icons">
-      <ul>
-        <li class="col-sm-2 col-sm-offset-1">
-          <h4>Paint</h4>
-          <%= image_tag 'paint_icon.png', alt: "Paint icon", class: "work-icon img-responsive" %>
-        </li>
-        <li class="col-sm-2">
-          <h4>Plumbing</h4>
-          <%= image_tag 'plumbing_icon.png', alt: "plumbing icon", class: "work-icon img-responsive" %>
-        </li>
-        <li class="col-sm-2">
-          <h4>Carpentry</h4>
-          <%= image_tag 'carpentry_icon.png', alt: "carpentry icon", class: "work-icon img-responsive" %>
-        </li>
-        <li class="col-sm-2">
-          <h4>Mechanical</h4>
-          <%= image_tag 'mechanical_icon.png', alt: "mechanical icon", class: "work-icon img-responsive" %>
-        </li>
-        <li class="col-sm-2">
-          <h4>Electrical</h4>
-          <%= image_tag 'electrical_icon.png', alt: "electrical icon", class: "work-icon img-responsive" %>
-        </li>
-      </ul>
-    </div>
-  </div>
+    <div class="container">
+      <h1 class="home-title">Veterans Work</h1>
+      <h3>Connect Customers with Veterans in Skilled Trades</h3>
+      <div class="icons">
+        <ul>
+          <li class="col-xs-2 col-sm-offset-1">
+            <%= image_tag 'paint_icon.png', alt: "Paint icon", class: "work-icon img-responsive" %>
+          </li>
+          <li class="col-xs-2">
+            <%= image_tag 'plumbing_icon.png', alt: "plumbing icon", class: "work-icon img-responsive" %>
+          </li>
+          <li class="col-xs-2">
+            <%= image_tag 'carpentry_icon.png', alt: "carpentry icon", class: "work-icon img-responsive" %>
+          </li>
+          <li class="col-xs-2">
+            <%= image_tag 'mechanical_icon.png', alt: "mechanical icon", class: "work-icon img-responsive" %>
+          </li>
+          <li class="col-xs-2">
+            <%= image_tag 'electrical_icon.png', alt: "electrical icon", class: "work-icon img-responsive" %>
+          </li>
+        </ul>
+      </div> <!-- icons -->
+    </div><!-- container -->
+  </div><!-- home-header -->
 
   <div id="home-content">
-    <div id="service-search" class="row">
-      <h4 class="col-xs-12">Find a Service</h4>
-      <%= form_tag do %>
-        <%= text_field_tag "TBD", nil, placeholder: "What service do you need?", class: "service-text-box col-md-8 col-sm-12" %>
-        <%= submit_tag "Get Started", class: "button col-sm-3 " %>
-      <% end %>
-    </div>
-
-    <div class="row home-info">
-      <div class=" home-about col-lg-5 col-lg-offset-1">
-        <h2>About Veterans Work</h2>
-        <p> Work opportunities can sometimes be hard to come by for our beloved veterans in skilled trades. Veterans Work's mission is to connect customers in need with hard-working, dedicated veterans who are qualified and ready to work.</p>
-      </div>
-      <!-- <div class="vet-sign-in col-lg-4 col-lg-offset-1">
+    <div class="vet-sign-in row">
+      <div class="col-sm-4 company-cta">
         <h4>Veterans Sign-In</h4>
-        <p>Skilled trade veterans and veteran-owned companies can bid on and win work opportunities.</p>
-        <div class="row">
-          <a href="/companies/sign_in" id="company-sign-in">
-            <button class="button col-lg-3 col-lg-offset-2">Sign-In</button>
+        <h5>Skilled trade veterans: <br>Sign up to bid on and win work opportunities.</h5>
+        <div class="text-center">
+          <a class="button btn-lg" href="/companies/sign_in">
+            Veterans Sign-In
           </a>
-          <p class="sign-up col-lg-7">Not registered?
-            <a href="/companies/sign_up" id="company-sign-up">Sign-Up</a>
-          </p>
         </div>
-      </div> -->
+        <p class="sign-up">Not registered?
+          <a href="/companies/sign_up">Sign-Up</a>
+        </p>
+      </div>
+
+      <div class="col-sm-4 customer-cta">
+        <h4>Customer Sign-In</h4>
+        <h5>Want to hire a veteran to do some work?  <br>Sign up as a customer!</h5>
+        <div class="text-center">
+          <a class="button btn-lg" href="/customers/sign_in">
+            Customers Sign-In
+          </a>
+        </div>
+        <p class="sign-up">Not registered?
+          <a href="/customers/sign_up">Sign-Up</a>
+        </p>
+      </div>
+
+      <div class="col-sm-4 learn-cta">
+        <h4>Learn More</h4>
+        <h5>Still not sure how to get started?  <br>Visit the How It Works page for more details.</h5>
+        <div class="text-center">
+          <a class="button btn-lg " href="/how">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="home-info row">
+      <div class="home-about col-xs-10 col-xs-offset-1">
+        <h2>About Us</h2>
+        <p> We strive to provide easy access to veteran owned companies in a single location. This platform allows customers and businesses a seamless way to review and complete projects, from the beginning to the end.  <a href="/about"> Read More. . .</a></p>
+      </div>
     </div>
   </div>
 </div>

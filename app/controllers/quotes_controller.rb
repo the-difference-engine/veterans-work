@@ -7,6 +7,7 @@ class QuotesController < ApplicationController
       @accepted_quotes = current.accepted_quotes
       @declined_quotes = current.declined_quotes
       @completed_quotes = current.completed_quotes
+      @has_contracts = current.contracts.any?
 
       if params[:request_id]
         @open_quotes = @open_quotes.select do |quote|
@@ -59,10 +60,20 @@ class QuotesController < ApplicationController
 
   def show
     @quote = Quote.find(params[:id])
-    @customer_request = @quote.customer_request
+    @request = @quote.customer_request
     @company = @quote.company
-    if current_customer
-      @quote.update(customer_viewed: true)
+    @view_date = @quote.view_date
+    @has_permissions = @quote.contract && (
+      @quote.company == current_company ||
+      @request.customer == current_customer)
+    if current_customer == @request.customer ||
+       current_company == @quote.company ||
+       current_admin
+      @quote.update(customer_viewed: true, view_date: Time.now) if current_customer && !@view_date
+      render 'show.html.erb'
+    else
+      flash[:notice] = 'Sorry, you do not have the permissions to view this page!'
+      redirect_to '/'
     end
   end
 
@@ -104,6 +115,6 @@ class QuotesController < ApplicationController
   end
 
   def has_fewer_than_3_siblings?(quote)
-    quote.customer_request.quotes.count < 3
+    quote.customer_request.open_quotes.count < 3
   end
 end

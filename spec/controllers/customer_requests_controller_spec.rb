@@ -98,6 +98,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
 
       before :each do
         @customer = create :customer
+        @company = create(:company)
         sign_in @customer
       end
 
@@ -112,6 +113,34 @@ RSpec.describe CustomerRequestsController, type: :controller do
         )
         get :index
         expect(assigns(:requests)).to eq([customer_request_1])
+      end
+
+      it 'assigns open customer requests to @requests' do
+        customer_request_1 = create(:customer_request,
+          customer_id: @customer.id,
+          expires_date: Date.today + 10
+        )
+        quote = create(:quote,
+          company_id: @company.id,
+          customer_request_id: customer_request_1.id,
+          accepted: nil
+        )
+        get :index
+        expect(assigns(:requests)).to include(customer_request_1)
+      end
+
+      it 'does not assign customer requests that have been accepted to @requests' do
+        customer_request_1 = create(:customer_request,
+          customer_id: @customer.id,
+          expires_date: Date.today + 10
+        )
+        quote = create(:quote,
+          company_id: @company.id,
+          customer_request_id: customer_request_1.id,
+          accepted: true
+        )
+        get :index
+        expect(assigns(:requests)).not_to include(customer_request_1)
       end
     end
   end
@@ -159,7 +188,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
         post :create, params: { customer_request: attributes_for(:customer_request, service_category_id: service_category.id)}
       }.to change(CustomerRequest, :count).by(1)
     end
-    it 'redirects to the customer_requests index' do
+    it 'redirects to the /' do
       customer = create(:customer)
       sign_in customer
       service_category = create(:service_category)
@@ -169,7 +198,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
           service_category_id: service_category.id
         )
       }
-      expect(response).to redirect_to("/customers/#{customer.id}")
+      expect(response).to redirect_to("/")
     end
   end
 
@@ -235,7 +264,7 @@ RSpec.describe CustomerRequestsController, type: :controller do
           customer: customer
         )
         sign_in customer
-        put :update, params: {
+        patch :update, params: {
           id: customer_request.id,
           customer_request: {
             address: '215 W Ohio St',

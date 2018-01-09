@@ -5,9 +5,15 @@
     </div>
     <div class="col-sm-7">
       <h1><%= @company.name %></h1>
-      <!-- placeholder photo, actual photo should be downloaded -->
-        <h4><%= @company.star_avg %><img style="width: 20%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/5_stars.svg/2000px-5_stars.svg.png"></h4>
-      <h3><img style="height: 30px" src="https://cdn2.iconfinder.com/data/icons/filled-icons/493/Geotag-512.png"><%= @company.shorten_zip_code.to_region %></h3>
+ 
+      <% @company.star_avg.to_i.times do  %>
+        <span style="color: gold" class="glyphicon glyphicon-star"></span>
+      <% end %>
+      <% @company.empty_stars.to_i.times do %>
+        <span style="color: gold" class="glyphicon glyphicon-star-empty"></span>
+      <% end %>
+
+      <%= @company.shorten_zip_code.to_region %></h3>
         <h4>Phone: <%= number_to_phone(@company.phone, area_code: true) %>  &nbsp;| &nbsp; <a href="mailto:<%= @company.email %>">Email Us</a></h4>
         <h4>Website: <%= @company.url %></h4>
         <p>About: <%= @company.description %></p>
@@ -17,15 +23,23 @@
             <li style="display: inline"><%= service.name %></li>
           <% end %>
         </ul>
+        <% if current_admin %>
+          <%= link_to "Edit Profile", edit_company_path(@company), class: "btn btn-success pull-left" %>
+          </a>
+        <% end %>
     </div>
   </div>
   <div class="col-sm-10 col-sm-offset-1">
     <hr>
     <br>
-    <h3 style="width: 100%">Reviews:<span style="float: right"><a href="/reviews/new">Leave a Review</a></span></h3>
+    <h3 style="width: 100%">Reviews:
+    <% if current_customer %>
+      <span style="float: right"><%= link_to "Leave a Review", new_review_path(company: @company.id) %></span>
+    <% end %>
+    </h3>
     <% @company.reviews.reverse.each do |review| %>
       <div class="well">
-        <p><%= review.created_at.strftime("%b %d, %Y") %></p>
+        <p><%= review.created_at.localtime.strftime("%b %d, %Y") %></p>
         <p><%= review.body %></p>
       </div>
     <% end %>

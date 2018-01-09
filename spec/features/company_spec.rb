@@ -29,7 +29,7 @@ RSpec.describe "the signout process", :type => :feature do
 
   it 'signs me out' do
     visit '/customer_requests'
-    find(:css, 'ul.nav.navbar-nav.navbar-right').click_on("Logout #{@company.name}")
+    find(:css, 'div#mySidenav').click_on("Logout #{@company.name}")
     expect(page).to have_content 'Signed out successfully'
   end
 end
@@ -62,12 +62,22 @@ RSpec.describe 'company creates quote', :type => :feature do
     click_button 'Submit'
     expect(page).to have_content 'New Quote created successfully!'
   end
+
+  context 'company view of quotes show page with no contract' do
+    it 'should not contain customer email address' do
+      @quote = create(:quote,
+        customer_request_id: @customer_request.id,
+        company_id: @company.id)
+      visit("/quotes/#{@quote.id}")
+      expect(page).not_to have_content('customer@example.com')
+    end
+  end
 end
 
 RSpec.describe "customer decides on quote", :type => :feature do
   before :each do
     @company1 = create :company, email: 'user1@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
-    @company2 = create :company, email: 'user2@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721    
+    @company2 = create :company, email: 'user2@example.com', password: 'password', status: 'Active', service_radius: 30.0, latitude: 41.9687556, longitude: -87.6939721
     @service_category = create :service_category, name: 'Paint'
     @customer = create :customer, email: 'customer@example.com', password: 'password'
     @customer_request = create :customer_request, customer_id: @customer.id, description: 'Sample request description', service_category_id: @service_category.id, zipcode: '60601', expires_date: Date.today() + 3, latitude: 41.9687556, longitude: -87.6939721
@@ -168,29 +178,63 @@ RSpec.describe "customer decides on quote", :type => :feature do
   context 'company view of quotes table after a job has been completed' do
     before :each do
       @quote1.update(accepted: true)
-      create(:contract, quote_id: @quote1.id, completion_date: 1.day.ago)
+      create(:contract,
+        quote_id: @quote1.id,
+        customer_request_id: @customer_request.id,
+        company_id: @company1.id,
+        completion_date: 1.day.ago)
       @quote2.update(accepted: false)
       visit('/quotes')
     end
 
-    it 'should show completed quotes button when there are completed quotes' do
-      expect(page).to have_css('#completedBtn')
+    it 'should show contracts button when the company has contracts' do
+      expect(page).to have_css('#contractsBtn')
     end
 
-    it 'should allow company to view completed quotes' do
-      click_button 'Completed Requests'
-      within '#completed_quotes' do
-        expect(page).to have_content('Sample request description')
-      end
+    it 'should allow customer to go to contracts page' do
+      click_link 'My Contracts'
+      expect(page).to have_content('Completed Contracts')
     end
 
-    it 'should hide completed quotes modal when customer clicks close x' do
-      click_button 'Completed Requests'
-      within '#completed' do
-        find('.close').click
-      end
-      expect(page).to have_css('#completed', visible: false)
+  end
+
+  context 'company view of quotes show page with contract' do
+    it "should show customer's email if own quote is accepted" do
+      @quote1.update(accepted: true)
+      create(:contract, quote_id: @quote1.id, customer_request_id: @customer_request.id, completion_date: nil)
+      @quote2.update(accepted: false)
+      visit("/quotes/#{@quote1.id}")
+
+      expect(page).to have_content('customer@example.com')
     end
 
+    it "should not show customer's email if own quote is rejected" do
+      @quote1.update(accepted: false)
+      @quote2.update(accepted: true)
+      create(:contract, quote_id: @quote2.id, customer_request_id: @customer_request.id, completion_date: nil)
+      visit("/quotes/#{@quote1.id}")
+
+      expect(page).not_to have_content('customer@example.com')
+    end
+  end
+end
+
+RSpec.describe "company decides to purchase credits", :type => :feature do
+  before :each do
+    @company = create :company, email: 'company@example.com', password: 'password', status: 'Active'
+    visit '/companies/sign_in'
+    within(".login-form") do
+      fill_in 'company[email]', with: 'company@example.com'
+      fill_in 'company[password]', with: 'password'
+    end
+    click_button 'Log in'
+  end
+
+  context 'company clicks BUY MORE CREDITS' do
+    it 'should cause the modal to appear' do
+      visit '/customer_requests'
+      find('#creditBtn').click
+      expect(page).to have_content 'Purchase Credits:'
+    end
   end
 end
