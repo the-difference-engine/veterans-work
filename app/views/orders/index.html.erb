@@ -1,7 +1,11 @@
 <h1>My Orders</h1>
-  <button type="button" style="float: right" id="creditBtn" class="btn-primary clearfix" data-container="body" data-toggle="popover" data-placement="top">Buy More Credits</button>
-<br>
-<br>
+  <div id="credit-summary" class="clearfix">
+    <ol>
+      <li><button type="button" id="creditBtn" class="brn-primary">
+      Buy More Credits</button></li>
+      <li><p>Credits: <%= current_company.credits %></li></p>
+    </ol>
+  </div>
 <div class="row">
   <div class="col-sm-12">
     <table class="table table-hover table-responsive">
